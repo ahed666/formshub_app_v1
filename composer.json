@@ -1,0 +1,93 @@
+{
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The Laravel Framework.",
+    "keywords": ["framework", "laravel"],
+    "license": "MIT",
+    "require": {
+        "php": "^8.0.2",
+        "barryvdh/laravel-dompdf": "^2.0",
+        "bjeavons/zxcvbn-php": "^1.3",
+        "codedge/laravel-fpdf": "^1.12",
+        "dompdf/dompdf": "^2.0",
+        "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2.7",
+        "james-heinrich/getid3": "^1.9",
+        "laravel/cashier": "^14.12",
+        "laravel/framework": "^9.19",
+        "laravel/jetstream": "^2.14",
+        "laravel/sanctum": "^3.0",
+        "laravel/tinker": "^2.7",
+        "livewire/livewire": "^2.5",
+        "mpdf/mpdf": "^8.2",
+        "nesbot/carbon": "^2.66",
+        "pawlox/video-thumbnail": "^4.0",
+        "pbmedia/laravel-ffmpeg": "^8.3",
+        "pestphp/pest": "^1.16",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "php-ffmpeg/php-ffmpeg": "^1.1",
+        "pusher/pusher-php-server": "^7.2",
+        "setasign/fpdf": "^1.8",
+        "setasign/fpdi": "^2.5",
+        "setasign/fpdi-tcpdf": "^2.3",
+        "smalot/pdfparser": "^2.7",
+        "spatie/pdf-to-image": "^1.2",
+        "spatie/pdf-to-text": "^1.52",
+        "stichoza/google-translate-php": "^5.1",
+        "stripe/stripe-php": "^10.21",
+        "victorybiz/laravel-tel-input": "^1.2"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^1.18",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.0.1",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^6.1",
+        "phpunit/phpunit": "^9.5.10",
+        "spatie/laravel-ignition": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php artisan vendor:publish --force --tag=livewire:assets --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -1,0 +1,6 @@
+@media print {
+    /* Apply a background color for table headers when printing */
+    th {
+      background-color: #1277D1;
+    }
+  }

@@ -1,0 +1,33 @@
+[11-Nov-2023 13:55:26 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.2.34. in /home8/formshub/public_html/vendor/composer/platform_check.php on line 24
+[11-Nov-2023 13:55:28 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.2.34. in /home8/formshub/public_html/vendor/composer/platform_check.php on line 24
+[11-Nov-2023 13:55:32 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.1.0". You are running 7.2.34. in /home8/formshub/public_html/vendor/composer/platform_check.php on line 24
+[18-Jan-2024 12:07:51 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 27870490 bytes) in /home8/formshub/app_html/vendor/livewire/livewire/src/HydrationMiddleware/HydratePublicProperties.php on line 330
+[20-Jan-2024 10:36:39 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home8/formshub/app_html/app/Http/Livewire/signPdf/AddSignPdf.php on line 164
+[20-Jan-2024 10:36:41 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home8/formshub/app_html/app/Http/Livewire/signPdf/AddSignPdf.php on line 164
+[20-Jan-2024 10:36:48 UTC] PHP Fatal error:  Constant expression contains invalid operations in /home8/formshub/app_html/app/Http/Livewire/signPdf/AddSignPdf.php on line 164
+[04-Feb-2024 12:10:22 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(623): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(554): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(460): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(377): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(493): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(138): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home8/formshub/app_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
+[04-Feb-2024 12:10:26 UTC] PHP Fatal error:  Uncaught RuntimeException: A facade root has not been set. in /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php:335
+Stack trace:
+#0 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/RegisterErrorViewPaths.php(16): Illuminate\Support\Facades\Facade::__callStatic()
+#1 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(642): Illuminate\Foundation\Exceptions\RegisterErrorViewPaths->__invoke()
+#2 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(623): Illuminate\Foundation\Exceptions\Handler->registerErrorViewPaths()
+#3 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(554): Illuminate\Foundation\Exceptions\Handler->renderHttpException()
+#4 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(460): Illuminate\Foundation\Exceptions\Handler->prepareResponse()
+#5 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Exceptions/Handler.php(377): Illuminate\Foundation\Exceptions\Handler->renderExceptionResponse()
+#6 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(493): Illuminate\Foundation\Exceptions\Handler->render()
+#7 /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php(138): Illuminate\Foundation\Http\Kernel->renderException()
+#8 /home8/formshub/app_html/public/index.php(51): Illuminate\Foundation\Http\Kernel->handle()
+#9 {main}
+  thrown in /home8/formshub/app_html/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php on line 335
