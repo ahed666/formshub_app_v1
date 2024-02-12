@@ -335,7 +335,7 @@ return [
        'status'=>'الحالة',
        'download'=>'تحميل',
        'processing'=>'تتم المعالجة',
-       'loading'=>'يتم التحميل',
+       'loading'=>'  جاري التحميل',
 
        //subscriptions
        'yoursubscription'=>'اشتراكك :',
