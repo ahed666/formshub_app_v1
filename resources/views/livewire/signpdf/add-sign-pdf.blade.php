@@ -370,6 +370,8 @@
 <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js') }}"></script>
 {{-- detect the start date of expiry  --}}
 <script>
+         var translations = @json(__('main'));
+
     pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js";
     var canvasPdf = document.getElementById('canvasPdf');
     var canvasRect = document.getElementById('canvasRect');
@@ -573,7 +575,7 @@
         canvasRect.addEventListener('mousedown', handleMouseDown);
         canvasRect.addEventListener('mouseup', handleMouseUp);
         canvasRect.addEventListener('mousemove', handleMouseMove);
-      
+
         drawRect();
     }
 
@@ -721,7 +723,7 @@ const mouseY = parseFloat(event.clientY - canvasRect.getBoundingClientRect().top
     {
         Swal.fire({
             icon: 'success',
-            title:'Successfully Saved messages',
+            title:translations.success_message_messagessaved_title,
             text:flashedMessage_messagessaved,
             confirmButtonColor:'#1277D1',
 

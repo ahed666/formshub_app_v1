@@ -1223,6 +1223,7 @@
             config
             );
 
+            chartInstances[`line-${question.id}`]=line_chart;
 
 
         }
@@ -1463,7 +1464,7 @@
             var max=0;
 
             data.question_data.forEach(function(answer,i) {
-                
+
               answer.answer_sum=answer.counts.reduce((partialSum, a) => partialSum + a, 0);
               totalAnswers+=answer.answer_sum;
               totalSkipped=answer.answer_skipped;
@@ -1494,7 +1495,7 @@
             //    <div class="font-bold  col-span-1 h-full w-1/3  text-center  p-1 rounded-[0.5rem] border-[1px] " style="background-color:${colorArray[i]}"></div>
 
             data.question_data.forEach(function(answer,i) {
-                    
+
                     answer.ratio=answer.answer_sum==0?0:((100*answer.answer_sum)/totalAnswers).toFixed(1);
                     MostChoosen=answer.answer_sum==max&&max>0?
                     `<div class="text-xs flex justify-center items-center font-bold  col-span-1  text-center  p-1 text-valid">
@@ -1691,9 +1692,9 @@ console.log(data);
                         let formattedText = translatedText.replace(':days', ageDays);
                              return  formattedText;
                         }
-               
-                   
-                      
+
+
+
                   }
                     else
                   {  let translatedText = @json(__('main.days_months', ['months' => ':months', 'days' => ':days']));

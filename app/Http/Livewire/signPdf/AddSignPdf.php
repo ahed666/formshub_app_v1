@@ -407,7 +407,7 @@ public $answers_json_text_rating='
             {$msg->message=$message['message'];
                 $msg->save();}
         }
-        return redirect()->route('signpdf.add')->with('success_message_messagessaved','saved');
+        return redirect()->route('signpdf.add')->with('success_message_messagessaved',trans('main.success_message_messagessaved_text'));
        } catch (\Throwable $th) {
 
         }

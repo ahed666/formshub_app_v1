@@ -214,12 +214,12 @@ return [
     'autoskip'=>'Auto skipped',
     'skipbyuser'=>'Skip by user',
     'mostchoosen'=>'Most Choosen',
-    
-    
 
 
- 
- 
+
+
+
+
       'statisticquestions'=>'Statistic Questions' ,
       'unstatisticquestions'=>'Unstatistic Questions' ,
       'summary'=>'Summary' ,
@@ -239,7 +239,7 @@ return [
     'addkiosk'=>'Add Kiosk',
     'devicecode'=>'Device code',
     'ckeck'=>'Check',
-  
+
     'nokiosks'=>'No kiosks have been added yet',
      'kioskupdated'=>'Kiosk Updated',
      'devicereadyconnect_message'=>'device is avilable and ready to add',
@@ -291,6 +291,8 @@ return [
     'changepdf'=>'Change PDF',
     'sendtokiosk'=>'Send to kiosk ',
     'waitnewsigned'=>'Waiting for a new signed document,or try to',
+    'success_message_messagessaved_text'=>'Saved successfully',
+    'success_message_messagessaved_title'=>'Saved successfully',
     // 'settings'=>'Settings',
     'selectkiosk'=>'Select Kiosk : ',
     'selectlanguage'=>'Select Language : ',
@@ -579,8 +581,8 @@ return [
     'num_kiosks_Premium'=>'You have reached the maximum limit allowed.',
     'num_questions_Premium'=>'You have reached the maximum limit allowed.',
     'num_media_Premium'=>'You have reached the maximum limit allowed.',
-    
-    
+
+
     //hints
     'activeformhint'=>'This option allows you to switch form (Active) meaning people can submit responses to this form, whether from a shared link or from a connected kiosk, or (Inactive), meaning this form will not be visible to people and responses can not be submitted whether from a shared link or from a connected kiosk.',
     'allowtouchhint'=>'This option allows you to switch form (Active) meaning people can submit responses to this form, whether from a shared link or from a connected kiosk, or (Inactive), meaning this form will not be visible to people and responses can not be submitted whether from a shared link or from a connected kiosk.',
