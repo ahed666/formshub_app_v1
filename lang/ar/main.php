@@ -229,6 +229,10 @@ return [
     'full' => 'كامل',
     'exportedas' => ':التصدير ك ',
 
+    'addnewmediafailed_title' => 'فشل إضافة الوسائط!',
+'addnewmediafailed_text' => 'لا يمكن إضافته',
+
+
     // my kiosks
     'addkiosks'=>'إضافة جهاز',
     'totalkiosks_num'=>'مجموع الإجهزة',

@@ -289,7 +289,7 @@ class AddNewMedia extends Component
             return redirect()->route('editform', ['id' => $this->form_id])->with('success_message','your question has been added successfuly');
         }
         catch (\Throwable $th) {
-            return redirect()->route('editform', ['id' => $this->form_id])->with('error_message','cannnot be add');
+            return redirect()->route('editform', ['id' => $this->form_id])->with('error_message',trans('main.addnewmediafailed_text'));
 
         }
 

@@ -227,6 +227,10 @@ return [
       'exportedas'=>'Exported As:' ,
 
 
+      'addnewmediafailed_title'=>'Add media failed!',
+      'addnewmediafailed_text'=>'cannnot be add',
+
+
     // my kiosks
     'addkiosk'=>'Add Kiosk',
     'totalkiosks_num'=>'Total Kiosks',

@@ -682,7 +682,7 @@
         console.log(flashedMessage_error);
         Swal.fire({
             icon: 'error',
-            title:'Add media failed!',
+            title:translations.addnewmediafailed_title,
             text:flashedMessage,
             confirmButtonColor:'#1277D1',
 
