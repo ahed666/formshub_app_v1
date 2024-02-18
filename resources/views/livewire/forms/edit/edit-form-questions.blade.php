@@ -866,7 +866,7 @@ window.addEventListener('show-terms-delete-confirmation', event => {
             confirmButtonColor: '#1277D1',
             showCancelButton: true,
             cancelButtonColor:'#f3f4f6',
-            cancelButtonText:`<h5 style='color:000000;border:0;box-shadow: none;'>${translations.ignore_button}</h5>`,
+            confirmButtonText:`<h5 style='color:#1277D1;border:0;box-shadow: none;'>${translations.ignore_button}</h5>`,
             confirmButtonText:translations.warethat_button
             }).then((result) => {
             if (result.isConfirmed) {
