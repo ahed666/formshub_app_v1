@@ -879,7 +879,7 @@ function ShoweditTermsHint(){
     Swal.fire({
             html:`<span class="text-secondary_blue">${translations.termsconditions}</span> ${translations.edittermshint}`,
             confirmButtonColor:'#1277D1',
-            confirmButtonText:`<h5 style='color:#1277D1;border:0;box-shadow: none;'>${translations.ok}</h5>`,
+            confirmButtonText:`<h5 style='color:#ffffff;border:0;box-shadow: none;'>${translations.ok}</h5>`,
 
     })
 }
