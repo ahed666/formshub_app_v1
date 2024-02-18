@@ -28,15 +28,23 @@ use Carbon\Carbon;
 use App\Models\Subscribe;
 use App\Models\SubscribePlan;
 use App\Models\TypeSubscribe;
+use App\Models\StandbykiosksMedia;
 use Illuminate\Support\Facades\URL;
 use App\Jobs\RefreshKiosk;
 use App\Jobs\RefreshSignatueAccount;
 use Livewire\WithFileUploads;
 use Image;
 use Illuminate\Support\Facades\Redirect;
+
+
+use Owenoj\LaravelGetId3\GetId3;
+use FFMpeg\FFMpeg;
+
+use Pawlox\VideoThumbnail\Facade\VideoThumbnail;
+use FFMpeg\Coordinate\TimeCode;
 class Kiosks extends Component
 {
-    use WithFileUploads;
+
     public $kiosks;
     public $validcode=false;
     public $isavilable=false;
@@ -56,7 +64,7 @@ class Kiosks extends Component
     public $edited_kiosk_name;
     public $edited_form_id;
     public $idEditing;
-    public $idEditingImage;
+
       // subscriptions settings
       public $validAccount;
       public $current_subscribe;
@@ -65,12 +73,7 @@ class Kiosks extends Component
       public $valid;
       public $permissions;
 
-      public $imagesrc;
-      public $image;
       public $modal;
-
-      public $currentTempImagePath;
-      public $changeToDefult=false;
       public $errors_permission='
       {
           "Free":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed.","num_kiosks":"You have reached the maximum limit allowed."},
@@ -87,6 +90,7 @@ class Kiosks extends Component
     // to confirm delete question
     'deleteDeviceConfirmed'=>'deletedevice',
     "unlink"=>"unlinkForm",
+    'refreshafterupdated'=>'sendrefresh',
 
     ];
     // validation rules
@@ -111,129 +115,11 @@ class Kiosks extends Component
        $this->mount();
 
     }
-    public function setEditImageId($id,$imagePath){
-       $this->idEditingImageId=$id;
-       $this->currentTempImagePath=$imagePath;
 
-
-
-    }
-    // update temporary image for kiosk
-    public function updatedimage(){
-        $this->modal=true;
-        // $this->answers[$this->stepimage]['image']=$this->image->temporaryUrl();
-        $this->imagesrc=$this->image->temporaryUrl();
-
-        $this->dispatchBrowserEvent('image-updated-edit', ['image' => $this->image]);
-    }
-    // after click save crop changes
-    public function cropimage(){
-        $this->dispatchBrowserEvent('save');
-
-
-
-    }
-    // save image as temp after crop it
-    public function saveImageTemp($image){
-        $folderPath = public_path('storage/images/temp/');
-        if (!file_exists($folderPath)) {
-            mkdir($folderPath, 0777, true);
-        }
-        $image_parts = explode(";base64,", $image);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
-        $image = Image::make($image_base64);
-
-        $this->modal=false;
-        $this->changeToDefult=true;
-
-        $name="StandByKioskImage_".$this->idEditingImageId.Auth::user()->id.uniqid().Carbon::now()->format('YmdHis').".jpg";
-        $file = $folderPath .$name;
-        if(str_contains($this->currentTempImagePath, 'storage/images/temp/'))
-        {
-            File::delete(public_path($this->currentTempImagePath));
-        }
-        $this->currentTempImagePath="storage/images/temp/".$name;
-        $this->dispatchBrowserEvent('changeImagePath',['path'=>$this->currentTempImagePath]);
-        $image->save($file, 100);
-
-
-    }
-    // set defult stand by image
-    public function setDefultStandByImage(){
-
-        if(str_contains($this->currentTempImagePath, 'storage/images/temp/'))
-        {
-            File::delete(public_path($this->currentTempImagePath));
-        }
-        $this->currentTempImagePath="images/default_images/default_standbyimage.gif";
-        $this->changeToDefult=true;
-
-        $this->dispatchBrowserEvent('changeImagePath',['path'=>$this->currentTempImagePath]);
-
-    }
-    // after close the modal of crop iimage
-    public function closemodal(){
-        $this->modal=false;
-
-
-
-    }
-    public function saveImageKiosk(){
-        $kiosk=Kiosk::findOrFail($this->idEditingImageId);
-        //    save image
-        $imageQuestionInfo=Pictures::whereid($kiosk->standbyimage_id)->first();
-
-        $folderPath ='storage/images/upload/';
-        if(str_contains($this->currentTempImagePath, 'storage/images/temp/'))
-        {
-
-
-            $image_name="standbyimage-".$kiosk->id.Auth::user()->id.Carbon::now()->format('YmdHis');
-            $name=$image_name . '.jpg';
-            $file = $folderPath .$name;
-            $old=public_path($this->currentTempImagePath);
-            $new=$file;
-
-            if(str_contains($imageQuestionInfo->pic_url, 'storage/images/upload/')&&$this->changeToDefult==true)
-                File::delete(public_path($imageQuestionInfo->pic_url));
-            File::move($old , $new);
-
-        }
-
-        else
-        {
-
-            if(str_contains($imageQuestionInfo->pic_url, 'storage/images/upload/')&&$this->changeToDefult==true)
-                 File::delete(public_path($imageQuestionInfo->pic_url));
-           $new=$this->currentTempImagePath;
-
-        }
-
-        $imageQuestionInfo->pic_url=$new;
-        $imageQuestionInfo->pic_name=$imageQuestionInfo->pic_name;
-        $imageQuestionInfo->save();
-        RefreshKiosk::dispatch($kiosk);
-
-        return redirect()->to('/kiosks');
-    }
-    public function resetValue(){
-        if(str_contains($this->currentTempImagePath, 'storage/images/temp/'))
-        {
-            File::delete(public_path($this->currentTempImagePath));
-        }
-        $this->mount();
-    }
-     // t oclose crop modal if user click save
-     public function closemodalwithsave(){
-
-        $this->modal=false;
-    }
     public function saveChanges(){
         $this->validateOnly('edited_kiosk_name');
 
-        try {
+        // try {
            $kiosk=Kiosk::findOrFail($this->idEditing);
            $kiosk->device_name=$this->edited_kiosk_name;
            $current_Kiosk;
@@ -261,6 +147,7 @@ class Kiosks extends Component
                     $kiosk->form_id=$this->edited_form_id;
                 }
                 $kiosk->save();
+                
                 //send refresh event to kiosk
                 $this->sendrefresh($kiosk->id);
             }
@@ -272,13 +159,7 @@ class Kiosks extends Component
                     $kiosk->form_id=null;
                     $kiosk->sign_kiosk=false;
                 }
-                // // sign pdf
-                // elseif($this->edited_form_id=="sign")
-                // {
-                //     $kiosk->form_id=null;
-                //     $kiosk->sign_kiosk=true;
-                // }
-                // form
+
                 else
                 {
                     $kiosk->sign_kiosk=false;
@@ -288,32 +169,18 @@ class Kiosks extends Component
                 $kiosk->save();
             }
 
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        // }
         $this->mount();
         $this->idEditing=null;
         $this->edit=false;
     }
 
-    // public function setInserviceKiosk($kioskId,$status){
 
-    //     try {
-    //         $kiosk=Kiosk::findOrFail($kioskId);
-
-    //         $kiosk->in_service=!$status;
-
-    //         $kiosk->save();
-    //         $this->sendrefresh($kiosk->id);
-
-    //      } catch (\Throwable $th) {
-    //         $this->mount();
-    //      }
-
-
-    // }
     public function sendrefresh($id)
     {
+
         try {
 
 
@@ -327,6 +194,7 @@ class Kiosks extends Component
          $this->mount();
          $this->emit('refreshTriggered', $kiosk->device_code);
         } catch (\Throwable $th) {
+
             $this->mount();
         }
     }
@@ -335,8 +203,9 @@ class Kiosks extends Component
         $this->kiosks=Kiosk::leftjoin('forms','forms.id','=','devices.form_id')
         ->leftJoin('device_codes','device_codes.id','=','devices.device_code_id')
         ->leftJoin('devices_models','devices_models.id','=','device_codes.device_model_id')
-        ->join('pictures','pictures.id','=','devices.standbyimage_id')
-        ->where('devices.account_id',Auth::user()->current_account_id)->select('devices.*','pictures.pic_url as standbyimage_path','device_codes.device_code as device_code','devices_models.device_model','forms.form_title as form_title','forms.id as form_id')->get();
+        ->where('devices.account_id',Auth::user()->current_account_id)->select('devices.*','device_codes.device_code as device_code','devices_models.device_model','forms.form_title as form_title','forms.id as form_id')->get();
+
+
 
         // subscribe
         $this->current_subscribe=SubscribePlan::getCurrentSubscription(Auth::user()->current_account_id);
@@ -358,7 +227,7 @@ class Kiosks extends Component
        }
 
     }
-     //   delete question confirmation
+     //   delete kiosk confirmation
      public function delete($id)
      {   try
         {
@@ -385,11 +254,13 @@ class Kiosks extends Component
     //  delete device
     public function deletedevice()
     {
-        $imageQuestionInfo=Pictures::whereid($this->device_delete_id)->first();
-        if(str_contains($imageQuestionInfo->pic_url,'storage/images/upload/'))
-        File::delete(public_path($imageQuestionInfo->pic_url));
-        $imageQuestionInfo->delete();
-        Kiosk::whereid($this->device_delete_id)->delete();
+        $kiosk=Kiosk::whereid($this->device_delete_id)->first();
+        $standbyMedia=StandbykiosksMedia::whereid($kiosk->standbymedia_id)->first();
+        if(str_contains($standbyMedia->path_file,'storage/images/upload/standby'||$standbyMedia->path_file,'storage/videos/standby'))
+        File::delete(public_path($standbyMedia->path_file));
+        $standbyMedia->delete();
+        $kiosk->delete();
+
 
         $this->mount();
     }

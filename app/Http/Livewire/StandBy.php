@@ -66,8 +66,9 @@ class StandBy extends Component
 
         $this->deviceinfo = explode('/', $this->url);
         $this->currentkiosk=Kiosk::wheredevice_code_id($this->deviceinfo[5])->
-        join('pictures','devices.standbyimage_id','=','pictures.id')->select('devices.*','pictures.pic_url as standbyimage_path')->
+        join('standbykiosks_media','devices.standbymedia_id','=','standbykiosks_media.id')->select('devices.*','standbykiosks_media.type','standbykiosks_media.path_file as path')->
         first();
+
 
     }
     public function refreshpage($url)

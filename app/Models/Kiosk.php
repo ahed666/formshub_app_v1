@@ -8,7 +8,7 @@ use App\Models\DeviceCode;
 use App\Models\Pictures;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\StandbykiosksMedia;
 class Kiosk extends Model
 {
     use HasFactory;
@@ -64,12 +64,13 @@ class Kiosk extends Model
 
        $kiosks=self::whereaccount_id($account_id)->get();
        foreach ($kiosks as $key => $kiosk) {
-        $pic=Pictures::whereid($kiosk->standbyimage_id)->first();
-        
-        if(str_contains($pic->pic_url,'storage/images/upload/'))
-        File::delete(public_path($pic->pic_url));
-        
+        $media=StandbykiosksMedia::whereid($kiosk->standbymedia_id)->first();
+
+        if (str_contains($media->path_file, 'storage/videos/standby/') || str_contains($media->path_file, 'storage/images/upload/standby/'))
+            File::delete(public_path($media->path_file));
         $kiosk->delete();
+
+
 
 
        }
