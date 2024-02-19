@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="overflow-y-auto rounded-[0.5rem] 2xl:max-h-[700px]  min-h-[700px] xs:max-h-[400px]">
+        <div class="overflow-y-auto rounded-[0.5rem] 2xl:max-h-[700px]  min-h-[400px] xs:min-h-[300px] xs:max-h-[400px]">
             <table class="w-full">
                 <thead class="" >
                     <tr id="showresponse-tablehead" class=" border-b-[1px] border-t-[1px] p-1  ">
