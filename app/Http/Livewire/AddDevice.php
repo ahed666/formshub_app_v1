@@ -16,6 +16,8 @@ use App\Models\QuestionType;
 use Storage;
 use Illuminate\Support\Facades\File;
 use App\Models\Pictures;
+use App\Models\StandbykiosksMedia;
+
 use App\Models\CustomQuestionTranslation;
 use App\Models\CustomQuestion;
 use App\Models\DeviceCode;
@@ -213,13 +215,13 @@ class AddDevice extends Component
 
 
     $device->save();
-    $image=new Pictures();
-    $image->pic_url=$this->defultImage;
-    $image->pic_name="standByImage_".$device->id.Auth::user()->id.Auth::user()->current_account_id;
-    $image->user_id=Auth::user()->id;
-    $image->account_id=Auth::user()->current_account_id;
-    $image->save();
-    $device->standbyimage_id=$image->id;
+
+    $standbyMedia=new StandbykiosksMedia();
+    $standbyMedia->path_file=$this->defultImage;
+    $standbyMedia->type="image";
+
+    $standbyMedia->save();
+    $device->standbymedia_id=$standbyMedia->id;
     $device->save();
     $this->resetvalues();
     $this->isSubmitting = false;
