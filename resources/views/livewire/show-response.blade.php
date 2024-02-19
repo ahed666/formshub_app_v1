@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="overflow-y-auto rounded-[0.5rem] 2xl:max-h-[700px] xs:max-h-[400px]">
+        <div class="overflow-y-auto rounded-[0.5rem] 2xl:max-h-[700px] min-h-400 xs:max-h-[400px]">
             <table class="w-full">
                 <thead class="" >
                     <tr id="showresponse-tablehead" class=" border-b-[1px] border-t-[1px] p-1  ">
@@ -153,7 +153,7 @@
     function intialshowresponse(id,viewed){
 
         // if(viewed==false)Livewire.emit('changestatus',id);
-        // else 
+        // else
         showresponse(id);
     }
 
@@ -167,7 +167,7 @@
         langView=event.detail.langView;
         addformlanguages(formlanguages);
         intialshowresponse(event.detail.response.id,event.detail.response.viewed);
-      
+
     });
     window.addEventListener('languagechanged', event => {
 
