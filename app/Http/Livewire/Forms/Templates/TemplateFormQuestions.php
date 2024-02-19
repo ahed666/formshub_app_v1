@@ -37,7 +37,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 class TemplateFormQuestions extends Component
 {
-    
+
     public $form;
     public $account;
     public $logo;
@@ -369,7 +369,7 @@ class TemplateFormQuestions extends Component
 
             $this->current_message=FormTrnslations::whereform_id($this->current_formid)->whereform_local($this->current_lang)->first();
 
-            $this->dispatchBrowserEvent('startform',['questions'=>$this->fullquestions,'ControlButtons'=>$this->ControlButtons,'score'=>$this->form->score,'step'=>$this->step,'lang'=>$this->current_lang,'current_message'=>$this->current_message,'comments'=>$this->comments[0]]);
+            $this->dispatchBrowserEvent('startform',['questions'=>$this->fullquestions,'ControlButtons'=>$this->ControlButtons,'score'=>(bool)$this->form->score,'step'=>$this->step,'lang'=>$this->current_lang,'current_message'=>$this->current_message,'comments'=>$this->comments[0]]);
         }
         catch (\Throwable $th)
         {
@@ -470,15 +470,15 @@ class TemplateFormQuestions extends Component
 
             }
             elseif($item['type']=="drawing"){
-                 
+
                 try {
                     $question=new ResponsedCustomersInfo();
                     $question->question_id=$item['question_id'];
-                 
+
                     if(count($item['answerchecked'])>0)
                     {
                         $question->answer=$this->saveImageDrawing($item['answerchecked'][0],$response->id,$item['question_id']);
-                        
+
                     }
                     else
                     {
