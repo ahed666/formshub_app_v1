@@ -1451,7 +1451,7 @@
             {
 
                 type_Rating=question.type=="rating"||question.type=="rating_image"?"Rating":"Satisfaction";
-                document.getElementById(`Satisfaction-${question.id}`).innerHTML+=`
+                document.getElementById(`Satisfaction-${question.id}`).innerHTML=`
                 <div><h1 class="text-sm xs:text-xs md:text-sm text-black mr-1">${type_Rating}{{ __(' Level: ') }}</h1></div>
                 <div id="rating-${ question.id }" ></div>`;
             }
