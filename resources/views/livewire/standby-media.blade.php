@@ -37,7 +37,7 @@
             <x-jet-secondary-button wire:click="resetValue" data-dismiss="modal" aria-label="Close" type="button" wire:loading.attr="disabled">
                 {{ __('main.cancel') }}
             </x-jet-secondary-button>
-            <x-jet-button wire:click="saveStandbyMediaKiosk" class="ml-3" type="button" wire:loading.attr="disabled">
+            <x-jet-button wire:click="saveStandbyMediaKiosk" class="ml-3" type="button" wire:loading.attr="disabled" wire:target="currentFile">
                 {{ __('main.save') }}
             </x-jet-button>
         </div>
