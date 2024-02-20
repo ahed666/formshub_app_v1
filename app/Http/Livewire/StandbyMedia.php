@@ -215,6 +215,7 @@ class StandbyMedia extends Component
     }
     public function saveStandbyMediaKiosk()
     {
+        $this->disable('saveStandbyMediaKiosk');
         $kiosk = Kiosk::findOrFail($this->idEditingImageId);
         $standbyMedia = StandbykiosksMedia::whereid($kiosk->standbymedia_id)->first();
         if (str_contains($standbyMedia->path_file, 'storage/videos/standby/') || str_contains($standbyMedia->path_file, 'storage/images/upload/standby/')) {
@@ -260,7 +261,7 @@ class StandbyMedia extends Component
 
         }
 
-
+        $this->enable('saveStandbyMediaKiosk');
         return redirect()->route('kiosks')->with(['updatedmessage'=>$kiosk->id]);
 
 

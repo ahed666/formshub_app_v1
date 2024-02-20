@@ -32,20 +32,19 @@
 
     {{-- end body --}}
     {{-- footer --}}
-    <div class="flex justify-between items-center p-6 space-x-2 border-t border-gray-200 rounded-b "
-    x-data="{ isUploading: false, progress: 0 }"
-    x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false"
-    x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
+    <div class="flex justify-between items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
         <div class="flex justify-center space-x-2 items-center">
             <x-jet-secondary-button wire:click="resetValue" data-dismiss="modal" aria-label="Close" type="button" wire:loading.attr="disabled">
                 {{ __('main.cancel') }}
             </x-jet-secondary-button>
-            <x-jet-button x-disabled="isUploading" wire:click="saveStandbyMediaKiosk" class="ml-3" type="button" wire:loading.attr="disabled">
+            <x-jet-button wire:click="saveStandbyMediaKiosk" class="ml-3" type="button" wire:loading.attr="disabled">
                 {{ __('main.save') }}
             </x-jet-button>
         </div>
         <div class="flex justify-between space-x-4 items-center"
-       >
+        x-data="{ isUploading: false, progress: 0 }"
+        x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false"
+        x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
 
             <label class="grid justify-center items-center mb-0" for="currentFile">
                 <div class="flex justify-center items-center">
