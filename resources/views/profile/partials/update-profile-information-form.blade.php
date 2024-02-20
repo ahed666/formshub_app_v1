@@ -26,7 +26,7 @@
         <div>
             <x-input-label for="email" :value="__('main.email')" />
              <div class="relative">
-            <x-text-input disabled maxlength="50"  id="email" name="email" pattern="email" title="enter valid email" type="email" class="mt-1 block w-full opacity-50" :value="old('email', $user->email)" required autocomplete="email" />
+            <x-text-input disabled maxlength="50"  id="email" name="email"  title="enter valid email" type="email" class="mt-1 block w-full opacity-50" :value="old('email', $user->email)" required autocomplete="email" />
             <div class="flex justify-end items-center absolute right-0"><a id="editemailbutton" onclick="ShowEmail()" class="text-xs text-secondary hover:text-secondary_1 font-bold cursor-pointer hover:underline" type="button">{{ __('main.changeemail') }}</a></div>
             </div>
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
