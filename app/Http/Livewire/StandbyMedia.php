@@ -58,7 +58,7 @@ class StandbyMedia extends Component
     public $video;
     public $mediaId;
     public $maxVideoDuration = 180;
-    public $maxFileSize = 8000;
+    public $maxFileSize = 10240;
     public $validVideo = false;
     public $base64Video;
     public $numMediaItems;
