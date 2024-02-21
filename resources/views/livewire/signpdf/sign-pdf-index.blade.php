@@ -78,41 +78,41 @@
                     <div wire:ignore target="signPdf"  class="col-span-12   px-2 pb-2 border-[1px] border-gray-400  rounded-[0.5rem] bg-white
                      min-h-[95vh] max-h-full    drop-shadow"  >
 
-                        <div class="flex justify-center  items-center space-x-12 my-2 ">
+                        <div class="flex justify-center  items-center space-x-32 my-2 ">
 
                                <div class="flex justify-center  items-center space-x-12 my-2 ">
-                                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                                <svg id="prev" class="w-6 h-6 text-secondary_blue hover:cursor-pointer" fill="currentColor"  viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(0)">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                <g id="SVGRepo_iconCarrier">
-                                <path id="primary" d="M17.45,2.11a1,1,0,0,0-1.05.09l-12,9a1,1,0,0,0,0,1.6l12,9a1,1,0,0,0,1.05.09A1,1,0,0,0,18,21V3A1,1,0,0,0,17.45,2.11Z" style="fill: currentColor;"/>
-                                </g>
-                                </svg>
+                                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                                    <svg id="prev" class="w-6 h-6 text-secondary_blue hover:cursor-pointer" fill="currentColor"  viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(0)">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <g id="SVGRepo_iconCarrier">
+                                    <path id="primary" d="M17.45,2.11a1,1,0,0,0-1.05.09l-12,9a1,1,0,0,0,0,1.6l12,9a1,1,0,0,0,1.05.09A1,1,0,0,0,18,21V3A1,1,0,0,0,17.45,2.11Z" style="fill: currentColor;"/>
+                                    </g>
+                                    </svg>
 
-                                <h1 >Page: <span id="page_num"></span> / <span id="page_count"></span></h1>
+                                    <h1 >Page: <span id="page_num"></span> / <span id="page_count"></span></h1>
 
-                                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                                <svg fill="currentColor" id="next" class="w-6 h-6 text-secondary_blue hover:cursor-pointer" viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(180)">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                                <g id="SVGRepo_iconCarrier">
-                                <path id="primary" d="M17.45,2.11a1,1,0,0,0-1.05.09l-12,9a1,1,0,0,0,0,1.6l12,9a1,1,0,0,0,1.05.09A1,1,0,0,0,18,21V3A1,1,0,0,0,17.45,2.11Z" style="fill: currentColor;"/>
-                                </g>
-                                </svg>
+                                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                                    <svg fill="currentColor" id="next" class="w-6 h-6 text-secondary_blue hover:cursor-pointer" viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(180)">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <g id="SVGRepo_iconCarrier">
+                                    <path id="primary" d="M17.45,2.11a1,1,0,0,0-1.05.09l-12,9a1,1,0,0,0,0,1.6l12,9a1,1,0,0,0,1.05.09A1,1,0,0,0,18,21V3A1,1,0,0,0,17.45,2.11Z" style="fill: currentColor;"/>
+                                    </g>
+                                    </svg>
                                 </div>
-                                <div>
-                                    <a wire:click="download">
+                                <div class="grid justify-center items-center">
+                                    <a class="flex justify-center items-center" wire:click="download">
                                         <svg class="w-6 h-6 text-secondary_blue hover:cursor-pointer outline-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                           <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                         </svg>
-
                                     </a>
+                                    <span class="text-xs">{{ __('main.download') }}</span>
                                 </div>
 
 
 
-                          
+
 
                         </div>
                         <div class="relative flex justify-center items-center  min-h-[90vh] max-h-full overflow-auto ">
@@ -158,14 +158,14 @@
   pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.6.347/pdf.worker.min.js";
     var ctxPdf;
     var PdfSize;
- 
+
     var url,filePath,pdfDoc = null;
     var pageNum = 1,pageRendering = false,pageNumPending = null,scale = 1;
         var translations = @json(__('main'));
 
         document.addEventListener('DOMContentLoaded', function() {
           Livewire.emit('getprevfile');
-        
+
         });
             // previous file
     document.addEventListener('prevfile-uploaded', event =>  {
@@ -177,7 +177,7 @@
         PdfSize= event.detail.uploadedFileInfo.size;
         canvasPdf.height = parseInt(PdfSize['height'], 10);
         canvasPdf.width = parseInt(PdfSize['width'], 10);
-       
+
         filePath =`{{ asset('${url}') }}`;
 
         ctxPdf = canvasPdf.getContext('2d');
@@ -252,7 +252,7 @@
         // Update page counters
         document.getElementById('page_num').textContent = num;
     }
-    
+
         //when click on prev page button
     function onPrevPage() {
         if (pageNum <= 1) {
@@ -269,8 +269,8 @@
         pageNum++;
         queueRenderPage(pageNum);
     }
- 
-  
+
+
     </script>
     {{-- @if(session('success_message_signed'))
 

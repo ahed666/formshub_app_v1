@@ -236,7 +236,7 @@ return [
     // my kiosks
     'addkiosks'=>'إضافة جهاز',
     'totalkiosks_num'=>'مجموع الإجهزة',
-    'editimage'=>'تعديل الصورة',
+    'editstandby'=>'تعديل حالة الاستعداد',
     'kioskname'=>'اسم الجهاز',
     'linkedform'=>'النموذج المربوط',
     'standbyimage'=>'الصورة في حالة الأستعداد',

@@ -84,12 +84,14 @@ class Dashboard extends Component
         $this->Todos=ToDo::todosByStatus($this->current_account_id);
         $this->tickets=SupportTicket::ticketsByStatus($this->current_account_id);
         // forms
-        $this->forms= Form::select('forms.*', \DB::raw('COUNT(responses.id) as responses_count'),\DB::raw('COUNT(form_media.id) as media_count'))
+        $this->forms= Form::select('forms.*',\DB::raw('COUNT(devices.id) as devices_count'), \DB::raw('COUNT(responses.id) as responses_count'),\DB::raw('COUNT(form_media.id) as media_count'))
         ->leftJoin('responses', 'forms.id', '=', 'responses.form_id')
         ->leftJoin('form_media','form_media.form_id','=','forms.id')
+        ->leftJoin('devices','devices.form_id','=','forms.id')
         ->where('forms.account_id', $this->current_account_id)
         ->groupBy('forms.id')
         ->get();
+
         // kiosks
         $this->kiosks=Kiosk::leftjoin('forms','forms.id','=','devices.form_id')
         ->leftjoin('device_codes','device_codes.id','=','devices.device_code_id')

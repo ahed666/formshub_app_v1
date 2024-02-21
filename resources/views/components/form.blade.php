@@ -68,46 +68,56 @@
 
         {{-- buttons --}}
         <div class="mt-2 xs:mt-1 flex justify-between xs:justify-normal xs:space-x-2 items-center ">
-            <div class="flex justify-between items-center ">
-                {{-- edit button --}}
-                <x-jet-button class="ml-1 xs:ml-0 " wire:click="Route('editform',{{ $form->id }})"
-                    type="button"   wire:loading.attr="disabled">
-                    {{ __('main.edit') }}
-                    <svg class="w-4 h-4 mx-1" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                        <g id="SVGRepo_iconCarrier">
-                        <path d="M823.3 938.8H229.4c-71.6 0-129.8-58.2-129.8-129.8V215.1c0-71.6 58.2-129.8 129.8-129.8h297c23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7h-297c-24.5 0-44.4 19.9-44.4 44.4V809c0 24.5 19.9 44.4 44.4 44.4h593.9c24.5 0 44.4-19.9 44.4-44.4V512c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v297c0 71.6-58.2 129.8-129.8 129.8z" fill="#ffffff"/>
-                        <path d="M483 756.5c-1.8 0-3.5-0.1-5.3-0.3l-134.5-16.8c-19.4-2.4-34.6-17.7-37-37l-16.8-134.5c-1.6-13.1 2.9-26.2 12.2-35.5l374.6-374.6c51.1-51.1 134.2-51.1 185.3 0l26.3 26.3c24.8 24.7 38.4 57.6 38.4 92.7 0 35-13.6 67.9-38.4 92.7L513.2 744c-8.1 8.1-19 12.5-30.2 12.5z m-96.3-97.7l80.8 10.1 359.8-359.8c8.6-8.6 13.4-20.1 13.4-32.3 0-12.2-4.8-23.7-13.4-32.3L801 218.2c-17.9-17.8-46.8-17.8-64.6 0L376.6 578l10.1 80.8z" fill="#ffffff"/>
-                        </g>
-                    </svg>
-                </x-jet-button>
-                {{-- statistics button --}}
-                <x-jet-button class="ml-1 xs:ml-0 " wire:click="Route('statisticform',{{ $form->id }})"  type="button"   wire:loading.attr="disabled">
-                    {{ __('main.statistic') }}
-                    <svg class="w-4 h-4 mx-1"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                        <g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}</style> </defs> <g id="ic-statistics-2"> <line class="cls-1" x1="2" y1="20" x2="22" y2="20"/> <path class="cls-1" d="M5,20V8.2A.2.2,0,0,1,5.2,8H7.8a.2.2,0,0,1,.2.2V20"/> <path class="cls-1" d="M11,20V4.27c0-.15.09-.27.2-.27h2.6c.11,0,.2.12.2.27V20"/> <path class="cls-1" d="M17,20V11.15c0-.08.09-.15.2-.15h2.6c.11,0,.2.07.2.15V20"/> </g> </g>
-                    </svg>
-                </x-jet-button>
-                {{-- preview button --}}
-                <a target="_blank" href="{{ route('preview',$form->id) }}" class="bg-gray-400 hover:no-underline inline-flex items-center px-4 py-2 xs:p-1
-                    border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest
-                    active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-1 ">
-                    {{ __('main.preview') }}
-                    <?xml  version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                    <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
-                        <defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title>
-                        <circle cx="22" cy="24" r="2"/>
-                        <path id="_inner_path_" data-name="&lt;inner path&gt;" class="cls-1" d="M22,28a4,4,0,1,1,4-4A4.0039,4.0039,0,0,1,22,28Zm0-6a2,2,0,1,0,2,2A2.0027,2.0027,0,0,0,22,22Z"/>
-                        <path d="M29.7769,23.4785A8.64,8.64,0,0,0,22,18a8.64,8.64,0,0,0-7.7769,5.4785L14,24l.2231.5215A8.64,8.64,0,0,0,22,30a8.64,8.64,0,0,0,7.7769-5.4785L30,24ZM22,28a4,4,0,1,1,4-4A4.0045,4.0045,0,0,1,22,28Z"/>
-                        <path d="M12,28H7V7h3v3H22V7h3v9h2V7a2,2,0,0,0-2-2H22V4a2,2,0,0,0-2-2H12a2,2,0,0,0-2,2V5H7A2,2,0,0,0,5,7V28a2,2,0,0,0,2,2h5ZM12,4h8V8H12Z"/>
-                    </svg>
-                </a>
-                <span class="rounded-[0.5rem] w-auto h-6 ml-1  p-1 text-xs {{ $form->active?"text-valid bg-green-100":"text-primary_red bg-red-100" }}">{{ $form->active?__('main.active'):__('main.inactive') }}</span>
 
-            </div>
+                <div>
+
+
+                    {{-- edit button --}}
+                    <x-jet-button class="ml-1 xs:ml-0 " wire:click="Route('editform',{{ $form->id }})"
+                        type="button"   wire:loading.attr="disabled">
+                        {{ __('main.edit') }}
+                        <svg class="w-4 h-4 mx-1" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier">
+                            <path d="M823.3 938.8H229.4c-71.6 0-129.8-58.2-129.8-129.8V215.1c0-71.6 58.2-129.8 129.8-129.8h297c23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7h-297c-24.5 0-44.4 19.9-44.4 44.4V809c0 24.5 19.9 44.4 44.4 44.4h593.9c24.5 0 44.4-19.9 44.4-44.4V512c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v297c0 71.6-58.2 129.8-129.8 129.8z" fill="#ffffff"/>
+                            <path d="M483 756.5c-1.8 0-3.5-0.1-5.3-0.3l-134.5-16.8c-19.4-2.4-34.6-17.7-37-37l-16.8-134.5c-1.6-13.1 2.9-26.2 12.2-35.5l374.6-374.6c51.1-51.1 134.2-51.1 185.3 0l26.3 26.3c24.8 24.7 38.4 57.6 38.4 92.7 0 35-13.6 67.9-38.4 92.7L513.2 744c-8.1 8.1-19 12.5-30.2 12.5z m-96.3-97.7l80.8 10.1 359.8-359.8c8.6-8.6 13.4-20.1 13.4-32.3 0-12.2-4.8-23.7-13.4-32.3L801 218.2c-17.9-17.8-46.8-17.8-64.6 0L376.6 578l10.1 80.8z" fill="#ffffff"/>
+                            </g>
+                        </svg>
+                    </x-jet-button>
+                    {{-- statistics button --}}
+                    <x-jet-button class="ml-1 xs:ml-0 " wire:click="Route('statisticform',{{ $form->id }})"  type="button"   wire:loading.attr="disabled">
+                        {{ __('main.statistic') }}
+                        <svg class="w-4 h-4 mx-1"  viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.5px;}</style> </defs> <g id="ic-statistics-2"> <line class="cls-1" x1="2" y1="20" x2="22" y2="20"/> <path class="cls-1" d="M5,20V8.2A.2.2,0,0,1,5.2,8H7.8a.2.2,0,0,1,.2.2V20"/> <path class="cls-1" d="M11,20V4.27c0-.15.09-.27.2-.27h2.6c.11,0,.2.12.2.27V20"/> <path class="cls-1" d="M17,20V11.15c0-.08.09-.15.2-.15h2.6c.11,0,.2.07.2.15V20"/> </g> </g>
+                        </svg>
+                    </x-jet-button>
+                    {{-- preview button --}}
+                    <a target="_blank" href="{{ route('preview',$form->id) }}" class="bg-gray-400 hover:no-underline inline-flex items-center px-4 py-2 xs:m-0 xs:p-1
+                        border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest
+                        active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-1 ">
+                        {{ __('main.preview') }}
+                        <?xml  version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                        <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                            <defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title>
+                            <circle cx="22" cy="24" r="2"/>
+                            <path id="_inner_path_" data-name="&lt;inner path&gt;" class="cls-1" d="M22,28a4,4,0,1,1,4-4A4.0039,4.0039,0,0,1,22,28Zm0-6a2,2,0,1,0,2,2A2.0027,2.0027,0,0,0,22,22Z"/>
+                            <path d="M29.7769,23.4785A8.64,8.64,0,0,0,22,18a8.64,8.64,0,0,0-7.7769,5.4785L14,24l.2231.5215A8.64,8.64,0,0,0,22,30a8.64,8.64,0,0,0,7.7769-5.4785L30,24ZM22,28a4,4,0,1,1,4-4A4.0045,4.0045,0,0,1,22,28Z"/>
+                            <path d="M12,28H7V7h3v3H22V7h3v9h2V7a2,2,0,0,0-2-2H22V4a2,2,0,0,0-2-2H12a2,2,0,0,0-2,2V5H7A2,2,0,0,0,5,7V28a2,2,0,0,0,2,2h5ZM12,4h8V8H12Z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="flex justify-end items-center xs:items-baseline">
+                    @if($form->devices_count>0)
+                     <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                     <svg class="w-4 h-4 m-1 text-valid" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;stroke:currentColor;stroke-miterlimit:10;stroke-width:1.91px;}</style></defs><path class="cls-1" d="M10.57,5.8l2.71-2.72a5.4,5.4,0,0,1,7.64,7.64L18.2,13.43"/><path class="cls-1" d="M5.8,10.57,3.08,13.28a5.4,5.4,0,0,0,7.64,7.64l2.71-2.72"/><line class="cls-1" x1="16.77" y1="7.23" x2="7.23" y2="16.77"/></svg>
+                    @endif
+                    <span class="rounded-[0.5rem] w-auto h-6 ml-1  p-1 text-xs {{ $form->active?"text-valid bg-green-100":"text-primary_red bg-red-100" }}">{{ $form->active?__('main.active'):__('main.inactive') }}</span>
+
+                </div>
+
 
 
 
@@ -197,39 +207,46 @@
 
 
         {{-- buttons --}}
-        <div class=" mt-2 xs:mt-1 flex justify-between items-center xs:grid">
-            <div class="flex justify-between items-center ">
-                {{-- edit button --}}
-                <x-jet-button class=" " wire:click="Route('editform',{{ $form->id }})"
-                    type="button"   wire:loading.attr="disabled">
-                    {{ __('main.edit') }}
-                    <svg class="w-4 h-4 mx-1" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                        <g id="SVGRepo_iconCarrier">
-                        <path d="M823.3 938.8H229.4c-71.6 0-129.8-58.2-129.8-129.8V215.1c0-71.6 58.2-129.8 129.8-129.8h297c23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7h-297c-24.5 0-44.4 19.9-44.4 44.4V809c0 24.5 19.9 44.4 44.4 44.4h593.9c24.5 0 44.4-19.9 44.4-44.4V512c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v297c0 71.6-58.2 129.8-129.8 129.8z" fill="#ffffff"/>
-                        <path d="M483 756.5c-1.8 0-3.5-0.1-5.3-0.3l-134.5-16.8c-19.4-2.4-34.6-17.7-37-37l-16.8-134.5c-1.6-13.1 2.9-26.2 12.2-35.5l374.6-374.6c51.1-51.1 134.2-51.1 185.3 0l26.3 26.3c24.8 24.7 38.4 57.6 38.4 92.7 0 35-13.6 67.9-38.4 92.7L513.2 744c-8.1 8.1-19 12.5-30.2 12.5z m-96.3-97.7l80.8 10.1 359.8-359.8c8.6-8.6 13.4-20.1 13.4-32.3 0-12.2-4.8-23.7-13.4-32.3L801 218.2c-17.9-17.8-46.8-17.8-64.6 0L376.6 578l10.1 80.8z" fill="#ffffff"/>
-                        </g>
-                    </svg>
-                </x-jet-button>
-                {{-- preview button --}}
-                <a target="_blank" href="{{ route('preview',$form->id) }}" class="bg-gray-400 hover:no-underline inline-flex items-center px-4 py-2 xs:p-1
-                    border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest
-                    active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3 ">
-                    {{ __('main.preview') }}
-                    <?xml  version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                    <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
-                        <defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title>
-                        <circle cx="22" cy="24" r="2"/>
-                        <path id="_inner_path_" data-name="&lt;inner path&gt;" class="cls-1" d="M22,28a4,4,0,1,1,4-4A4.0039,4.0039,0,0,1,22,28Zm0-6a2,2,0,1,0,2,2A2.0027,2.0027,0,0,0,22,22Z"/>
-                        <path d="M29.7769,23.4785A8.64,8.64,0,0,0,22,18a8.64,8.64,0,0,0-7.7769,5.4785L14,24l.2231.5215A8.64,8.64,0,0,0,22,30a8.64,8.64,0,0,0,7.7769-5.4785L30,24ZM22,28a4,4,0,1,1,4-4A4.0045,4.0045,0,0,1,22,28Z"/>
-                        <path d="M12,28H7V7h3v3H22V7h3v9h2V7a2,2,0,0,0-2-2H22V4a2,2,0,0,0-2-2H12a2,2,0,0,0-2,2V5H7A2,2,0,0,0,5,7V28a2,2,0,0,0,2,2h5ZM12,4h8V8H12Z"/>
-                    </svg>
-                </a>
+        <div class=" mt-2 xs:mt-1 flex justify-between items-center ">
+                <div>
+                    {{-- edit button --}}
+                    <x-jet-button class=" " wire:click="Route('editform',{{ $form->id }})"
+                        type="button"   wire:loading.attr="disabled">
+                        {{ __('main.edit') }}
+                        <svg class="w-4 h-4 mx-1" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" stroke="#ffffff">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier">
+                            <path d="M823.3 938.8H229.4c-71.6 0-129.8-58.2-129.8-129.8V215.1c0-71.6 58.2-129.8 129.8-129.8h297c23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7h-297c-24.5 0-44.4 19.9-44.4 44.4V809c0 24.5 19.9 44.4 44.4 44.4h593.9c24.5 0 44.4-19.9 44.4-44.4V512c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v297c0 71.6-58.2 129.8-129.8 129.8z" fill="#ffffff"/>
+                            <path d="M483 756.5c-1.8 0-3.5-0.1-5.3-0.3l-134.5-16.8c-19.4-2.4-34.6-17.7-37-37l-16.8-134.5c-1.6-13.1 2.9-26.2 12.2-35.5l374.6-374.6c51.1-51.1 134.2-51.1 185.3 0l26.3 26.3c24.8 24.7 38.4 57.6 38.4 92.7 0 35-13.6 67.9-38.4 92.7L513.2 744c-8.1 8.1-19 12.5-30.2 12.5z m-96.3-97.7l80.8 10.1 359.8-359.8c8.6-8.6 13.4-20.1 13.4-32.3 0-12.2-4.8-23.7-13.4-32.3L801 218.2c-17.9-17.8-46.8-17.8-64.6 0L376.6 578l10.1 80.8z" fill="#ffffff"/>
+                            </g>
+                        </svg>
+                    </x-jet-button>
+                    {{-- preview button --}}
+                    <a target="_blank" href="{{ route('preview',$form->id) }}" class="bg-gray-400 hover:no-underline inline-flex items-center px-4 py-2 xs:p-1
+                        border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest
+                        active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3 ">
+                        {{ __('main.preview') }}
+                        <?xml  version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                        <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                            <defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title>
+                            <circle cx="22" cy="24" r="2"/>
+                            <path id="_inner_path_" data-name="&lt;inner path&gt;" class="cls-1" d="M22,28a4,4,0,1,1,4-4A4.0039,4.0039,0,0,1,22,28Zm0-6a2,2,0,1,0,2,2A2.0027,2.0027,0,0,0,22,22Z"/>
+                            <path d="M29.7769,23.4785A8.64,8.64,0,0,0,22,18a8.64,8.64,0,0,0-7.7769,5.4785L14,24l.2231.5215A8.64,8.64,0,0,0,22,30a8.64,8.64,0,0,0,7.7769-5.4785L30,24ZM22,28a4,4,0,1,1,4-4A4.0045,4.0045,0,0,1,22,28Z"/>
+                            <path d="M12,28H7V7h3v3H22V7h3v9h2V7a2,2,0,0,0-2-2H22V4a2,2,0,0,0-2-2H12a2,2,0,0,0-2,2V5H7A2,2,0,0,0,5,7V28a2,2,0,0,0,2,2h5ZM12,4h8V8H12Z"/>
+                        </svg>
+                    </a>
+                </div>
+                <div class="flex justify-end items-center">
+                    @if($form->devices_count>0)
+                     <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                     <svg class="w-4 h-4 m-1 text-valid" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;stroke:currentColor;stroke-miterlimit:10;stroke-width:1.91px;}</style></defs><path class="cls-1" d="M10.57,5.8l2.71-2.72a5.4,5.4,0,0,1,7.64,7.64L18.2,13.43"/><path class="cls-1" d="M5.8,10.57,3.08,13.28a5.4,5.4,0,0,0,7.64,7.64l2.71-2.72"/><line class="cls-1" x1="16.77" y1="7.23" x2="7.23" y2="16.77"/></svg>
+                    @endif
+                 </div>
 
 
 
-            </div>
+
 
 
 

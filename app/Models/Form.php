@@ -117,8 +117,9 @@ class Form extends Model
         }
     }
     public static function getAllForms($accountId){
-        return  self::join('type_of_forms','type_of_forms.id','=','forms.form_type_id')->where('forms.account_id','=',$accountId)->
-        select('forms.*','type_of_forms.form_type')->get();
+        return  self::join('type_of_forms','type_of_forms.id','=','forms.form_type_id')->where('forms.account_id','=',$accountId)
+        ->select('forms.*','type_of_forms.form_type')->get();
+
     }
 
     // all forms by type form order

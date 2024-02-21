@@ -231,6 +231,7 @@ class Allforms extends Component
         $this->plansPermissionsErrors= json_decode($this->errors_permission, true);
 
         $this->forms = Form::getAllForms(Auth::user()->current_account_id);
+
         $this->typesForms=Form::getAllTypesForms(Auth::user()->current_account_id);
         $this->responses=[];
         $this->totalresponses=0;
@@ -247,12 +248,13 @@ class Allforms extends Component
             $form->responsesCount=Responses::countResponsesPerForm($form->id);
             $this->totalresponses+=$form->responsesCount;
             $form->mediaCount=FormMedia::whereform_id($form->id)->count();
-
+            $form->devices_count=count(Kiosk::where('form_id','=',$form->id)->get());
            $form->active==true?$this->totalactiveforms+=1:"";
             $form->age=$this->formAge($form->created_at);
             $this->totalforms+=1;
             }
         }
+
 
         $this->main_languages = json_decode($this->main_lang, true);
         $this->messages = json_decode($this->messages_defult, true);
@@ -281,7 +283,7 @@ class Allforms extends Component
             if($days==0)
                return trans('main.today');
             else
-           { 
+           {
                return trans('main.days',['days'=>$days]);}
             }
             else

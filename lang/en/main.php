@@ -234,7 +234,7 @@ return [
     // my kiosks
     'addkiosk'=>'Add Kiosk',
     'totalkiosks_num'=>'Total Kiosks',
-    'editimage'=>'Edit Image',
+    'editstandby'=>'Edit Stand-By',
     'kioskname'=>'Kiosk Name',
     'linkedform'=>'linked Form',
     'standbyimage'=>'Stand By Image',

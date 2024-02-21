@@ -170,12 +170,12 @@
                         <h1 class="text-{{ $color }} {{$current_subscribe->allowed_days<10?"animate-pulse":""}} mt-1">{{ __('main.daysremaining',['days'=>$current_subscribe->allowed_days]) }}</h1>
 
                 <div class="min-h-[125px] max-h-auto h-auto flex justify-center items-center">
-                    
+
                       @if($statuslogic=="active")
-                    
+
                         <svg fill="currentColor" class="w-16 h-16 text-valid" viewBox="0 0 200 200" data-name="Layer 1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><title/><path d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165Zm25-91.5-29,35L76,94c-4.5-3.5-10.5-2.5-14,2s-2.5,10.5,2,14c6,4.5,12.5,9,18.5,13.5,4.5,3,8.5,7.5,14,8,1.5,0,3.5,0,5-1l3-3,22.5-27c4-5,8-9.5,12-14.5,3-4,4-9,.5-13L138,71.5c-3.5-2.5-9.5-2-13,2Z"/></svg>
                       @elseif($statuslogic=="expiredgrace")
-                       
+
                         <svg class="w-16 h-16"  viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                         <g transform="translate(.23100119 .14285704) scale(.28571)">
                         <circle cx="17" cy="17" r="14" fill="gray"/>
@@ -189,7 +189,7 @@
                         </g>
                         </svg>
                       @else
-                      
+
                         <svg class="w-16 h-16" fill="#545454" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" stroke="#545454">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
@@ -307,7 +307,14 @@
 
 
 
+
                                 </div>
+                                <div class="flex justify-end items-center">
+                                    @if($form->devices_count>0)
+                                     <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                                     <svg class="w-4 h-4 m-1 text-valid" viewBox="0 0 24 24" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;stroke:currentColor;stroke-miterlimit:10;stroke-width:1.91px;}</style></defs><path class="cls-1" d="M10.57,5.8l2.71-2.72a5.4,5.4,0,0,1,7.64,7.64L18.2,13.43"/><path class="cls-1" d="M5.8,10.57,3.08,13.28a5.4,5.4,0,0,0,7.64,7.64l2.71-2.72"/><line class="cls-1" x1="16.77" y1="7.23" x2="7.23" y2="16.77"/></svg>
+                                    @endif
+                                 </div>
 
                         </div>
 
