@@ -144,7 +144,7 @@
                                     </svg>
                                     <div style="right:-241px"  class=" inline-flex absolute bottom-0 whitespace-normal w-96  sm:right-1 items-center hidden mb-6 group-hover:flex">
                                         <span class=" relative text-ellipsis square z-10 p-2 text-xs leading-none text-gray-400  bg-white shadow-lg">
-                                            {!! $password_policy !!}
+                                            {!! __('auth.passwordpolicy') !!}
 
                                         </span>
 

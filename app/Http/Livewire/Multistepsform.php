@@ -65,7 +65,7 @@ class Multistepsform extends Component
     public $numberphoneempty=0;
     //password confirmed or no
     public $isconfirm=0;
-    public $password_policy;
+
 
     // confirmed and non confirmed classes
     public $confirmedclass='"border-green-300 caret-green-300  focus:border-green-300 focus:ring focus:ring-green-200
@@ -93,7 +93,7 @@ class Multistepsform extends Component
     //messages of validation in real time
     public function __construct()
     {
-         $password_policy=trans('auth.passwordpolicy');
+
 
         $this->messages = [
             'required' => trans('auth.required'),
