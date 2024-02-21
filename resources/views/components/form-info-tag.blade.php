@@ -10,7 +10,7 @@
     @if($type=="bar")
     <x-progress-bar :value="round($info, 1)" class="{{ $bgcolor }}" />
     @else
-    <span class="whitespace-nowrap overflow-hidden" data-bs-toggle="tooltip"  data-bs-html="true" title="{{ $info }}">{{  $info  }}</span>
+    <span class="whitespace-nowrap overflow-hidden font-bold" data-bs-toggle="tooltip"  data-bs-html="true" title="{{ $info }}">{{  $info  }}</span>
     @endif
    </div>
 </div>

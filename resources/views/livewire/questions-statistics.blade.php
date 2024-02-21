@@ -192,7 +192,7 @@
                                 </svg>
                             </div>
                             <div class="mx-1">
-                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="age-{{ $currentQuestion->id }}" class=""></span></h1>
+                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="age-{{ $currentQuestion->id }}" class="font-bold"></span></h1>
                             </div>
                         </div>
                         {{-- answers --}}
@@ -220,7 +220,7 @@
                                 </svg>
                             </div>
                             <div class="mx-1">
-                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-answers-{{ $currentQuestion->id }}" class=""></span>{{ __('main.answers') }}</h1>
+                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-answers-{{ $currentQuestion->id }}" class="font-bold"></span>{{ __('main.answers') }}</h1>
                             </div>
                         </div>
                         {{-- skip --}}
@@ -233,7 +233,7 @@
                                 </svg>
                             </div>
                             <div class="mx-1">
-                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-skipped-{{ $currentQuestion->id }}" class=""></span>{{ __('main.skips') }}</h1>
+                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-skipped-{{ $currentQuestion->id }}" class="font-bold"></span>{{ __('main.skips') }}</h1>
                             </div>
                         </div>
                     </div>
