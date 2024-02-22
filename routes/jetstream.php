@@ -207,6 +207,7 @@ Route::group(['middleware' => config('jetstream.middleware', ['web'])], function
 
             // Accounts...
             if (Jetstream::hasAccountFeatures()) {
+           
                 Route::get('/accounts/create', [AccountController::class, 'create'])->name('accounts.create');
                 Route::get('/accounts/{account}', [AccountController::class, 'show'])->name('accounts.show');
                 Route::put('/current-account', [CurrentAccountController::class, 'update'])->name('current-account.update');
