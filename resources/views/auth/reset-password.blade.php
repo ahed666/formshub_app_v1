@@ -13,7 +13,7 @@
 
 
 
-        <form method="POST" action="{{ route('password.update.forget') }}">
+        <form method="POST" action="{{ url('/reset-password') }}">
             @csrf
 
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
