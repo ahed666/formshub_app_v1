@@ -24,12 +24,14 @@ use Carbon\Carbon;
 use App\Models\Subscribe;
 use App\Models\SubscribePlan;
 use App\Models\TypeSubscribe;
+use App\Models\FrequencyAskedQuestion;
 // google translate api
 use Stichoza\GoogleTranslate\GoogleTranslate;
 use Illuminate\Support\Facades\Auth;
 class Support extends Component
 {
     public $tickets;
+    public $questions;
     public $StatusColors='{
         "Open":"primary_red","Pending":"yellow-400","In Progress":"secondary_blue","Closed":"valid"
     }';
@@ -37,6 +39,7 @@ class Support extends Component
 
 
     public function mount(){
+        $this->questions=FrequencyAskedQuestion::all();
         $this->tickets=SupportTicket::whereaccount_id(Auth::user()->current_account_id)->orderBy('created_at', 'desc')->get();
         $this->dispatchBrowserEvent('loadedTickets', ['tickets' => $this->tickets]);
         $this->StatusColors=json_decode($this->StatusColors, true);

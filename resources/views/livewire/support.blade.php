@@ -19,30 +19,38 @@
          <div class="mt-2   container w-full overflow-hidden h-auto">
         <ul class="mt-2    owl_faq owl-carousel owl-theme align-content-center">
             <div  class="item relative  w-full">
+                @foreach ($questions as $question )
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
-                    <a href="" class="hover:no-underline hover:border-secondary_blue">
+                    <a href="https://formshub.net/knowledgebase/{{ $question->id }}" class="hover:no-underline hover:border-secondary_blue">
                         <div>
                             {{-- title question --}}
                             <div class="flex justify-center items-center font-bold">
-                                {{ __('main.titlevalue_get_started') }}
+                                @if(App::getLocale()=="en")    {{ $question->question }}
+                                @else {{  $question->question_ar }}
+                                @endif
                             </div>
                             {{-- text question --}}
-                            <div  data-bs-toggle="tooltip"  data-bs-html="true" title="{{ __('main.textvalue_get_started') }}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
-                                {{ __('main.textvalue_get_started') }}
+                            <div  data-bs-toggle="tooltip"  data-bs-html="true" title="{{!! $question->answer !!}}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
+                                @if(App::getLocale()=="en"){!! $question->answer !!}
+                            @else {!!  $question->answer_ar !!}
+                            @endif
                             </div>
                         </div>
                     </a>
                 </li>
+                @endforeach
+
             </div>
+
             <div  class="item relative  w-full">
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="" class="hover:no-underline hover:border-secondary_blue">
                         <div>
-                            {{-- title question --}}
+
                             <div class="flex justify-center items-center font-bold">
                                 {{ __('main.titlevalue_manage_accounts') }}
                             </div>
-                            {{-- text question --}}
+
                             <div data-bs-toggle="tooltip"  data-bs-html="true" title="{{ __('main.textvalue_manage_accounts') }}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
                                 {{ __('main.textvalue_manage_accounts') }}
                             </div>
@@ -54,11 +62,11 @@
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="" class="hover:no-underline hover:border-secondary_blue">
                         <div>
-                            {{-- title question --}}
+
                             <div class="flex justify-center items-center font-bold">
                                 {{ __('main.titlevalue_add_kiosk') }}
                             </div>
-                            {{-- text question --}}
+
                             <div data-bs-toggle="tooltip"  data-bs-html="true" title="{{ __('main.textvalue_add_kiosk') }}"  class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
                                 {{ __('main.textvalue_add_kiosk') }}
                             </div>
@@ -70,11 +78,11 @@
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="" class="hover:no-underline hover:border-secondary_blue">
                         <div>
-                            {{-- title question --}}
+
                             <div class="flex justify-center items-center font-bold">
                                 {{ __('main.titlevalue_form_customization') }}
                             </div>
-                            {{-- text question --}}
+
                             <div data-bs-toggle="tooltip"  data-bs-html="true" title="{{ __('main.textvalue_form_customization') }}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
                                 {{ __('main.textvalue_form_customization') }}
                             </div>
@@ -86,11 +94,11 @@
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="" class="hover:no-underline hover:border-secondary_blue">
                         <div>
-                            {{-- title question --}}
+
                             <div class="flex justify-center items-center font-bold">
                                 {{ __('main.titlevalue_problem_diagnosis') }}
                             </div>
-                            {{-- text question --}}
+
                             <div data-bs-toggle="tooltip"  data-bs-html="true" title="{{ __('main.textvalue_problem_diagnosis') }}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
                                 {{ __('main.textvalue_problem_diagnosis') }}
                             </div>
@@ -102,11 +110,11 @@
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="" class="hover:no-underline hover:border-secondary_blue">
                         <div>
-                            {{-- title question --}}
+
                             <div class="flex justify-center items-center font-bold">
                                 {{ __('main.titlevalue_billing_invoice') }}
                             </div>
-                            {{-- text question --}}
+
                             <div data-bs-toggle="tooltip"  data-bs-html="true" title="  {{ __('main.textvalue_billing_invoice') }}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
                                 {{ __('main.textvalue_billing_invoice') }}
                             </div>
@@ -118,11 +126,11 @@
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="" class="hover:no-underline hover:border-secondary_blue">
                         <div>
-                            {{-- title question --}}
+
                             <div class="flex justify-center items-center font-bold">
                                 {{ __('main.titlevalue_subscription_problem') }}
                             </div>
-                            {{-- text question --}}
+
                             <div data-bs-toggle="tooltip"  data-bs-html="true" title="{{ __('main.textvalue_subscription_problem') }}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
                                 {{ __('main.textvalue_subscription_problem') }}
                             </div>
