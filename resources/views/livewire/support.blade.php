@@ -22,7 +22,7 @@
             <div  class="item relative  w-full">
 
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
-                    <a href="https://formshub.net/knowledgebase/{{ $question->id }}" class="hover:no-underline hover:border-secondary_blue">
+                    <a href="https://formshub.net/knowledgebase/{{ $question->id }}" class="hover:no-underline hover:border-secondary_blue" target="_blank">
                         <div>
                             {{-- title question --}}
                             <div class="flex justify-center items-center font-bold">
