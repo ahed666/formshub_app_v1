@@ -113,6 +113,14 @@ Route::get('/loader',function()
 // end unsubscribe
 
 //external urls
+
+//knowledgebase
+Route::get('/knowledgebase',function()
+{
+
+    $externalUrl = env('WEBSITE_URL').'/knowledgebase'; // Replace this with your external URL
+    return redirect()->away($externalUrl);
+})->name('knowledgebase');
 //terms and conditions
 Route::get('/terms_conditions',function()
 {

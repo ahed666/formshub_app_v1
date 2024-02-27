@@ -9,7 +9,7 @@
             </h1>
         </div>
         <div class="mt-1 flex justify-start items-center">
-            <a type="button"  class="rounded bg-gray-300 p-2 text-secondary_blue hover:text-secondary_1 hover:no-underline focus:outline-none active:outline-none">
+            <a type="button" href="{{ route('knowledgebase') }}"  class="rounded bg-gray-300 p-2 text-secondary_blue hover:text-secondary_1 hover:no-underline focus:outline-none active:outline-none">
                 {{ __('main.visit_kb') }}
             </a>
         </div>
