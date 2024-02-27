@@ -118,22 +118,23 @@ Route::get('/loader',function()
 Route::get('/knowledgebase',function()
 {
 
-    $externalUrl = env('WEBSITE_URL').'/knowledgebase'; // Replace this with your external URL
+    $externalUrl = env('WEBSITE_URL','https://formshub.net').'/knowledgebase'; // Replace this with your external URL
     return redirect()->away($externalUrl);
 })->name('knowledgebase');
 //terms and conditions
 Route::get('/terms_conditions',function()
 {
 
-    $externalUrl = env('WEBSITE_URL').'/termsandconditions'; // Replace this with your external URL
+    $externalUrl = env('WEBSITE_URL','https://formshub.net').'/termsandconditions'; // Replace this with your external URL
     return redirect()->away($externalUrl);
+
 }
 )->name('terms_conditions');
 // privacy policy
 Route::get('/privacypolicy',function()
 {
 
-    $externalUrl = env('WEBSITE_URL').'/privacypolicy'; // Replace this with your external URL
+    $externalUrl = env('WEBSITE_URL','https://formshub.net').'/privacypolicy'; // Replace this with your external URL
     return redirect()->away($externalUrl);
 }
 )->name('privacypolicy');
