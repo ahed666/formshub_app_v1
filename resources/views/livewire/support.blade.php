@@ -18,8 +18,9 @@
         </div>
          <div class="mt-2   container w-full overflow-hidden h-auto">
         <ul class="mt-2    owl_faq owl-carousel owl-theme align-content-center">
+            @foreach ($questions as $question )
             <div  class="item relative  w-full">
-                @foreach ($questions as $question )
+
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="https://formshub.net/knowledgebase/{{ $question->id }}" class="hover:no-underline hover:border-secondary_blue">
                         <div>
@@ -38,11 +39,12 @@
                         </div>
                     </a>
                 </li>
-                @endforeach
+
 
             </div>
+            @endforeach
 
-            <div  class="item relative  w-full">
+            {{-- <div  class="item relative  w-full">
                 <li class=" border border-gray-200 hover:border-secondary_blue p-2  rounded-[0.5rem]">
                     <a href="" class="hover:no-underline hover:border-secondary_blue">
                         <div>
@@ -137,7 +139,7 @@
                         </div>
                     </a>
                 </li>
-            </div>
+            </div> --}}
         </ul>
        </div>
 
