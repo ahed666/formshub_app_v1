@@ -40,6 +40,7 @@ class Support extends Component
 
     public function mount(){
         $this->questions=FrequencyAskedQuestion::all();
+        
         $this->tickets=SupportTicket::whereaccount_id(Auth::user()->current_account_id)->orderBy('created_at', 'desc')->get();
         $this->dispatchBrowserEvent('loadedTickets', ['tickets' => $this->tickets]);
         $this->StatusColors=json_decode($this->StatusColors, true);
