@@ -1,6 +1,3 @@
-<html>
-    <head></head>
-    <body>
 
 <x-guest-layout>
     <x-jet-authentication-card>
@@ -36,7 +33,4 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
-@livewireScripts()
 
-</body>
-</html>
