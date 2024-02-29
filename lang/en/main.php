@@ -400,6 +400,7 @@ return [
     'titlevalue_problem_diagnosis' => 'Problem diagnosis',
     'titlevalue_billing_invoice' => 'Billing & invoice',
     'titlevalue_subscription_problem' => 'Subscription Problem',
+
     'textvalue_get_started' => 'Learn to how use Form Point app, learn more about features and how to get the most benefits.',
     'textvalue_manage_accounts' => 'Manage your account, add account members and manage access, enhance your account work.',
     'textvalue_add_kiosk' => 'See how you can add and manage kiosks remotely.',
@@ -408,6 +409,8 @@ return [
     'textvalue_billing_invoice' => 'Learn more about how to manage and access your billing information.',
     'textvalue_subscription_problem' => 'Learn how to manage your subscriptions and fix subscription problems.',
     'notickets'=>'No tickets have been created yet',
+
+  
 
 
     // profile

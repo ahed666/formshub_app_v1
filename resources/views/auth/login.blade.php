@@ -1,12 +1,4 @@
-<html>
-    <head>
-        <title>{{ __('login') }}</title>
-        <link rel="icon" type="image/png" href="{{ asset('images/fav_icon/favicon.ico') }}">
-    </head>
-    <body>
 
-
- </div>
 
 <x-guest-layout>
     <x-jet-validation-errors class="mb-4" />
@@ -27,6 +19,9 @@
        @endif
     @endif
 </x-guest-layout>
+@push('scripts')
+
+
 <script>
 
     // for disable resend button for 2 minutes
@@ -87,7 +82,6 @@ var timer = null;  // For referencing the timer
 }());
 </script>
 @endif
-@livewireScripts()
+@endpush
 
-</body>
-</html>
+
