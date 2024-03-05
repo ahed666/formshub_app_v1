@@ -717,7 +717,7 @@ public $answers_json_text_rating='
                     $new=$file;
                     if(str_contains($this->question_image,'storage/images/upload/'))
                     File::delete(public_path($this->question_image));
-                
+
                     File::move($old , $new);
                     }
                     else
@@ -824,6 +824,7 @@ public $answers_json_text_rating='
 
                                         $old=public_path($ans['temp_image']);
                                         $new=$file;
+
                                         if(str_contains($ans['image'],'storage/images/upload/'))
                                         File::delete(public_path($ans['image']));
 

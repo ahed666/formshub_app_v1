@@ -24,10 +24,11 @@
    document.addEventListener('featched',(e)=>{
         media=e.detail.media;
         FormSettings=e.detail.FormSettings;
+        console.log(FormSettings);
 
        if(media.length>0){
         showMedia();
-        
+
         if(FormSettings.allow_touch==true)
             initalButtons();
        }
@@ -86,7 +87,7 @@
                 clearInterval(idleInterval);
 
         if(index<media.length){
-        
+
         if(media[index].type=="video"){
         videoContents= media[index].blob;
         slider.innerHTML=` <div class="item">
@@ -97,12 +98,12 @@
         </div>`;
         var video=document.getElementById('video');
        video.muted = true;
-        
+
         video.volume = getVolume(media[index].volume);
         video.muted = media[index].mute;
        video.play();
         var time=media[index].duration*1000;
-    
+
         index+=1;
         idleInterval = setInterval(function () {showMedia();},time );}
         else if(media[index].type=="image"){
@@ -127,18 +128,18 @@
 
 
    function backSlider(){
-    
+
     index-=2;
     if(index<0)index=0;//or media.length-1
     showMedia();
    }
 
    function nextSlider(){
-    
+
 
     showMedia();
    }
-   
+
    function getVolume(volume){
        console.log(volume);
       dynamicVolume= parseInt(volume,10)/100
