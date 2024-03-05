@@ -120,7 +120,7 @@
 
         else{
                 index=0;
-                if(FormSettings.allow_loop)
+                if(FormSettings.allow_loop==true)
                 showMedia();
         }
 
