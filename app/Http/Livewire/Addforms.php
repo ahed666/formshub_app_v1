@@ -100,7 +100,7 @@ class Addforms extends Component
         if(str_contains($this->form_logo_temp,'images/temp/'))
         {
                 //  dd(public_path(str_replace('/', '\\', $this->form_logo) ));
-                
+
             File::delete(public_path($this->form_logo_temp));
         }
         $this->form_logo="images/logo_1_transparent_dark.png";
@@ -237,6 +237,9 @@ class Addforms extends Component
               if($logo==null)
               {
                 $logo=new Logos();
+              }
+              else{
+                File::delete(public_path($logo->logo_url));
               }
 
             if(str_contains($this->form_logo_temp,'storage/images/temp/'))
