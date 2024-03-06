@@ -252,7 +252,7 @@
 
             {{-- answers and charts --}}
 
-            <div id="question_answers" class="w-full col-span-12">
+            <div id="question_answers" class="w-full col-span-12 ">
 
             </div>
 
@@ -914,7 +914,7 @@
 
                         </div>
                         <div class="w-[40%] lg:w-[60%] md:w-[60%] xs:w-full xs:min-h-full xs:max-h-full max-h-[475px] min-h-[475px]  xs:max-w-full">
-                            <div class="grid grid-cols-12 w-1/4 h-8">
+                            <div class="grid grid-cols-12 w-1/4 xs:w-1/2 h-8">
                                 <button class="text-xs text-white bg-secondary_blue col-span-6 h-full border border-gray-200 rounded-[0.5rem]" onclick="SwitchChart(${QestionData.id})" id="buttonSwitchChartline-${QestionData.id}">Line Chart</button>
                                 <button disabled class="text-xs col-span-6 text-white bg-secondary_blue h-full opacity-50 border border-gray-200 rounded-[0.5rem]" onclick="SwitchChart(${QestionData.id})" id="buttonSwitchChartpie-${QestionData.id}">Pie Chart</button>
 
@@ -924,12 +924,12 @@
                             <div id="charts-${ QestionData.id }" class="overflow-y-auto scrollbar scrollbar-thumb-secondary_blue scrollbar-track-gray-200  grid grid-cols-12 gap-2 p-1 items-center justify-center w-full h-full max-h-[375px] xs:max-h-full  md:w-full xs:w-full md:h-3/4 xs:h-3/4   ">
 
                                 <div id="chartPie" class="h-full p-4 xs:p-1 col-span-12 border border-gray-200 rounded-[0.5rem] ">
-                                    <div class="flex justify-end items-center" ><a id="button-pie-${ QestionData.id }" onclick="showLegend('pie-${ QestionData.id }')" class="text-secondary_blue text-sm hover:cursor-pointer hover:no-underline">${translations.hidelabels}</a></div>
+                                    <div class="flex justify-end items-center" ><a id="button-pie-${ QestionData.id }" onclick="showLegend('pie-${ QestionData.id }')" class="text-secondary_blue text-sm xs:text-xs hover:cursor-pointer hover:no-underline">${translations.hidelabels}</a></div>
                                     <div class="flex justify-center items-center  w-full h-full"><canvas id="pie-${ QestionData.id }" class="w-full h-auto" ></canvas></div>
                                 </div>
 
                                 <div id="chartLine" class="hidden h-full p-4  xs:p-1 col-span-12 border border-gray-200 rounded-[0.5rem]">
-                                    <div class="flex justify-end items-center" ><a id="button-line-${ QestionData.id }" onclick="showLegend('line-${ QestionData.id }')" class="text-secondary_blue text-sm hover:cursor-pointer hover:no-underline">${translations.hidelabels}</a></div>
+                                    <div class="flex justify-end items-center" ><a id="button-line-${ QestionData.id }" onclick="showLegend('line-${ QestionData.id }')" class="text-secondary_blue text-sm xs:text-xs hover:cursor-pointer hover:no-underline">${translations.hidelabels}</a></div>
                                     <div class="flex justify-center items-center  w-full h-full"><canvas id="line-${ QestionData.id }" class="w-full h-auto"></canvas></div>
                                 </div>
 
