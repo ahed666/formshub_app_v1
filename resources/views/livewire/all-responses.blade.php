@@ -232,7 +232,7 @@
     </div>
     {{-- show in popup list modal --}}
     <div  class="modal fade fixed top-0 left-0 z-[1055]  h-full w-full  " id="show-response" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="show-response-modal" aria-hidden="true">
-        <div class="xs:mx-0 modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[1000px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
+        <div class="xs:m-0 modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[1000px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
         <div class="modal-content  w-full flex-col rounded-md border-none  bg-clip-padding text-current shadow-lg
         outline-none ">
         @livewire('show-response')
@@ -245,7 +245,7 @@
     @endif
     {{-- add to pop up--}}
     <div  class="modal fade fixed top-0 left-0 z-[1055]  h-full w-full  " id="todo-response" tabindex="-1" role="dialog" aria-labelledby="todo-response-modal" aria-hidden="true">
-        <div class="xs:mx-0 modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[1000px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
+        <div class="xs:m-0 modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[1000px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
         <div class="modal-content  w-full flex-col rounded-md border-none  bg-clip-padding text-current shadow-lg
         outline-none ">
 
