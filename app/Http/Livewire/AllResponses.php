@@ -133,6 +133,9 @@ class AllResponses extends Component
           $res->todo=false;
           $res->save();
           ToDo::whereresponse_id($id)->delete();
+          $this->allresponses = Responses::where('form_id', $this->current_form_id)
+          ->orderBy('reviewed_at', 'desc')
+          ->get();
           $this->responsesdata();
 
           $this->dispatchBrowserEvent('refreshdata',['id'=>$id]);
