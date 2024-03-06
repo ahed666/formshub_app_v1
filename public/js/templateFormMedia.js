@@ -84,7 +84,7 @@
      }
 
     function showMedia(){
-                clearInterval(idleInterval);
+        clearInterval(idleInterval);
 
         if(index<media.length){
 

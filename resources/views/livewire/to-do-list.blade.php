@@ -63,7 +63,7 @@
                             <option  value="High">{{ __('main.high') }}</option>
                     </select>
                 </div>
-            
+
            </div>
            {{-- Info Panel --}}
            <div id="box_status_info" class="flex xs:mt-2">
@@ -423,20 +423,18 @@
         async () => {
 
         const { value: accept } = await Swal.fire({
-            text: "You will no longer have access to this task",
+            text: translations.removetask_hint_text,
         input: 'checkbox',
         inputValue: 0,
         icon:'question',
         confirmButtonColor: '#dc2626',
         showCancelButton: true,
-          cancelButtonColor:'#f3f4f6',
-        cancelButtonText:"<h5 style='color:000000;border:0;box-shadow: none;'>Cancel</h5>",
-        inputPlaceholder:
-        'Are you sure you want to delete it',
-        confirmButtonText:
-            'Delete ',
+        cancelButtonColor:'#f3f4f6',
+        cancelButtonText:`<h5 style='color:000000;border:0;box-shadow: none;'>${translations.cancel}</h5>`,
+        inputPlaceholder:translations.removetask_hint_sure,
+         confirmButtonText:translations.delete,
         inputValidator: (result) => {
-            return !result && 'Checkbox is required'
+            return !result && translations.checkboxrequired
         }
         })
 

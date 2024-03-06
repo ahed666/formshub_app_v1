@@ -277,7 +277,7 @@ function hideLoadingAnimation() {
   document.getElementById("loading-animation").classList.add("hidden");
 
 }
-
+var translations = @json(__('main'));
 var filtersTextTranslations={
     "ar":{"very satisfied":"راضي تماماٌ",
             "satisfied":"راضي",
@@ -611,20 +611,18 @@ var filtersTranslations={
         (async () => {
 
         const { value: accept } = await Swal.fire({
-            text: "remove todo will wipe all data that belong to it, this action cannot be undone!!",
+            text: translations.removetask_hint_text,
         input: 'checkbox',
         inputValue: 0,
         icon:'question',
         confirmButtonColor: '#dc2626',
         showCancelButton: true,
         cancelButtonColor:'#f3f4f6',
-        cancelButtonText:"<h5 style='color:000000;border:0;box-shadow: none;'>Cancel</h5>",
-        inputPlaceholder:
-        'Are you sure you want to delete it',
-         confirmButtonText:
-            'Delete ',
+        cancelButtonText:`<h5 style='color:000000;border:0;box-shadow: none;'>${translations.cancel}</h5>`,
+        inputPlaceholder:translations.removetask_hint_sure,
+         confirmButtonText:translations.delete,
         inputValidator: (result) => {
-            return !result && 'Checkbox is required'
+            return !result && translations.checkboxrequired
         }
         })
 

@@ -76,8 +76,8 @@
                             @foreach ($mostresponses as $response )
 
 
-                                <tr data-response-id="{{ $response->id }}" 
-                                      wire:loading.class=" animate-pulse " class="hover:border-2 hover:border-secondary_blue hover:z-20 hover:shadow  w-full p-1 border-b-[1px] border-gray-200 {{ $response->viewed?"bg-white":"bg-primary_blue" }}  ">
+                                <tr data-response-id="{{ $response->id }}"
+                                      wire:loading.class=" animate-pulse " class="hover:border-2 hover:border-secondary_blue hover:z-20 hover:shadow  w-full p-1 border-b-[1px] border-gray-200 bg-white  ">
 
                                     <td  class="  max-h-8 pl-2">
                                         <div data-bs-toggle="tooltip"  data-bs-html="true" title="{{ \Carbon\Carbon::parse($response->reviewed_at)->setTimezone(Auth::user()->timezone)->format('Y-m-d H:i') }}"  class="hover:cursor-pointer min-h-[35px] max-h-[35px] overflow-hidden truncate flex justify-center items-center">

@@ -410,7 +410,7 @@ return [
     'textvalue_subscription_problem' => 'Learn how to manage your subscriptions and fix subscription problems.',
     'notickets'=>'No tickets have been created yet',
 
-  
+
 
 
     // profile
@@ -516,6 +516,8 @@ return [
     'refreshtriggeredsuccessfully'=>'Refresh request has been sent to kiosk ID: :id , if updates did not apply to the kiosk, please restart it.',
     //todo
     'notasks'=>'No tasks have been added yet.',
+    'removetask_hint_text'=>'Removing the task will wipe it from ToDo list, this action cannot be undone!!',
+    'removetask_hint_sure'=>'I\'m sure I want to remove the task',
     //signpdf
     'formsentsuccessfully'=>'Please wait for the user to sign the sent form, if no signature is provided, the sign request will be automatically cancelled after 40 seconds.',
     'formsentsuccessfully_title'=>'Form Successfully Sent',
