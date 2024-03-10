@@ -445,6 +445,10 @@
         , "full": "/resources/Non-Statistical Question Full.xlsx",
 
     };
+    var mostchoosen=`                     <svg class="w-4 h-4 text-valid" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+</svg>
+`;
     var FilesPaths = JSON.parse(JSON.stringify(paths));
     var responseColumnsTranslations = {
         "ar": {
@@ -666,7 +670,7 @@
                             // sheet.cell(`E${i+15}`).value(answer.ratio+' %');
 
                             if (answer.answer_sum == max && max > 0) {
-                                sheet.cell(`F${i+15}`).value(translations.mostchoosen);
+                                sheet.cell(`F${i+15}`).value(mostchoosen);
                                 sheet.cell(`F${i+15}`).style({
                                     fill: {
                                         type: 'solid'
@@ -1575,7 +1579,7 @@
             answer.ratio = answer.answer_sum == 0 ? 0 : ((100 * answer.answer_sum) / totalAnswers).toFixed(1);
             MostChoosen = answer.answer_sum == max && max > 0 ?
                 `<div class="text-xs flex justify-center items-center font-bold  col-span-1  text-center  p-1 text-valid">
-                                <span>${translations.mostchoosen}</span>
+                                <span>${mostchoosen}</span>
                     </div>` : ``;
 
             answers_section.innerHTML += `
