@@ -77,7 +77,7 @@ return [
     'myforms'=>'My Forms',
     'mykiosks'=>'My Kiosks',
     'todo_nav'=>'To Do',
-    'signpdf_nav'=>'Sign Pdf',
+    'signpdf_nav'=>'Sign PDF',
     'account'=>'Account',
     'support'=>'Support',
     'settings'=>'Settings',
