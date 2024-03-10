@@ -28,7 +28,7 @@
                       focus:ring-secondary " wire:model.defer="target"  >
 
                         <option value="Customer Support" wire:key="target-0" >{{ __('main.customersupport') }}</option>
-                        <option value="Sales" wire:key="target-1" >{{ __('main.sales') }}</option>
+                        {{-- <option value="Sales" wire:key="target-1" >{{ __('main.sales') }}</option> --}}
 
                     </select>
 
