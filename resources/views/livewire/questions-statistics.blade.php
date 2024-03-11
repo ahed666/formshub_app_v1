@@ -129,7 +129,7 @@
             {{-- info answers & dates filters & export option --}}
             <div class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-4 ">
                  {{-- question info --}}
-                 <div class="grid xs:flex xs:my-2">
+                 <div class="grid xs:flex xs:my-2 bg-primary_blue">
                     {{-- age --}}
                     <div class="w-full flex  items-center my-[2px] ">
                         <div class="mx-1">
