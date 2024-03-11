@@ -104,7 +104,7 @@
 
 
             {{--question detials  --}}
-            <div class="col-span-12 w-full flex xs:grid  justify-between items-center h-14 ">
+            <div class="col-span-12 w-full flex xs:grid  justify-between items-center ">
                 <div class="col-span-11 xs:col-span-12  ">
                     <h1 id="question_text" class="text-black text-xl  xs:text-xs md:text-sm font-bold ">
 
@@ -129,7 +129,7 @@
             {{-- info answers & dates filters & export option --}}
             <div class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-4 ">
                  {{-- question info --}}
-                 <div class="grid xs:flex xs:my-2 bg-primary_blue px-8">
+                 <div class="grid xs:flex xs:my-2 bg-primary_blue px-8 xs:px-0 md:px-0">
                     {{-- age --}}
                     <div class="w-full flex  items-center my-[2px] ">
                         <div class="mx-1">
@@ -189,7 +189,7 @@
                         </div>
                     </div>
                 </div>
-                <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 ml-1 mb-2 mt-2 w-[40%] ">
+                <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 ml-1 mb-2 mt-2 w-[40%]  xs:w-full md:w-full">
 
 
                     {{-- dates  --}}
