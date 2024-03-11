@@ -104,7 +104,7 @@
 
 
             {{-- export options --}}
-            <div class="w-full flex xs:grid  justify-between items-center">
+            <div class="col-span-12 w-full flex xs:grid  justify-between items-center">
                 <div class="w-[90%] xs:w-full ">
                     <h1 id="question_text" class="text-black  xs:text-xs md:text-sm font-bold text-md">
 
