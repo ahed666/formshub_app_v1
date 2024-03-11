@@ -3,7 +3,7 @@
 @endpush
 <div wire:loading.class="disabled opacity-50" class=" py-4 xs:py-1">
     @if($responses!=null&&count($responses)>0)
-    <div class="flex justify-between items-center px-4 xs:px-1   mb-1">
+    <div class="flex justify-between items-center px-4 xs:px-1   my-1">
         <div class="flex space-x-4 items-center w-[60%] xs:w-full xs:justify-start justify-end">
 
             <button {{ $questionIndex>0?"":"disabled" }} wire:click="backQuestion" class="focus:outline-none">
