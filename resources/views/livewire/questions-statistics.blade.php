@@ -3,12 +3,12 @@
 @endpush
 <div wire:loading.class="disabled opacity-50" class=" py-4 xs:py-1">
     @if($responses!=null&&count($responses)>0)
-    <div class="flex justify-between items-center   mb-1">
+    <div class="flex justify-between items-center px-4 xs:px-1   mb-1">
         <div class="flex space-x-4 items-center w-[60%] xs:w-full xs:justify-start justify-end">
 
             <button {{ $questionIndex>0?"":"disabled" }} wire:click="backQuestion" class="focus:outline-none">
                 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                <svg id="prev" class="opacity-50 w-10 h-10 text-secondary_blue hover:cursor-pointer" fill="currentColor" viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(0)">
+                <svg id="prev" class="opacity-50 w-10 h-10 xs:w-6 xs:h-6 text-secondary_blue hover:cursor-pointer" fill="currentColor" viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(0)">
                     <g id="SVGRepo_bgCarrier" stroke-width="0" />
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
                     <g id="SVGRepo_iconCarrier">
@@ -20,14 +20,14 @@
                     @endfor
                     @elseif(count($formquestions)>=8)
 
-                    @for($i = 0;$i < count($formquestions); $i++) <button wire:click="currentQuestion({{ $i }})" class="{{$questionIndex==$i?"bg-secondary_blue":""  }} focus:outline-none border-[1px] border-gray-200 p-1">{{ $i+1 }}</button>
+                    @for($i = 0;$i < count($formquestions); $i++) <button wire:click="currentQuestion({{ $i }})" class="{{$questionIndex==$i?"bg-secondary_blue":""  }} focus:outline-none border-[1px] border-gray-200 p-1 xs:text-xs">{{ $i+1 }}</button>
                         @endfor
 
                         @endif
             </div>
             <button {{ $questionIndex<count($formquestions)-1?"":"disabled" }} wire:click="nextQuestion" class="focus:outline-none">
                 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                <svg fill="currentColor" id="next" class="opacity-50 w-10 h-10 text-secondary_blue hover:cursor-pointer" viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(180)">
+                <svg fill="currentColor" id="next" class="opacity-50 w-10 h-10 xs:w-6 xs:h-6 text-secondary_blue hover:cursor-pointer" viewBox="0 0 24 24" id="previous" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color" transform="rotate(180)">
                     <g id="SVGRepo_bgCarrier" stroke-width="0" />
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
                     <g id="SVGRepo_iconCarrier">
@@ -100,16 +100,17 @@
     <div id="fullpage" class="p-4 xs:p-1 max-h-[80vh]  xs:h-full xs:max-h-full  overflow-y-auto scrollbar scrollbar-thumb-secondary_blue scrollbar-track-gray-200 ">
         {{-- @foreach($formquestions as $key => $question) --}}
         <div id="question_template" class="grid grid-cols-12  bg-white my-1 rounded-[0.5rem] border-[1px] border-gray-300  p-3 ">
+
+
+
             {{--question detials  --}}
-
-
-            {{-- export options --}}
             <div class="col-span-12 w-full flex xs:grid  justify-between items-center">
                 <div class="col-span-11 xs:col-span-12 ">
                     <h1 id="question_text" class="text-black  xs:text-xs md:text-sm font-bold text-md">
 
                     </h1>
                 </div>
+                {{-- hidden or show question  --}}
                 <div id="question_show" class="col-span-1 xs:col-span-12 mx-4 flex justify-end items-center">
                     @if($currentQuestion->show)
                     <svg class="w-6 h-6 text-green-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -125,7 +126,7 @@
 
 
             </div>
-            {{-- info answers & dates filters --}}
+            {{-- info answers & dates filters & export option --}}
             <div class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-1 ">
 
                 <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 w-full ml-1 mb-2 mt-2 ">
@@ -197,6 +198,7 @@
                         <div id="date-{{ $currentQuestion->id }}" class="grid xs:flex justify-center items-center mt-[2px] xs:max-w-xs p-1 ">
                         </div>
                     </div>
+                    {{-- export options --}}
                     <div class="flex justify-center items-center xs:my-2 ">
                         <div wire:ignore class="group/main inline-block relative">
 
