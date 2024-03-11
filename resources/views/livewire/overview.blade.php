@@ -1,5 +1,5 @@
 <div>
-    <div class=" grow p-4 xs:p-1">
+    <div class=" grow py-4 xs:py-1">
 
         {{-- first row of charts --}}
         <div class="grid grid-cols-12">

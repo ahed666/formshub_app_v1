@@ -52,7 +52,7 @@
             {{-- tabs of show statistics methods --}}
                <x-tabs-statistics :id="$current_form_id" :type="$type" />
             <!--Tabs content-->
-            <div class="border-primary_blue border     shadow  rounded-[0.5rem]">
+            <div class="">
                 {{-- overview statistics --}}
                 @if($type=="overview")
                  @livewire('overview')

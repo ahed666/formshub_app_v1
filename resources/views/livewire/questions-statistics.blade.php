@@ -1,7 +1,7 @@
 @push('styles')
 
 @endpush
-<div wire:loading.class="disabled opacity-50" class=" p-4 xs:p-1">
+<div wire:loading.class="disabled opacity-50" class=" py-4 xs:py-1">
     @if($responses!=null&&count($responses)>0)
     <div class="flex justify-between items-center   mb-1">
         <div class="flex space-x-4 items-center">

@@ -37,7 +37,7 @@
 }
     </style>
 @endpush
-<div wire:loading.class="disabled opacity-50  " class="p-4 xs:p-1" >
+<div wire:loading.class="disabled opacity-50  " class="py-4 xs:py-1" >
 
     @if(count($allresponses)>0)
     <div id="loading-animation" class="hidden">
