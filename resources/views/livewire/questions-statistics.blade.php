@@ -826,7 +826,7 @@
             blobs = new Map();
 
         });
-
+        console.log('finish export');
         window.location.reload();
     }
 
@@ -838,11 +838,11 @@
 
         form = e.detail.form;
         QestionData = e.detail.questionsData;
-
+        console.log(QestionData);
 
         start = e.detail.start;
         end = e.detail.end;
-
+        console.log(start, end);
         QuestionText.innerHTML = QestionData.question_details;
 
         // get all dates
@@ -1316,6 +1316,7 @@
         var chartLine = document.getElementById('chartLine');
         var buttonLine = document.getElementById(`buttonSwitchChartline-${id}`);
         var buttonPie = document.getElementById(`buttonSwitchChartpie-${id}`);
+        console.log(id, chartPie, chartLine, buttonPie, buttonLine);
 
         if (chartPie.classList.contains("hidden")) {
             chartPie.classList.remove("hidden");
@@ -1398,7 +1399,7 @@
         tablehead.innerHTML += `<th    data-bs-toggle="tooltip"  data-bs-html="true" title=""  class="${textalign}  sticky top-0 px-4 py-2 bg-secondary_blue ml-1 mr-1 w-1/5 text-sm xs:text-xs text-center " >${translations.answer}</th>`;
         // chooses / buttons
         tablehead.innerHTML += `<th  data-bs-toggle="tooltip"  data-bs-html="true" title=""   class="${textalign}  sticky top-0 px-4 py-2 bg-secondary_blue ml-1 mr-1 w-1/5 text-sm xs:text-xs text-center">${translations.viewfullresponses}</th>`;
-
+        console.log(data);
         data.forEach(function(response, i) {
 
             if (dates.includes(formatDate(response.date))) {
@@ -1426,6 +1427,7 @@
                             </div>
                         </td>`;
                     totalAnswers += 1;
+                    console.log(totalAnswers);
                 } else if (response.type_skip != null) {
                     response.type_skip == "user" ?
                         defultTbody.innerHTML += `
@@ -1452,6 +1454,7 @@
 
 
                     totalSkipped += 1;
+                    console.log(totalSkipped);
                 } else if (response.answer_details == null && response.type_skip == null) {
                     defultTbody.innerHTML += `<td  class="max-h-8 pl-2" id='response_answer-${id}-${response.response_id}'>
                         <div data-bs-toggle="tooltip"  data-bs-html="true" title="No answer"  class="hover:cursor-pointer min-h-[35px] max-h-[35px] overflow-hidden truncate flex justify-center items-center">
@@ -1486,6 +1489,7 @@
                         </td>`;
             }
         });
+        console.log(totalAnswers, totalSkipped);
         document.getElementById(`total-answers-${id}`).innerText = totalAnswers;
         document.getElementById(`total-skipped-${id}`).innerText = totalSkipped;
 
@@ -1608,7 +1612,7 @@
     }
     // initial data for each question
     function initialQuestionData(question) {
-
+        console.log(question);
         var data = {
             question_data: []
         };
@@ -1632,7 +1636,7 @@
 
         const TotalAnswerPerResponse = new Map();
         // if(question.type=="satisfaction"||question.type=="rating"||question.type=="satisfaction_image"||question.type=="rating_image")
-
+        console.log(allDates);
         allDates.forEach(function(date, i) {
 
             question.data.forEach(response => {
@@ -1641,7 +1645,7 @@
                     TotalAnswerPerResponse.set(response.response_id, 0);
 
                 if (question.type == "satisfaction" || question.type == "rating" || question.type == "satisfaction_image" || question.type == "rating_image")
-
+                    console.log(formatDate(response.reviewed_at), date);
                 if (date == formatDate(response.reviewed_at)) {
                     data.question_data.forEach(function(answer, j) {
 
@@ -1670,7 +1674,7 @@
         TotalAnswerPerResponse.forEach((value, key) => {
             value > 0 ? question.answeredcount += 1 : "";
         });
-
+        console.log(data);
         return data;
     }
     // on change date of question
@@ -1763,7 +1767,7 @@
             } else {
                 let translatedText = @json(__('main.days_months', ['months' => ':months', 'days' => ':days']));
                 let formattedText = translatedText.replace(':months', ageMonths).replace(':days', ageDays);
-
+                console.log(formattedText);
                 return formattedText;
             }
 
