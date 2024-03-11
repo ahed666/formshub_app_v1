@@ -127,7 +127,7 @@
 
             </div>
             {{-- info answers & dates filters & export option --}}
-            <div class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-1 ">
+            <div class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-4 ">
                  {{-- question info --}}
                  <div class="grid xs:flex xs:my-2">
                     {{-- age --}}
