@@ -4,7 +4,7 @@
 <div wire:loading.class="disabled opacity-50" class=" py-4 xs:py-1">
     @if($responses!=null&&count($responses)>0)
     <div class="flex justify-between items-center   mb-1">
-        <div class="flex space-x-4 items-center">
+        <div class="flex space-x-4 items-center w-[60%] xs:w-full justify-end">
 
             <button {{ $questionIndex>0?"":"disabled" }} wire:click="backQuestion" class="focus:outline-none">
                 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
