@@ -1489,7 +1489,7 @@
                         </td>`;
             }
         });
-
+       
         document.getElementById(`total-answers-${id}`).innerText = totalAnswers;
         document.getElementById(`total-skipped-${id}`).innerText = totalSkipped;
 
@@ -1612,7 +1612,7 @@
     }
     // initial data for each question
     function initialQuestionData(question) {
-
+      
         var data = {
             question_data: []
         };
@@ -1636,7 +1636,7 @@
 
         const TotalAnswerPerResponse = new Map();
         // if(question.type=="satisfaction"||question.type=="rating"||question.type=="satisfaction_image"||question.type=="rating_image")
-
+        
         allDates.forEach(function(date, i) {
 
             question.data.forEach(response => {
@@ -1645,7 +1645,7 @@
                     TotalAnswerPerResponse.set(response.response_id, 0);
 
                 if (question.type == "satisfaction" || question.type == "rating" || question.type == "satisfaction_image" || question.type == "rating_image")
-
+                    console.log(formatDate(response.reviewed_at), date);
                 if (date == formatDate(response.reviewed_at)) {
                     data.question_data.forEach(function(answer, j) {
 
@@ -1674,7 +1674,7 @@
         TotalAnswerPerResponse.forEach((value, key) => {
             value > 0 ? question.answeredcount += 1 : "";
         });
-
+       
         return data;
     }
     // on change date of question
@@ -1767,7 +1767,7 @@
             } else {
                 let translatedText = @json(__('main.days_months', ['months' => ':months', 'days' => ':days']));
                 let formattedText = translatedText.replace(':months', ageMonths).replace(':days', ageDays);
-
+                console.log(formattedText);
                 return formattedText;
             }
 
