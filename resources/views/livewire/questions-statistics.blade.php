@@ -1489,7 +1489,7 @@
                         </td>`;
             }
         });
-        console.log(totalAnswers, totalSkipped);
+       
         document.getElementById(`total-answers-${id}`).innerText = totalAnswers;
         document.getElementById(`total-skipped-${id}`).innerText = totalSkipped;
 
@@ -1612,7 +1612,7 @@
     }
     // initial data for each question
     function initialQuestionData(question) {
-        console.log(question);
+      
         var data = {
             question_data: []
         };
@@ -1636,7 +1636,7 @@
 
         const TotalAnswerPerResponse = new Map();
         // if(question.type=="satisfaction"||question.type=="rating"||question.type=="satisfaction_image"||question.type=="rating_image")
-        console.log(allDates);
+        
         allDates.forEach(function(date, i) {
 
             question.data.forEach(response => {
