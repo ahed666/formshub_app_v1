@@ -130,7 +130,7 @@
 
                 <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 w-full ml-1 mb-2 mt-2 ">
                     {{-- question info --}}
-                    <div class="grid xs:flex">
+                    <div class="grid xs:flex xs:my-2">
                         {{-- age --}}
                         <div class="w-full flex  items-center my-[2px] ">
                             <div class="mx-1">
@@ -192,12 +192,12 @@
                     </div>
 
                     {{-- dates  --}}
-                    <div class="grid mr-1 xs:block xs:mt-2  items-center  md:block md:row-span-1 xs:row-span-1">
+                    <div class="grid mr-1 xs:block xs:mt-2  items-center  md:block md:row-span-1 xs:row-span-1 xs:my-2">
                         <h1 class="text-sm text-center">{{ __('main.specifystatisticsdates') }}</h1>
                         <div id="date-{{ $currentQuestion->id }}" class="grid xs:flex justify-center items-center mt-[2px] xs:max-w-xs p-1 ">
                         </div>
                     </div>
-                    <div class="">
+                    <div class="flex justify-center items-center xs:my-2 ">
                         <div wire:ignore class="group/main inline-block relative">
 
                             <x-jet-button id="dropdownRadioexportoptions-{{ $currentQuestion->id }}" data-dropdown-toggle="exportoptions-{{ $currentQuestion->id }}" class="" type="button">
