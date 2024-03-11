@@ -128,121 +128,121 @@
             </div>
             {{-- info answers & dates filters & export option --}}
             <div class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-1 ">
-                {{-- export options --}}
-                <div class="flex justify-center items-center xs:my-2 ">
-                    <div wire:ignore class="group/main inline-block relative">
-
-                        <x-jet-button id="dropdownRadioexportoptions-{{ $currentQuestion->id }}" data-dropdown-toggle="exportoptions-{{ $currentQuestion->id }}" class="" type="button">
-                            {{ __('main.exportquestionas') }}<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                 {{-- question info --}}
+                 <div class="grid xs:flex xs:my-2">
+                    {{-- age --}}
+                    <div class="w-full flex  items-center my-[2px] ">
+                        <div class="mx-1">
+                            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                            <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+                            <svg fill="#000000" class="w-6 h-6" viewBox="-2.64 -2.64 29.28 29.28" xmlns="http://www.w3.org/2000/svg">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                <g id="SVGRepo_iconCarrier">
+                                    <path d="M20,3a1,1,0,0,0,0-2H4A1,1,0,0,0,4,3H5.049c.146,1.836.743,5.75,3.194,8-2.585,2.511-3.111,7.734-3.216,10H4a1,1,0,0,0,0,2H20a1,1,0,0,0,0-2H18.973c-.105-2.264-.631-7.487-3.216-10,2.451-2.252,3.048-6.166,3.194-8Zm-6.42,7.126a1,1,0,0,0,.035,1.767c2.437,1.228,3.2,6.311,3.355,9.107H7.03c.151-2.8.918-7.879,3.355-9.107a1,1,0,0,0,.035-1.767C7.881,8.717,7.227,4.844,7.058,3h9.884C16.773,4.844,16.119,8.717,13.58,10.126ZM12,13s3,2.4,3,3.6V20H9V16.6C9,15.4,12,13,12,13Z" />
+                                </g>
                             </svg>
-                        </x-jet-button>
-                        {{-- if type of question is text then export as full or summary --}}
-                        @if($currentQuestion->question_type=="short_text_question"||$currentQuestion->question_type=="long_text_question"||$currentQuestion->question_type=="date_question"
-                        ||$currentQuestion->question_type=="email"||$currentQuestion->question_type=="number"||$currentQuestion->question_type=="drawing")
-                        <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
-                            <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
-                                @if($allowexport)
-                                <li onclick="ExportSingle({{$currentQuestion->id}},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
-                                    <span class="text-center">{{ __('Excel') }}</span>
-                                </li>
-                                @else
-                                <li onclick="ShowWarning()" class="w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
-                                    <span class="text-center">{{ __('Excel') }}</span>
-                                </li>
-                                @endif
-                            </ul>
                         </div>
-
-                        {{-- if type of question is not text then export as full only --}}
-                        @else
-                        <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
-                            <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
-                                @if($allowexport)
-                                <li onclick="ExportSingle({{ $currentQuestion->id }},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
-                                    <span class="text-center">{{ __('Excel') }}</span>
-                                </li>
-                                @else
-                                <li onclick="ShowWarning()" class=" w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
-                                    <span class="text-center">{{ __('Excel') }}</span>
-                                </li>
-                                @endif
-                            </ul>
+                        <div class="mx-1">
+                            <h1 class="text-sm xs:text-xs md:text-sm"><span id="age-{{ $currentQuestion->id }}" class="font-bold"></span></h1>
                         </div>
-
-                        @endif
                     </div>
-                </div>
-                <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 ml-1 mb-2 mt-2 w-[40%]">
-                    {{-- question info --}}
-                    <div class="grid xs:flex xs:my-2">
-                        {{-- age --}}
-                        <div class="w-full flex  items-center my-[2px] ">
-                            <div class="mx-1">
-                                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-                                <svg fill="#000000" class="w-6 h-6" viewBox="-2.64 -2.64 29.28 29.28" xmlns="http://www.w3.org/2000/svg">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-                                    <g id="SVGRepo_iconCarrier">
-                                        <path d="M20,3a1,1,0,0,0,0-2H4A1,1,0,0,0,4,3H5.049c.146,1.836.743,5.75,3.194,8-2.585,2.511-3.111,7.734-3.216,10H4a1,1,0,0,0,0,2H20a1,1,0,0,0,0-2H18.973c-.105-2.264-.631-7.487-3.216-10,2.451-2.252,3.048-6.166,3.194-8Zm-6.42,7.126a1,1,0,0,0,.035,1.767c2.437,1.228,3.2,6.311,3.355,9.107H7.03c.151-2.8.918-7.879,3.355-9.107a1,1,0,0,0,.035-1.767C7.881,8.717,7.227,4.844,7.058,3h9.884C16.773,4.844,16.119,8.717,13.58,10.126ZM12,13s3,2.4,3,3.6V20H9V16.6C9,15.4,12,13,12,13Z" />
-                                    </g>
-                                </svg>
-                            </div>
-                            <div class="mx-1">
-                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="age-{{ $currentQuestion->id }}" class="font-bold"></span></h1>
-                            </div>
-                        </div>
-                        {{-- answers --}}
-                        <div class="w-full flex  items-center my-[2px]">
-                            <div class="mx-1">
-                                <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-                                <svg class="w-6 h-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-83.3 -83.3 656.60 656.60" xml:space="preserve" width="800px" height="800px">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0" />
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
-                                    <g id="SVGRepo_iconCarrier">
+                    {{-- answers --}}
+                    <div class="w-full flex  items-center my-[2px]">
+                        <div class="mx-1">
+                            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                            <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+                            <svg class="w-6 h-6" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-83.3 -83.3 656.60 656.60" xml:space="preserve" width="800px" height="800px">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
                                         <g>
                                             <g>
-                                                <g>
-                                                    <path d="M450,0h-410c-22.056,0-40,17.944-40,40v280c0,22.056,17.944,40,40,40h235v120c0,4.118,2.524,7.814,6.358,9.314 c1.184,0.463,2.417,0.687,3.639,0.687c2.738,0,5.42-1.126,7.35-3.218L409.38,360H450c22.056,0,40-17.944,40-40V40 C490,17.944,472.057,0,450,0z M470,320c0,11.028-8.972,20-20,20h-45c-2.791,0-5.455,1.167-7.348,3.217L295,454.423V350 c0-5.523-4.477-10-10-10h-245c-11.028,0-20-8.972-20-20V40c0-11.028,8.972-20,20-20h410c11.028,0,20,8.972,20,20V320z" />
-                                                    <path d="M144.881,80.001c-3.957,0.047-7.513,2.423-9.072,6.06l-75,175l18.383,7.878L106.594,205h79.982l29.329,64.158 l18.189-8.315l-80-175C152.45,82.244,148.863,79.974,144.881,80.001z M115.167,185l30.129-70.302L177.433,185H115.167z" />
-                                                    <rect x="255.001" y="115" width="80" height="20" />
-                                                    <rect x="350" y="115" width="60" height="20" />
-                                                    <rect x="255.001" y="165" width="180" height="20" />
-                                                    <rect x="255.001" y="215" width="75" height="20" />
-                                                </g>
+                                                <path d="M450,0h-410c-22.056,0-40,17.944-40,40v280c0,22.056,17.944,40,40,40h235v120c0,4.118,2.524,7.814,6.358,9.314 c1.184,0.463,2.417,0.687,3.639,0.687c2.738,0,5.42-1.126,7.35-3.218L409.38,360H450c22.056,0,40-17.944,40-40V40 C490,17.944,472.057,0,450,0z M470,320c0,11.028-8.972,20-20,20h-45c-2.791,0-5.455,1.167-7.348,3.217L295,454.423V350 c0-5.523-4.477-10-10-10h-245c-11.028,0-20-8.972-20-20V40c0-11.028,8.972-20,20-20h410c11.028,0,20,8.972,20,20V320z" />
+                                                <path d="M144.881,80.001c-3.957,0.047-7.513,2.423-9.072,6.06l-75,175l18.383,7.878L106.594,205h79.982l29.329,64.158 l18.189-8.315l-80-175C152.45,82.244,148.863,79.974,144.881,80.001z M115.167,185l30.129-70.302L177.433,185H115.167z" />
+                                                <rect x="255.001" y="115" width="80" height="20" />
+                                                <rect x="350" y="115" width="60" height="20" />
+                                                <rect x="255.001" y="165" width="180" height="20" />
+                                                <rect x="255.001" y="215" width="75" height="20" />
                                             </g>
                                         </g>
                                     </g>
-                                </svg>
-                            </div>
-                            <div class="mx-1">
-                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-answers-{{ $currentQuestion->id }}" class="font-bold"></span>{{ __('main.answers') }}</h1>
-                            </div>
+                                </g>
+                            </svg>
                         </div>
-                        {{-- skip --}}
-                        <div class="w-full flex  items-center my-[2px]">
-                            <div class="mx-1">
-                                <?xml version="1.0" encoding="utf-8"?>
-                                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-                                <svg class="w-6 h-6 text-black" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="CurrentColor" class="bi bi-skip-forward">
-                                    <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
-                                </svg>
-                            </div>
-                            <div class="mx-1">
-                                <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-skipped-{{ $currentQuestion->id }}" class="font-bold"></span>{{ __('main.skips') }}</h1>
-                            </div>
+                        <div class="mx-1">
+                            <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-answers-{{ $currentQuestion->id }}" class="font-bold"></span>{{ __('main.answers') }}</h1>
                         </div>
                     </div>
+                    {{-- skip --}}
+                    <div class="w-full flex  items-center my-[2px]">
+                        <div class="mx-1">
+                            <?xml version="1.0" encoding="utf-8"?>
+                            <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                            <svg class="w-6 h-6 text-black" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="CurrentColor" class="bi bi-skip-forward">
+                                <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z" />
+                            </svg>
+                        </div>
+                        <div class="mx-1">
+                            <h1 class="text-sm xs:text-xs md:text-sm"><span id="total-skipped-{{ $currentQuestion->id }}" class="font-bold"></span>{{ __('main.skips') }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 ml-1 mb-2 mt-2 w-[40%]">
+
 
                     {{-- dates  --}}
-                    <div class="flex mr-1 xs:block xs:mt-2  items-center  md:block md:row-span-1 xs:row-span-1 xs:my-2">
+                    <div class="grid mr-1 xs:block xs:mt-2  items-center  md:block md:row-span-1 xs:row-span-1 xs:my-2">
                         <h1 class="text-sm text-center">{{ __('main.specifystatisticsdates') }}</h1>
-                        <div id="date-{{ $currentQuestion->id }}" class="grid xs:flex justify-center items-center mt-[2px] xs:max-w-xs p-1 ">
+                        <div id="date-{{ $currentQuestion->id }}" class="flex justify-center items-center mt-[2px] xs:max-w-xs p-1 ">
                         </div>
                     </div>
+                    {{-- export options --}}
+                    <div class="flex justify-center items-center xs:my-2 ">
+                        <div wire:ignore class="group/main inline-block relative">
 
+                            <x-jet-button id="dropdownRadioexportoptions-{{ $currentQuestion->id }}" data-dropdown-toggle="exportoptions-{{ $currentQuestion->id }}" class="" type="button">
+                                {{ __('main.exportquestionas') }}<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                                </svg>
+                            </x-jet-button>
+                            {{-- if type of question is text then export as full or summary --}}
+                            @if($currentQuestion->question_type=="short_text_question"||$currentQuestion->question_type=="long_text_question"||$currentQuestion->question_type=="date_question"
+                            ||$currentQuestion->question_type=="email"||$currentQuestion->question_type=="number"||$currentQuestion->question_type=="drawing")
+                            <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
+                                <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
+                                    @if($allowexport)
+                                    <li onclick="ExportSingle({{$currentQuestion->id}},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
+                                        <span class="text-center">{{ __('Excel') }}</span>
+                                    </li>
+                                    @else
+                                    <li onclick="ShowWarning()" class="w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
+                                        <span class="text-center">{{ __('Excel') }}</span>
+                                    </li>
+                                    @endif
+                                </ul>
+                            </div>
+
+                            {{-- if type of question is not text then export as full only --}}
+                            @else
+                            <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
+                                <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
+                                    @if($allowexport)
+                                    <li onclick="ExportSingle({{ $currentQuestion->id }},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
+                                        <span class="text-center">{{ __('Excel') }}</span>
+                                    </li>
+                                    @else
+                                    <li onclick="ShowWarning()" class=" w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
+                                        <span class="text-center">{{ __('Excel') }}</span>
+                                    </li>
+                                    @endif
+                                </ul>
+                            </div>
+
+                            @endif
+                        </div>
+                    </div>
 
                 </div>
 
