@@ -1597,7 +1597,7 @@
                                 </div>
                             </div>
 
-                            <div class="font-bold  col-span-1 text-center  p-1 rounded-[0.5rem] border-[1px] border-gray-300 " >
+                            <div data-bs-toggle="tooltip"  data-bs-html="true" title="${answer.answer_sum}" class="font-bold  col-span-1 text-center  p-1 rounded-[0.5rem] border-[1px] border-gray-300  overflow-hidden" >
                                 <span>${answer.answer_sum}</span>
                             </div>
 
