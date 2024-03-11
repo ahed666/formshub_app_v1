@@ -1316,7 +1316,7 @@
         var chartLine = document.getElementById('chartLine');
         var buttonLine = document.getElementById(`buttonSwitchChartline-${id}`);
         var buttonPie = document.getElementById(`buttonSwitchChartpie-${id}`);
-        console.log(id, chartPie, chartLine, buttonPie, buttonLine);
+       
 
         if (chartPie.classList.contains("hidden")) {
             chartPie.classList.remove("hidden");
@@ -1399,7 +1399,7 @@
         tablehead.innerHTML += `<th    data-bs-toggle="tooltip"  data-bs-html="true" title=""  class="${textalign}  sticky top-0 px-4 py-2 bg-secondary_blue ml-1 mr-1 w-1/5 text-sm xs:text-xs text-center " >${translations.answer}</th>`;
         // chooses / buttons
         tablehead.innerHTML += `<th  data-bs-toggle="tooltip"  data-bs-html="true" title=""   class="${textalign}  sticky top-0 px-4 py-2 bg-secondary_blue ml-1 mr-1 w-1/5 text-sm xs:text-xs text-center">${translations.viewfullresponses}</th>`;
-        console.log(data);
+        
         data.forEach(function(response, i) {
 
             if (dates.includes(formatDate(response.date))) {
