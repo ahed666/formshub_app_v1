@@ -104,9 +104,9 @@
 
 
             {{--question detials  --}}
-            <div class="col-span-12 w-full flex xs:grid  justify-between items-center">
-                <div class="col-span-11 xs:col-span-12 ">
-                    <h1 id="question_text" class="text-black  xs:text-xs md:text-sm font-bold text-md">
+            <div class="col-span-12 w-full flex xs:grid  justify-between items-center h-14 ">
+                <div class="col-span-11 xs:col-span-12  ">
+                    <h1 id="question_text" class="text-black text-xl  xs:text-xs md:text-sm font-bold ">
 
                     </h1>
                 </div>
@@ -128,8 +128,52 @@
             </div>
             {{-- info answers & dates filters & export option --}}
             <div class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-1 ">
+                {{-- export options --}}
+                <div class="flex justify-center items-center xs:my-2 ">
+                    <div wire:ignore class="group/main inline-block relative">
 
-                <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 w-full ml-1 mb-2 mt-2 ">
+                        <x-jet-button id="dropdownRadioexportoptions-{{ $currentQuestion->id }}" data-dropdown-toggle="exportoptions-{{ $currentQuestion->id }}" class="" type="button">
+                            {{ __('main.exportquestionas') }}<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </x-jet-button>
+                        {{-- if type of question is text then export as full or summary --}}
+                        @if($currentQuestion->question_type=="short_text_question"||$currentQuestion->question_type=="long_text_question"||$currentQuestion->question_type=="date_question"
+                        ||$currentQuestion->question_type=="email"||$currentQuestion->question_type=="number"||$currentQuestion->question_type=="drawing")
+                        <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
+                            <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
+                                @if($allowexport)
+                                <li onclick="ExportSingle({{$currentQuestion->id}},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
+                                    <span class="text-center">{{ __('Excel') }}</span>
+                                </li>
+                                @else
+                                <li onclick="ShowWarning()" class="w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
+                                    <span class="text-center">{{ __('Excel') }}</span>
+                                </li>
+                                @endif
+                            </ul>
+                        </div>
+
+                        {{-- if type of question is not text then export as full only --}}
+                        @else
+                        <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
+                            <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
+                                @if($allowexport)
+                                <li onclick="ExportSingle({{ $currentQuestion->id }},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
+                                    <span class="text-center">{{ __('Excel') }}</span>
+                                </li>
+                                @else
+                                <li onclick="ShowWarning()" class=" w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
+                                    <span class="text-center">{{ __('Excel') }}</span>
+                                </li>
+                                @endif
+                            </ul>
+                        </div>
+
+                        @endif
+                    </div>
+                </div>
+                <div class=" flex items-center justify-between xs:block md:block md:row-span-1 xs:row-span-1 ml-1 mb-2 mt-2 w-[40%]">
                     {{-- question info --}}
                     <div class="grid xs:flex xs:my-2">
                         {{-- age --}}
@@ -193,58 +237,15 @@
                     </div>
 
                     {{-- dates  --}}
-                    <div class="grid mr-1 xs:block xs:mt-2  items-center  md:block md:row-span-1 xs:row-span-1 xs:my-2">
+                    <div class="flex mr-1 xs:block xs:mt-2  items-center  md:block md:row-span-1 xs:row-span-1 xs:my-2">
                         <h1 class="text-sm text-center">{{ __('main.specifystatisticsdates') }}</h1>
                         <div id="date-{{ $currentQuestion->id }}" class="grid xs:flex justify-center items-center mt-[2px] xs:max-w-xs p-1 ">
                         </div>
                     </div>
-                    {{-- export options --}}
-                    <div class="flex justify-center items-center xs:my-2 ">
-                        <div wire:ignore class="group/main inline-block relative">
 
-                            <x-jet-button id="dropdownRadioexportoptions-{{ $currentQuestion->id }}" data-dropdown-toggle="exportoptions-{{ $currentQuestion->id }}" class="" type="button">
-                                {{ __('main.exportquestionas') }}<svg class="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
-                                </svg>
-                            </x-jet-button>
-                            {{-- if type of question is text then export as full or summary --}}
-                            @if($currentQuestion->question_type=="short_text_question"||$currentQuestion->question_type=="long_text_question"||$currentQuestion->question_type=="date_question"
-                            ||$currentQuestion->question_type=="email"||$currentQuestion->question_type=="number"||$currentQuestion->question_type=="drawing")
-                            <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
-                                <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
-                                    @if($allowexport)
-                                    <li onclick="ExportSingle({{$currentQuestion->id}},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
-                                        <span class="text-center">{{ __('Excel') }}</span>
-                                    </li>
-                                    @else
-                                    <li onclick="ShowWarning()" class="w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
-                                        <span class="text-center">{{ __('Excel') }}</span>
-                                    </li>
-                                    @endif
-                                </ul>
-                            </div>
-
-                            {{-- if type of question is not text then export as full only --}}
-                            @else
-                            <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
-                                <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
-                                    @if($allowexport)
-                                    <li onclick="ExportSingle({{ $currentQuestion->id }},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
-                                        <span class="text-center">{{ __('Excel') }}</span>
-                                    </li>
-                                    @else
-                                    <li onclick="ShowWarning()" class=" w-full group/item m-1 hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue py-2 px-4  whitespace-no-wrap inline-flex justify-center items-center">
-                                        <span class="text-center">{{ __('Excel') }}</span>
-                                    </li>
-                                    @endif
-                                </ul>
-                            </div>
-
-                            @endif
-                        </div>
-                    </div>
 
                 </div>
+
 
 
             </div>
