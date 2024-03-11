@@ -826,7 +826,7 @@
             blobs = new Map();
 
         });
-    
+
         window.location.reload();
     }
 
@@ -838,11 +838,11 @@
 
         form = e.detail.form;
         QestionData = e.detail.questionsData;
-        
+
 
         start = e.detail.start;
         end = e.detail.end;
-     
+
         QuestionText.innerHTML = QestionData.question_details;
 
         // get all dates
@@ -1316,7 +1316,7 @@
         var chartLine = document.getElementById('chartLine');
         var buttonLine = document.getElementById(`buttonSwitchChartline-${id}`);
         var buttonPie = document.getElementById(`buttonSwitchChartpie-${id}`);
-       
+
 
         if (chartPie.classList.contains("hidden")) {
             chartPie.classList.remove("hidden");
@@ -1399,7 +1399,7 @@
         tablehead.innerHTML += `<th    data-bs-toggle="tooltip"  data-bs-html="true" title=""  class="${textalign}  sticky top-0 px-4 py-2 bg-secondary_blue ml-1 mr-1 w-1/5 text-sm xs:text-xs text-center " >${translations.answer}</th>`;
         // chooses / buttons
         tablehead.innerHTML += `<th  data-bs-toggle="tooltip"  data-bs-html="true" title=""   class="${textalign}  sticky top-0 px-4 py-2 bg-secondary_blue ml-1 mr-1 w-1/5 text-sm xs:text-xs text-center">${translations.viewfullresponses}</th>`;
-        
+
         data.forEach(function(response, i) {
 
             if (dates.includes(formatDate(response.date))) {
@@ -1427,7 +1427,7 @@
                             </div>
                         </td>`;
                     totalAnswers += 1;
-                    console.log(totalAnswers);
+
                 } else if (response.type_skip != null) {
                     response.type_skip == "user" ?
                         defultTbody.innerHTML += `
@@ -1454,7 +1454,7 @@
 
 
                     totalSkipped += 1;
-                    console.log(totalSkipped);
+
                 } else if (response.answer_details == null && response.type_skip == null) {
                     defultTbody.innerHTML += `<td  class="max-h-8 pl-2" id='response_answer-${id}-${response.response_id}'>
                         <div data-bs-toggle="tooltip"  data-bs-html="true" title="No answer"  class="hover:cursor-pointer min-h-[35px] max-h-[35px] overflow-hidden truncate flex justify-center items-center">
