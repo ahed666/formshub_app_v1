@@ -105,12 +105,12 @@
 
             {{-- export options --}}
             <div class="col-span-12 w-full flex xs:grid  justify-between items-center">
-                <div class="w-[90%] xs:w-full ">
+                <div class="col-span-11 xs:col-span-12 ">
                     <h1 id="question_text" class="text-black  xs:text-xs md:text-sm font-bold text-md">
 
                     </h1>
                 </div>
-                <div id="question_show" class="w-[10%] xs:w-full mx-4 justify-end items-center">
+                <div id="question_show" class="col-span-1 xs:col-span-12 mx-4 flex justify-end items-center">
                     @if($currentQuestion->show)
                     <svg class="w-6 h-6 text-green-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"></path>
