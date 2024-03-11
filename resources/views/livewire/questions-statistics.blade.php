@@ -826,7 +826,7 @@
             blobs = new Map();
 
         });
-        console.log('finish export');
+    
         window.location.reload();
     }
 
@@ -838,11 +838,11 @@
 
         form = e.detail.form;
         QestionData = e.detail.questionsData;
-        console.log(QestionData);
+        
 
         start = e.detail.start;
         end = e.detail.end;
-        console.log(start, end);
+     
         QuestionText.innerHTML = QestionData.question_details;
 
         // get all dates
