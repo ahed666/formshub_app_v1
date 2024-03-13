@@ -671,7 +671,7 @@
                             // sheet.cell(`E${i+15}`).value(answer.ratio+' %');
 
                             if (answer.answer_sum == max && max > 0) {
-                                sheet.cell(`F${i+15}`).value(mostchoosen);
+                                sheet.cell(`F${i+15}`).value(translations.mostchoosen);
                                 sheet.cell(`F${i+15}`).style({
                                     fill: {
                                         type: 'solid'
