@@ -377,6 +377,7 @@
 <script src="{{ asset('https://cdn.jsdelivr.net/npm/jquery.fancytable/dist/fancyTable.min.js') }}"></script>
 
 <script>
+
     var translations = @json(__('main'));
     var allDates;
     var questions;

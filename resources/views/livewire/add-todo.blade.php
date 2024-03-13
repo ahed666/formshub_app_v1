@@ -38,7 +38,7 @@
                     </label>
                     <div wire:ignore class="grid grid-cols-12 bg-gray-50 border border-gray-300 text-gray-900 rounded-[0.5rem] p-2">
                         <div class="col-span-6 ">
-                         
+
                             <h1 class=" text-md"  ><span>{{ __('main.createdat') }}</span><span class="text-secondary_blue">{{ \Carbon\Carbon::parse($todoInfo->created_at)->setTimezone('Asia/Dubai')->format('Y-m-d H:i')  }}</span></h1>
                             <h1 class="mt-1 text-md"  ><span>{{ __('main.formtitle') }}</span><span class="text-secondary_blue">{{ $todoInfo->form_title?$todoInfo->form_title:__('Not set') }}</span></h1>
                         </div>
@@ -62,7 +62,7 @@
                     </label>
                     <textarea wire:model="task"
                     type="text" id="task" maxlength="500"
-                    class="w-full h-20   text-sm rounded-lg  block px-2 border-gray-300  focus:border-secondary mr-2
+                    class="w-full h-20  resize-none   text-sm rounded-lg  block px-2 border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary "
                     id="exampleFormControlInputText"
                     placeholder="" ></textarea>
