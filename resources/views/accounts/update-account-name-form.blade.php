@@ -26,19 +26,7 @@
                     </div>
                 </div>
 
-                <!-- Account Name -->
-                {{-- <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="name" value="{{ __('Account  Holder Name') }}" />
 
-                    <x-jet-input id="name"
-                                type="text"
-                                maxlength="35"
-                                class="mt-1 block  w-1/2"
-                                wire:model.defer="state.name"
-                                :disabled="! Gate::check('update', $account)" />
-
-                    <x-jet-input-error for="name" class="mt-2" />
-                </div> --}}
                 {{-- bussiness name --}}
                 <div class="col-span-6 sm:col-span-4">
                     <x-jet-label for="business_name" value="{{ __('main.businessname') }}" />
@@ -46,14 +34,14 @@
                     <x-jet-input  id="business_name"
                                 type="text"
                                 maxlength="60"
-                                class="mt-1 block w-1/2"
+                                class="mt-1 block w-1/2 xs:w-full"
                                 wire:model.defer="state.business_name"
                                 :disabled="! Gate::check('update', $account)" />
 
                     <x-jet-input-error for="business_name" class="mt-2" />
                 </div>
                 {{-- country/city locations --}}
-                <div class="col-span-6 sm:col-span-4 flex gap-1">
+                <div class="col-span-6 sm:col-span-4 flex justify-between gap-1">
                     {{-- country --}}
                     <div class="col-span-3 sm:col-span-2  ">
                         <x-jet-label for="country" value="{{ __('main.country') }}" />
@@ -99,7 +87,7 @@
                                 type="text"
                                 maxlength="12"
                                 pattern="^(02|03|04|06|07|09|)\d{7}$" title="Please enter a valid UAE  phone number with either '02xxxxxxx','03xxxxxxx','04xxxxxxx','06xxxxxxx','07xxxxxxx' or '09xxxxxxx' "
-                                class="mt-1 block  w-1/2"
+                                class="mt-1 block  w-1/2 xs:w-full"
                                 wire:model.defer="state.phone_number"
                                 :disabled="! Gate::check('update', $account)" />
 
@@ -112,7 +100,7 @@
                     <x-jet-input id="billing_address"
                                 type="text"
                                 maxlength="150"
-                                class="mt-1 block  w-1/2"
+                                class="mt-1 block  w-1/2 xs:w-full"
                                 wire:model.defer="state.billing_address"
                                 :disabled="! Gate::check('update', $account)" />
 
@@ -126,7 +114,7 @@
                     <x-jet-input id="tax_number"
                                 type="text"
                                 maxlength="20"
-                                class="mt-1 block  w-1/2"
+                                class="mt-1 block  w-1/2 xs:w-full"
                                 wire:model.defer="state.tax_number"
                                 :disabled="! Gate::check('update', $account)" />
 
