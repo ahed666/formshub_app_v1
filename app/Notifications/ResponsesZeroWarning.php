@@ -50,6 +50,7 @@ class ResponsesZeroWarning extends Notification
                     ->line('Or you can click the Button below:')
                     ->action(' My Subscriptions', url('/subscriptions'))
                     ->unsubscribeAction('Unsubscribe',$url)
+                    ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
                     ->line('Thank you for using our application!');
     }
     /**

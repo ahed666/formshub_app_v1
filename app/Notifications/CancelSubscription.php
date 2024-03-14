@@ -47,6 +47,7 @@ class CancelSubscription extends Notification
         ->line('If you were having issues using your Forms Hub, feel free to create a support ticket from your account')
         ->line('Or you can click the Button below:')
         ->action(' Create Ticket', url('/support'))
+        ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
         ->line('Thank you for using our application!');
     }
 

@@ -48,7 +48,9 @@ class PlanExpired extends Notification
                     To continue using your account without interruption, login to your account to renew your subscription or click the Button below')
                     ->action('My Subscriptions', url('/subscriptions'))
                     ->unsubscribeAction('Unsubscribe',$url)
-                    ->line('Without renewal, accounts will be suspended after 30 days of subscription expiry. read more about subscription terms.');
+                    ->line('Without renewal, accounts will be suspended after 30 days of subscription expiry. read more about subscription terms.')
+                    ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
+                    ->line('Thank you for using our application!');
     }
 
     /**

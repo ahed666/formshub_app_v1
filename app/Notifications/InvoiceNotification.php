@@ -68,6 +68,7 @@ class InvoiceNotification extends Notification
                     ->action('Payment & Billing', url('/payment_billing'))
                     ->unsubscribeAction('Unsubscribe',$url)
                     ->attachData($pdfString, $filename.'.pdf', ['mime' => 'application/pdf',])
+                    ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
                     ->line('Thank you for using our application!');
 
         }

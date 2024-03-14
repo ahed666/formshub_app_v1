@@ -43,6 +43,7 @@ class DeleteAccount extends Notification
         return (new MailMessage)
                     ->subject('Your Account Has Been Deleted')
                     ->line('Your Forms Hub account has been successfully deleted We hope to see you again in Forms Hub')
+                    ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
                     ->line('Thank you for using our application!');
     }
 

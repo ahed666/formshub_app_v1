@@ -49,6 +49,7 @@ class FreePlanExpired extends Notification
                     ->action('My Subscriptions', url('/subscriptions'))
                     ->line('Without an upgrade, accounts will be suspended after 30 days of expiry. read more about subscription terms.')
                     ->unsubscribeAction('Unsubscribe',$url)
+                    ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
                     ->line('Thank you for using our application!');
     }
 
