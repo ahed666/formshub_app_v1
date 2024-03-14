@@ -85,6 +85,7 @@
     <script>
 
          document.addEventListener('saved',(e)=>{
+
             window.location.reload();
          });
     </script>

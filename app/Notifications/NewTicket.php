@@ -51,8 +51,9 @@ class NewTicket extends Notification
                     ->line("A support ticket ID FHT-{$this->ticket->id} has been created")
                     ->line('Our concern team will look into it and get back to you soon')
                     ->line('To track the status of your ticket, simply click on the link below')
+                    ->action('Track Status', url('/support'))
                     ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
-                    ->action('Track Status', url('/support'));
+                    ->line('Thank you for using our application!');
     }
 
     /**

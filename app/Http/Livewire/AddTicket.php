@@ -60,6 +60,7 @@ class AddTicket extends Component
 
         } catch (\Throwable $th) {
             //throw $th;
+            dd($th);
         }
     }
     public function resetvalues()
