@@ -4,6 +4,7 @@
 <div wire:loading.class="disabled opacity-50" class=" py-4 xs:py-1">
     @if($responses!=null&&count($responses)>0)
     <div class="flex justify-between items-center px-4 xs:px-1   my-1">
+        {{-- switch between questions --}}
         <div class="flex space-x-4 items-center w-[60%] xs:w-full xs:justify-start justify-end">
 
             <button {{ $questionIndex>0?"":"disabled" }} wire:click="backQuestion" class="focus:outline-none">
@@ -14,16 +15,18 @@
                     <g id="SVGRepo_iconCarrier">
                         <path id="primary" d="M17.45,2.11a1,1,0,0,0-1.05.09l-12,9a1,1,0,0,0,0,1.6l12,9a1,1,0,0,0,1.05.09A1,1,0,0,0,18,21V3A1,1,0,0,0,17.45,2.11Z" style="fill: currentColor;" />
                     </g>
-                </svg></button>
+                </svg>
+            </button>
             <div class="flex items-center justify-center space-x-0 w-72 xs:w-40 overflow-x-auto">
-                @if(count($formquestions)<8) @for($i=0; $i < count($formquestions); $i++) <button wire:click="currentQuestion({{ $i }})" class="{{$questionIndex==$i?"bg-secondary_blue":""  }} focus:outline-none border-[1px]  border-gray-200 p-1">{{ $i+1 }}</button>
+                @if(count($formquestions)<8)
+                    @for($i=0; $i < count($formquestions); $i++) <button wire:click="currentQuestion({{ $i }})" class="{{$questionIndex==$i?"bg-secondary_blue":""  }} focus:outline-none border-[1px]  border-gray-200 p-1">{{ $i+1 }}</button>
                     @endfor
-                    @elseif(count($formquestions)>=8)
+                @elseif(count($formquestions)>=8)
 
                     @for($i = 0;$i < count($formquestions); $i++) <button wire:click="currentQuestion({{ $i }})" class="{{$questionIndex==$i?"bg-secondary_blue":""  }} focus:outline-none border-[1px] border-gray-200 p-1 xs:text-xs">{{ $i+1 }}</button>
-                        @endfor
+                    @endfor
 
-                        @endif
+                @endif
             </div>
             <button {{ $questionIndex<count($formquestions)-1?"":"disabled" }} wire:click="nextQuestion" class="focus:outline-none">
                 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -33,8 +36,10 @@
                     <g id="SVGRepo_iconCarrier">
                         <path id="primary" d="M17.45,2.11a1,1,0,0,0-1.05.09l-12,9a1,1,0,0,0,0,1.6l12,9a1,1,0,0,0,1.05.09A1,1,0,0,0,18,21V3A1,1,0,0,0,17.45,2.11Z" style="fill: currentColor;" />
                     </g>
-                </svg></button>
+                </svg>
+            </button>
         </div>
+        {{-- menu  --}}
         <div>
             <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
             <svg id="dropdownQuestionsStatisticsOptions" data-dropdown-toggle="dropdown" fill="currentColor" class="w-6 h-6 hover:cursor-pointer text-svg_primary hover:text-secondary_blue" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 460.054 460.054" xml:space="preserve">

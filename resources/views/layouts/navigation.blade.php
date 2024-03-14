@@ -17,7 +17,7 @@
         <span
         class="ml-2 mt-2   flex w-16 h-12 text-white text-4xl top-5 left-5 cursor-pointer"
         onclick="openSidebar()">
-            <svg class=" bg-gray-900 rounded-md"  fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg class=" bg-secondary_blue rounded-md"  fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
             </svg>
 
@@ -55,7 +55,7 @@
                                                      } catch (\Throwable $th) {
                                                         $currentAccount=DB::table('users')->where('id','=',Auth::user()->id)->select('users.*')->first();
                                                      }
-                                                     
+
                                                  @endphp
                                     <h1 class="text-[10px] truncate pl-[4px]">{{ $currentAccount->name }} {{ __('(') }}<span class="text-[10px]">{{ $currentAccount->email }}</span>{{ __(')') }}</h1>
                                     <div class="flex justify-end">
