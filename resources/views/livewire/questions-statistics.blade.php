@@ -114,7 +114,7 @@
                 <span class="text-sm">{{ __('main.pleasewait') }}</span>
             </div>
             {{--question detials  --}}
-            <div wire:loading wire:loading.class="hidden"  wire:target="currentQuestion"  class="col-span-12 w-full flex xs:grid  justify-between items-center ">
+            <div wire:loading wire:loading.class="hidden" wire:loading.class.remove="flex"  wire:target="currentQuestion"  class="col-span-12 w-full flex xs:grid  justify-between items-center ">
                 <div class="col-span-11 xs:col-span-12  ">
                     <h1 id="question_text" class="text-black text-xl  xs:text-xs md:text-sm font-bold ">
 
@@ -137,7 +137,7 @@
 
             </div>
             {{-- info answers & dates filters & export option --}}
-            <div wire:loading wire:loading.class="hidden"  wire:target="currentQuestion" class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-4 ">
+            <div wire:loading wire:loading.class="hidden" wire:loading.class.remove="flex"  wire:target="currentQuestion" class="flex justify-between items-center xs:block md:block col-span-12 md:row-span-1 xs:row-span-1 my-4 ">
                  {{-- question info --}}
                  <div class="grid xs:flex xs:my-2 bg-primary_blue px-8 xs:px-0 md:px-0">
                     {{-- age --}}
@@ -262,7 +262,7 @@
 
             {{-- answers and charts --}}
 
-            <div wire:loading wire:loading.class="hidden"  wire:target="currentQuestion" id="question_answers" class="w-full col-span-12 ">
+            <div wire:loading wire:loading.class="hidden" wire:loading.class.remove="block"  wire:target="currentQuestion" id="question_answers" class="w-full col-span-12 ">
 
             </div>
 
