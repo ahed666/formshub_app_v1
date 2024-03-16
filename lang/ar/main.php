@@ -73,6 +73,7 @@ return [
     'resetpassword' => 'إعادة تعيين كلمة المرور',
     'today'=>'اليوم',
     'all'=>'الكل',
+
     'pleasewait'=>'... انتظر من فضلك',
 
     //  navbar
