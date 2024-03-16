@@ -105,7 +105,7 @@
     <div id="fullpage"  class="p-4 xs:p-1 max-h-[80vh]  xs:h-full xs:max-h-full  overflow-y-auto scrollbar scrollbar-thumb-secondary_blue scrollbar-track-gray-200 ">
         {{-- @foreach($formquestions as $key => $question) --}}
         <div id="question_template"  class="grid grid-cols-12  bg-white my-1 rounded-[0.5rem] border-[1px] border-gray-300  p-3 ">
-            <div id="loading-animation" wire:loading   wire:loading.class.remove="hidden" wire:loading.class="flex opacity-100"  class="hidden justify-center items-center absolute top-1/2 left-1/2">
+            <div id="loading-animation" wire:loading   wire:loading.class.remove="hidden"   class=" flex hidden opacity-100 justify-center col-span-12 items-center absolute top-1/2 left-1/2">
                 <svg class="animate-spin h-10 w-10 mr-1 text-secondary_blue" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"></path>
                 </svg>
