@@ -104,7 +104,7 @@
     </div>
     <div id="fullpage"  class="p-4 xs:p-1 max-h-[80vh]  xs:h-full xs:max-h-full  overflow-y-auto scrollbar scrollbar-thumb-secondary_blue scrollbar-track-gray-200 ">
         {{-- @foreach($formquestions as $key => $question) --}}
-        <div id="question_template" wire:loading wire:target="currentQuestion" wire:loading.class.remove="grid" wire:loading.class="hidden" class="grid grid-cols-12  bg-white my-1 rounded-[0.5rem] border-[1px] border-gray-300  p-3 ">
+        <div id="question_template" wire:loading wire:target="currentQuestion"  wire:loading.class="opacity-0" class="grid grid-cols-12  bg-white my-1 rounded-[0.5rem] border-[1px] border-gray-300  p-3 ">
 
 
 
