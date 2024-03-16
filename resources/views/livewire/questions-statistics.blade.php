@@ -110,7 +110,7 @@
             <span class="text-sm">{{ __('main.pleasewait') }}</span>
         </div>
         {{-- @foreach($formquestions as $key => $question) --}}
-        <div id="question_template" class="grid grid-cols-12  bg-white my-1 rounded-[0.5rem] border-[1px] border-gray-300  p-3 ">
+        <div id="question_template" wire:loading wire:loading.class="hidden" wire:target="currentQuestion" class="grid grid-cols-12  bg-white my-1 rounded-[0.5rem] border-[1px] border-gray-300  p-3 ">
 
 
 
