@@ -86,7 +86,7 @@ return [
     'profile'=>'Profile',
     'logout'=>'Logout',
     'close'=>'Close',
-    ''=>'',
+    'pleasewait'=>'Please Wait...',
 
     // dashboard
     'welcomeAccount'=>'Welcome :name ,you are in :currentaccount account',
