@@ -237,7 +237,7 @@
                                     <label  class="text-gray-300 font-bold text-sm xs:ml-2 xs:mr-2 w-auto whitespace-nowrap " for="professional_dashboard_statistics">
                                         {{ __('Professional Dashboard & Statistics') }}
                                     </label>
-                                    <select disabled  id="professional_dashboard_statistics" name="professional_dashboard_statistics" class=" w-1/4  h-10   text-sm rounded-lg
+                                    <select   id="professional_dashboard_statistics" name="professional_dashboard_statistics" class=" w-1/4  h-10   text-sm rounded-lg
                                       px-2  border-gray-300  focus:border-secondary mr-2 focus:ring-secondary "  >
                                       <option {{ $plan->professional_dashboard_statistics == true ? 'selected' : '' }} value="true">{{ __('Yes') }}</option>
                                       <option {{ $plan->professional_dashboard_statistics == false ? 'selected' : '' }} value="false">{{ __('No') }}</option>
@@ -248,7 +248,7 @@
                                     <label  class="text-gray-300 font-bold text-sm xs:ml-2 xs:mr-2 w-auto whitespace-nowrap " for="pro_questions">
                                         {{ __('Pro Questions Types') }}
                                     </label>
-                                    <select disabled  id="pro_questions" name="pro_questions" class=" w-1/4  h-10   text-sm rounded-lg
+                                    <select   id="pro_questions" name="pro_questions" class=" w-1/4  h-10   text-sm rounded-lg
                                       px-2  border-gray-300  focus:border-secondary mr-2
                                        focus:ring-secondary "  >
                                       <option {{ $plan->pro_questions == true ? 'selected' : '' }} value="true">{{ __('Yes') }}</option>
@@ -296,7 +296,7 @@
                                     <label  class="text-gray-300 font-bold text-sm xs:ml-2 xs:mr-2 w-auto whitespace-nowrap " for="multi_languages">
                                         {{ __('Multi-Languages Form') }}
                                     </label>
-                                    <select disabled  id="multi_languages" name="multi_languages" class=" w-1/4  h-10   text-sm rounded-lg
+                                    <select   id="multi_languages" name="multi_languages" class=" w-1/4  h-10   text-sm rounded-lg
                                         px-2  border-gray-300  focus:border-secondary mr-2 focus:ring-secondary "  >
                                         <option {{ $plan->multi_languages == true ? 'selected' : '' }} value="true">{{ __('Yes') }}</option>
                                         <option {{ $plan->multi_languages == false ? 'selected' : '' }} value="false">{{ __('No') }}</option>
@@ -491,11 +491,11 @@
                 document.querySelector("#arrow").classList.toggle("rotate-0");
             }
             dropdown();
-    
+
             function openSidebar() {
                 document.querySelector(".sidebar").classList.toggle("hidden");
             }
-    
+
         </script>
     <script>
          var responsesCategories = {!! json_encode($responsesCategories->toArray(), JSON_HEX_TAG) !!};
