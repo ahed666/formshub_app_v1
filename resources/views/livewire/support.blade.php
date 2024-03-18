@@ -31,31 +31,15 @@
                                 @endif
                             </div>
                             {{-- text question --}}
-                            <div  data-bs-toggle="tooltip"  data-bs-html="true" title="{{!! $question->answer !!}}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
+                            {{-- <div  data-bs-toggle="tooltip"  data-bs-html="true" title="{{!! $question->answer !!}}" class="flex justify-center items-center mt-2 text-sm text-left whitespace-nowrap overflow-hidden">
                                 @if(App::getLocale()=="en")
 
-                                @php
-                                $text = str_replace('__CONTACT_ROUTE__',route('contact'), $question->answer);
-                                $text = str_replace('__PRODUCTS_ROUTE__',route('contact'), $question->answer);
-                                $text = str_replace('__PRICING_ROUTE__',route('contact'), $question->answer);
-                                $text = str_replace('__KB_ROUTE__',route('contact'), $question->answer);
-                                $text = str_replace('__TERMS_ROUTE__',route('contact'), $question->answer);
-                                $text = str_replace('__PP_ROUTE__',route('contact'), $question->answer);
-
-                            @endphp
-                            {!! $text !!}
+                                {!! $question->answer !!}
                             @else
-                            @php
-                                $text = str_replace('__CONTACT_ROUTE__',route('contact'), $question->answer_ar);
-                                $text = str_replace('__PRODUCTS_ROUTE__',route('contact'), $question->answer_ar);
-                                $text = str_replace('__PRICING_ROUTE__',route('contact'), $question->answer_ar);
-                                $text = str_replace('__KB_ROUTE__',route('contact'), $question->answer_ar);
-                                $text = str_replace('__TERMS_ROUTE__',route('contact'), $question->answer_ar);
-                                $text = str_replace('__PP_ROUTE__',route('contact'), $question->answer_ar);
-                            @endphp
-                            {!! $text !!}
+
+                             {!!  $question->answer_ar !!}
                             @endif
-                            </div>
+                            </div> --}}
                         </div>
                     </a>
                 </li>
