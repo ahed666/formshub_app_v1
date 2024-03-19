@@ -32,7 +32,7 @@
         <div class="w-full  mb-2 flex justify-between p-2 pl-4  items-center bg-white drop-shadow     rounded-[0.5rem]" >
 
                 <button data-toggle="modal" data-target="#adddevice" type="button" class="bg-secondary_blue rounded
-                 xs:p-1   xs:h-10    p-2 h-16   w-[100px] hover:cursor-pointer ease-in delay-100  hover:-translate-z-1 hover:scale-[1.1]
+                   xs:h-10    p-2 h-16   w-[100px] hover:cursor-pointer ease-in delay-100  hover:-translate-z-1 hover:scale-[1.1]
                    duration-200 xs:my-2  xs:flex xs:justify-between xs:items-center ">
                     <div  class="flex   justify-center items-center">
 

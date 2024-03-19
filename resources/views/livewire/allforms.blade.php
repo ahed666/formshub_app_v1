@@ -19,7 +19,7 @@
         <div class="w-full  mb-2 flex justify-between items-center p-2 pl-4 bg-white drop-shadow max-h-[18vh]     rounded-[0.5rem] " >
             {{-- add form --}}
             <button type="button" wire:click="$emit('add_form',{{ json_encode($main_languages)}},{{ json_encode($messages)}})"  data-toggle="modal"
-            data-target="#addform" class="bg-secondary_blue rounded xs:p-1   xs:h-10    p-2 h-16   w-[100px] hover:cursor-pointer
+            data-target="#addform" class="bg-secondary_blue rounded    xs:h-10    p-2 h-16   w-[100px] hover:cursor-pointer
             ease-in delay-100  hover:-translate-z-1 hover:scale-[1.1]  duration-200 xs:my-2   xs:flex xs:justify-between xs:items-center ">
                 <div class="flex justify-center items-center">
 
