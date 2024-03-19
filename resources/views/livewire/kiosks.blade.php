@@ -33,11 +33,11 @@
 
                 <button data-toggle="modal" data-target="#adddevice" type="button" class="bg-secondary_blue rounded
                  xs:p-1   xs:h-10 xs:w-[80px]   p-2 h-16   w-[100px] hover:cursor-pointer ease-in delay-100  hover:-translate-z-1 hover:scale-[1.1]
-                   duration-200 xs:my-2   xs:grid xs:justify-center xs:items-center ">
+                   duration-200 xs:my-2  xs:flex xs:justify-between xs:items-center ">
                     <div  class="flex   justify-center items-center">
 
                         <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                        <svg   class=" w-6 h-6 xs:w-3 xs:h-3  " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg   class=" w-6 h-6  " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                         <g id="SVGRepo_iconCarrier"> <path d="M11 4H6C4.89543 4 4 4.89543 4 6V14C4 15.1046 4.89543 16 6 16H18C19.1046 16 20 15.1046 20 14V12" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M18 3V6M18 9V6M18 6H15M18 6H21" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M12 16V20" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M8 20H16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
