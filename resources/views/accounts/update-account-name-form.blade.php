@@ -26,20 +26,35 @@
                     </div>
                 </div>
 
+                <div class="flex justify-between items-center">
+                    {{-- bussiness name --}}
+                    <div class="col-span-3 sm:col-span-6 xs:col-span-6">
+                        <x-jet-label for="business_name" value="{{ __('main.businessname') }}" />
 
-                {{-- bussiness name --}}
-                <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="business_name" value="{{ __('main.businessname') }}" />
+                        <x-jet-input  id="business_name"
+                                    type="text"
+                                    maxlength="60"
+                                    class="mt-1 block w-1/2 xs:w-full"
+                                    wire:model.defer="state.business_name"
+                                    :disabled="! Gate::check('update', $account)" />
 
-                    <x-jet-input  id="business_name"
-                                type="text"
-                                maxlength="60"
-                                class="mt-1 block w-1/2 xs:w-full"
-                                wire:model.defer="state.business_name"
-                                :disabled="! Gate::check('update', $account)" />
+                        <x-jet-input-error for="business_name" class="mt-2" />
+                    </div>
+                    {{-- billing address --}}
+                    <div class="col-span-3 sm:col-span-6 xs:sm:col-span-6">
+                        <x-jet-label for="billing_address" value="{{ __('main.billingaddress') }}" />
 
-                    <x-jet-input-error for="business_name" class="mt-2" />
+                        <x-jet-input id="billing_address"
+                                    type="text"
+                                    maxlength="150"
+                                    class="mt-1 block  w-1/2 xs:w-full"
+                                    wire:model.defer="state.billing_address"
+                                    :disabled="! Gate::check('update', $account)" />
+
+                        <x-jet-input-error for="billing_address" class="mt-2" />
+                    </div>
                 </div>
+
                 {{-- country/city locations --}}
                 {{-- country --}}
                 <div class="col-span-6 sm:col-span-4 ">
@@ -95,19 +110,7 @@
 
                     <x-jet-input-error for="phone_number" class="mt-2" />
                 </div>
-                {{-- billing address --}}
-                <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="billing_address" value="{{ __('main.billingaddress') }}" />
 
-                    <x-jet-input id="billing_address"
-                                type="text"
-                                maxlength="150"
-                                class="mt-1 block  w-1/2 xs:w-full"
-                                wire:model.defer="state.billing_address"
-                                :disabled="! Gate::check('update', $account)" />
-
-                    <x-jet-input-error for="billing_address" class="mt-2" />
-                </div>
 
                 {{-- tax Number --}}
                 <div class="col-span-6 sm:col-span-4">
