@@ -29,7 +29,7 @@
 
     </div>
 
-    <div class="sidebar xs:hidden fixed z-[100] top-0 bottom-0 left-0 p-2   w-[12%] lg:w-[20%] md:w-[25%] sm:w-[50%] xs:w-[50%] xs:overflow-y-auto xs:no-scrollbar
+    <div id="" class="sidebar xs:hidden fixed z-[100] top-0 bottom-0 left-0 p-2   w-[12%] lg:w-[20%] md:w-[25%] sm:w-[50%] xs:w-[50%] xs:overflow-y-auto xs:no-scrollbar
     text-center bg-gray-900">
         <div class="text-gray-100 text-xl">
             <div class="">
