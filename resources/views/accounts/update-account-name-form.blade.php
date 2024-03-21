@@ -41,7 +41,7 @@
                     <x-jet-input-error for="business_name" class="mt-2" />
                 </div>
                 {{-- country/city locations --}}
-                <div class="col-span-3 sm:col-span-4 flex justify-between gap-1">
+                <div class="col-span-6 sm:col-span-4 flex justify-between gap-1">
                     {{-- country --}}
                     <div class="col-span-3 sm:col-span-2 w-1/2 ">
                         <x-jet-label for="country" value="{{ __('main.country') }}" />
