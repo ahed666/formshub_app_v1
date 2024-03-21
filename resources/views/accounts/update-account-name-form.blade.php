@@ -41,9 +41,10 @@
                     <x-jet-input-error for="business_name" class="mt-2" />
                 </div>
                 {{-- country/city locations --}}
-                <div class="col-span-6 sm:col-span-4 flex justify-between gap-1">
-                    {{-- country --}}
-                    <div class="col-span-3 sm:col-span-2 w-1/2 ">
+                {{-- country --}}
+                <div class="col-span-6 sm:col-span-4 ">
+
+
                         <x-jet-label for="country" value="{{ __('main.country') }}" />
                         <select  name="country" id="country"   wire:model.defer="state.country" class="mt-1
                         text-sm border-gray-300  focus:border-secondary mr-2
@@ -55,9 +56,10 @@
 
                         </select>
                         <x-jet-input-error for="country" class="mt-2" />
-                    </div>
-                    {{-- city --}}
-                    <div class="col-span-3 sm:col-span-2  w-1/2">
+                </div>
+                  {{-- city --}}
+                <div class="col-span-6 sm:col-span-4 ">
+
                         <x-jet-label for="city" value="{{ __('main.city') }}" />
                         <select  name="city" id="city" wire:model.defer="state.city" class="mt-1
                         text-sm border-gray-300  focus:border-secondary mr-2
@@ -76,7 +78,7 @@
 
                         </select>
                         <x-jet-input-error for="city" class="mt-2" />
-                    </div>
+
 
                 </div>
                 {{-- Phone Number --}}
