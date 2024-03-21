@@ -48,7 +48,7 @@
                         <x-jet-label for="country" value="{{ __('main.country') }}" />
                         <select  name="country" id="country"   wire:model.defer="state.country" class="mt-1
                         text-sm border-gray-300  focus:border-secondary mr-2
-                         focus:ring-secondary   rounded-md shadow-sm block  w-full" value={{ $account->country }} wire:model="state.country"   required>
+                         focus:ring-secondary   rounded-md shadow-sm block w-1/2  xs:w-full" value={{ $account->country }} wire:model="state.country"   required>
 
                         {{-- <option  class="text-sm" value=" " >{{__('Select Country')}}</option> --}}
                         <option selected  class="text-sm" value="United Arab Emaraties" >{{__('United Arab Emaraties')}}</option>
@@ -63,7 +63,7 @@
                         <x-jet-label for="city" value="{{ __('main.city') }}" />
                         <select  name="city" id="city" wire:model.defer="state.city" class="mt-1
                         text-sm border-gray-300  focus:border-secondary mr-2
-                         focus:ring-secondary   rounded-md shadow-sm block  w-full
+                         focus:ring-secondary   rounded-md shadow-sm block  w-1/2  xs:w-full
                         "   required>
 
                         {{-- <option  class="text-sm" value=" " >{{__('Select City')}}</option> --}}
