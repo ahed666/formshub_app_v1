@@ -54,7 +54,7 @@
                         <x-jet-input-error for="billing_address" class="mt-2" />
                     </div>
                     {{-- tax Number --}}
-                    <div class="col-span-2 sm:col-span-6 xs:sm:col-span-6w-full">
+                    <div class="col-span-2 sm:col-span-6 xs:sm:col-span-6 w-full">
                         <x-jet-label for="tax_number" value="{{ __('main.taxnumber') }}" />
 
                         <x-jet-input id="tax_number"
