@@ -9,7 +9,7 @@
     <div class="mt-5 md:mt-0 md:col-span-2 shadow rounded-[0.5rem]  ">
         <form wire:submit.prevent="{{ $submit }}">
             <div class="px-4 py-5 bg-white sm:p-6  {{ isset($actions) ? 'rounded-tl-lg rounded-tr-lg' : 'rounded-lg' }}">
-                <div class="grid grid-cols-6 gap-6">
+                <div class="grid grid-cols-6 gap-6 xs:gap-3">
                     {{ $form }}
                 </div>
             </div>
