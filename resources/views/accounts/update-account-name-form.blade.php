@@ -26,9 +26,9 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 flex justify-between items-center">
+                <div class="col-span-6 flex justify-between items-center gap-2">
                     {{-- bussiness name --}}
-                    <div class="col-span-2 sm:col-span-6 xs:col-span-6">
+                    <div class="col-span-2 sm:col-span-6 xs:col-span-6 w-full">
                         <x-jet-label for="business_name" value="{{ __('main.businessname') }}" />
 
                         <x-jet-input  id="business_name"
@@ -41,7 +41,7 @@
                         <x-jet-input-error for="business_name" class="mt-2" />
                     </div>
                     {{-- billing address --}}
-                    <div class="col-span-2 sm:col-span-6 xs:sm:col-span-6">
+                    <div class="col-span-2 sm:col-span-6 xs:sm:col-span-6 w-full">
                         <x-jet-label for="billing_address" value="{{ __('main.billingaddress') }}" />
 
                         <x-jet-input id="billing_address"
@@ -54,7 +54,7 @@
                         <x-jet-input-error for="billing_address" class="mt-2" />
                     </div>
                     {{-- tax Number --}}
-                    <div class="col-span-2 sm:col-span-6 xs:sm:col-span-6">
+                    <div class="col-span-2 sm:col-span-6 xs:sm:col-span-6w-full">
                         <x-jet-label for="tax_number" value="{{ __('main.taxnumber') }}" />
 
                         <x-jet-input id="tax_number"
@@ -69,14 +69,15 @@
                 </div>
 
                 {{-- country/city locations --}}
-                {{-- country --}}
-                <div class="col-span-6 sm:col-span-4 ">
+                <div class="col-span-6 flex justify-between items-center gap-2">
+                    {{-- country --}}
+                    <div class="col-span-2 sm:col-span-6 xs:col-span-6 w-full ">
 
 
                         <x-jet-label for="country" value="{{ __('main.country') }}" />
                         <select  name="country" id="country"   wire:model.defer="state.country" class="mt-1
                         text-sm border-gray-300  focus:border-secondary mr-2
-                         focus:ring-secondary   rounded-md shadow-sm block w-1/2  xs:w-full" value={{ $account->country }} wire:model="state.country"   required>
+                        focus:ring-secondary   rounded-md shadow-sm block w-full" value={{ $account->country }} wire:model="state.country"   required>
 
                         {{-- <option  class="text-sm" value=" " >{{__('Select Country')}}</option> --}}
                         <option selected  class="text-sm" value="United Arab Emaraties" >{{__('United Arab Emaraties')}}</option>
@@ -84,14 +85,14 @@
 
                         </select>
                         <x-jet-input-error for="country" class="mt-2" />
-                </div>
-                  {{-- city --}}
-                <div class="col-span-6 sm:col-span-4 ">
+                    </div>
+                    {{-- city --}}
+                    <div class="col-span-2 sm:col-span-6 xs:col-span-6 w-full">
 
                         <x-jet-label for="city" value="{{ __('main.city') }}" />
                         <select  name="city" id="city" wire:model.defer="state.city" class="mt-1
                         text-sm border-gray-300  focus:border-secondary mr-2
-                         focus:ring-secondary   rounded-md shadow-sm block  w-1/2  xs:w-full
+                        focus:ring-secondary   rounded-md shadow-sm block  w-full
                         "   required>
 
                         {{-- <option  class="text-sm" value=" " >{{__('Select City')}}</option> --}}
@@ -108,21 +109,23 @@
                         <x-jet-input-error for="city" class="mt-2" />
 
 
-                </div>
-                {{-- Phone Number --}}
-                <div class="col-span-6 sm:col-span-4">
-                    <x-jet-label for="phone_number" value="{{ __('main.phonenumber') }}" />
+                    </div>
+                    {{-- Phone Number --}}
+                    <div class="col-span-2 sm:col-span-6 xs:col-span-6 w-full">
+                        <x-jet-label for="phone_number" value="{{ __('main.phonenumber') }}" />
 
-                    <x-jet-input id="phone_number"
-                                type="text"
-                                maxlength="12"
-                                pattern="^(02|03|04|06|07|09|)\d{7}$" title="Please enter a valid UAE  phone number with either '02xxxxxxx','03xxxxxxx','04xxxxxxx','06xxxxxxx','07xxxxxxx' or '09xxxxxxx' "
-                                class="mt-1 block  w-1/2 xs:w-full"
-                                wire:model.defer="state.phone_number"
-                                :disabled="! Gate::check('update', $account)" />
+                        <x-jet-input id="phone_number"
+                                    type="text"
+                                    maxlength="12"
+                                    pattern="^(02|03|04|06|07|09|)\d{7}$" title="Please enter a valid UAE  phone number with either '02xxxxxxx','03xxxxxxx','04xxxxxxx','06xxxxxxx','07xxxxxxx' or '09xxxxxxx' "
+                                    class="mt-1 block  w-full"
+                                    wire:model.defer="state.phone_number"
+                                    :disabled="! Gate::check('update', $account)" />
 
-                    <x-jet-input-error for="phone_number" class="mt-2" />
+                        <x-jet-input-error for="phone_number" class="mt-2" />
+                    </div>
                 </div>
+
 
 
 
