@@ -26,7 +26,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 flex sm:grid xs:grid justify-between items-center gap-2">
+                <div class="col-span-6 flex sm:grid xs:grid justify-between items-center gap-2 xs:gap-0">
                     {{-- bussiness name --}}
                     <div class="col-span-2 sm:col-span-6 xs:col-span-6 w-full">
                         <x-jet-label for="business_name" value="{{ __('main.businessname') }}" />
