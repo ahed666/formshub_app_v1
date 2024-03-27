@@ -93,8 +93,9 @@ class Subscribe extends Component
 
     }
     public function updatedcateresponses(){
-        if($this->action!="buyresponses")
-        $this->mount();
+
+      
+
         $this->validate(
             [
             'cateresponses' =>['required'],
@@ -102,6 +103,7 @@ class Subscribe extends Component
             'cateresponses.required'=>'You should select number of responses ',
            ]
         );
+
         $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($this->cateresponses)->first()->price:0;
         $this->numresponses=$this->cateresponses?ResponseCategory::whereid($this->cateresponses)->first()->num:0;
     }

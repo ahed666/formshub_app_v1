@@ -212,14 +212,16 @@
                     @if($type->subscription_type!="Free")
                     <div class="p-1 mt-4 mx-1">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="dropdown">
-                         {{ __('main.selectnumofresponses') }}
+                         {{ __('main.selectnumofresponses') }}{{ $cateresponses }}
                         </label>
                         <div class="relative">
                           <select wire:model="cateresponses" id="dropdown" name="dropdown" class="text-md width-1/2 rounded-lg block appearance-none  bg-white border border-gray-300 text-gray-700
                            leading-tight focus:outline-none focus:border-gray-500 ">
 
-                           @foreach ($responsesCategories as $cat)
+                           @foreach ($responsesCategories as $cat  )
+
                            <option class="text-md" value="{{$cat->id}}">{{ number_format($cat->num, 0, '.', ',') }}</option>
+
                            @endforeach
 
                             <!-- Add more options as needed -->

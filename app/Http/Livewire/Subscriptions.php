@@ -141,12 +141,13 @@ class Subscriptions extends Component
     {
         $this->types=TypeSubscribe::all();
         $this->current_subscribe=SubscribePlan::getCurrentSubscription(Auth::user()->current_account_id);
-
+         
 
 
         $this->num_kiosks=count(Kiosk::whereaccount_id(Auth::user()->current_account_id)->get());
         $this->num_forms=count(Form::whereaccount_id(Auth::user()->current_account_id)->get());
         $this->num_responses=$this->current_subscribe->num_of_responses;
+
         $this->subscriptionsUpgrade=json_decode($this->subscriptions_upgrade,true);
         // $this->planFeatures=json_decode($this->plans_permission,true);
         $diffrence=Carbon::now()->diffInDays(Carbon::parse($this->current_subscribe->start_date));
