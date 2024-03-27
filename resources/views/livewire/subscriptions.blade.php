@@ -434,7 +434,7 @@
    function showRoleWarning(){
     Swal.fire({
             icon: 'error',
-            title:translations.errorpermission.replace(':error_role', errorRole),
+            title:translations.errorpermission.replace(':error_role', error_role),
             confirmButtonColor:'#f3f4f6',
             confirmButtonText:`<h5 style='color:000000;border:0;box-shadow: none;'>${translations.ok}</h5>`,
             text:' ',
