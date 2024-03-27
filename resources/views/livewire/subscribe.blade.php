@@ -212,7 +212,7 @@
                     @if($type->subscription_type!="Free")
                     <div class="p-1 mt-4 mx-1">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="dropdown">
-                         {{ __('main.selectnumofresponses') }}{{ $cateresponses }}
+                         {{ __('main.selectnumofresponses') }}
                         </label>
                         <div class="relative">
                           <select wire:model="cateresponses" id="dropdown" name="dropdown" class="text-md width-1/2 rounded-lg block appearance-none  bg-white border border-gray-300 text-gray-700

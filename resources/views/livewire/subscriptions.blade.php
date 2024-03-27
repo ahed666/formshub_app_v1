@@ -35,6 +35,7 @@
                 <span>{{ __('main.yoursubscription') }}<span class="text-secondary  font-bold">{{$current_subscribe->type}}</span>  </span>
             <br><span class="whitespace-nowrap">{{ __('main.duedate') }}
                 <span class="text-secondary  font-bold">{{ \Carbon\Carbon::parse($current_subscribe->expired_at)->addDay()->format('d m Y') }} </span>
+
                 @if($current_subscribe['subscription_status']=="Valid")
                 <span class="text-sm text-valid">({{ __('main.active_status') }})</span>
                 @elseif($current_subscribe['subscription_status']=="Grace")
