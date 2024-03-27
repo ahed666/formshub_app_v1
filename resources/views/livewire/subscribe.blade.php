@@ -27,7 +27,7 @@
                @foreach ($responsesCategories as $cat)
 
                @if($current_subscribe->num_of_responses+$cat->num<=$maxnumresponses&&$cat->price>0)
-               <option class="text-md" value="{{$cat->id}}">{{ number_format($cat->num, 0, '.', ',') }}</option>
+               <option class="text-md" value="{{$cat->id}}">{{ number_format($cat->num, 0, '.', ',') }}{{$current_subscribe->num_of_responses  }}-{{ $cat->num }}-{{ $maxnumresponses }}-{{ $current_subscribe->num_of_responses+$cat->num<=$maxnumresponses }}</option>
                @endif
                @endforeach
 
