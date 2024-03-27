@@ -137,7 +137,7 @@ class Subscribe extends Component
         $this->totalprice=$this->priceresponses;
 
         $this->desc="Forms hub ".ResponseCategory::whereid($this->cateresponses)->first()->num."
-         additional responses. valid (from: ".Carbon::now()->format('Y-m-d')." , to: ".
+         additional responses. valid (from: ". Carbon::now()->format('Y-m-d') ." , to: ".
          Carbon::parse($this->current_subscribe->expired_at)->format('Y-m-d').")";
 
         // $this->showCheckout=true;
@@ -160,8 +160,8 @@ class Subscribe extends Component
 
         if(!$validAccount)
         {
-           $kiosks=Kiosk::whereaccount_id(Auth::user()->current_Account_id)->get();
-           $forms=Form::whereaccount_id(Auth::user()->current_Account_id)->get();
+           $kiosks= Kiosk::whereaccount_id(Auth::user()->current_Account_id)->get();
+           $forms= Form::whereaccount_id(Auth::user()->current_Account_id)->get();
         //    unvalid with num of kiosks
            if(count($kiosks)>$this->choosenPlanInfo->num_kiosks)
            {
@@ -217,7 +217,7 @@ class Subscribe extends Component
 
         $desc1="Forms hub premium one year subscription with ".$this->numresponses;
         if($this->choosenPlan==$this->current_subscribe->plan_id)
-         $desc2= "valid (from ".Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." to ".\Carbon\Carbon::parse($current_subscribe->expired_at)->format('d m Y')." )";
+         $desc2= "valid (from ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." to ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." )";
 
         else
         $desc2= "valid (from ".\Carbon\Carbon::now()->format('d m Y')." to ".\Carbon\Carbon::now()->addyear()->subDays(1)->format('d m Y')." )";
