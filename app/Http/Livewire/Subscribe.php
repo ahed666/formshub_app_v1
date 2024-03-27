@@ -79,24 +79,33 @@ class Subscribe extends Component
 
         $this->responsesCategories=ResponseCategory::all();
         $defaultResponsesCat=ResponseCategory::whereid($this->cateresponses)->first();
+
          $this->priceresponses=$defaultResponsesCat->price;
          $this->numresponses=$defaultResponsesCat->num;
          $this->maxnumresponses=$this->current_subscribe->num_responses;
          $this->validAddResponses=false;
-    //     foreach ($this->responsesCategories as $cat)
-    //     if($this->current_subscribe->num_of_responses+$cat->num<=$this->maxnumresponses)
-    //    { $this->validAddResponses=true;
-    //     $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
-    //     $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
-    //     $this->cateresponses=$cat->id;
-    //    }
+        foreach ($this->responsesCategories as $cat)
+        if($this->current_subscribe->num_of_responses+$cat->num<=$this->maxnumresponses)
+        { $this->validAddResponses=true;
+            $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
+            $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
+            $this->cateresponses=$cat->id;
+        }
 
 
+
+    }
+    public function refreshData(){
+        $this->types=TypeSubscribe::all();
+
+        $this->current_subscribe=SubscribePlan::getCurrentSubscription(Auth::user()->current_account_id);
+
+        $this->responsesCategories=ResponseCategory::all();
     }
     public function updatedcateresponses(){
 
         if($this->action!="buyresponses")
-        $this->mount();
+        $this->refreshData();
 
         $this->validate(
             [
@@ -152,7 +161,7 @@ class Subscribe extends Component
     // downgrade plan
     public function downgrade($palnid)
     {
-        $this->mount();
+        $this->refreshData();
 
         $validAccount=Carbon::parse($this->current_subscribe->expired_at)->isPast()?false:true;
         $this->choosenPlan=$palnid;

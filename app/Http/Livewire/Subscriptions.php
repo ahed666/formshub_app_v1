@@ -90,7 +90,7 @@ class Subscriptions extends Component
 
             $crace=Carbon::now()->lte(Carbon::parse($this->current_subscribe->expired_at)->addMonths($this->current_subscribe->grace_period)->endOfDay())&&Carbon::now()->greaterThan($this->current_subscribe->expired_at);
             // if allow renew (expired and inside the range between expired and locked)
-            
+
             if($this->current_subscribe->valid==false||$crace)
             {
 
@@ -161,6 +161,7 @@ class Subscriptions extends Component
         $this->account = Jetstream::newAccountModel()->findOrFail(Auth::user()->currentAccount->id);
 
     }
+
     public function cancel()
     {
         if($this->account->user_id==Auth::user()->id)
