@@ -88,8 +88,9 @@ class Subscriptions extends Component
             // $validallowdate=Carbon::parse($this->current_subscribe->expired_at)->addMonths(1);
             // Carbon::now()->lessThan($validallowdate)&&
 
-            $crace=Carbon::now()->lte(Carbon::parse($this->current_subscribe->expired_at)->addMonths($this->current_subscribe->grace_period))&&Carbon::now()->greaterThan($this->current_subscribe->expired_at);
+            $crace=Carbon::now()->lte(Carbon::parse($this->current_subscribe->expired_at)->addMonths($this->current_subscribe->grace_period)->endOfDay())&&Carbon::now()->greaterThan($this->current_subscribe->expired_at);
             // if allow renew (expired and inside the range between expired and locked)
+            
             if($this->current_subscribe->valid==false||$crace)
             {
 
