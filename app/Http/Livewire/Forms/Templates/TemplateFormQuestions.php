@@ -23,6 +23,7 @@ use App\Models\Account;
 use App\Models\Responses;
 use App\Models\ResponsedQuestions;
 use App\Models\ResponsedCustomersInfo;
+use App\Models\Fact;
 
 use Carbon\Carbon;
 use App\Models\Subscribe;
@@ -68,7 +69,7 @@ class TemplateFormQuestions extends Component
     public $errorMessage;
     public $problem=false;
     public $errorText;
-
+    public  $messages;
     public $errors_permission='
     {
         "Free":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed."},
@@ -556,6 +557,8 @@ class TemplateFormQuestions extends Component
         $response->complet_percent=round((count($numOfAnsweredQuestions)*100)/count($this->questions),1);
 
         $response->save();
+        // to add new response to count of responses in facts
+        $this->increseResponsesCount();
         try {
 
 
@@ -573,6 +576,11 @@ class TemplateFormQuestions extends Component
             //throw $th;
         }
         $this->dispatchBrowserEvent('submitted');
+    }
+    public function increseResponsesCount (){
+     $facts= Fact::first();
+     $facts->responses_count+=1;
+     $facts->save();
     }
     public function render()
     {
