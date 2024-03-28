@@ -121,9 +121,9 @@ class Subscriptions extends Component
                 // $validallowdate=Carbon::parse($this->current_subscribe->expired_at)->addMonths(1);
                 // Carbon::now()->lessThan($validallowdate)&&
 
-                $crace=Carbon::now()->lessThan(Carbon::parse($this->current_subscribe->expired_at)->addMonths($this->current_subscribe->grace_period))&&Carbon::now()->greaterThan($this->current_subscribe->expired_at);
+                $this->current_subscribe=SubscribePlan::getCurrentSubscription(Auth::user()->current_account_id);
                 // if allow renew (expired and inside the range between expired and locked)
-                if($this->current_subscribe->valid==false||$crace)
+                if($this->current_subscribe['subscription_status']=="Locked"||$this->current_subscribe['subscription_status']=="Grace")
                 {
 
                     return redirect()->route('subscribe', ['type'=>'renew','id' => $planid]);
