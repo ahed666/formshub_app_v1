@@ -25,6 +25,7 @@ use App\Models\ResponsedQuestions;
 use App\models\ResponsedCustomersInfo;
 use Carbon\Carbon;
 use App\Models\Subscribe;
+use App\Models\Fact;
 use App\Models\SubscribePlan;
 use App\Models\TypeSubscribe;
 use App\Models\PdfFile;
@@ -53,6 +54,7 @@ class SignPdfTemplate extends Component
     public $current_message;
     public $current_account_id;
     public $buttonsText;
+    public $url;
     public $buttonsLang='{
         "en":{"clear":"Clear","finish":"Finish"},
         "ar":{"clear":"مسح","finish":"إنهاء"},
@@ -144,6 +146,10 @@ class SignPdfTemplate extends Component
 
 
             $this->setPreviousStatusKiosk();
+
+        // to increase count of signedpdf +1  in facts
+            Fact::increseFactCount('signedpdf');
+
             try {
                 RefreshSignatueAccount::dispatch($this->current_account_id);
             } catch (\Throwable $th) {

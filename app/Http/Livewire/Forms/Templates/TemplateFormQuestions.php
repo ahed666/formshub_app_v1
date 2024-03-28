@@ -557,8 +557,8 @@ class TemplateFormQuestions extends Component
         $response->complet_percent=round((count($numOfAnsweredQuestions)*100)/count($this->questions),1);
 
         $response->save();
-        // to add new response to count of responses in facts
-        $this->increseResponsesCount();
+        // to increase count of responses +1  in facts
+        Fact::increseFactCount('responses');
         try {
 
 
@@ -577,11 +577,7 @@ class TemplateFormQuestions extends Component
         }
         $this->dispatchBrowserEvent('submitted');
     }
-    public function increseResponsesCount (){
-     $facts= Fact::first();
-     $facts->responses_count+=1;
-     $facts->save();
-    }
+
     public function render()
     {
         return view('livewire.forms.templates.template-form-questions');

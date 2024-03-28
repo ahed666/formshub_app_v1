@@ -16,11 +16,13 @@ use App\Models\Logos;
 use App\Models\Subscribe;
 use App\Models\SubscribePlan;
 use App\Models\TypeSubscribe;
-
+use App\Models\Fact;
 use App\Models\Account;
 use App\Models\FormType;
 use Illuminate\Support\Facades\Auth;
 use Storage;
+use Illuminate\Support\Str;
+
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 class Addforms extends Component
@@ -51,6 +53,9 @@ class Addforms extends Component
     public $step=1;
     public $form_type_id=1;
     public $form_types;
+    public $current_subscribe;
+    public $valid;
+    public $error;
 
 
 
@@ -376,6 +381,8 @@ class Addforms extends Component
                 $this->resetvalue();
 
                 $this->isSubmitting = false;
+                // to increase count of responses +1  in facts
+                Fact::increseFactCount('createdforms');
                 return redirect()->route('editform', ['id' => $form->id])->with('success_message','your Form has been add successfuly');
 
             }
