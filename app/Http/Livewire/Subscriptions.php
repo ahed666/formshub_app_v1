@@ -49,6 +49,8 @@ class Subscriptions extends Component
     public $num_responses=0;
     public $progressbarValue;
     public $locked;
+    public $effectAllow;
+    public $account;
     public $subscriptions_upgrade='
     {
       "Free":["Basic","Premium","Proffessional","Ultimate"],
@@ -159,7 +161,19 @@ class Subscriptions extends Component
         $validallowdate=Carbon::parse($this->current_subscribe->expired_at)->addMonths($this->current_subscribe->grace_period);
         $this->locked=Carbon::now()->greaterThan($validallowdate);
         $this->account = Jetstream::newAccountModel()->findOrFail(Auth::user()->currentAccount->id);
+        $this->checkEffect();
 
+    }
+    public function checkEffect(){
+
+
+
+                $crace=Carbon::now()->lessThan(Carbon::parse($this->current_subscribe->expired_at)->addMonths($this->current_subscribe->grace_period))&&Carbon::now()->greaterThan($this->current_subscribe->expired_at);
+                // if allow renew (expired and inside the range between expired and locked)
+                if($this->current_subscribe->valid==false||$crace||$this->current_subscribe->order_plan==1)
+                {
+                    $this->effectAllow=true;
+                }
     }
 
     public function cancel()

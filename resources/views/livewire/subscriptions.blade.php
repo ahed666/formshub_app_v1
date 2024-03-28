@@ -53,7 +53,7 @@
                 {{-- first button --}}
                 @if($current_subscribe->order_plan!=1)
                            {{-- href="{{ route('subscribe',['renew',$current_subscribe->plan_id]) }}" --}}
-                    <a wire:click="renewCheck({{ $current_subscribe->plan_id }})"   target="_blank" class=" cursor-pointer
+                    <a wire:click="renewCheck({{ $current_subscribe->plan_id }})"   target="_blank" class="{{ $effectAllow?"animate-pulse":"" }} cursor-pointer
                         mt-2 inline-flex items-center h-8 p-1 bg-secondary  border border-transparent
                         rounded-md font-semibold text-xs text-white  uppercase tracking-widest
                          hover:bg-secondary_1  focus:bg-secondary_1
@@ -62,7 +62,7 @@
                         {{ __('main.renew') }}
                     </a>
                 @else
-                    <a href="{{ route('subscribe') }}" target="_blank" class="
+                    <a href="{{ route('subscribe') }}" target="_blank" class="{{ $effectAllow?"animate-pulse":"" }}
                         mt-2 inline-flex items-center h-8 p-1 bg-secondary border border-transparent
                         rounded-md font-semibold text-xs text-white  uppercase tracking-widest hover:bg-secondary_1  focus:bg-secondary_1
                          active:bg-gray-900  focus:outline-none
