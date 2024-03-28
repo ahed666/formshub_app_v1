@@ -60,7 +60,7 @@ class SignPdfIndex extends Component
     {
             return [
                 "echo:refresh.{$this->account_id},RefreshSignatue" => 'getPrevFile',
-                
+
                  "getprevfile"=>"getPrevFile",
 
 
@@ -70,13 +70,13 @@ class SignPdfIndex extends Component
     {
 
         $this->signature=SignFile::getLastSignature(Auth::user()->current_account_id);
-           
+
         $this->account_id=Auth::user()->current_account_id;
 
         $this->accountStatus=SubscribePlan::getCurrentAccountStatus(Auth::user()->current_account_id);
         $this->current_subscribe=SubscribePlan::getCurrentSubscription(Auth::user()->current_account_id);
         $this->main_languages=json_decode($this->main_lang, true);
-        
+
 
     }
     public function getPrevFile(){
@@ -88,23 +88,23 @@ class SignPdfIndex extends Component
         if($PdfFile){
         $testSizeResult=$this->testFileSize(public_path($PdfFile->path_file));
 
-           
+
         if($testSizeResult['result']==true&& $this->signature){
         $this->uploadedFileInfo = [
 
             'path' =>$this->signature->path_file,
-         
+
             'pageNum'=>$PdfFile->page_num,
             'size'=>$testSizeResult['message'],
         ];
-   
+
         $this->dispatchBrowserEvent('prevfile-uploaded',['uploadedFileInfo' => $this->uploadedFileInfo]);
-         
+
     }
         }
         }
-    
-    
+
+
     public function testFileSize($pdfPath){
 
 
@@ -116,7 +116,7 @@ class SignPdfIndex extends Component
             $count = $fpdi->setSourceFile($pdfPath);
             try
             {
-               
+
 
                 $parser = new Parser();
 
@@ -146,7 +146,7 @@ class SignPdfIndex extends Component
 
             }
             catch (\Throwable $th)
-            {   
+            {
                 return ['result'=>false,'title'=>trans('main.filesizenotcaptured_title') , 'message' => trans('main.filesizenotcaptured')];
 
             }
@@ -171,8 +171,12 @@ class SignPdfIndex extends Component
         $file->delete();
         $this->mount();
     }
+    public function refreshsignature()
+    {
+        $this->mount();
+    }
 
- 
+
     public function render()
     {
         return view('livewire.signpdf.sign-pdf-index');
