@@ -137,9 +137,15 @@ class PaymentController extends Controller
     $invoice->invoice_no=$invoice->id;
     $invoice->save();
     $user = User::find($account->user_id);
-    if($user->email_sub_payment_subscriptions)
+    // send notify as invoice to user
+    try {
+        if($user->email_sub_payment_subscriptions)
     {$user->notify(new InvoiceNotification($invoice->id));
     sleep(1);}
+    } catch (\Throwable $th) {
+        //throw $th;
+    }
+
     if($order->action=="buyresponses")
    {
     return  trans('main.paymentsuccess_buyresponses');}

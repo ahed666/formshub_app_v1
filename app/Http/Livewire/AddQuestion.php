@@ -55,6 +55,7 @@ class AddQuestion extends Component
     public $is_mandetory_question=null;
     // category of types
     public $category_types;
+
     // end category of types
     //subscribe
     public $valid=false;
@@ -749,12 +750,7 @@ class AddQuestion extends Component
                 else
                 $Question->optional=1;
                 // calculate the order of question
-                $questions_orders=Questions::whereform_id($this->form_id)->select('questions.question_order')->get();
-                $max_order=0;
-                    foreach($questions_orders as $order)
-                    { if($order->question_order>$max_order)
-                    $max_order=$order->question_order;
-                    }
+                $max_order = Questions::where('form_id', $this->form_id)->max('question_order');
 
                 $Question->question_order=$max_order+=1;
 
@@ -790,15 +786,15 @@ class AddQuestion extends Component
                 //  save question
                 $Question->save();
 
-                //  detect the source of trnslation
-                $source="";
-                foreach($this->languages as $lang)
-                {if($lang['code']==$this->local)
-                    {
-                    $source=$lang['trans'];
-                    }
+                // //  detect the source of trnslation
+                // $source="";
+                // foreach($this->languages as $lang)
+                // {if($lang['code']==$this->local)
+                //     {
+                //     $source=$lang['trans'];
+                //     }
 
-                }
+                // }
                 // add translation of question for each language of form languages
                 foreach($this->languages as $lang)
                 {

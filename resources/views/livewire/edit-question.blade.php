@@ -24,7 +24,15 @@
         @csrf
             {{-- question text --}}
             <x-question-text :text="$question_text" :hint="$hint_question" :local="$local"   />
+            <div class="mt-2 px-4">
+                <span class="text-sm text-secondary_red font-bold">{{ __('main.answers') }}</span>
+                @if($type=="email"||$type=="yes_no"||$type=="like_dislike"||$type=="Agree_Disagree"||$type=="satisfaction"||$type=="rating"||$type=="drawing"||$type=="number"||$type=="date_question"||$type=="long_text_question"||$type=="short_text_question")
+                <span class="text-sm">{{ __('main.hintAddAnswers_premade') }} </span>
 
+                @else
+                <span class="text-sm">{{ __('main.hintAddAnswers') }} </span>
+                @endif
+             </div>
             {{-- yes or no || like or dislike || accept or not accept --}}
             @if($type=="yes_no"||$type=="like_dislike"||$type=="Agree_Disagree"||$type=="satisfaction"||$type=="rating")
 
@@ -213,7 +221,7 @@
 
 
 
-                <div x-data="{ selectedHideCount: 0 }" x-on:selected-hide-changed.window="selectedHideCount += $event.detail.value ? 1 : -1" class="my-8 ml-1 mr-1 xs:border-t-[1px] border-gray-100 grid grid-cols-12 max-h-[500px]   overflow-y-scroll sm:grid-cols-3 xs:grid-cols-3 gap-3 py-2 px-4" >
+                <div x-data="{ selectedHideCount: 0 }" x-on:selected-hide-changed.window="selectedHideCount += $event.detail.value ? 1 : -1" class="my-8 xs:border-t-[1px] border-gray-100 grid grid-cols-12 max-h-[500px]   overflow-y-scroll sm:grid-cols-3 xs:grid-cols-3 gap-3 py-2 px-4" >
 
                     @foreach ($answers as $i =>  $answer )
                         @if( $stepanswer>=$i)

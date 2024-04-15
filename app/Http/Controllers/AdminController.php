@@ -169,6 +169,25 @@ class AdminController extends Controller
 
         return view('admin.accounts',compact('accounts'));
     }
+    // accounts for export
+    public function getAccounts(){
+
+            // Fetch data from the database or any other source
+            $data =Account::leftJoin('users', 'accounts.user_id', '=', 'users.id')
+            ->leftJoin('subscriptions_plans', 'accounts.id', '=', 'subscriptions_plans.account_id')
+            ->leftJoin('type_of_subscriptions','type_of_subscriptions.id','=','subscriptions_plans.type_of_subscription_id')
+            ->select('users.email','users.name','users.mobile_number','accounts.business_name','accounts.country','accounts.city','type_of_subscriptions.subscription_type',DB::raw('CASE
+            WHEN subscriptions_plans.expired_at > CURDATE() AND subscriptions_plans.valid = 1 THEN "Valid"
+            WHEN CURDATE()  <= DATE_ADD(subscriptions_plans.expired_at,INTERVAL type_of_subscriptions.grace_period MONTH) AND subscriptions_plans.valid = 1 THEN "Expired - Grace Period"
+            WHEN  CURDATE() > DATE_ADD(subscriptions_plans.expired_at, INTERVAL type_of_subscriptions.grace_period MONTH) AND CURDATE() <= DATE_ADD(subscriptions_plans.expired_at, INTERVAL type_of_subscriptions.locked_period MONTH)  THEN "Locked"
+            WHEN  CURDATE() > DATE_ADD(subscriptions_plans.expired_at, INTERVAL type_of_subscriptions.locked_period MONTH) THEN "Locked-(D)"
+
+            END AS subscription_status'))->get()->toArray();
+
+            // Return the data as JSON
+            return response()->json($data);
+
+    }
     // users
     public function users(){
         $today = Carbon::now()->startOfDay();

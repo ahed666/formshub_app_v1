@@ -124,6 +124,9 @@ return [
     'expiredgrace_status'=>'Expired - Grace Period',
     'responsesgotaction'=>'Awesome! You have got :numResponsesToday   responses today',
     // my forms
+    'hintAddQuestion'=>'( Enter your question here )',
+    'hintAddAnswers'=>'( Add answers here )',
+    'hintAddAnswers_premade'=>'( Pre-made answers )',
     'createform'=>'Create Form',
     'editinfo'=>' Edit Info ',
     'totalforms'=>'Total Forms',

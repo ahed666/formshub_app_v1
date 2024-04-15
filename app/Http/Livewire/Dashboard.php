@@ -68,7 +68,6 @@ class Dashboard extends Component
 
         $this->current_account_id=Auth::user()->current_account_id==null?
         Account::whereuser_id(Auth::user()->id)->first()->id:Auth::user()->current_account_id;
-
         $this->currentAccount=User::join('accounts','users.id','=','accounts.user_id')->where('accounts.id','=',$this->current_account_id)->where('accounts.personal_account','=','1')->select('users.name as account_name')->first();
 
         $this->current_subscribe=SubscribePlan::getCurrentSubscription($this->current_account_id);

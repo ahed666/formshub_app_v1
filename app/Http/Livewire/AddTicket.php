@@ -55,7 +55,13 @@ class AddTicket extends Component
 
           $ticket->save();
 
-          $user->notify(new NewTicket($ticket));
+          try {
+            $user->notify(new NewTicket($ticket));
+          } catch (\Throwable $th) {
+            //throw $th;
+          }
+
+
           $this->dispatchBrowserEvent('saved');
 
         } catch (\Throwable $th) {

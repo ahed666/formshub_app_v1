@@ -134,6 +134,10 @@ return [
     'saving'=>'جاري الحفظ',
     'responsesgotaction'=>'مذهل! لقد حصلت على  :numResponsesToday رد  اليوم',
     // my forms
+    'hintAddQuestion'=>'( أدخل سؤالك هنا  )',
+    'hintAddAnswers'=>'( أضف الإجابات هنا )',
+    'hintAddAnswers_premade'=>'(  إجابات معدة مسبقاََ )',
+
     'createform'=>'إنشاء نموذج',
     'editinfo'=>'تعديل المعلومات',
     'totalforms'=>'عدد النماذج',

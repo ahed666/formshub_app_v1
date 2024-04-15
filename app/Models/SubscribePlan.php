@@ -16,6 +16,7 @@ class SubscribePlan extends Model
     ];
 
     public static function getCurrentSubscription($account_id){
+
         return self::join("type_of_subscriptions","type_of_subscriptions.id","=","subscriptions_plans.type_of_subscription_id")
         ->where("subscriptions_plans.account_id",$account_id)->select('subscriptions_plans.*','type_of_subscriptions.num_responses',
         'type_of_subscriptions.num_questions','type_of_subscriptions.num_kiosks','type_of_subscriptions.num_forms','type_of_subscriptions.todo',

@@ -89,7 +89,14 @@ Route::group(['prefix'=>'admin-center','middleware'=>['auth:admin']],function(){
     Route::post('/saveresponsescategories',[AdminController::class, 'saveresponsescategories'])->name('admin.saveresponsescategories');
     Route::post('/logout',[AdminController::class, 'destroy'])->name('admin.logout');
     Route::post('/adminlogoutsession/{id}',[AdminController::class, 'adminLogout'])->name('admin.adminLogout');
+
+
+
+
+
 });
+Route::get('/api/data/export/accounts',[AdminController::class, 'getAccounts'])->name('admin.getAccounts');
+
 //    Route::middleware(['auth:admin'])->get('/admin-center/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
 // end admin

@@ -400,6 +400,12 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- export accounts --}}
+                        <div class="flex justify-between items-center mt-10">
+                           <span>{{ __('Export Accounts') }}</span>
+                           <x-jet-button type="button" onclick="getAccounts()"  class="">export</x-jet-button>
+
+                        </div>
                     </div>
                 </div>
             {{--end subscriptions info --}}
@@ -485,6 +491,76 @@
         </div>
     </div>
     @livewireScripts()
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('https://unpkg.com/xlsx-populate/browser/xlsx-populate.min.js') }}"></script>
+
+    <script>
+        pathExcelFile="/resources/admin/Accounts.xlsx";
+        function getAccounts(){
+            axios.get('/api/data/export/accounts')
+            .then(response => {
+                // Handle the response data
+                exportAccounts(response.data) ;
+            })
+            .catch(error => {
+                // Handle any errors
+                console.error(error);
+            });
+        }
+        function exportAccounts(Accounts){
+
+
+             if(Accounts){
+            fetch(pathExcelFile)
+            .then(response => response.arrayBuffer())
+            .then(buffer => {
+                const workbook = XlsxPopulate.fromDataAsync(buffer);
+
+                return workbook.then(workbook => {
+
+                        const sheet = workbook.sheet(0);
+
+                        Accounts.forEach(function(account, i) {
+
+                            sheet.cell(`A${i+2}`).value(account.email);
+                            sheet.cell(`B${i+2}`).value(account.business_name);
+                            sheet.cell(`C${i+2}`).value(account.name);
+                            sheet.cell(`D${i+2}`).value(account.mobile_number);
+                            sheet.cell(`E${i+2}`).value(account.country);
+                            sheet.cell(`F${i+2}`).value(account.city);
+                            sheet.cell(`G${i+2}`).value(account.subscription_type);
+                            sheet.cell(`H${i+2}`).value(account.subscription_status);
+                        });
+
+                    // Save the modified workbook
+
+                    return workbook.outputAsync();
+
+                });
+            })
+            // add some of setting to download
+            .then(fileData => {
+
+                const blob = new Blob([fileData], {
+                    details: accounts
+                }, {
+                    type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                });
+
+
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+
+                    a.download =  'Accounts.xlsx'; // Set the desired name for the downloaded file
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
+            });
+        }
+        }
+    </script>
     <script type="text/javascript">
             function dropdown() {
                 document.querySelector("#submenu").classList.toggle("hidden");
