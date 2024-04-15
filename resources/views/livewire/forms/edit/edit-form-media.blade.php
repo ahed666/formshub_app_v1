@@ -529,8 +529,8 @@
 {{-- sweet alert delete confirm --}}
 <script>
     var translations = @json(__('main'));
-    // var app_url="https://app.formshub.net/";
-  var app_url="http://192.168.1.101:8000/";
+    var app_url="https://app.formshub.net/";
+//   var app_url="http://192.168.1.101:8000/";
     //  to confirm delete media
     window.addEventListener('show-media-delete-confirmation', event => {
 
