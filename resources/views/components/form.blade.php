@@ -99,7 +99,6 @@
                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest
                         active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-1 ">
                         {{ __('main.preview') }}
-                        <?xml  version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                         <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
                             <defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title>
                             <circle cx="22" cy="24" r="2"/>
@@ -228,7 +227,7 @@
                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest
                         active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-3 ">
                         {{ __('main.preview') }}
-                        <?xml  version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
                         <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
                             <defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title>
                             <circle cx="22" cy="24" r="2"/>
