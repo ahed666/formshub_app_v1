@@ -254,11 +254,11 @@
                     const newValue=question.answer;
                     oldValue.length==0?value=newValue:value=oldValue+' , '+newValue;}
                     question.answer!=null?answer.innerHTML=`${value}`:(question.type_skip=="user"?answer.innerHTML=`<div class="flex justify-center items-center"><span>${translations.skipbyuser}</span>
-                        <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
                         <svg class="mx-1 w-6 h-6 text-yellow-500" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="CurrentColor" class="bi bi-skip-forward">
                         <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"/>
                         </svg></div>`:answer.innerHTML=`<div class="flex justify-center items-center"><span>${translations.autoskip}</span>
-                        <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+
                         <svg class="mx-1 w-6 h-6 text-yellow-500" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="CurrentColor" class="bi bi-skip-forward">
                         <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"/>
                         </svg></div>`);
@@ -270,8 +270,6 @@
 
                         if(answer.innerHTML.length==0){
                             answer.innerHTML=`<div class="flex justify-center items-center"><span>${translations.noanswer}</span>
-                                <?xml version="1.0" encoding="utf-8"?>
-                                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                 <svg class="mx-1 w-6 h-6 text-primary_red" fill="currentColor"  viewBox="0 0 24 24" id="exclamation"
                                 xmlns="http://www.w3.org/2000/svg" class="icon line"><path id="primary"
                                 d="M13,13H11a1,1,0,0,1-1-1V4a1,1,0,0,1,1-1h2a1,1,0,0,1,1,1v8A1,1,0,0,1,13,13Zm1,6a2,2,0,1,0-2,2A2,2,0,0,0,14,19Z"
