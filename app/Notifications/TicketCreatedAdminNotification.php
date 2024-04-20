@@ -6,12 +6,12 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use App\Models\SupportTicket;
 
-class NewTicket extends Notification
+class TicketCreatedAdminNotification extends Notification
 {
     use Queueable;
     private  $ticket;
+
     /**
      * Create a new notification instance.
      *
@@ -41,18 +41,9 @@ class NewTicket extends Notification
      */
     public function toMail($notifiable)
     {
-        // return (new MailMessage)
-        //             ->line('The introduction to the notification.')
-        //             ->action('Notification Action', url('/'))
-        //             ->line('Thank you for using our application!');
         return (new MailMessage)
-                    ->from('contact@formshub.net','Form Hub')
-                    ->subject("Ticket FHT-{$this->ticket->id} - ({$this->ticket->target}) ")
-                    ->line("A support ticket ID FHT-{$this->ticket->id} has been created")
-                    ->line('Our concern team will look into it and get back to you soon')
-                    ->line('To track the status of your ticket, simply click on the link below')
-                    ->action('Track Status', url('/support'))
-                    ->line('Please do not reply to this message. Replies to this message are routed to an unmonitored mailbox.')
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
 

@@ -45,7 +45,7 @@
 
                                     @foreach ( $form_types as $type )
                                         <li   class="2xl:col-span-3 xl:col-span-3 lg:col-span-3  "  >
-                                            <input    wire:model="form_type_id" value="{{ $type->id }}" class="peer visually-hidden" name="form-type" id="form-type-{{ $type->id }}" type="radio" required>
+                                            <input {{ $type->id==2?"disabled":"" }}   wire:model="form_type_id" value="{{ $type->id }}" class="peer visually-hidden " name="form-type" id="form-type-{{ $type->id }}" type="radio" required>
                                                 <label for="form-type-{{ $type->id }}" class="{{ $type->enable?"":"opacity-50" }}
                                                     grid items-center justify-center w-full p-1  text-gray-500 bg-white border-[2px] rounded-lg cursor-pointer
                                                     peer-checked:border-secondary_blue
@@ -64,8 +64,10 @@
 
                                         </li>
                                     @endforeach
-                                    @error('form_type_id') <span class="text-sm text-red-400 error">{{ $message }}</span> @enderror
+
                                 </ul>
+                                @error('form_type_id') <span class="text-sm text-red-400 error">{{ $message }}</span> @enderror
+
                             </div>
                             {{-- form info --}}
                             <div class="grid grid-cols-12 p-4 gap-2 ">
@@ -74,7 +76,7 @@
 
                                     <div class="w-full  "  >
 
-                                        <label  class="text-black text-sm xs:ml-2 xs:mr-2 w-20 whitespace-nowrap" for="form-title">{{ __('main.formtitle') }}<a data-bs-toggle="tooltip"  data-bs-html="true" 
+                                        <label  class="text-black text-sm xs:ml-2 xs:mr-2 w-20 whitespace-nowrap" for="form-title">{{ __('main.formtitle') }}<a data-bs-toggle="tooltip"  data-bs-html="true"
                                         title="{{ __('main.formtitlehint') }}"><svg   class="inline-block text-secondary_blue w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
                                         </svg></a></label>
@@ -170,7 +172,7 @@
                             {{-- form title --}}
                             <div class="w-full "  >
 
-                                <label  class="text-black text-sm xs:ml-2 xs:mr-2 w-20 whitespace-nowrap" for="form-title">{{ __('main.formtitle') }} 
+                                <label  class="text-black text-sm xs:ml-2 xs:mr-2 w-20 whitespace-nowrap" for="form-title">{{ __('main.formtitle') }}
                                 <a data-bs-toggle="tooltip"  data-bs-html="true" title="{{ __('main.formtitlehint') }}"><svg   class="inline-block text-secondary_blue w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
                                 </svg></a></label>

@@ -30,6 +30,8 @@ use App\Notifications\NewTicket;
 use App\Models\SupportTicket;
 use App\Models\User;
 use App\Models\Account;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TicketCreatedAdminNotification;
 class AddTicket extends Component
 {
     public $subject;
@@ -57,6 +59,12 @@ class AddTicket extends Component
 
           try {
             $user->notify(new NewTicket($ticket));
+
+            $supportEmail = env('SUPPORT_EMAIL', 'contact@formshub.net');
+            Mail::to($supportEmail)->send(new TicketCreatedAdminNotification($ticket));
+
+
+
           } catch (\Throwable $th) {
             //throw $th;
           }

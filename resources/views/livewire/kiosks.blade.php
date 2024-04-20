@@ -116,7 +116,6 @@
                                <div class="grid justify-center  items-center">
                                 <div class="flex justify-center items-center">
 
-                                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                     <svg
                                     wire:click="$emit('setEditMediaId',{{ json_encode($kiosk->id)}})"
                                       data-toggle="modal" data-target="#mediamodal"   class="mx-1 w-6 h-6 text-svg_primary hover:text-secondary_blue hover:cursor-pointer"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

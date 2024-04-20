@@ -157,6 +157,7 @@ class Addforms extends Component
         $this->validateOnly($propertyName,[
 
             'form_title'=>['required','min:5'],
+            'form_type_id'=>['required','in:1'],
 
 
         ],
@@ -164,6 +165,7 @@ class Addforms extends Component
 
             'form_title.min'=>'The :attribute must contain at least 5 characters ',
             'form_title.required'=>'The :attribute is empty ',
+            'form_type_id.in' => 'This type not avilable now', // Custom error message for form_type_id validation
 
         ]
        );
@@ -177,7 +179,7 @@ class Addforms extends Component
         {$this->validate([
 
             'form_title'=>['required','min:5'],
-            'form_type_id'=>['required'],
+            'form_type_id'=>['required','in:1'],
             'form_DefultLanguages'=>[ 'required']
 
         ],[
@@ -186,12 +188,14 @@ class Addforms extends Component
             'form_title.required'=>'form title cannot be empty ',
             'form_type_id.required'=>'you should select type of form ',
             'form_DefultLanguages.required'=>'form defult language is required  ',
+            'form_type_id.in' => 'This type not avilable now', // Custom error message for form_type_id validation
+
         ]
         );}
         else{$this->validate([
 
             'form_title'=>['required','min:5'],
-            'form_type_id'=>['required'],
+            'form_type_id'=>['required','in:1'],
 
 
         ],[
@@ -199,6 +203,7 @@ class Addforms extends Component
             'form_title.min'=>'the :attribute must contain at least 5 characters ',
             'form_title.required'=>'form title cannot be empty ',
             'form_type_id.required'=>'you should select type of form ',
+            'form_type_id.in' => 'This type not avilable now', // Custom error message for form_type_id validation
 
         ]
         );}
