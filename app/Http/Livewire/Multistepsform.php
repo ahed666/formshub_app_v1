@@ -53,10 +53,10 @@ class Multistepsform extends Component
       //status of show password
     public $show=false;
     //current step (inital 2 beacuse there is one country defult)
-    public $currentstep=2;
+
     //intital strength of password
     public $passwordStrength=0;
-    public $isDisabled;
+
     //password empty status
     public $passwordempty=0;
     // number phone level(0 no valid ,1 valid)
@@ -143,20 +143,7 @@ class Multistepsform extends Component
         $this->cities=Cities::all();
         // $this->receive_emails=false;
 
-        if($this->country=="null" || empty($this->country)){
-            $this->currentstep=1;
-          $this->isDisabled=true;
-           }
-  else{
-    $this->isDisabled=false;
-   $this->currentstep=2;}
-//    foreach($this->countries as $country)
-//                if($this->country==$country->country)
-//                {
-//                    $this->idCountry=$country->id;
-//                $this->CountryMobileCode=$country->country_code;
-//                $this->cities=Cities::wherecountry_id($country->id)->get();
-//      }
+
 
     }
     public function render()
@@ -170,25 +157,25 @@ class Multistepsform extends Component
         $this->show=false;
       }
       //to initial status of confirmed password
-    public function onchangeconfirmpassword(){
-        if($this->password_confirmation!=$this->password){
-       $this->isconfirm=0;}
-       else{
-       $this->validate(['password_confirmation' => 'required_with:password|same:password', ]);
-       $this->isconfirm=1;}
+//     public function onchangeconfirmpassword(){
+//         if($this->password_confirmation!=$this->password){
+//        $this->isconfirm=0;}
+//        else{
+//        $this->validate(['password_confirmation' => 'required_with:password|same:password', ]);
+//        $this->isconfirm=1;}
 
-    }
- public function onchangepassword(){
+//     }
+//  public function onchangepassword(){
 
-     $this->passwordStrength=0;
-    $this->validate(['password' => $this->passwordRules(), ]);
-    $zxcvbn = new Zxcvbn();
-	$strength = $zxcvbn->passwordStrength($this->password);
+//      $this->passwordStrength=0;
+//     $this->validate(['password' => $this->passwordRules(), ]);
+//     $zxcvbn = new Zxcvbn();
+// 	$strength = $zxcvbn->passwordStrength($this->password);
 
-	$this->passwordStrength = $strength['score'];
+// 	$this->passwordStrength = $strength['score'];
 
 
- }
+//  }
 //  public function updatedmobile_number($mobile_number){
 //     $this->numberphonelevel=0;
 //     if($this->mobile_number!=null){
@@ -211,25 +198,7 @@ class Multistepsform extends Component
 
 
  }
- //this will use if there is more one country
-  public function onchangestepone(){
 
-
-    if($this->country=="null" || empty($this->country)){
-             $this->currentstep=1;
-           $this->isDisabled=true;
-            }
-   else{
-     $this->isDisabled=false;
-    $this->currentstep=2;}
-    foreach($this->countries as $country)
-                if($this->country==$country->country)
-                {
-                    $this->idCountry=$country->id;
-                $this->CountryMobileCode=$country->country_code;
-                $this->cities=Cities::wherecountry_id($country->id)->get();
-      }
-  }
 
     // public function increasestep(){
 
@@ -257,11 +226,7 @@ class Multistepsform extends Component
 
         $this->validateOnly($propertyName);
 
-      // if($propertyName!="null" && empty($propertyName)){
-        //     $this->isDisabled=false;
 
-        // }
-        // else          $this->isDisabled=true;
 
     }
 
@@ -307,6 +272,7 @@ class Multistepsform extends Component
     // }
     public function submitForm(){
         $this->validatedata();
+
 
     }
 }

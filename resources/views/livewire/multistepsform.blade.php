@@ -1,6 +1,6 @@
 <div>
 {{-- wire:submit.prevent="register" --}}
-        <form  method="POST"  action="{{ route('register') }}" >
+        <form   method="POST"  action="{{ route('register') }}" >
             @csrf
 
             <div class="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="" >
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="city" value="{{ __('auth.city') }}" />
-                    <select {{ $isDisabled ? 'disabled' : '' }}  name="city" id="city" class="text-sm
+                    <select   name="city" id="city" class="text-sm
                     border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full" required  wire:model="city">
                     <option     class="text-sm" value="">{{   __('Select one') }}</option>
@@ -44,17 +44,17 @@
                 <div class=" ">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="name" value="{{ __('auth.fullname') }}" />
 
-                    <input {{ $isDisabled ? 'disabled' : '' }} maxlength="35" placeholder="Adam" id="name"
+                    <input  maxlength="35" placeholder="Adam" id="name"
                      class="border-gray-300  focus:border-secondary mr-2
-                      focus:ring-secondary rounded-md shadow-sm block w-full placeholder-gray-300 text-sm" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" wire:model="name" />
+                      focus:ring-secondary rounded-md shadow-sm block w-full placeholder-gray-300 text-sm" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" wire:model.debounce.500ms="name" />
                     @error('name') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300" style="">{{ $message }}</span> @enderror
                 </div>
 
                 <div class="">
                     <x-jet-label style="white-space:nowrap;x;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="email" value="{{ __('auth.email_label') }}" />
-                    <input {{ $isDisabled ? 'disabled' : '' }} maxlength="50" placeholder="example@domain.com" id="email"
+                    <input  maxlength="50" placeholder="example@domain.com" id="email"
                     class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="email" name="email"  required  wire:model="email" />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="email" name="email"  required  wire:model.debounce.500ms="email" />
                     @error('email') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300" style="">{{ $message }}</span> @enderror
 
                 </div>
@@ -64,9 +64,9 @@
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] block font-medium text-sm  lg:w-30 xl:w-30" for="" value="{{ __('auth.mobilenumber') }}" />
                     <div class=" row flex ">
                         <input  type="text" id="CountryMobileCode" class="border-gray-300  focus:border-secondary mr-2
-                         focus:ring-secondary  rounded-md shadow-sm block text-sm  w-20 ml-[2px] mr-2 " value={{$CountryMobileCode}} type="text" name="CountryMobileCode"  wire:model="CountryMobileCode" disabled>
+                         focus:ring-secondary  rounded-md shadow-sm block text-sm  w-20 ml-[2px] mr-2 " value={{$CountryMobileCode}} type="text" name="CountryMobileCode"  wire:model.debounce.500ms="CountryMobileCode" disabled>
                     <input pattern="^(05|5)\d{8}$" title="Please enter a valid UAE mobile phone number with either '05xxxxxxxx' or '5xxxxxxxx' "
-                    {{ $isDisabled ? 'disabled' : '' }} placeholder="5xxxxxxxx" maxlength="10"  id="mobile_number"
+                    placeholder="5xxxxxxxx" maxlength="10"  id="mobile_number"
                     class="border-gray-300   focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="text" required  name="mobile_number"  wire:model="mobile_number"  />
                     </div>
@@ -81,21 +81,21 @@
                 {{-- bussiness name --}}
                 <div class=" col-span-2">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px]  lg:w-30 xl:w-30" for="business_name" value="{{ __('auth.businessname') }}({{ __('auth.optional') }})" />
-                    <input maxlength="60" {{ $isDisabled ? 'disabled' : '' }} placeholder=""  id="business_name" class="border-gray-300  focus:border-secondary mr-2
+                    <input maxlength="60"  placeholder=""  id="business_name" class="border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="business_name" wire:model="business_name"  />
                     @error('business_name') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
                 </div>
                 {{-- phone number  --}}
                 <div class="">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="phone_number" value="{{ __('auth.phonenumber') }}({{ __('auth.optional') }})" />
-                    <input  maxlength="10" {{ $isDisabled ? 'disabled' : '' }} id="phone_number" placeholder="" class="border-gray-300  focus:border-secondary mr-2
+                    <input  maxlength="10"  id="phone_number" placeholder="" class="border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="phone_number"   wire:model="phone_number"  />
                     @error('phone_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
                 </div>
                  {{-- tax number --}}
                 <div class="">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="tax_number" value="{{ __('auth.taxnumber') }}({{ __('auth.optional') }})" />
-                    <input maxlength="20" {{ $isDisabled ? 'disabled' : '' }} placeholder="" id="tax_number" class="border-gray-300  focus:border-secondary mr-2
+                    <input maxlength="20" placeholder="" id="tax_number" class="border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="tax_number"  wire:model="tax_number" />
                     @error('tax_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300 ">{{ $message }}</span> @enderror
                 </div>
@@ -106,7 +106,7 @@
             <div class="grid gap-4 mb-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
                 <div class="col-span-4 ">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="billing_address" value="{{ __('auth.billingaddress') }}({{ __('auth.optional') }})" />
-                    <input maxlength="150" {{ $isDisabled ? 'disabled' : '' }} id="billing_address" placeholder="" class="border-gray-300   focus:border-secondary mr-2
+                    <input maxlength="150"  id="billing_address" placeholder="" class="border-gray-300   focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="billing_address" wire:model="billing_address"  />
                     @error('billing_address') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
                 </div>
@@ -117,7 +117,27 @@
 
                     <div class="flex relative justify-between w-70  " >
                             <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="password" value="{{ __('auth.password_label') }}" />
-                            <div class="justify-end" >
+                             <div class="flex items-center justify-end">
+                                <div wire:ignore id="passwordStrength">
+                                    <span class="mx-2 mt-2 mb-[2px] flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300" style="white-space:nowrap;margin:6px;">
+                                        {{ __('*required') }}
+                                    </span>
+                                </div>
+                                <div class="flex group" >
+                                    <svg class="inline-block w-4 text-secondary h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                    </svg>
+                                    <div style="right:-241px"  class=" inline-flex absolute bottom-0 whitespace-normal w-96  sm:right-1 items-center hidden mb-6 group-hover:flex">
+                                        <span class=" relative text-ellipsis square z-10 p-2 text-xs leading-none text-gray-400  bg-white shadow-lg">
+                                            {!! __('auth.passwordpolicy') !!}
+
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                             </div>
+                            {{-- <div class="justify-end" >
                                 @if($passwordempty==1)
                                     @if($passwordStrength>=1)
                                         <span class="mx-2 mt-2 mb-[2px] flex font-medium text-sm text-gray-700  lg:w-30 xl:w-30 text-{{ $passwordLevelsColors[$passwordStrength] }}-600 " style="white-space:nowrap;margin:6px;">
@@ -152,28 +172,19 @@
                                 </div>
                                 </span>
                                 <!-- Component End  -->
-                            </div>
+                            </div> --}}
                     </div>
-                                {{-- border-{{ $passwordLevelsColors[$passwordStrength] }}-400   focus:border-{{ $passwordLevelsColors[$passwordStrength] }}-400 focus:ring focus:ring-{{ $passwordLevelsColors[$passwordStrength] }}-400 --}}
-                                {{-- <div id="tooltip-error" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip ">
-                                    Tooltip content
-                                    <div class="tooltip-arrow" data-popper-arrow></div> --}}
+
                     <div class="relative" >
-                        <input oninput="validatePasswordMatch()" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
-                         title="Password must be strong" wire:change="onchangepassword()" wire:model="password" maxlength="30" id="password"
-                         {{ $isDisabled ? 'disabled' : '' }} class="border-gray-300
-                          focus:border-{{ $passwordLevelsColors[$passwordStrength] }}-300   focus:border-secondary mr-2
+                        <input  oninput="validatePasswordStrength();validatePasswordMatch()" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
+                         title="Password must be strong"  wire:model="password" maxlength="30" id="password"
+                          class="border-gray-300
+                            focus:border-secondary mr-2
                            focus:ring-secondary
                          rounded-md shadow-sm block  w-full text-sm" type="{{ $show ? 'text' : 'password' }}" name="password"  required autocomplete="new-password"    />
                         <div class="w-9 absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
 
-                            {{-- <svg class="h-6 text-gray-700" fill="none" wire:click="showpassword()"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewbox="0 0 576 512">
-                            <path fill="currentColor"
-                                d="{{ $show ? 'M320 400c-75.85 0-137.25-58.71-142.9-133.11L72.2 185.82c-13.79 17.3-26.48 35.59-36.72 55.59a32.35 32.35 0 0 0 0 29.19C89.71 376.41 197.07 448 320 448c26.91 0 52.87-4 77.89-10.46L346 397.39a144.13 144.13 0 0 1-26 2.61zm313.82 58.1l-110.55-85.44a331.25 331.25 0 0 0 81.25-102.07 32.35 32.35 0 0 0 0-29.19C550.29 135.59 442.93 64 320 64a308.15 308.15 0 0 0-147.32 37.7L45.46 3.37A16 16 0 0 0 23 6.18L3.37 31.45A16 16 0 0 0 6.18 53.9l588.36 454.73a16 16 0 0 0 22.46-2.81l19.64-25.27a16 16 0 0 0-2.82-22.45zm-183.72-142l-39.3-30.38A94.75 94.75 0 0 0 416 256a94.76 94.76 0 0 0-121.31-92.21A47.65 47.65 0 0 1 304 192a46.64 46.64 0 0 1-1.54 10l-73.61-56.89A142.31 142.31 0 0 1 320 112a143.92 143.92 0 0 1 144 144c0 21.63-5.29 41.79-13.9 60.11z' : 'M572.52 241.4C518.29 135.59 410.93 64 288 64S57.68 135.64 3.48 241.41a32.35 32.35 0 0 0 0 29.19C57.71 376.41 165.07 448 288 448s230.32-71.64 284.52-177.41a32.35 32.35 0 0 0 0-29.19zM288 400a144 144 0 1 1 144-144 143.93 143.93 0 0 1-144 144zm0-240a95.31 95.31 0 0 0-25.31 3.79 47.85 47.85 0 0 1-66.9 66.9A95.78 95.78 0 1 0 288 160z' }} ">
-                            </path>
-                            </svg> --}}
+
 
                             <svg id="passIcon_password" class="h-6 w-8 text-gray-700 " fill="none" onclick="togglePasswordVisibility('password','passIcon_password')" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
 
@@ -206,10 +217,9 @@
                     <div class="">
                         <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="password_confirmation" value="{{ __('auth.confirmpassword') }}" />
                         <div class="relative">
-                            <input oninput="validatePasswordMatch()" maxlength="30" {{ $isDisabled ? 'disabled' : '' }} id="password_confirmation"
-                              class="border-gray-300  focus:border-{{ $passwordLevelsColors[$isconfirm] }}-300
-                              border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full text-sm"    type="password" name="password_confirmation" wire:change="onchangeconfirmpassword()" required autocomplete="new-password"  wire:model="password_confirmation" />
+                            <input oninput="validatePasswordMatch()" maxlength="30"  id="password_confirmation"
+                              class="border-gray-300  focus:border-secondary mr-2
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full text-sm"    type="password" name="password_confirmation"  required autocomplete="new-password"  wire:model="password_confirmation" />
                             <div class="w-9 absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
 
 
@@ -239,9 +249,12 @@
 
                             </div>
                         </div>
+
                         @error('password_confirmation') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300" required style="">{{ $message }}</span> @enderror
 
                     </div>
+
+
                 </div>
                 {{-- terms & conditions --}}
                 <div class="grid gap-4 mb-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 ">
@@ -268,7 +281,7 @@
                  {{-- source know us  --}}
                 <div class=" pl-1 col-span-3" >
                         <x-jet-label style="white-space:nowrap;" class="text-secondary lg:w-30 xl:w-30" for="know_about_us" value="{{ __('auth.howknowaboutus') }}" />
-                        <select {{ $isDisabled ? 'disabled' : '' }}  name="know_about_us" id="know_about_us" class="border-gray-300  focus:border-secondary mr-2
+                        <select   name="know_about_us" id="know_about_us" class="border-gray-300  focus:border-secondary mr-2
                          focus:ring-secondary
                         rounded-md shadow-sm block  text-sm w-1/4 xs:w-full"   wire:model="know_about_us">
                         <option class="text-sm" value="">{{   __('Select one') }}</option>
@@ -284,25 +297,7 @@
                         </select>
 
                 </div>
-                {{-- TimeZone --}}
-                {{-- <div class=" pl-1 col-span-3" >
-                    <x-jet-label style="white-space:nowrap;" class="text-secondary lg:w-30 xl:w-30" for="timezone" value="{{ __('Time Zone?(Optional)') }}" />
-                    <select {{ $isDisabled ? 'disabled' : '' }}  name="timezone" id="timezone" class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary
-                    rounded-md shadow-sm block  text-sm w-1/4 xs:w-full"   wire:model="timeZone">
-                       @php
-                              $timezones = \DateTimeZone::listIdentifiers();
-                       @endphp
 
-                    @foreach($timezones as $tmzone)
-                        <option class="text-sm" value="{{ $tmzone }}">
-                            {{ $tmzone }}
-                        </option>
-                    @endforeach
-
-                    </select>
-
-            </div> --}}
                  <input wire:ignore type="hidden" name="timezone" id="timezone">
                 <div class="container p-4 mx-0 min-w-full flex flex-col items-center">
                     <button  type="submit "  class=" text-center 2xl:w-full xl:w-full lg:w-full md:w-full items-center px-4 py-2 bg-secondary border border-transparent
@@ -319,17 +314,82 @@
         </form>
 </div>
 @push('scripts')
-<script>
-    function validatePasswordMatch() {
-      var password = document.getElementById('password').value;
-      var confirm_password = document.getElementById('password_confirmation');
 
-      if (password === confirm_password.value) {
-        confirm_password.setCustomValidity('');
-      } else {
-        confirm_password.setCustomValidity("Passwords don't match");
-      }
+<script>
+    // function validatePasswordMatch() {
+    //   var password = document.getElementById('password').value;
+    //   var confirm_password = document.getElementById('password_confirmation');
+
+    //   if (password === confirm_password.value) {
+    //     confirm_password.setCustomValidity('');
+    //   } else {
+    //     confirm_password.setCustomValidity("Passwords don't match");
+    //   }
+    // }
+    function validatePasswordMatch()
+     {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('password_confirmation').value;
+            if (password !== confirmPassword) {
+                document.getElementById('password_confirmation').setCustomValidity("Passwords do not match");
+            } else {
+                document.getElementById('password_confirmation').setCustomValidity("");
+            }
     }
+    function CheckPassword(password) {
+    // Check if password length is at least 8 characters
+    if (password.length < 8) {
+        return false;
+    }
+
+    // Check if password contains at least one lowercase letter
+    if (!/[a-z]/.test(password)) {
+        return false;
+    }
+    if (!/[A-Z]/.test(password)) {
+        return false;
+    }
+
+    // Check if password contains at least one digit
+    if (!/\d/.test(password)) {
+        return false;
+    }
+
+    // Check if password contains at least one special character
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+        return false;
+    }
+
+    // Password meets all criteria
+    return true;
+}
+
+    function validatePasswordStrength() {
+            var password = document.getElementById('password').value;
+            var result = CheckPassword(password);
+
+            // Display the password strength
+            var strengthText = '';
+
+            result==false?
+                    strengthText = `
+                    <span class="mx-2 mt-2 mb-[2px] flex font-medium text-sm text-gray-700  lg:w-30 xl:w-30 text-red-600 " style="white-space:nowrap;margin:6px;">
+                                        <svg class="flex w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>Week</span>`
+
+                   :
+
+
+                    strengthText = `
+                    <span class="mx-2 mt-2 mb-[2px] flex font-medium text-sm text-gray-700  lg:w-30 xl:w-30 text-green-600 " style="white-space:nowrap;margin:6px;">
+                                        <svg class="flex w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+                                        </svg>Strong</span>`;
+
+
+            document.getElementById('passwordStrength').innerHTML =  strengthText;
+        }
 </script>
 <script>
     function togglePasswordVisibility(Id,PassIconId) {

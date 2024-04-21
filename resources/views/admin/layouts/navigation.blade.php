@@ -110,18 +110,7 @@
             <span class="text-[15px] ml-4 text-gray-200 text-center text-red  {{ Route::is('admin.kiosks') ?"font-bold":"" }} ">  {{ __('Kiosks') }}</span></x-dropdown-link>
         </div>
         {{-- forms --}}
-        {{-- <div
-            class="{{ Route::is('admin.forms') ?"bg-secondary_blue":"" }} max-h-[44px] min-h-[44px] p-1 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
-            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-            <svg class="w-8 text-white" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 512 512" xml:space="preserve" fill="currentColor">
-            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-            <g id="SVGRepo_iconCarrier"> <style type="text/css">  .st0{fill:currentCOlor;}  </style> <g> <path class="st0" d="M449.891,87.953c-3.766-8.906-10.031-16.438-17.922-21.781c-7.891-5.328-17.5-8.469-27.719-8.469h-42.656 v-7.359h-61.828c0.281-2,0.438-4.063,0.438-6.141C300.203,19.828,280.375,0,256,0s-44.203,19.828-44.203,44.203 c0,2.078,0.156,4.141,0.438,6.141h-61.828v7.359H107.75c-6.813,0-13.359,1.391-19.281,3.906 c-8.906,3.766-16.453,10.031-21.797,17.922c-5.328,7.906-8.469,17.5-8.469,27.719v355.219c0,6.781,1.391,13.344,3.906,19.281 c3.766,8.906,10.031,16.438,17.922,21.781c7.906,5.344,17.5,8.469,27.719,8.469h296.5c6.797,0,13.359-1.375,19.281-3.906 c8.922-3.75,16.453-10.031,21.797-17.922c5.328-7.891,8.469-17.5,8.469-27.703V107.25 C453.797,100.438,452.422,93.891,449.891,87.953z M256,27.797c9.047,0,16.406,7.359,16.406,16.406c0,2.172-0.438,4.234-1.203,6.141 h-30.391c-0.781-1.906-1.219-3.969-1.219-6.141C239.594,35.156,246.969,27.797,256,27.797z M424.328,462.469 c0,2.813-0.563,5.406-1.578,7.797c-1.5,3.578-4.063,6.672-7.281,8.859c-3.219,2.156-7,3.406-11.219,3.406h-296.5 c-2.813,0-5.422-0.563-7.813-1.563c-3.594-1.516-6.672-4.094-8.844-7.297c-2.156-3.219-3.406-7-3.422-11.203V107.25 c0-2.813,0.563-5.422,1.578-7.813c1.516-3.594,4.078-6.688,7.281-8.844c3.219-2.156,7-3.406,11.219-3.422h42.656v6.141 c0,11.531,9.344,20.875,20.891,20.875h169.422c11.531,0,20.875-9.344,20.875-20.875v-6.141h42.656c2.813,0,5.422,0.563,7.813,1.578 c3.578,1.5,6.672,4.063,8.844,7.281s3.422,7,3.422,11.219V462.469z"/> <rect x="156.141" y="170.672" class="st0" width="31.625" height="31.625"/> <rect x="225.516" y="170.672" class="st0" width="130.359" height="31.625"/> <rect x="156.141" y="264.125" class="st0" width="31.625" height="31.625"/> <rect x="225.516" y="264.125" class="st0" width="130.359" height="31.625"/> <rect x="156.141" y="357.594" class="st0" width="31.625" height="31.625"/> <rect x="225.516" y="357.594" class="st0" width="130.359" height="31.625"/> </g> </g>
-            </svg>
-            <x-dropdown-link  class="no-underline hover:no-underline focus:no-underline" :href="route('admin.forms')" :active="request()->routeIs('admin.forms')">
 
-            <span class="text-[15px] ml-4 text-gray-200 text-center text-red  {{ Route::is('admin.forms') ?"font-bold":"" }} ">  {{ __('forms') }}</span></x-dropdown-link>
-        </div> --}}
 
         {{-- subscriptions --}}
         <div
@@ -158,7 +147,6 @@
         <div
             class="{{ Route::is('admin.supportTickets') ?"bg-secondary_blue":"" }} max-h-[44px] min-h-[44px] p-1 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
 
-            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
             <svg class="w-8 text-white"  viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
             <g id="SVGRepo_bgCarrier" stroke-width="0"/>
             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
@@ -172,7 +160,6 @@
         <div
             class="{{ Route::is('admin.deletedaccounts') ?"bg-secondary_blue":"" }} max-h-[44px] min-h-[44px] p-1 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
 
-            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
             <svg class="w-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M4 20V19C4 16.2386 6.23858 14 9 14H12.75M16 15L18.5 17.5M18.5 17.5L21 20M18.5 17.5L21 15M18.5 17.5L16 20M15 7C15 9.20914 13.2091 11 11 11C8.79086 11 7 9.20914 7 7C7 4.79086 8.79086 3 11 3C13.2091 3 15 4.79086 15 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -185,7 +172,6 @@
             class="{{ Route::is('admin.canceledplans') ?"bg-secondary_blue":"" }} max-h-[44px] min-h-[44px] p-1 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
 
 
-            <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
             <svg class="w-8 text-white"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M11 15L9 13M9 13L11 11M9 13H13C14.1046 13 15 13.8954 15 15V16M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M4 6H20M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -204,7 +190,6 @@
               class="{{ Route::is('admin.settings') ?"bg-secondary_blue":"" }} max-h-[44px] min-h-[44px] p-1 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
 
 
-                <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                 <svg  class="w-8 text-white" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M600.704 64a32 32 0 0 1 30.464 22.208l35.2 109.376c14.784 7.232 28.928 15.36 42.432 24.512l112.384-24.192a32 32 0 0 1 34.432 15.36L944.32 364.8a32 32 0 0 1-4.032 37.504l-77.12 85.12a357.12 357.12 0 0 1 0 49.024l77.12 85.248a32 32 0 0 1 4.032 37.504l-88.704 153.6a32 32 0 0 1-34.432 15.296L708.8 803.904c-13.44 9.088-27.648 17.28-42.368 24.512l-35.264 109.376A32 32 0 0 1 600.704 960H423.296a32 32 0 0 1-30.464-22.208L357.696 828.48a351.616 351.616 0 0 1-42.56-24.64l-112.32 24.256a32 32 0 0 1-34.432-15.36L79.68 659.2a32 32 0 0 1 4.032-37.504l77.12-85.248a357.12 357.12 0 0 1 0-48.896l-77.12-85.248A32 32 0 0 1 79.68 364.8l88.704-153.6a32 32 0 0 1 34.432-15.296l112.32 24.256c13.568-9.152 27.776-17.408 42.56-24.64l35.2-109.312A32 32 0 0 1 423.232 64H600.64zm-23.424 64H446.72l-36.352 113.088-24.512 11.968a294.113 294.113 0 0 0-34.816 20.096l-22.656 15.36-116.224-25.088-65.28 113.152 79.68 88.192-1.92 27.136a293.12 293.12 0 0 0 0 40.192l1.92 27.136-79.808 88.192 65.344 113.152 116.224-25.024 22.656 15.296a294.113 294.113 0 0 0 34.816 20.096l24.512 11.968L446.72 896h130.688l36.48-113.152 24.448-11.904a288.282 288.282 0 0 0 34.752-20.096l22.592-15.296 116.288 25.024 65.28-113.152-79.744-88.192 1.92-27.136a293.12 293.12 0 0 0 0-40.256l-1.92-27.136 79.808-88.128-65.344-113.152-116.288 24.96-22.592-15.232a287.616 287.616 0 0 0-34.752-20.096l-24.448-11.904L577.344 128zM512 320a192 192 0 1 1 0 384 192 192 0 0 1 0-384zm0 64a128 128 0 1 0 0 256 128 128 0 0 0 0-256z"/></svg>
                 <x-dropdown-link  class="no-underline hover:no-underline focus:no-underline" :href="route('admin.settings')" :active="request()->routeIs('admin.settings')">
 
@@ -215,7 +200,6 @@
               class="{{ Route::is('admin.orders') ?"bg-secondary_blue":"" }} max-h-[44px] min-h-[44px] p-1 mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
 
 
-                <?xml version="1.0" encoding="utf-8"?>
                 <svg class="w-8 text-white"  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                 viewBox="0 0 115.35 122.88" style="enable-background:new 0 0 115.35 122.88" xml:space="preserve">
                 <g>
@@ -232,7 +216,6 @@
              <div  class="p-2 mt-0 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-secondary_blue text-white">
 
 
-                <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                 <svg fill="currentColor" class="w-[20px]"  viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3.651 16.989h17.326c0.553 0 1-0.448 1-1s-0.447-1-1-1h-17.264l3.617-3.617c0.391-0.39 0.391-1.024 0-1.414s-1.024-0.39-1.414 0l-5.907 6.062 5.907 6.063c0.196 0.195 0.451 0.293 0.707 0.293s0.511-0.098 0.707-0.293c0.391-0.39 0.391-1.023 0-1.414zM29.989 0h-17c-1.105 0-2 0.895-2 2v9h2.013v-7.78c0-0.668 0.542-1.21 1.21-1.21h14.523c0.669 0 1.21 0.542 1.21 1.21l0.032 25.572c0 0.668-0.541 1.21-1.21 1.21h-14.553c-0.668 0-1.21-0.542-1.21-1.21v-7.824l-2.013 0.003v9.030c0 1.105 0.895 2 2 2h16.999c1.105 0 2.001-0.895 2.001-2v-28c-0-1.105-0.896-2-2-2z"></path>
                 </svg>
