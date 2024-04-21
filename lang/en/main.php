@@ -562,7 +562,7 @@ return [
     //paying
     'buy_responses'=>':num additional responses ',
     'valid'=>'valid (from: :start to: :end)',
-    'newplan'=>'Forms hub premium one year subscription with :num responses',
+    'newplan'=>'Forms hub premium one-year subscription with :num responses',
     'price'=>'Price: ',
     'vat'=>'Vat: ',
     'total'=>'Total :',

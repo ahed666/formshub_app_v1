@@ -221,7 +221,7 @@ class Subscribe extends Component
         // $this->totalprice=$this->totalprice+($this->totalprice*0.05);
         // $this->showCheckout=true;
         $this->action="new plan";
-
+        // Forms hub premium one-year subscription with
         $desc1="Forms hub premium one-year subscription with ".$this->numresponses ." responses.";
         if($this->choosenPlan==$this->current_subscribe->plan_id)
          $desc2= " valid (from ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." to ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." )";
