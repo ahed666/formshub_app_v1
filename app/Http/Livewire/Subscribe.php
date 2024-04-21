@@ -88,21 +88,10 @@ class Subscribe extends Component
         if($this->current_subscribe->num_of_responses+$cat->num<=$this->maxnumresponses)
         {
             $this->validAddResponses=true;
-            // i want make defult category is 3 if possible
-            if($cat->id>=3)
-            {
-                $this->priceresponses=$this->cateresponses?ResponseCategory::whereid(3)->first()->price:0;
-                $this->numresponses=$this->cateresponses?ResponseCategory::whereid(3)->first()->num:0;
 
-                $this->cateresponses=3;
-
-            }
-            else{
-                $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
-                $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
-
-                $this->cateresponses=$cat->id;
-            }
+            $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
+            $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
+            $this->cateresponses=$cat->id;
 
         }
 

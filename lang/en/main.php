@@ -560,7 +560,7 @@ return [
     'readmore'=>'read more',
 
     //paying
-    'buy_responses'=>':num additional responses ',
+    'buy_responses'=>'Forms hub :num additional responses ',
     'valid'=>'valid (from: :start to: :end)',
     'newplan'=>'Forms hub premium one-year subscription with :num responses',
     'price'=>'Price: ',

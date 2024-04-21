@@ -575,7 +575,7 @@ return [
     'lockedaccount_text' => 'تجنب تعليق حسابك بشكل دائم',
     'readmore' => 'اقرأ المزيد',
 
-    'buy_responses' => 'رد إضافي  :num ',
+    'buy_responses' => 'رد إضافي  :num  فورمس هب',
     'valid'=>'صالحة (من: :start الى: :end)',
     'newplan'=>'اشتراك فورمز هب بريميوم لمدة سنة مع :num رد',
     'price'=>'السعر:',
