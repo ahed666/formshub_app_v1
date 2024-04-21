@@ -122,8 +122,6 @@ class Multistepsform extends Component
              'name' => ['required','string','max:35'],
              'email' => ['required', 'string', 'email:rfc,dns', 'max:50', 'unique:users'],
              'mobile_number' => ['required','regex:/((5)[0-9]{8}$)|((05)[0-9]{8}$)/'],
-
-
              'password_confirmation' => 'required_with:password|same:password|max:30',
              'password' => 'max:30',
              'phone_number' => [ 'nullable','max:12','regex:/([0-9]{9}$)/'],

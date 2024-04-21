@@ -29,12 +29,38 @@ class CreateNewUser implements CreatesNewUsers
         $this->input=$input;
 
         Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email:rfc,dns', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:35'],
+            'email' => ['required', 'string', 'email:rfc,dns', 'max:50', 'unique:users'],
             'password' => $this->passwordRules(),
             'password_confirmation' => 'required_with:password|same:password|max:30',
 
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+
+            'country' =>['required','string','max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'mobile_number' => ['required','regex:/((5)[0-9]{8}$)|((05)[0-9]{8}$)/'],
+            'phone_number' => [ 'nullable','max:12','regex:/([0-9]{9}$)/'],
+            'business_name' => [  'nullable','max:60'],
+            'billing_address' => [ 'nullable','max:150'],
+            'tax_number' => [ 'nullable','max:20',],
+        ],[
+            'required' => trans('auth.required'),
+            'integer' => trans('auth.integer'),
+            'regex' => trans('auth.regex'),
+            'digits' => trans('auth.digits'),
+            'email.unique' => trans('auth.email_unique'),
+            'email' => trans('auth.email'),
+            'email.max' => trans('auth.email_max'),
+            'mobile_number.regex' => trans('auth.mobile_number_regex'),
+            'password_confirmation.same' => trans('auth.password_confirmation_same'),
+            'name.max' => trans('auth.name_max'),
+            'phone_number.regex' => trans('auth.phone_number_regex'),
+            'phone_number.max' => trans('auth.phone_number_max'),
+            'tax_number.max' => trans('auth.tax_number_max'),
+            'billing_address' => trans('auth.billing_address'),
+            'business_name' => trans('auth.business_name'),
+            'password' => trans('auth.password'),
+            'password_confirmation' => trans('auth.password_confirmation'),
         ])->validate();
 
 

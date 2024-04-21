@@ -7,7 +7,7 @@
                 <div class="" >
                     <x-jet-label style="" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="country" value="{{ __('auth.country') }}"  />
                     <select autofocus name="country" id="country" class="text-sm border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full" wire:change="onchangestepone()" wire:model="country" required>
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full" wire:change="onchangestepone()"  required>
 
                     @foreach ($countries as $Country )
                     @if($Country->country=="United Arab Emaraties")
@@ -26,7 +26,7 @@
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="city" value="{{ __('auth.city') }}" />
                     <select   name="city" id="city" class="text-sm
                     border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full" required  wire:model="city">
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full" required  >
                     <option     class="text-sm" value="">{{   __('Select one') }}</option>
                     @foreach ($cities as $city )
                     <option class="text-sm" value="{{$city->city_name}}" >{{$city->city_name}}</option>
@@ -46,7 +46,7 @@
 
                     <input  maxlength="35" placeholder="Adam" id="name"
                      class="border-gray-300  focus:border-secondary mr-2
-                      focus:ring-secondary rounded-md shadow-sm block w-full placeholder-gray-300 text-sm" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" wire:model.debounce.500ms="name" />
+                      focus:ring-secondary rounded-md shadow-sm block w-full placeholder-gray-300 text-sm" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"  />
                     @error('name') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300" style="">{{ $message }}</span> @enderror
                 </div>
 
@@ -54,7 +54,7 @@
                     <x-jet-label style="white-space:nowrap;x;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="email" value="{{ __('auth.email_label') }}" />
                     <input  maxlength="50" placeholder="example@domain.com" id="email"
                     class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="email" name="email"  required  wire:model.debounce.500ms="email" />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="email" name="email"  required  />
                     @error('email') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300" style="">{{ $message }}</span> @enderror
 
                 </div>
@@ -64,11 +64,11 @@
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] block font-medium text-sm  lg:w-30 xl:w-30" for="" value="{{ __('auth.mobilenumber') }}" />
                     <div class=" row flex ">
                         <input  type="text" id="CountryMobileCode" class="border-gray-300  focus:border-secondary mr-2
-                         focus:ring-secondary  rounded-md shadow-sm block text-sm  w-20 ml-[2px] mr-2 " value={{$CountryMobileCode}} type="text" name="CountryMobileCode"  wire:model.debounce.500ms="CountryMobileCode" disabled>
+                         focus:ring-secondary  rounded-md shadow-sm block text-sm  w-20 ml-[2px] mr-2 " value={{$CountryMobileCode}} type="text" name="CountryMobileCode"   disabled>
                     <input pattern="^(05|5)\d{8}$" title="Please enter a valid UAE mobile phone number with either '05xxxxxxxx' or '5xxxxxxxx' "
                     placeholder="5xxxxxxxx" maxlength="10"  id="mobile_number"
                     class="border-gray-300   focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="text" required  name="mobile_number"  wire:model="mobile_number"  />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="text" required  name="mobile_number"    />
                     </div>
 
 
@@ -82,21 +82,21 @@
                 <div class=" col-span-2">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px]  lg:w-30 xl:w-30" for="business_name" value="{{ __('auth.businessname') }}({{ __('auth.optional') }})" />
                     <input maxlength="60"  placeholder=""  id="business_name" class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="business_name" wire:model="business_name"  />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="business_name"  />
                     @error('business_name') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
                 </div>
                 {{-- phone number  --}}
                 <div class="">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="phone_number" value="{{ __('auth.phonenumber') }}({{ __('auth.optional') }})" />
                     <input  maxlength="10"  id="phone_number" placeholder="" class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="phone_number"   wire:model="phone_number"  />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="phone_number"     />
                     @error('phone_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
                 </div>
                  {{-- tax number --}}
                 <div class="">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="tax_number" value="{{ __('auth.taxnumber') }}({{ __('auth.optional') }})" />
                     <input maxlength="20" placeholder="" id="tax_number" class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="tax_number"  wire:model="tax_number" />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="tax_number"   />
                     @error('tax_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300 ">{{ $message }}</span> @enderror
                 </div>
 
@@ -107,7 +107,7 @@
                 <div class="col-span-4 ">
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="billing_address" value="{{ __('auth.billingaddress') }}({{ __('auth.optional') }})" />
                     <input maxlength="150"  id="billing_address" placeholder="" class="border-gray-300   focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="billing_address" wire:model="billing_address"  />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="billing_address"   />
                     @error('billing_address') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
                 </div>
             </div>
@@ -177,7 +177,7 @@
 
                     <div class="relative" >
                         <input  oninput="validatePasswordStrength();validatePasswordMatch()" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$"
-                         title="Password must be strong"  wire:model="password" maxlength="30" id="password"
+                         title="Password must be strong"   maxlength="30" id="password"
                           class="border-gray-300
                             focus:border-secondary mr-2
                            focus:ring-secondary
@@ -219,7 +219,7 @@
                         <div class="relative">
                             <input oninput="validatePasswordMatch()" maxlength="30"  id="password_confirmation"
                               class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full text-sm"    type="password" name="password_confirmation"  required autocomplete="new-password"  wire:model="password_confirmation" />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full text-sm"    type="password" name="password_confirmation"  required autocomplete="new-password"   />
                             <div class="w-9 absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
 
 
@@ -259,7 +259,7 @@
                 {{-- terms & conditions --}}
                 <div class="grid gap-4 mb-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 ">
                     <div class="">
-                        <input id="terms"  name="terms" wire:model="terms"  aria-describedby="terms" type="checkbox" class="
+                        <input id="terms"  name="terms"   aria-describedby="terms" type="checkbox" class="
                         w-4 h-4 border border-secondary rounded bg-primary focus:ring-[1px] focus:ring-primary
                            " required="">
                             <label for="terms" class="font-light text-gray-500  text-md ">{{ __('auth.acceptstart') }}
@@ -268,22 +268,13 @@
                                 <a href="{{ route('privacypolicy') }}" class="font-medium text-blue-600  hover:underline" target="_blank"> {{ __('auth.privacypolicy') }}</a></label>
                     </div>
                 </div>
-                {{-- subscribe email --}}
-                {{-- <div class="grid gap-4 mb-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 ">
-                    <div class="col-span-2">
-                        <input id="receive_emails"  name="receive_emails" wire:model="receive_emails" value="{{ $receive_emails }}" aria-describedby="receive_emails" type="checkbox"
-                        class="w-4 h-4 border border-secondary rounded bg-primary focus:ring-[1px] focus:ring-primary " >
-                        <label for="receive_emails" class="text-md font-light text-gray-500 ">
-                            {{ __('I would like to receive emails from form point about our new offers and events ...etc.') }}</label>
 
-                    </div>
-                </div> --}}
                  {{-- source know us  --}}
                 <div class=" pl-1 col-span-3" >
                         <x-jet-label style="white-space:nowrap;" class="text-secondary lg:w-30 xl:w-30" for="know_about_us" value="{{ __('auth.howknowaboutus') }}" />
                         <select   name="know_about_us" id="know_about_us" class="border-gray-300  focus:border-secondary mr-2
                          focus:ring-secondary
-                        rounded-md shadow-sm block  text-sm w-1/4 xs:w-full"   wire:model="know_about_us">
+                        rounded-md shadow-sm block  text-sm w-1/4 xs:w-full"   >
                         <option class="text-sm" value="">{{   __('Select one') }}</option>
 
                         <option class="text-sm" value="Search engine (e.g. Google, Bing)" >{{__('auth.searchengine')}}</option>
