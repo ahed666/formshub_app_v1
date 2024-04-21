@@ -84,13 +84,13 @@ class Subscribe extends Component
          $this->numresponses=$defaultResponsesCat->num;
          $this->maxnumresponses=$this->current_subscribe->num_responses;
          $this->validAddResponses=false;
-        foreach ($this->responsesCategories as $cat)
-        if($this->current_subscribe->num_of_responses+$cat->num<=$this->maxnumresponses)
-        { $this->validAddResponses=true;
-            $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
-            $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
-            $this->cateresponses=$cat->id;
-        }
+        // foreach ($this->responsesCategories as $cat)
+        // if($this->current_subscribe->num_of_responses+$cat->num<=$this->maxnumresponses)
+        // { $this->validAddResponses=true;
+        //     $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
+        //     $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
+        //     $this->cateresponses=$cat->id;
+        // }
 
 
 
