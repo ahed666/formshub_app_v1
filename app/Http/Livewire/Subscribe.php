@@ -84,13 +84,13 @@ class Subscribe extends Component
          $this->numresponses=$defaultResponsesCat->num;
          $this->maxnumresponses=$this->current_subscribe->num_responses;
          $this->validAddResponses=false;
-        // foreach ($this->responsesCategories as $cat)
-        // if($this->current_subscribe->num_of_responses+$cat->num<=$this->maxnumresponses)
-        // { $this->validAddResponses=true;
-        //     $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
-        //     $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
-        //     $this->cateresponses=$cat->id;
-        // }
+        foreach ($this->responsesCategories as $cat)
+        if($this->current_subscribe->num_of_responses+$cat->num<=$this->maxnumresponses)
+        { $this->validAddResponses=true;
+            $this->priceresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->price:0;
+            $this->numresponses=$this->cateresponses?ResponseCategory::whereid($cat->id)->first()->num:0;
+            // $this->cateresponses=$cat->id;
+        }
 
 
 
@@ -145,9 +145,7 @@ class Subscribe extends Component
 
         $this->totalprice=$this->priceresponses;
 
-        $this->desc="Forms hub ".ResponseCategory::whereid($this->cateresponses)->first()->num."
-         additional responses. valid (from: ". Carbon::now()->format('Y-m-d') ." , to: ".
-         Carbon::parse($this->current_subscribe->expired_at)->format('Y-m-d').")";
+        $this->desc="Forms hub ".ResponseCategory::whereid($this->cateresponses)->first()->num." additional responses. valid (from: ". Carbon::now()->format('d m Y') ." , to: ".Carbon::parse($this->current_subscribe->expired_at)->format('d m Y').")";
 
         // $this->showCheckout=true;
         $id=$this->createOrder();
@@ -224,12 +222,12 @@ class Subscribe extends Component
         // $this->showCheckout=true;
         $this->action="new plan";
 
-        $desc1="Forms hub premium one year subscription with ".$this->numresponses;
+        $desc1="Forms hub premium one-year subscription with ".$this->numresponses ." responses.";
         if($this->choosenPlan==$this->current_subscribe->plan_id)
-         $desc2= "valid (from ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." to ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." )";
+         $desc2= " valid (from ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." to ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')." )";
 
         else
-        $desc2= "valid (from ".\Carbon\Carbon::now()->format('d m Y')." to ".\Carbon\Carbon::now()->addyear()->subDays(1)->format('d m Y')." )";
+        $desc2= " valid (from ".\Carbon\Carbon::now()->format('d m Y')." to ".\Carbon\Carbon::now()->addyear()->subDays(1)->format('d m Y')." )";
 
 
 
