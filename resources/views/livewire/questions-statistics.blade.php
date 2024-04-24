@@ -613,12 +613,11 @@
         var question;
         var questionIndex;
         // get question data by it id
-        for (const [i, q] of questions.entries()) {
-    if (question_id == q.id) {
-        questionIndex = i + 1;
-        break;
-    }
-}
+        questions.forEach(function(q,i) {
+                if(question_id==q.id)
+                {questionIndex=i+1;
+                }
+        });
 
         if (QestionData.question_type == "short_text_question" || QestionData.question_type == "long_text_question" || QestionData.question_type == "date_question" ||
             QestionData.question_type == "email" || QestionData.question_type == "number" || QestionData.question_type == "drawing") {
