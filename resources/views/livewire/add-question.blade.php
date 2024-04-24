@@ -262,7 +262,7 @@
                                         @elseif($type=="Agree_Disagree")
                                             @for($i = 1; $i >=0; $i--)
                                                 <div class="mx-4">
-                                                    <div class="border-[1px] border-gray-300 peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-40 max-w-40 min-w-32 h-16
+                                                    <div class="border-[1px] border-gray-300 peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-48 max-w-48 min-w-32 h-16
                                                     flex justify-center items-center p-2   text-gray-500 bg-white border-[2px] rounded-lg cursor-pointer
                                                   peer-checked:border-blue-400
                                                  hover:text-gray-600 hover:bg-gray-100 ">
