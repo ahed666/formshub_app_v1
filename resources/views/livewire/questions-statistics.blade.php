@@ -220,7 +220,7 @@
                             <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
                                 <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
                                     @if($allowexport)
-                                    <li onclick="ExportSingle({{$currentQuestion->id}},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
+                                    <li onclick="ExportSingle({{ $questionIndex }},{{$currentQuestion->id}},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
                                         <span class="text-center">{{ __('Excel') }}</span>
                                     </li>
                                     @else
@@ -236,7 +236,7 @@
                             <div id="exportoptions-{{ $currentQuestion->id }}" class="z-20 hidden w-auto bg-white divide-y divide-gray-100 rounded-[0.5rem]  ">
                                 <ul class="w-32 p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
                                     @if($allowexport)
-                                    <li onclick="ExportSingle({{ $currentQuestion->id }},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
+                                    <li onclick="ExportSingle({{ $questionIndex }},{{ $currentQuestion->id }},'Excel','full')" class="w-full group/item hover:cursor-pointer whitespace-nowrap rounded-t text-secondary_blue p-1  whitespace-no-wrap inline-flex justify-center items-center">
                                         <span class="text-center">{{ __('Excel') }}</span>
                                     </li>
                                     @else
@@ -608,16 +608,12 @@
 
     }
     // export single question
-    function ExportSingle(question_id, filetype, type = null) {
+    function ExportSingle(questionIndex,question_id, filetype, type = null) {
 
         var question;
-        var questionIndex;
+
         // get question data by it id
-        questions.forEach(function(q,i) {
-                if(question_id==q.id)
-                {questionIndex=i+1;
-                }
-        });
+
 
         if (QestionData.question_type == "short_text_question" || QestionData.question_type == "long_text_question" || QestionData.question_type == "date_question" ||
             QestionData.question_type == "email" || QestionData.question_type == "number" || QestionData.question_type == "drawing") {
