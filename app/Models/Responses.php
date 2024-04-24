@@ -110,8 +110,9 @@ class Responses extends Model
 
         $numAllResponses=self::allResponses($accountId);
         foreach ($forms as $key => $form) {
-            $numAllResponses==0||$form->count==1?$form->ratio=0:$form->ratio=round(($form->count)*100/$numAllResponses,1);
+            $numAllResponses==0?$form->ratio=0:$form->ratio=round(($form->count)*100/$numAllResponses,1);
         }
+
         $chartData = [
             'labels' => $forms->pluck('form_title')->toArray(),
             'data' => $forms->pluck('ratio')->toArray(),
