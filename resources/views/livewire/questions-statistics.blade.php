@@ -612,7 +612,7 @@
 
         var question;
         var questionIndex;
-        get question data by it id
+        // get question data by it id
         questions.forEach(function(q,i) {
                 if(question_id==q.id)
                 {questionIndex=i+1;
