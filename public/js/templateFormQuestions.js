@@ -364,7 +364,7 @@ function initialquestion(){
                 answers.innerHTML+=`
                 <div class="ml-4 mr-4">
                                 <input   class="hidden peer pointer-events-none" onclick="setanswer_mcq(${current_question.answers[i].id},${current_question.answers[i].score})"  value="answerchecked.${i}" name="answer-agree_disagree" id="answer-yes_no-${i}" type="radio" >
-                                <label for="answer-yes_no-${i}" class="border-[1px] border-gray-300 select-none peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-48 max-w-[48] min-w-[48] h-24
+                                <label for="answer-yes_no-${i}" class="border-[1px] border-gray-300 select-none peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-48 max-w-48 min-w-48 h-24
                                         flex justify-center items-center p-2   text-gray-500 bg-formbutton border-[2px] rounded-lg cursor-pointer
                                      peer-checked:border-blue-400
                                     hover:text-gray-600 hover:bg-gray-100">
@@ -391,7 +391,7 @@ function initialquestion(){
                 answers.innerHTML+=`
                 <div class="ml-4 mr-4">
                                 <input   class="hidden peer pointer-events-none" onclick="setanswer_mcq(${current_question.answers[i].id},${current_question.answers[i].score})"  value="answerchecked.${i}" name="answer-yes_no" id="answer-yes_no-${i}" type="radio" >
-                                <label for="answer-yes_no-${i}" class="border-[1px] border-gray-300 select-none peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-48 max-w-[48] min-w-[48] h-24
+                                <label for="answer-yes_no-${i}" class="border-[1px] border-gray-300 select-none peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-48 max-w-48 min-w-48 h-24
                                         flex justify-center items-center p-2   text-gray-500 bg-formbutton border-[2px] rounded-lg cursor-pointer
                                      peer-checked:border-blue-400
                                     hover:text-gray-600 hover:bg-gray-100">
@@ -423,7 +423,7 @@ function initialquestion(){
                 answers.innerHTML+=`
                 <div class="ml-4 mr-4">
                                 <input   class="hidden peer pointer-events-none" onclick="setanswer_mcq(${current_question.answers[i].id},${current_question.answers[i].score})"  value="answerchecked.${i}" name="answer-like_dislike" id="answer-yes_no-${i}" type="radio" >
-                                <label for="answer-yes_no-${i}" class="border-[1px] border-gray-300 peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-48 max-w-[48] min-w-[48] h-24
+                                <label for="answer-yes_no-${i}" class="border-[1px] border-gray-300 peer-checked:drop-shadow-lg peer-checked:bg-blue-100 peer-checked:text-blue-600 peer-checked:font-bold peer-checked:text-xl w-48 max-w-48 min-w-48 h-24
                                         flex justify-center items-center p-2   text-gray-500 bg-formbutton border-[2px] rounded-lg cursor-pointer
                                      peer-checked:border-blue-400
                                     hover:text-gray-600 hover:bg-gray-100">
