@@ -24,9 +24,7 @@ class Fact extends Model
             case 'linkedkiosks':
                 $facts->linkedkiosks_count+=1;
                 break;
-            case 'linkedkiosks':
-                $facts->linkedkiosks_count+=1;
-                break;
+
 
             default:
                 # code...

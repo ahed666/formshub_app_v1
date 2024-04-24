@@ -14,7 +14,7 @@
           {{ __('main.responses')}}
         @endif
     </h1>
-    <h1 class="text-center text-sm">
+    <h1 class="text-center font-bold text-sm">
         {{ $cat->price }} AED
     </h1>
    </div>

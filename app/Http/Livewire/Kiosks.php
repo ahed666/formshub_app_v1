@@ -64,7 +64,8 @@ class Kiosks extends Component
     public $edited_kiosk_name;
     public $edited_form_id;
     public $idEditing;
-
+     public $error;
+     public $ifadd;
       // subscriptions settings
       public $validAccount;
       public $current_subscribe;
@@ -147,7 +148,7 @@ class Kiosks extends Component
                     $kiosk->form_id=$this->edited_form_id;
                 }
                 $kiosk->save();
-                
+
                 //send refresh event to kiosk
                 $this->sendrefresh($kiosk->id);
             }

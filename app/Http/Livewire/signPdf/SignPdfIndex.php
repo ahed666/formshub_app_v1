@@ -160,7 +160,7 @@ class SignPdfIndex extends Component
     {
         $this->signature=SignFile::getLastSignature(Auth::user()->current_account_id);
         $path = public_path($this->signature->path_file);
-        $filename = 'signature.pdf';
+        $filename = 'Signed PDF.pdf';
          $this->mount();
         return response()->download($path, $filename);
     }

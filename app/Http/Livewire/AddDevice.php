@@ -21,6 +21,7 @@ use App\Models\StandbykiosksMedia;
 use App\Models\CustomQuestionTranslation;
 use App\Models\CustomQuestion;
 use App\Models\DeviceCode;
+use App\Models\Fact;
 use Carbon\Carbon;
 use App\Models\Subscribe;
 use App\Models\SubscribePlan;
@@ -45,6 +46,7 @@ class AddDevice extends Component
     public $message_text=null;
     public $locked;
     public $isSubmitting;
+    public $error;
     // public $formNullMessage="";
     // validation rules
     protected $rules=[
@@ -215,7 +217,11 @@ class AddDevice extends Component
 
 
     $device->save();
-
+     try {
+        Fact::increseFactCount('linkedkiosks');
+     } catch (\Throwable $th) {
+        //throw $th;
+     }
     $standbyMedia=new StandbykiosksMedia();
     $standbyMedia->path_file=$this->defultImage;
     $standbyMedia->type="image";

@@ -417,44 +417,49 @@ public $answers_json_text_rating='
     public function signPdf($start_x,$start_y,$end_x,$end_y,$start_cx,$start_cy,$end_cx,$end_cy,$page_num){
 
         $this->validate();
-        // if there is file for first time attempt
-        if($this->PdfFile->path_file!=null||$this->uploadedFileInfo['path']!=null){
-        try {
+        if($this->PdfFile!=null&&$this->uploadedFileInfo!=null){
+            // if there is file for first time attempt
+            if($this->PdfFile->path_file!=null||$this->uploadedFileInfo['path']!=null){
+            try {
 
-        // delete previous file
-        if($this->uploadedFileInfo['path']!=$this->PdfFile->path_file)
-            File::delete(public_path($this->PdfFile->path_file));
-        // delete previous signed pdf
-        SignFile::deleteLastSignature(Auth::user()->current_account_id);
+                // delete previous file
+                if($this->uploadedFileInfo['path']!=$this->PdfFile->path_file)
+                    File::delete(public_path($this->PdfFile->path_file));
+                // delete previous signed pdf
+                SignFile::deleteLastSignature(Auth::user()->current_account_id);
 
 
 
-        $this->PdfFile->language=$this->selectedLanguage;
-        $this->PdfFile->start_x=$start_x;
-        $this->PdfFile->start_y=$start_y;
-        $this->PdfFile->end_x=$end_x;
-        $this->PdfFile->end_y=$end_y;
-        $this->PdfFile->page_num=$page_num;
-        $this->PdfFile->start_cx=$start_cx;
-        $this->PdfFile->start_cy=$start_cy;
-        $this->PdfFile->end_cx=$end_cx;
-        $this->PdfFile->end_cy=$end_cy;
-        $this->PdfFile->path_file=$this->uploadedFileInfo['path'];
-        $this->PdfFile->save();
-        $kiosk=$this->changeStatusSelectedKiosk($this->selectedKiosk);
-        RefreshKiosk::dispatch($kiosk);
-        // $this->dispatchBrowserEvent('close_modal_addkiosks');
-        return redirect()->route('signpdf.index')->with('success_message_signed','signed');
+                $this->PdfFile->language=$this->selectedLanguage;
+                $this->PdfFile->start_x=$start_x;
+                $this->PdfFile->start_y=$start_y;
+                $this->PdfFile->end_x=$end_x;
+                $this->PdfFile->end_y=$end_y;
+                $this->PdfFile->page_num=$page_num;
+                $this->PdfFile->start_cx=$start_cx;
+                $this->PdfFile->start_cy=$start_cy;
+                $this->PdfFile->end_cx=$end_cx;
+                $this->PdfFile->end_cy=$end_cy;
+                $this->PdfFile->path_file=$this->uploadedFileInfo['path'];
+                $this->PdfFile->save();
+                $kiosk=$this->changeStatusSelectedKiosk($this->selectedKiosk);
+                RefreshKiosk::dispatch($kiosk);
+                // $this->dispatchBrowserEvent('close_modal_addkiosks');
+                return redirect()->route('signpdf.index')->with('success_message_signed','signed');
 
-        //code...
-        } catch (\Throwable $th) {
-            $this->dispatchBrowserEvent('error',['title'=>trans('main.errorwhileupload_title') ,'message'=>trans('main.errorwhileupload')]);
+                //code...
+                } catch (\Throwable $th) {
+                    $this->dispatchBrowserEvent('error',['title'=>trans('main.errorwhileupload_title') ,'message'=>trans('main.errorwhileupload')]);
 
+                }
+            }
+            else{
+                $this->dispatchBrowserEvent('error',['title'=>trans('main.nopdf_title') ,'message'=>trans('main.nopdf')]);
+            }
         }
-    }
-    else{
-        $this->dispatchBrowserEvent('error',['title'=>trans('main.nopdf_title') ,'message'=>trans('main.nopdf')]);
-    }
+        else{
+            $this->dispatchBrowserEvent('error',['title'=>trans('main.nopdf_title') ,'message'=>trans('main.nopdf')]);
+        }
     }
 
     public function render()
