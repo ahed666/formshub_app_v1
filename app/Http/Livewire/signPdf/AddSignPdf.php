@@ -454,11 +454,11 @@ public $answers_json_text_rating='
                 }
             }
             else{
-                $this->dispatchBrowserEvent('error',['title'=>trans('main.nopdf_title') ,'message'=>trans('main.nopdf')]);
+                $this->dispatchBrowserEvent('error',['title'=>trans('main.errornopdf') ,'message'=>trans('main.errornopdf')]);
             }
         }
         else{
-            $this->dispatchBrowserEvent('error',['title'=>trans('main.nopdf_title') ,'message'=>trans('main.nopdf')]);
+            $this->dispatchBrowserEvent('error',['title'=>trans('main.errornopdf') ,'message'=>trans('main.errornopdf')]);
         }
     }
 
