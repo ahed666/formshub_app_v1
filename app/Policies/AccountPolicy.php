@@ -61,7 +61,17 @@ class AccountPolicy
         return $user->ownsAccount($account);
     }
 
-    public function checkAddValidPlan(User $user, Account $account):string
+    public function userCanBuyResponses( Account $account): bool
+    {
+        $plan=SubscribePlan::where('subscriptions_plans.account_id','=',$account->id)->join('type_of_subscriptions','type_of_subscriptions.id','=','subscriptions_plans.type_of_subscription_id')
+        ->first();
+        if($plan->type_of_subscription_id==1)
+        return false;
+       return true;
+
+    }
+
+    public function checkAddValidPlan( Account $account):bool
     {
         $plan=SubscribePlan::where('subscriptions_plans.account_id','=',$account->id)->join('type_of_subscriptions','type_of_subscriptions.id','=','subscriptions_plans.type_of_subscription_id')
          ->first();
@@ -80,8 +90,9 @@ class AccountPolicy
          return true;
         return false;
     }
-    public function checkAddValidDate(User $user, Account $account):string
+    public function checkAddValidDate(User $user, Account $account):bool
     {
+
         $plan=SubscribePlan::where('subscriptions_plans.account_id','=',$account->id)->join('type_of_subscriptions','type_of_subscriptions.id','=','subscriptions_plans.type_of_subscription_id')
          ->first();
 

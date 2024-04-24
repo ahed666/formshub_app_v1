@@ -49,9 +49,10 @@ class Dashboard extends Component
     public $responsesDataChart;
     public $current_account_id;
     public $currentAccount;
-    public $responsesPerForms;
+    public $responsesPerForm;
     public $responsesPerKiosk;
-
+    public $actions;
+    public $numKiosks;
     public $errors_permission='
     {
         "Free":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed.","num_kiosks":"You have reached the maximum limit allowed."},
@@ -83,7 +84,7 @@ class Dashboard extends Component
         $this->Todos=ToDo::todosByStatus($this->current_account_id);
         $this->tickets=SupportTicket::ticketsByStatus($this->current_account_id);
         // forms
-        $this->forms= Form::select('forms.*',\DB::raw('COUNT(devices.id) as devices_count'), \DB::raw('COUNT(responses.id) as responses_count'),\DB::raw('COUNT(form_media.id) as media_count'))
+        $this->forms= Form::select('forms.*',DB::raw('COUNT(devices.id) as devices_count'), DB::raw('COUNT(responses.id) as responses_count'),DB::raw('COUNT(form_media.id) as media_count'))
         ->leftJoin('responses', 'forms.id', '=', 'responses.form_id')
         ->leftJoin('form_media','form_media.form_id','=','forms.id')
         ->leftJoin('devices','devices.form_id','=','forms.id')
@@ -94,20 +95,21 @@ class Dashboard extends Component
         // kiosks
         $this->kiosks=Kiosk::leftjoin('forms','forms.id','=','devices.form_id')
         ->leftjoin('device_codes','device_codes.id','=','devices.device_code_id')
-        ->where('devices.account_id',$this->current_account_id)->select('devices.*','device_codes.device_code as device_code','forms.form_title as form_title')->get();
+        ->where('devices.account_id',$this->current_account_id)->select('devices.*','device_codes.device_code as device_code','forms.form_title as form_title','forms.form_type_id')->get();
         //  subscribe
 
 
         // $this->permissions= json_decode($this->plans_permission, true);
         $this->errors= json_decode($this->errors_permission, true);
-
-
-        $actionModel = new Action();
-        $this->actions = $actionModel->getAllActionsWithDismissalStatus($this->current_account_id);
-
         $this->numResponsesToday=Responses::getResponsesCreatedToday($this->current_account_id);
         $this->numForms=count($this->forms);
         $this->numKiosks=count($this->kiosks);
+
+        $actionModel = new Action();
+        $this->actions = $actionModel->getAllEnabledActions($this->current_account_id,$this->numResponsesToday,  $this->current_subscribe, $this->numForms, $this->numKiosks, $this->Todos);
+
+
+
 
         $this->accountStatus=SubscribePlan::getCurrentAccountStatus($this->current_account_id);
 

@@ -12,11 +12,11 @@
 
             <div class="grid grid-cols-12  border-2 rounded-lg   p-2 bg-gray-100 border-gray-200 min-h-[150px] mb-4">
 
-                <div class="col-span-8 xs:col-span-12 sm:col-span-12 md:col-span-12 ">
+                <div class="col-span-9 xs:col-span-12 sm:col-span-12 md:col-span-12">
                     {!! $desc!!}
                 </div>
 
-                <div class="col-span-4 xs:col-span-12 sm:col-span-12 md:col-span-12">
+                <div class="col-span-3 xs:col-span-12 sm:col-span-12 md:col-span-12">
                     @php
                     $formattedPrice = number_format($order->price, 2);
                     $formattedVat = number_format($order->price*0.05, 2);
@@ -24,18 +24,18 @@
                     @endphp
                     <div class="grid grid-cols-12 items-center justify-center">
                         <span class="col-span-4">{{ __('main.price') }}</span>
-                        <span class="col-span-4 text-secondary_blue  mx-1 text-right">{{  $formattedPrice }}</span>
-                        <span class="col-span-1 text-xs">AED</span>
+                        <span class="col-span-6 text-secondary_blue  mx-1 text-right">{{  $formattedPrice }}</span>
+                        <span class="col-span-2 text-xs">AED</span>
                     </div>
                     <div class="grid grid-cols-12 items-center justify-center">
                         <span class="col-span-4">{{ __('main.vat') }}</span>
-                        <span class="col-span-4 text-secondary_blue  mx-1 text-right">{{  $formattedVat }}</span>
-                        <span class="col-span-1 text-xs">AED</span>
+                        <span class="col-span-6 text-secondary_blue  mx-1 text-right">{{  $formattedVat }}</span>
+                        <span class="col-span-2 text-xs">AED</span>
                     </div>
                     <div class="grid grid-cols-12 items-center justify-center">
                         <span class="col-span-4 font-bold">{{ __('main.total') }}</span>
-                        <span class="col-span-4 text-secondary_blue font-bold  mx-1 text-right">{{  $formattedTotalPrice }}</span>
-                        <span class="col-span-1 text-xs">AED</span>
+                        <span class="col-span-6 text-secondary_blue font-bold  mx-1 text-right">{{  $formattedTotalPrice }}</span>
+                        <span class="col-span-2 text-xs">AED</span>
                     </div>
 
                 </div>
@@ -78,7 +78,7 @@
             </div>
             </div>
         </article>
-        <div class=" hidden  p-1 mt-4  justify-center items-center" id="TextAfterSubmit">
+        <div class=" hidden  p-1 mt-4  justify-center items-center text-primary_red" id="TextAfterSubmit">
             <h1 class="text-center" >{{ __('main.pleasewait')}}</h1>
             <h1 class="text-center" >{{ __('main.pleasewait_message') }}</h1>
         </div>

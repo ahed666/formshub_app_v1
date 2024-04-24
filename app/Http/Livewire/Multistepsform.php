@@ -50,6 +50,7 @@ class Multistepsform extends Component
     public $billing_address;
     public $CountryMobileCode;
       public $idCountry;
+      public $isChecked=false;
       //status of show password
     public $show=false;
     //current step (inital 2 beacuse there is one country defult)

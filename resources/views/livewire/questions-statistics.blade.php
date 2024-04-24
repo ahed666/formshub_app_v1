@@ -612,11 +612,13 @@
 
         var question;
         var questionIndex;
-        // get question data by it id
-        // questions.forEach(function(q,i) {
-        //         if(question_id==q.id)
-        //         {question=q;questionIndex=i+1;}
-        // });
+        get question data by it id
+        questions.forEach(function(q,i) {
+                if(question_id==q.id)
+                {questionIndex=i+1;
+                  break;
+                }
+        });
 
         if (QestionData.question_type == "short_text_question" || QestionData.question_type == "long_text_question" || QestionData.question_type == "date_question" ||
             QestionData.question_type == "email" || QestionData.question_type == "number" || QestionData.question_type == "drawing") {
@@ -1446,7 +1448,7 @@
                         <td  class="max-h-8 pl-2" id='response_answer-${id}-${response.response_id}'>
                         <div data-bs-toggle="tooltip"  data-bs-html="true" title="Skipped by ${response.type_skip}"  class="hover:cursor-pointer min-h-[35px] max-h-[35px] overflow-hidden truncate flex justify-center items-center">
                         <div class="flex justify-center items-center"><span class="text-sm xs:text-xs truncate text-center ">${translations.skipbyuser}</span>
-                      
+
                         <svg class="mx-1 w-6 h-6 text-yellow-500" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="CurrentColor" class="bi bi-skip-forward">
                         <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"/>
                         </svg></div>
@@ -1455,7 +1457,7 @@
                         defultTbody.innerHTML += `<td  class="max-h-8 pl-2" id='response_answer-${id}-${response.response_id}'>
                         <div data-bs-toggle="tooltip"  data-bs-html="true" title="Skipped by ${response.type_skip}"  class="hover:cursor-pointer min-h-[35px] max-h-[35px] overflow-hidden truncate flex justify-center items-center">
                         <div class="flex justify-center items-center"><span class="text-sm xs:text-xs truncate text-center ">${translations.autoskip}</span>
-                        
+
                         <svg class="mx-1 w-6 h-6 text-yellow-500" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="CurrentColor" class="bi bi-skip-forward">
                         <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5zM1 4.633v6.734L6.804 8 1 4.633zm7.5 0v6.734L14.304 8 8.5 4.633z"/>
                         </svg></div>

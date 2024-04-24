@@ -5,7 +5,10 @@
 
             <div class="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
                 <div class="" >
-                    <x-jet-label style="" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="country" value="{{ __('auth.country') }}"  />
+                    <div class="flex justify-between items-center">
+                        <x-jet-label style="" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="country" value="{{ __('auth.country') }}"  />
+                        <span class="text-sm font-medium text-primary_red ">{{ __('auth.required') }}</span>
+                    </div>
                     <select autofocus name="country" id="country" class="text-sm border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full" wire:change="onchangestepone()"  required>
 
@@ -23,7 +26,10 @@
 
                 </div>
                 <div class="" >
-                    <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="city" value="{{ __('auth.city') }}" />
+                    <div class="flex justify-between items-center">
+                        <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="city" value="{{ __('auth.city') }}" />
+                        <span class="text-sm font-medium text-primary_red ">{{ __('auth.required') }}</span>
+                    </div>
                     <select   name="city" id="city" class="text-sm
                     border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full" required  >
@@ -42,7 +48,10 @@
              <div class="text-lg font-bold card-header  text-black">{{ __('auth.personalinformation') }} </div>
             <div class="grid gap-4 mb-4 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3">
                 <div class=" ">
-                    <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="name" value="{{ __('auth.fullname') }}" />
+                    <div class="flex justify-between items-center">
+                        <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="name" value="{{ __('auth.fullname') }}" />
+                        <span class="text-sm font-medium text-primary_red ">{{ __('auth.required') }}</span>
+                    </div>
 
                     <input  maxlength="35" placeholder="Adam" id="name"
                      class="border-gray-300  focus:border-secondary mr-2
@@ -51,7 +60,10 @@
                 </div>
 
                 <div class="">
-                    <x-jet-label style="white-space:nowrap;x;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="email" value="{{ __('auth.email_label') }}" />
+                    <div class="flex justify-between items-center">
+                        <x-jet-label style="white-space:nowrap;x;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="email" value="{{ __('auth.email_label') }}" />
+                        <span class="text-sm font-medium text-primary_red ">{{ __('auth.required') }}</span>
+                    </div>
                     <input  maxlength="50" placeholder="example@domain.com" id="email"
                     class="border-gray-300  focus:border-secondary mr-2
                      focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="email" name="email"  required  />
@@ -68,7 +80,7 @@
                     <input pattern="^(05|5)\d{8}$" title="Please enter a valid UAE mobile phone number with either '05xxxxxxxx' or '5xxxxxxxx' "
                     placeholder="5xxxxxxxx" maxlength="10"  id="mobile_number"
                     class="border-gray-300   focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="text" required  name="mobile_number"    />
+                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm " type="text"   name="mobile_number"    />
                     </div>
 
 
@@ -76,41 +88,54 @@
 
                 </div>
             </div>
-            <div class="text-lg font-bold card-header  text-black">{{ __('auth.accountbillinginformation') }} </div>
-            <div class="grid gap-4 mb-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
-                {{-- bussiness name --}}
-                <div class=" col-span-2">
-                    <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px]  lg:w-30 xl:w-30" for="business_name" value="{{ __('auth.businessname') }}({{ __('auth.optional') }})" />
-                    <input maxlength="60"  placeholder=""  id="business_name" class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="business_name"  />
-                    @error('business_name') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
-                </div>
-                {{-- phone number  --}}
-                <div class="">
-                    <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="phone_number" value="{{ __('auth.phonenumber') }}({{ __('auth.optional') }})" />
-                    <input  maxlength="10"  id="phone_number" placeholder="" class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="phone_number"     />
-                    @error('phone_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
-                </div>
-                 {{-- tax number --}}
-                <div class="">
-                    <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="tax_number" value="{{ __('auth.taxnumber') }}({{ __('auth.optional') }})" />
-                    <input maxlength="20" placeholder="" id="tax_number" class="border-gray-300  focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="tax_number"   />
-                    @error('tax_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300 ">{{ $message }}</span> @enderror
-                </div>
+            <div class="flex justify-start items-center my-8">
+
+                <label class="grid items-center cursor-pointer">
+
+                    <span class=" text-md  text-black dark:text-gray-300 ">{{ __('auth.togglebusinesstitle') }}</span>
+                    <input type="checkbox" value="" class="sr-only peer" id="toggleBusinessDiv" >
+                    <div class="relative w-11 h-6 bg-gray-200 rounded-full  dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+
+                  </label>
+            </div>
+            <div id="businessDiv" class="hidden">
+                <div  class="text-lg font-bold card-header  text-black">{{ __('auth.accountbillinginformation') }} </div>
+                <div  class=" grid gap-4 mb-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
+                    {{-- bussiness name --}}
+                    <div class=" col-span-2">
+                        <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px]  lg:w-30 xl:w-30" for="business_name" value="{{ __('auth.businessname') }}" />
+                        <input maxlength="60"  placeholder=""  id="business_name" class="border-gray-300  focus:border-secondary mr-2
+                        focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="business_name"  />
+                        @error('business_name') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
+                    </div>
+                    {{-- phone number  --}}
+                    <div class="">
+                        <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="phone_number" value="{{ __('auth.phonenumber') }}" />
+                        <input  maxlength="10"  id="phone_number" placeholder="" class="border-gray-300  focus:border-secondary mr-2
+                        focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="phone_number"     />
+                        @error('phone_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
+                    </div>
+                    {{-- tax number --}}
+                    <div class="">
+                        <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="tax_number" value="{{ __('auth.taxnumber') }}" />
+                        <input maxlength="20" placeholder="" id="tax_number" class="border-gray-300  focus:border-secondary mr-2
+                        focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="tax_number"   />
+                        @error('tax_number') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300 ">{{ $message }}</span> @enderror
+                    </div>
 
 
-            </div>
-            {{-- biiling Address --}}
-            <div class="grid gap-4 mb-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
-                <div class="col-span-4 ">
-                    <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="billing_address" value="{{ __('auth.billingaddress') }}({{ __('auth.optional') }})" />
-                    <input maxlength="150"  id="billing_address" placeholder="" class="border-gray-300   focus:border-secondary mr-2
-                     focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="billing_address"   />
-                    @error('billing_address') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
                 </div>
-            </div>
+                <div class="grid gap-4 mb-4 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4">
+                    <div class="col-span-4 ">
+                        <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] lg:w-30 xl:w-30" for="billing_address" value="{{ __('auth.billingaddress') }}" />
+                        <input maxlength="150"  id="billing_address" placeholder="" class="border-gray-300   focus:border-secondary mr-2
+                        focus:ring-secondary  rounded-md shadow-sm block  w-full placeholder-gray-300 text-sm" type="text" name="billing_address"   />
+                        @error('billing_address') <span class="flex font-medium text-sm   lg:w-30 xl:w-30 text-red-600 text-danger  error placeholder-gray-300">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+           </div>
+
+
             <div class="text-lg font-bold card-header  text-black">{{ __('Account Security') }} </div>
             <div class="grid gap-4 mb-4 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2">
                 <div class="">
@@ -257,7 +282,7 @@
 
                 </div>
                 {{-- terms & conditions --}}
-                <div class="grid gap-4 mb-6 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 ">
+                <div class="grid gap-4 mb-6 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 ">
                     <div class="">
                         <input id="terms"  name="terms"   aria-describedby="terms" type="checkbox" class="
                         w-4 h-4 border border-secondary rounded bg-primary focus:ring-[1px] focus:ring-primary
@@ -306,7 +331,22 @@
 </div>
 @push('scripts')
 
+
+
+
+
+
 <script>
+      const toggleBusinessDiv = document.getElementById('toggleBusinessDiv');
+    const businessDiv = document.getElementById('businessDiv');
+
+    toggleBusinessDiv.addEventListener('change', function() {
+        if (this.checked) {
+            businessDiv.classList.remove('hidden');
+        } else {
+            businessDiv.classList.add('hidden');
+        }
+    });
     // function validatePasswordMatch() {
     //   var password = document.getElementById('password').value;
     //   var confirm_password = document.getElementById('password_confirmation');
@@ -364,7 +404,7 @@
 
             result==false?
                     strengthText = `
-                    <span class="mx-2 mt-2 mb-[2px] flex font-medium text-sm text-gray-700  lg:w-30 xl:w-30 text-red-600 " style="white-space:nowrap;margin:6px;">
+                    <span class="mx-2 mt-2 mb-[2px] flex font-medium text-sm text-gray-700  lg:w-30 xl:w-30 text-primary_red " style="white-space:nowrap;margin:6px;">
                                         <svg class="flex w-4 h-4 mr-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                                         </svg>Week</span>`

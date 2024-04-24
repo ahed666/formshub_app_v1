@@ -46,7 +46,7 @@ class NewTicket extends Notification
         //             ->action('Notification Action', url('/'))
         //             ->line('Thank you for using our application!');
         return (new MailMessage)
-                    ->from('contact@formshub.net','Form Hub')
+                    ->from('contact@formshub.net','Forms Hub')
                     ->subject("Ticket FHT-{$this->ticket->id} - ({$this->ticket->target}) ")
                     ->line("A support ticket ID FHT-{$this->ticket->id} has been created")
                     ->line('Our concern team will look into it and get back to you soon')

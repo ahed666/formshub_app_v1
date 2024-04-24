@@ -151,6 +151,8 @@ class Allforms extends Component
              $kiosk->form_id=null;$kiosk->save();
         }
         RefreshKiosks::dispatch($kiosks->toArray());
+        $this->mount();
+
 
     }
     public function copyformlink($form)

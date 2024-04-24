@@ -3,63 +3,9 @@
 
 <input type="hidden" id="dangerMessage" value="{{ session('danger') }}">
 
-    {{-- buy responses --}}
-    @if($action=="buyresponses"&&!$showCheckout)
 
-    <div class=" grid justify-center items-center mt-6 ">
-        <div class="grid justify-center items-center mb-10">
-            <h1 class="font-bold text-lg text-center my-4">{{ __('main.getadditionalresponses') }}</h1>
-            <h1 class="text-sm">{{ __('main.responsesvalid') }} <span class="text-secondary">{{ \Carbon\Carbon::parse($current_subscribe->expired_at)->subDays(1)->format('d m Y') }}</span></h1>
-        </div>
-        <div class="p-1 mt-4 mx-1 text-center">
-            @if(!$validAddResponses)
-            <span class="text-primary_red text-sm text-center">
-           {{ __('main.responsesadderror') }}
-            @elseif(!$current_subscribe->valid)
-            <span class="text-primary_red text-sm text-center">
-                {{ __('Your plan has been expired.') }}
-            </span>
-            @else
-            <div class="relative flex justify-center items-center">
-              <select wire:model="cateresponses" id="dropdown" name="dropdown" class="text-md width-1/2 rounded-lg block appearance-none  bg-white border border-gray-300 text-gray-700
-               leading-tight focus:outline-none focus:border-gray-500 ">
-
-               @foreach ($responsesCategories as $cat)
-
-               @if($current_subscribe->num_of_responses+$cat->num<=$maxnumresponses&&$cat->price>0)
-               <option class="text-md" value="{{$cat->id}}">{{ number_format($cat->num, 0, '.', ',') }}</option>
-               @endif
-               @endforeach
-
-                <!-- Add more options as needed -->
-              </select>
-              <div class="pointer-events-none  inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                @php
-                        $formattedPrice = number_format($priceresponses, 2);
-                @endphp
-                <span class="text-gray-900 mx-1">{{ __(' Price: ') }}</span>     <span class="text-lg text-secondary">{{$formattedPrice  }}<span class="text-xs text-gray-900">{{ __('AED') }}</span></span>
-              </div>
-            </div>
-
-            @error('cateresponses') <span class="text-sm text-red-400 error">{{ $message }}</span> @enderror
-
-            <div class="grid justify-center items-center mt-2">
-                {{-- wire:click="buyresponses"  wire:click="buyresponses --}}
-                <button wire:click="buyresponses"   class=" w-20 text-center justify-center
-                mt-2 inline-flex items-center h-8 p-1 bg-secondary  border border-transparent
-                rounded-md font-semibold text-xs text-white  uppercase tracking-widest hover:bg-secondary_1  focus:bg-secondary_1
-                 active:bg-gray-900  focus:outline-none
-                 transition ease-in-out duration-150">
-                    {{ __('main.buy') }}
-               </button>
-
-            </div>
-            @endif
-
-        </div>
-    </div>
     {{-- plans --}}
-    @elseif($action!="buyresponses"&&!$showCheckout)
+    {{-- @if($step==1) --}}
     <div class="  mt-6 ">
 
         <div class="grid justify-center items-center mb-10">
@@ -70,10 +16,7 @@
         <div class="flex justify-center xs:block gap-2 ">
 
             @foreach ($types as $type )
-            {{-- PRO --}}
-              {{-- {{ in_array($type->subscription_type,$subscriptionsUpgrade[$current_subscribe->type])?"":"opacity-50" }} --}}
-            {{-- @if($type->subscription_type!="Free" && in_array($type->subscription_type,$subscriptionsUpgrade[$current_subscribe->type])) --}}
-            {{-- relative transition ease-in-out delay-150 -translate-z-1 scale-110 duration-300 --}}
+
             <div  class="{{$type->subscription_type==$current_subscribe->type?"z-50 shadow relative bg-primary border-[2px] border-secondary ":"bg-[#fafafa] border-[1px]"  }} col-span-2 xs:mt-2   shadow-md rounded-2xl p-4  ">
                     {{-- current subscribe  --}}
 
@@ -88,11 +31,11 @@
                     <span class="text-secondary text-xl font-bold">{{ $type->subscription_type }}</span>
                     </div>
                     {{-- price --}}
-                    <div class="grid  text-center mt-2 items-center">
+                    <div class="grid  text-center mt-2 items-center text-3xl xs:text-lg font-bold text-secondary_1">
                         @if($type->order_plan==1)
-                        <div><span class="text-lg font-bold text-secondary_1">{{ $type->price }}</span><span class="text-xs">{{ __('AED') }}</span></div>
+                        <div><span class= "">{{ $type->price }}</span><span class="text-xs">{{ __('AED') }}</span></div>
                         @else
-                        <div><span class="text-lg font-bold text-secondary_1">{{ round((($type->price)+($priceresponses))) }}</span><span class="text-xs">{{ __('AED') }}</span><span class="text-sm text-secondary_1">{{ __(' / Year') }}</span></div>
+                        <div><span class="">{{ round($type->price) }}</span><span class="text-xs">{{ __('AED') }}</span><span class="text-sm text-secondary_1">{{ __(' / Year') }}</span></div>
                         @endif
                     </div>
                     {{-- features --}}
@@ -117,7 +60,7 @@
                             <li class="flex  mt-[2px]   ">
 
                                 <x-subscriptionfeature_svg :colorid="0" />
-                                <span class="text-md whitespace-normal" >{{ __('main.getupresponses',['num'=>number_format($type->num_responses, 0, '.', ',')]) }}</span>
+                                <span class="text-md whitespace-normal" >{{ __('main.getupresponses',['num'=>env('NUM_OF_RESPONSES_FREE',10000)]) }}</span>
                             </li>
                         @else
                             <li class="flex  mt-[2px]   ">
@@ -209,7 +152,7 @@
                             </li>
                         @endif
                         {{-- select num of responses --}}
-                    @if($type->subscription_type!="Free")
+                    {{-- @if($type->subscription_type!="Free")
                     <div class="p-1 mt-4 mx-1">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="dropdown">
                          {{ __('main.selectnumofresponses') }}
@@ -231,7 +174,7 @@
                         @error('cateresponses') <span class="text-sm text-red-400 error">{{ $message }}</span> @enderror
 
                     </div>
-                    @endif
+                    @endif --}}
                     </ul>
 
 
@@ -239,17 +182,20 @@
                     <div class="flex justify-center items-center mt-4 ">
                         {{-- current plan --}}
                         @if($type->order_plan==$current_subscribe->order_plan&&$current_subscribe->subscription_status=="Valid")
-                            <a href="{{ route('subscriptions') }}" class="bg-secondary hover:bg-secondary_1 text-white text-center text-md rounded-lg p-1 w-25 min-w-[100px]">
+                            <a href="{{ route('subscriptions') }}"
+                            class="bg-secondary hover:bg-secondary_1 text-white flex justify-center items-center text-center text-md rounded-lg p-1 w-25 min-w-[100px] h-12">
                                 {{ __('main.view') }}
                             </a>
                         @elseif($type->order_plan==$current_subscribe->order_plan&&($current_subscribe->subscription_status=="Grace"||$current_subscribe->subscription_status=="Locked"))
-                        <button wire:click="ChoosePlan({{ $type->id }})" class="bg-secondary hover:bg-secondary_1 text-white text-md rounded-lg p-1 w-25 min-w-[100px]">
+                        <button wire:click="ChoosePlan({{ $type->id }})"
+                            class="bg-secondary hover:bg-secondary_1 text-white text-md rounded-lg p-1 w-25 h-12 min-w-[100px]">
                             {{ __('main.renew') }}
                         </button>
 
 
                         @elseif($type->order_plan>$current_subscribe->order_plan)
-                            <button wire:click="ChoosePlan({{ $type->id }})" class="bg-secondary hover:bg-secondary_1 text-white text-md rounded-lg p-1 w-25 min-w-[100px]">
+                            <button wire:click="ChoosePlan({{ $type->id }})"
+                                class="bg-secondary hover:bg-secondary_1 text-white text-md rounded-lg p-1 w-25 h-12 min-w-[100px]">
                                 {{ __('main.upgrade') }}
                             </button>
 
@@ -264,112 +210,19 @@
         </div>
 
     </div>
-    @endif
-    {{-- payment --}}
-    @if($showCheckout)
-    <div class="flex justify-center xs:block mt-6">
-
-        <aside class="w-1/2 xs:w-full">
-            <article class="bg-white rounded-lg shadow-lg">
-                <div class="p-5 ">
-
-
-
-
-                    <div class="grid grid-cols-12  border-2 rounded-lg   p-2 bg-gray-100 border-gray-200 min-h-[150px] mb-4">
-
-                        <div class="col-span-8 xs:col-span-12 sm:col-span-12 md:col-span-12">
-                            @if($action=="buyresponses")
-                                <h1 class="mt-2 ">{{ __('main.buy_responses',['num'=>number_format($numresponses, 0, '.', ',')]) }}</h1>
-                                <h1 class="mt-2">{{ __('main.valid',['start'=>\Carbon\Carbon::now()->format('d m Y'),'end'=>\Carbon\Carbon::parse($current_subscribe->expired_at)->subDays(1)->format('d m Y')]) }}</h1>
-                            @else
-                               <h1 class="mt-2">{{ __('main.newplan',['num'=>number_format($numresponses, 0, '.', ',')]) }}</h1>
-                                @if($choosenPlanInfo->id==$current_subscribe->plan_id)
-                                <h1 class="mt-2">{{ __('main.valid',['start'=>\Carbon\Carbon::parse($current_subscribe->expired_at)->format('d m Y'),'end'=>\Carbon\Carbon::parse($current_subscribe->expired_at)->format('d m Y')]) }}
-
-                                @else
-                                <h1 class="mt-2">{{ __('main.valid',['start'=>\Carbon\Carbon::now()->format('d m Y'),'end'=>\Carbon\Carbon::now()->addyear()->subDays(1)->format('d m Y')]) }}
-
-                                @endif
-                            @endif
-                        </div>
-
-                        <div class="col-span-4 xs:col-span-12 sm:col-span-12 md:col-span-12">
-                            @php
-                            $formattedPrice = number_format($totalprice, 2);
-                            $formattedVat = number_format($totalprice*0.05, 2);
-                            $formattedTotalPrice = number_format($totalprice+(($totalprice)*0.05), 2);
-                            @endphp
-                            <div class="grid grid-cols-12 items-center justify-center">
-                                <span class="col-span-4">{{ __('main.price') }}</span>
-                                <span class="col-span-4 text-secondary_blue  mx-1 text-right">{{  $formattedPrice }}</span>
-                                <span class="col-span-1 text-xs">AED</span>
-                            </div>
-                            <div class="grid grid-cols-12 items-center justify-center">
-                                <span class="col-span-4">{{ __('main.vat') }}</span>
-                                <span class="col-span-4 text-secondary_blue  mx-1 text-right">{{  $formattedVat }}</span>
-                                <span class="col-span-1 text-xs">AED</span>
-                            </div>
-                            <div class="grid grid-cols-12 items-center justify-center">
-                                <span class="col-span-4 font-bold">{{ __('main.total') }}</span>
-                                <span class="col-span-4 text-secondary_blue font-bold  mx-1 text-right">{{  $formattedTotalPrice }}</span>
-                                <span class="col-span-1 text-xs">AED</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="tab-content">
-                        <div class="px-46 tab-pane fade show active" id="nav-tab-card">
-                            @foreach (['danger', 'success'] as $status)
-                                @if(Session::has($status))
-                                    <p class="alert alert-{{$status}}">{{ Session::get($status) }}</p>
-                                @endif
-                            @endforeach
-                                 {{-- onsubmit="return submitForm()" --}}
-                            <form  role="form" method="get" id="payment-form" action="{{ route('payment.create')}}">
-                                @csrf
-                                <input type="hidden" name="subscription_id" id="subscription_id" value="{{ $choosenPlan }}">
-                                <input type="hidden" name="price" id="price" value="{{ $totalprice }}">
-                                <input type="hidden" name="action" id="action" value="{{ $action }}">
-                                <input type="hidden" name="desc" id="desc" value="{{ $desc }}">
-
-                                <input type="hidden" name="cateresponses" id="cateresponses" value="{{ $cateresponses }}">
-
-                                <div class="flex justify-between items-center border-t-[1px] p-2 mt-2 border-gray-200">
-                                    @if(!$renew)
-                                    <button wire:click="Back" class="justify-center  min-w-[100px] w-auto h-10 p-1  text-center
-                                    inline-flex items-center px-4 py-2 bg-primary_red text-white  border-gray-300
-                                     rounded-md font-semibold text-xs   uppercase tracking-widest shadow-sm
-                                       disabled:opacity-25 transition ease-in-out duration-150 ml-2
-                                    " type="button">{{ __('main.back') }} </button>
-                                    @endif
-
-
-                                    <button id="submitButton" class="justify-center min-w-[100px] w-auto h-10 p-1 text-center
-                                    inline-flex items-center px-4 py-2 bg-secondary
-                                    border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary_1
-                                    active:bg-gray-900  disabled:opacity-25 transition
-                                    " type="submit"> {{ __('main.placeorder') }} </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-                </div>
-            </article>
-            <div class=" hidden  p-1 mt-4  justify-center items-center" id="TextAfterSubmit">
-                <h1 class="text-center" >{{ __('main.pleasewait')}}</h1>
-                <h1 class="text-center" >{{ __('main.pleasewait_message') }}</h1>
-            </div>
-        </aside>
-
+    {{-- @elseif($step==2)
+    <div class=" grid justify-center items-center mt-6 ">
+        <div class="grid justify-center items-center mb-10">
+            <h1 class="font-bold text-lg text-center my-4">{{ __('Select  Responses Category') }}</h1>
+            <h1 class="text-center ">
+                {!! nl2br(e(__('main.responses_text'))) !!}
+            </h1>
+        </div>
+    <x-buy-responses :action="$action" :choosenCategory="$choosenCategory" :validAddResponses="$validAddResponses" :maxnumresponses="$maxnumresponses"  :responsesCategories="$responsesCategories" :currentsubscribe="$current_subscribe" />
     </div>
+    @endif --}}
 
-    @endif
+
 </div>
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -400,19 +253,22 @@
 </script>
 <script>
 
-// document.addEventListener('DOMContentLoaded', function () {
-//   const form = document.getElementById('paymentForm');
-//   const submitButton = document.getElementById('submitButton');
 
-//   form.addEventListener('submit', function (event) {
-//     // Prevent the default form submission behavior
-//     event.preventDefault();
+function initBuy() {
 
-//     // Disable the submit button
-//     submitButton.disabled = true;
 
-//   });
-// });
+    try {
+            value=document.querySelector('input[name="category_responses"]:checked').value;
+         if(value)
+        Livewire.emit('nextStep', value);
+        } catch (error) {
+            document.getElementById('error').innerHTML = 'Please choose category';
+
+
+        }
+
+     }
+
 let formSubmitted = false;
 function submitForm(){
   const form = document.getElementById('paymentForm');

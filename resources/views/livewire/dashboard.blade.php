@@ -100,16 +100,24 @@
         {{-- actions --}}
         <div class="min-h-[250px] max-h-[250px] h-[250px] rounded-[0.5rem] col-span-5 row-span-1 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12">
             <div class="flex justify-between items-center">
-                {{-- bar account health--}}
-                {{-- <div class="flex">
-                    @php
-                        $health=67;
-                    @endphp
-                    <span class="text-sm mr-1">{{ __('Account Health ') }}</span>
-                    <x-progress-bar :value="$health" class="bg-secondary_blue" />
-                </div> --}}
-                <div>
+
+                <div class="flex justify-between items-center">
                     <h1 class="text-sm">{{ __('main.notifications') }}</h1>
+                    <div>
+                        @if(count($actions)>0)
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" id="_24x24_On_Light_Notification-Alert" data-name="24x24/On Light/Notification-Alert" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                <g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="none"/> <path id="Shape" d="M6,17v-.5H2.25A2.253,2.253,0,0,1,0,14.25v-.382a2.542,2.542,0,0,1,1.415-2.289A1.247,1.247,0,0,0,2.1,10.572l.446-4.91A6.227,6.227,0,0,1,10.618.286a5.477,5.477,0,0,0-.635,1.374A4.794,4.794,0,0,0,8.75,1.5,4.7,4.7,0,0,0,4.045,5.8L3.6,10.708A2.739,2.739,0,0,1,2.089,12.92a1.055,1.055,0,0,0-.589.949v.382A.751.751,0,0,0,2.25,15h13A.751.751,0,0,0,16,14.25v-.382a1.053,1.053,0,0,0-.586-.948A2.739,2.739,0,0,1,13.9,10.708l-.2-2.18a5.473,5.473,0,0,0,1.526.221l.166,1.822a1.26,1.26,0,0,0,.686,1.005,2.547,2.547,0,0,1,1.418,2.29v.382a2.252,2.252,0,0,1-2.25,2.25H11.5V17A2.75,2.75,0,0,1,6,17Zm1.5,0A1.25,1.25,0,0,0,10,17v-.5H7.5ZM15.047,6.744A3.486,3.486,0,0,1,13.5,6.28L13.456,5.8a4.7,4.7,0,0,0-1.648-3.185,3.5,3.5,0,0,1,.61-1.417A6.221,6.221,0,0,1,14.95,5.662l.1,1.081v0Z" transform="translate(3.25 2.25)" fill="#757575"/> <path id="Shape-2" data-name="Shape" d="M3.5,7A3.5,3.5,0,1,1,7,3.5,3.5,3.5,0,0,1,3.5,7Z" transform="translate(15 2)" fill="#ff5447"/> </g>
+                            </svg>
+                        @else
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" id="_24x24_On_Light_Notification-Alert" data-name="24x24/On Light/Notification-Alert" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                            <g id="SVGRepo_iconCarrier"> <rect id="view-box" width="24" height="24" fill="none"/> <path id="Shape" d="M6,17v-.5H2.25A2.253,2.253,0,0,1,0,14.25v-.382a2.542,2.542,0,0,1,1.415-2.289A1.247,1.247,0,0,0,2.1,10.572l.446-4.91A6.227,6.227,0,0,1,10.618.286a5.477,5.477,0,0,0-.635,1.374A4.794,4.794,0,0,0,8.75,1.5,4.7,4.7,0,0,0,4.045,5.8L3.6,10.708A2.739,2.739,0,0,1,2.089,12.92a1.055,1.055,0,0,0-.589.949v.382A.751.751,0,0,0,2.25,15h13A.751.751,0,0,0,16,14.25v-.382a1.053,1.053,0,0,0-.586-.948A2.739,2.739,0,0,1,13.9,10.708l-.2-2.18a5.473,5.473,0,0,0,1.526.221l.166,1.822a1.26,1.26,0,0,0,.686,1.005,2.547,2.547,0,0,1,1.418,2.29v.382a2.252,2.252,0,0,1-2.25,2.25H11.5V17A2.75,2.75,0,0,1,6,17Zm1.5,0A1.25,1.25,0,0,0,10,17v-.5H7.5ZM15.047,6.744A3.486,3.486,0,0,1,13.5,6.28L13.456,5.8a4.7,4.7,0,0,0-1.648-3.185,3.5,3.5,0,0,1,.61-1.417A6.221,6.221,0,0,1,14.95,5.662l.1,1.081v0Z" transform="translate(3.25 2.25)" fill="#cfcfcf"/> <path id="Shape-2" data-name="Shape" d="M3.5,7A3.5,3.5,0,1,1,7,3.5,3.5,3.5,0,0,1,3.5,7Z" transform="translate(15 2)" fill="#cfcfcf"/> </g>
+                            </svg>
+                        @endif
+                    </div>
                 </div>
                 <div>
                     <a class="text-sm hover:cursor-pointer hover:no-underline text-secondary_blue" wire:click="showActions()">{{ __('main.showdismissedaction') }}</a>
@@ -123,31 +131,9 @@
                  @php
                   $desc=  app()->getLocale()=="ar"? $action->description_ar :$action->description;
                  @endphp
-                @if($action->type=="responses_today"&&$numResponsesToday>0&&($action->dismiss == null || $action->dismiss != true))
+                   <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id" :currentsubscribe="$current_subscribe"  /></li>
 
-                      <li class="my-1"><x-action :actionType="$action->type" :action=" __('main.responsesgotaction',['numResponsesToday'=>$numResponsesToday])"  :actionId="$action->id" />
-                {{-- subscription expired --}}
-                @elseif($action->type=="subscription_expired"&&$current_subscribe->expired_at->isPast()&&$current_subscribe->valid&&($action->dismiss == null || $action->dismiss != true))
-                    <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id"  /></li>
-                {{-- account locked --}}
-                @elseif($action->type=="account_locked"&&$current_subscribe->expired_at->isPast()&&$current_subscribe->valid==false&&($action->dismiss == null || $action->dismiss != true))
-                    <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id"  /></li>
-                {{-- no forms --}}
-                @elseif($action->type=="no_forms"&&$numForms==0&&($action->dismiss == null || $action->dismiss != true)  )
-                    <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id"  /></li>
-                {{-- no kiosks --}}
-                @elseif($action->type=="no_kiosks"&&$numKiosks==0&&($action->dismiss == null || $action->dismiss != true)  )
-                    <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id"  /></li>
-                {{-- less than minimum responses --}}
-                @elseif($action->type=="less_than_minimum_responses"&&$current_subscribe->num_of_responses<=100&&$current_subscribe->num_of_responses>0&&($action->dismiss == null || $action->dismiss != true)  )
-                    <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id"  /></li>
-                {{-- out of responses --}}
-                @elseif($action->type=="outof_responses"&&$current_subscribe->num_of_responses==0&&($action->dismiss == null || $action->dismiss != true)  )
-                    <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id"  /></li>
-                {{-- open tasks --}}
-                @elseif($action->type=="open_tasks"&&$Todos['Open']>0&&($action->dismiss == null || $action->dismiss != true)  )
-                    <li class="my-1"><x-action :actionType="$action->type" :action="$desc" :actionId="$action->id"  /></li>
-                @endif
+
 
                 @endforeach
                 {{-- <x-action :action="'Your subscription is expired!'" :actionType="'subscription_expired'" actionText="Fix it" actionRoute="{{ route('subscriptions') }}" /> --}}
@@ -450,7 +436,7 @@
                                                     @if($kiosk->sign_kiosk==false&&$kiosk->form_id==null)
                                                     {{ __(' ⏱ ') }}{{ __('Stand-By') }}
                                                     @else
-                                                    {{ $kiosk->form_title }}
+                                                    {{ $kiosk->form_type_id == 1 ? __(' ✎ ') : __(' ▶ ') }} {{ $kiosk->form_title }}
                                                     @endif
                                                 </span>
                                             </div>

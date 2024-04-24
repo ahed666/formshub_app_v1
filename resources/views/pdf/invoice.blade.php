@@ -99,7 +99,7 @@
                 </tr> --}}
                 <tr >
                     <td scope="col" style="width: 65%"  class=" " >
-                        <small class="text-nowrap custom-color ">{{ __('Invoice to:') }}</small>
+                        <small class="text-nowrap custom-color ">{{ __('Business Name:') }}</small>
                         <small>{{$invoice->business_name }}</small>
                     </td>
 
@@ -112,7 +112,7 @@
                 </tr>
                 <tr >
                     <td scope="col" style="width: 65%"  class="  " >
-                        <small class="text-nowrap custom-color">{{ __('Attention:') }}</small>
+                        <small class="text-nowrap custom-color">{{ __('Person Name:') }}</small>
                         <small>{{ $invoice->account_name }}</small>
                     </td>
                     <td scope="col" style="width: 35%" class=" text-nowrap " >

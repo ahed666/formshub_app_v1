@@ -160,7 +160,19 @@ Route::middleware([
     Route::post('/payment/{id}/stripe/payment-intent', [PaymentController::class, 'createStripePaymentIntent'])->name('payment.paymentIntent.create');
     Route::get('/payment/{id}/stripe/callback', [PaymentController::class, 'confirm'])->name('stripe.return');
 
+    Route::get('/buyresponses', function () {
+        $allowBuyResponses=SubscribePlan::checkAllowBuyResponses(Auth::user()->current_account_id);
 
+        if($allowBuyResponses)
+        {
+
+            return view('buyresponses' );
+        }
+      else
+      abort(403, 'Unauthorized action.');
+
+
+    })->name('buyresponses');
 
     // change language
     Route::get('setlocale/{locale}',[LocaleController::class, 'setLocale'])->name('setLocale');
@@ -266,6 +278,8 @@ Route::post('/payment', [SubscriptionController::class, 'payment']);
     })->name('subscriptions');
     // subscription to plan  route
       // subscriptions route
+
+
       Route::get('/subscribe/{type?}/{id?}', function ($type=null,$id=null) {
 
         $account = Jetstream::newAccountModel()->findOrFail(Auth::user()->currentAccount->id);

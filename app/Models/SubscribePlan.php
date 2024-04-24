@@ -47,6 +47,16 @@ class SubscribePlan extends Model
         ->where('subscriptions_plans.active','=',true)
         ->first();
     }
+
+    public static function checkAllowBuyResponses($account_id){
+        $subscriptionPlan=self::getCurrentSubscription($account_id);
+
+        
+           if($subscriptionPlan->type_of_subscription_id==1)
+           return false;
+        else return true;
+
+    }
     public static function subscriptionsStatus(){
 //             DB::raw('SUM((CURDATE() > DATE_ADD(subscriptions_plans.expired_at, INTERVAL type_of_subscriptions.grace_period MONTH)) AND (CURDATE() <= DATE_ADD(subscriptions_plans.expired_at, INTERVAL type_of_subscriptions.locked_period MONTH)) THEN 1 ELSE 0 END) as locked'),
 

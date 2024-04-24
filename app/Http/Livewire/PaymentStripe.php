@@ -18,6 +18,7 @@ class PaymentStripe extends Component
 {  public $order;
     public $order_id;
     public $current_subscribe;
+    public $desc;
 
     public function mount($order_id){
        $this->order_id;
@@ -31,17 +32,17 @@ class PaymentStripe extends Component
         $desc="";
 
        if($order->action=="buyresponses")
-        $desc = '<h1 class="mt-2">' . __('main.buy_responses', ['num' => number_format($order->num_responses, 0, '.', ',')]) . '</h1>' .
-        '<h1 class="mt-2">' . __('main.valid', ['start' => Carbon::now()->format('d m Y'), 'end' => Carbon::parse($this->current_subscribe->expired_at)->subDays(1)->format('d m Y')]) . '</h1>';
+        $desc = '<h1 class="mt-2">' . __('main.buy_responses', ['num' => $order->num_responses]) . '</h1>' .
+        '<h1 class="mt-2">' . __('main.valid', ['start' => Carbon::now()->format('Y-m-d'), 'end' => Carbon::parse($this->current_subscribe->expired_at)->subDays(1)->format('Y-m-d')]) . '</h1>';
         else
         {
-             $desc1='<h1 class="mt-2">'. __('main.newplan',['num'=>number_format($order->num_responses, 0, '.', ',')]) .'</h1>';
+             $desc1='<h1 class="mt-2">'. __('main.newplan',['num'=>$order->num_responses]) .'</h1>';
 
             if($order->subscription_id==$this->current_subscribe->plan_id)
-            $desc2= '<h1 class="mt-2">'. __('main.valid',['start'=>\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y'),'end'=>\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('d m Y')]) .'</h1>';
+            $desc2= '<h1 class="mt-2">'. __('main.valid',['start'=>\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('Y-m-d'),'end'=>\Carbon\Carbon::parse($this->current_subscribe->expired_at)->addyear()->subDays(1)->format('Y-m-d')]) .'</h1>';
 
             else
-            $desc2= '<h1 class="mt-2">'. __('main.valid',['start'=>\Carbon\Carbon::now()->format('d m Y'),'end'=>\Carbon\Carbon::now()->addyear()->subDays(1)->format('d m Y')]).'</h1>';
+            $desc2= '<h1 class="mt-2">'. __('main.valid',['start'=>\Carbon\Carbon::now()->format('Y-m-d'),'end'=>\Carbon\Carbon::now()->addyear()->subDays(1)->format('Y-m-d')]).'</h1>';
          $desc=$desc1.$desc2;
         }
 

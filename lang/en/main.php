@@ -359,18 +359,18 @@ return [
        'exportstatistics'=>'Export statistics & responses reports',
        'avilableresponses'=>'Available responses : ',
        'getadditionalresponses'=>'Get additional responses',
-       'responsesvalid'=>'These responses will be valid till: ',
+       'responsesvalid'=>'Your additional responses will be valid until the expiry date of your current premium subscription. valid till: ',
        'responsesadderror'=>'You cannot exceed the maximum limit of responses per year cycle, please select lower responses amount.However, you will be able to get more responses once the next year\'s cycle begins.',
        'upgrade'=>'Upgrade',
 
         'currentplan'=>'Current Plan',
        'upgradeaccount_title'=>'Upgrade your account',
-       'upgradeaccount_text'=>'Enjoy premium features, and break limitations. (you can always get additional responses as you go',
+       'upgradeaccount_text'=>'Enjoy premium features, and break limitations.',
 
 
        'createuptodoforms'=>'Create up to :num forms',
        'connectuptokiosks'=>'Connect up to :num kiosks',
-       'getupresponses'=>'Get up to :num responses per year ',
+       'getupresponses'=>'Get :num free responses',
        'getflexableresponses'=>' Get flexible responses option',
        'addquestionsperform'=>'Add up to :num questions per form',
        'multilangaugeform'=>'Multi-languages form',
@@ -381,6 +381,7 @@ return [
        'selectnumofresponses'=>' Select number of responses per year :',
        'peryear'=>' per year',
        'cancelsubscription'=>'Cancel Subscription',
+       'checkout'=>'Checkout',
 
     //support
 
@@ -551,7 +552,8 @@ return [
     'renewdisablemessage_title'=> 'It appears that your subscription is still active',
     'renewdisablemessage'=>'You can renew your subscription once it expires',
     'errorpermission'=>'You do not have permission to do this action(:error_role)',
-
+   'continuewithoutresponses'=>'Continue without responses',
+   'responses_text'=>"Each custom form submitted through your kiosk is counted as one response, select the category according to your business requirements.\n(remember: you can always get additional responses if you are out of it).",
 
     //locekd messages
     'lockedaccount_title'=>'This feature is not available on this type of subscription or it might have been locked due to subscription expiry, to continue using this feature please manage your�subscription',
@@ -562,7 +564,7 @@ return [
     //paying
     'buy_responses'=>'Forms hub :num additional responses ',
     'valid'=>'valid (from: :start to: :end)',
-    'newplan'=>'Forms hub premium one-year subscription with :num responses',
+    'newplan'=>'Forms hub premium one-year subscription with :num free responses',
     'price'=>'Price: ',
     'vat'=>'Vat: ',
     'total'=>'Total :',

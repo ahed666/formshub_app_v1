@@ -107,6 +107,7 @@ class Addforms extends Component
                 //  dd(public_path(str_replace('/', '\\', $this->form_logo) ));
 
             File::delete(public_path($this->form_logo_temp));
+
         }
         $this->form_logo="images/logo_1_transparent_dark.png";
         $this->form_logo_temp="images/logo_1_transparent_dark.png";
@@ -248,7 +249,8 @@ class Addforms extends Component
               {
                 $logo=new Logos();
               }
-              else{
+              elseif(str_contains($this->form_logo_temp,'storage/images/upload/')){
+
                 File::delete(public_path($logo->logo_url));
               }
 
@@ -262,6 +264,7 @@ class Addforms extends Component
                 $old=public_path($this->form_logo_temp);
                 $new=$file;
                 File::move($old , $new);
+
             }
                 else
                 $new=$this->form_logo;

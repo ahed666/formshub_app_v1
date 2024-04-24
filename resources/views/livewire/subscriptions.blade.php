@@ -9,7 +9,7 @@
 }
     </style>
 @endpush
-<div class="" >
+<div   class="" >
     <div id="translations" data-translations="{{ json_encode(__('main')) }}"></div>
 
     <input type="hidden" id="flashedMessage" value="{{ session('message') }}">
@@ -17,7 +17,7 @@
 
 
     {{-- Liecence --}}
-     <div class="border-[1px] border-gray-100 shadow rounded-[0.5rem] mb-10 mt-6 p-4 xs:p-2 bg-white">
+     <div class="border-[1px] border-gray-100 shadow rounded-[0.5rem] mb-10 mt-6 p-4 xs:p-2 bg-white " wire:loading.class="hidden" >
 
        <div class="border-[1px] bg-primary  border-secondary flex justify-center items-center rounded-[0.5rem] w-36  p-1 ml-4 relative top-[-32px]">
         <span class=" text-secondary mr-1 ml-1">{{ $current_subscribe->type  }}</span>
@@ -34,7 +34,7 @@
             <div class="p-2  xs:mb-2">
                 <span>{{ __('main.yoursubscription') }}<span class="text-secondary  font-bold">{{$current_subscribe->type}}</span>  </span>
             <br><span class="whitespace-nowrap">{{ __('main.duedate') }}
-                <span class="text-secondary  font-bold">{{ \Carbon\Carbon::parse($current_subscribe->expired_at)->addDay()->format('d m Y') }} </span>
+                <span class="text-secondary  font-bold">{{ \Carbon\Carbon::parse($current_subscribe->expired_at)->addDay()->format('Y-m-d') }} </span>
 
                 @if($current_subscribe['subscription_status']=="Valid")
                 <span class="text-sm text-valid">({{ __('main.active_status') }})</span>
@@ -53,7 +53,7 @@
                 {{-- first button --}}
                 @if($current_subscribe->order_plan!=1)
                            {{-- href="{{ route('subscribe',['renew',$current_subscribe->plan_id]) }}" --}}
-                    <a wire:click="renewCheck({{ $current_subscribe->plan_id }})"   target="_blank" class="{{ $effectAllow?"animate-pulse":"" }} cursor-pointer
+                    <a wire:click="renewCheck({{ $current_subscribe->plan_id }})"    class="{{ $effectAllow?"animate-pulse":"" }} cursor-pointer
                         mt-2 inline-flex items-center h-8 p-1 bg-secondary  border border-transparent
                         rounded-md font-semibold text-xs text-white  uppercase tracking-widest
                          hover:bg-secondary_1  focus:bg-secondary_1
@@ -62,7 +62,7 @@
                         {{ __('main.renew') }}
                     </a>
                 @else
-                    <a href="{{ route('subscribe') }}" target="_blank" class="{{ $effectAllow?"animate-pulse":"" }}
+                    <a href="{{ route('subscribe') }}"  class="{{ $effectAllow?"animate-pulse":"" }}
                         mt-2 inline-flex items-center h-8 p-1 bg-secondary border border-transparent
                         rounded-md font-semibold text-xs text-white  uppercase tracking-widest hover:bg-secondary_1  focus:bg-secondary_1
                          active:bg-gray-900  focus:outline-none
@@ -96,7 +96,7 @@
                         <ul class="p-1 space-y-1 text-sm text-gray-700  border-[1px] rounded-[0.5rem] border-gray-200" aria-labelledby="dropdownRadioButton1">
                             @if($current_subscribe->valid)
                             <li  class=" hover:cursor-pointer pt-2 rounded-[0.5rem]">
-                                    <a href="{{ route('subscribe','buyresponses') }}" target="_blank" class="block hover:font-bold text-center w-full xs:text-xs  rounded-lg   text-black hover:text-secondary_blue  p-[2px] hover:cursor-pointer hover:no-underline">
+                                    <a href="{{ route('buyresponses') }}"  class="block hover:font-bold text-center w-full xs:text-xs  rounded-lg   text-black hover:text-secondary_blue  p-[2px] hover:cursor-pointer hover:no-underline">
                                         <span class="text-center w-full"> {{ __('main.getmoreresponses') }}</span>
                                     </a>
                             </li>
@@ -181,14 +181,14 @@
                         <span>{{ __('main.maxnum_respponses')}}</span>
                     </div>
                     <div class="col-span-1 text-center rounded-[0.5rem] ">
-                        <span class="font-bold"> {{ number_format($current_subscribe->num_responses, 0, '.', ',') }}</span>
+                        <span class="font-bold"> {{ $current_subscribe->num_responses}}</span>
                     </div>
                     @else
                     <div class="col-span-3 min-w-[310px] max-w-[310px]">
                         <span>{{ __('main.responsesmount')}}</span>
                     </div>
                     <div class="col-span-1 text-center rounded-[0.5rem] ">
-                        <span class="font-bold"> {{ __('100,000') }}</span>
+                        <span class="font-bold"> {{$current_subscribe->num_responses }}</span>
                     </div>
                     @endif
                 </div>
@@ -376,10 +376,10 @@
            <div class=" mt-24 p-2 w-1/2 xs:w-full">
                 <div class="flex text-sm xs:text-xs justify-between items-center">
                     @php
-                        $start_date = \Carbon\Carbon::parse($current_subscribe->start_date)->format('d m Y');
+                        $start_date = \Carbon\Carbon::parse($current_subscribe->start_date)->format('Y-m-d');
                     @endphp
                     <span>{{ $start_date }}</span>
-                    <span>{{ \Carbon\Carbon::parse($current_subscribe->expired_at)->format('d m Y') }}</span>
+                    <span>{{ \Carbon\Carbon::parse($current_subscribe->expired_at)->format('Y-m-d') }}</span>
                 </div>
                 <div class="w-full bg-neutral-200  rounded-[0.5rem]">
 
@@ -405,6 +405,10 @@
           </div>
 
 
+    </div>
+    <div wire:loading.class.remove="hidden" class="hidden absolute top-1/2 left-1/2" >
+        <!-- Show loading indicator while cancel function is running -->
+    {{ __('main.pleasewait') }}
     </div>
     {{-- plans --}}
 

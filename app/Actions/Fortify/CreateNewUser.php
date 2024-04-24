@@ -38,7 +38,7 @@ class CreateNewUser implements CreatesNewUsers
 
             'country' =>['required','string','max:255'],
             'city' => ['required', 'string', 'max:255'],
-            'mobile_number' => ['required','regex:/((5)[0-9]{8}$)|((05)[0-9]{8}$)/'],
+            'mobile_number' => ['nullable','regex:/((5)[0-9]{8}$)|((05)[0-9]{8}$)/'],
             'phone_number' => [ 'nullable','max:12','regex:/([0-9]{9}$)/'],
             'business_name' => [  'nullable','max:60'],
             'billing_address' => [ 'nullable','max:150'],
@@ -117,7 +117,7 @@ class CreateNewUser implements CreatesNewUsers
         $subscribe->account_id=$account_id;
         $subscribe->valid=true;
         $subscribe->active=true;
-        $subscribe->num_of_responses=$freeplan->num_responses;
+        $subscribe->num_of_responses=env('NUM_OF_RESPONSES_FREE', 500);
         $subscribe->type_of_subscription_id=$freeplan->id;
         $subscribe->save();
 

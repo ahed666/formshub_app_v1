@@ -61,15 +61,7 @@ class Subscriptions extends Component
     }
     ';
 
-    public $errors_permission='
-    {
-        "Free":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed.","num_kiosks":"You have reached the maximum limit allowed."},
-        "Basic":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed.","num_kiosks":"You have reached the maximum limit allowed."},
-        "Premium":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed.","num_kiosks":"You have reached the maximum limit allowed."},
-        "Professional":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed.","num_kiosks":"You have reached the maximum limit allowed."},
-        "Ultimate":{"num_forms":"You have reached the maximum limit allowed.","num_questions":"You have reached the maximum limit allowed.","num_responses":"You have reached the maximum limit allowed.","num_kiosks":"You have reached the maximum limit allowed."}
-    }
-    ';
+
     protected $listeners=[
         "canceled"=>"cancelnow",
 
@@ -212,8 +204,7 @@ class Subscriptions extends Component
         $canceledplan->responses_cat_id=$plan->response_cat_id;
         $canceledplan->num_responses=$plan->num_of_responses;
         $canceledplan->save();
-        // delete responses
-            // Responses::join('forms','forms.id','responses.form_id')->where('forms.account_id','=',Auth::user()->current_account_id)->delete();
+
         // delete forms and its responses
         Form::deleteFormsFiles(Auth::user()->current_account_id);
         // whereaccount_id(Auth::user()->current_account_id)->delete();
@@ -235,7 +226,7 @@ class Subscriptions extends Component
         //set free subscribe
 
         $plan->type_of_subscription_id=1;
-        $plan->num_of_responses=500;
+        $plan->num_of_responses=env('NUM_OF_RESPONSES_FREE', 500);
         $plan->start_date=Carbon::now();
         $plan->expired_at=Carbon::now()->addMonths(3)->subDays(1);
         $plan->save();
@@ -246,7 +237,7 @@ class Subscriptions extends Component
         }
         $this->mount();
     } catch (\Throwable $th) {
-       dd($th);
+           dd($th);
     }
 
     }

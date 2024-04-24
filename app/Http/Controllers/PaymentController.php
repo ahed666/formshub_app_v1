@@ -85,7 +85,7 @@ class PaymentController extends Controller
             $plan=new SubscribePlan();
             $plan->account_id=Auth::user()->current_account_id;
             $plan->type_of_subscription_id=$order->subscription_id;
-            $plan->num_of_responses=ResponseCategory::whereid($order->cate_responses)->first()->num;
+            $plan->num_of_responses=$order->num_responses;
             $plan->start_date=$plan->type_of_subscription_id==$$order->subscription_id?Carbon::parse( $plan->expired_at):Carbon::now();
             $plan->expired_at=$plan->type_of_subscription_id==$order->subscription_id?Carbon::parse( $plan->expired_at)->addyear()->subDay():Carbon::now()->addyear()->subDay();
             $plan->valid=true;
@@ -105,7 +105,7 @@ class PaymentController extends Controller
             $plan->valid=true;
             $plan->active=true;
             $plan->response_cat_id=$order->cate_responses;
-            $plan->num_of_responses=ResponseCategory::whereid($order->cate_responses)->first()->num;
+            $plan->num_of_responses=$order->num_responses;
 
             $plan->save();
         }

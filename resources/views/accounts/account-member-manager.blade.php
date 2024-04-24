@@ -29,7 +29,9 @@
                         <x-slot name="form">
                             <div class="flex col-span-6 justify-center text-center text-red-400">{{ __('This feature is not available on the Free plan, please upgrade your plan to add an account member.') }}</div>
                         </x-slot> --}}
+
                     @if(!Gate::check('checkAddValidDate',$account))
+
                         <x-slot name="form">
                             <div class="flex col-span-6 justify-center text-center text-red-400">{{ Gate::check('checkAddValid',$account) }}{{ __('Your subscription has expired, please renew your plan to use this feature.') }}</div>
                         </x-slot>
