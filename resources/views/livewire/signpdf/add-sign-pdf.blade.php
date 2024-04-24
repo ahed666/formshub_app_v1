@@ -96,7 +96,6 @@
                                 <input   wire:model="currentFile" class=" h-full  opacity-0 absolute  hover:cursor-pointer cursor-pointer w-full" type="file" name="file" id="file" accept="application/pdf" />
                                 <div  class="pl-2 pr-2 pt-2 hover:cursor-pointer cursor-pointer flex justify-center items-center">
 
-                                    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                     <svg  fill="#000000" xmlns="http://www.w3.org/2000/svg"
                                         class="w-4 h-4 hover:cursor-pointer cursor-pointer" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
                                     <path d="M20,37.5c0-0.8-0.7-1.5-1.5-1.5h-15C2.7,36,2,36.7,2,37.5v11C2,49.3,2.7,50,3.5,50h15c0.8,0,1.5-0.7,1.5-1.5
@@ -118,7 +117,6 @@
                             xs:flex xs:justify-center xs:items-center hover:cursor-pointer cursor-pointer">
                                 <div  class="flex justify-center items-center hover:cursor-pointer cursor-pointer">
 
-                                        <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
                                         <svg class="w-4 h-4 mx-1 text-white  hover:cursor-pointer cursor-pointer " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.0005 15.9995L15.0005 11.9995M15.0005 11.9995L11.0005 7.99951M15.0005 11.9995H3.00049M11.0005 2.99951H17.7997C18.9198 2.99951 19.4799 2.99951 19.9077 3.2175C20.284 3.40925 20.59 3.71521 20.7817 4.09153C20.9997 4.51935 20.9997 5.07941 20.9997 6.19951V17.7995C20.9997 18.9196 20.9997 19.4797 20.7817 19.9075C20.59 20.2838 20.284 20.5898 19.9077 20.7815C19.4799 20.9995 18.9198 20.9995 17.7997 20.9995H11.0005" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>

@@ -130,7 +130,6 @@
                 <div id="WaitingSection" class="h-[600px] flex  justify-center items-center">
                     <div class="grid items-center justify-center">
                         <div class="flex justify-center items-center">
-                            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                             <svg fill="#545454" class="w-14 h-14" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 297 297" xml:space="preserve" stroke="#545454">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
