@@ -75,8 +75,10 @@
 
                     <x-jet-label style="white-space:nowrap;" class="text-secondary mx-2 mt-2 mb-[2px] block font-medium text-sm  lg:w-30 xl:w-30" for="" value="{{ __('auth.mobilenumber') }}" />
                     <div class=" row flex ">
+                        <input type="hidden" name="CountryMobileCode" value="{{ $CountryMobileCode }}">
+
                         <input  type="text" id="CountryMobileCode" class="border-gray-300  focus:border-secondary mr-2
-                         focus:ring-secondary  rounded-md shadow-sm block text-sm  w-20 ml-[2px] mr-2 " value={{$CountryMobileCode}} type="text" name="CountryMobileCode"   disabled>
+                         focus:ring-secondary  rounded-md shadow-sm block text-sm  w-20 ml-[2px] mr-2 " value={{$CountryMobileCode}} type="text"   disabled>
                     <input pattern="^(05|5)\d{8}$" title="Please enter a valid UAE mobile phone number with either '05xxxxxxxx' or '5xxxxxxxx' "
                     placeholder="5xxxxxxxx" maxlength="10"  id="mobile_number"
                     class="border-gray-300   focus:border-secondary mr-2

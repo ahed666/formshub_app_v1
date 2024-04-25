@@ -27,7 +27,7 @@ class CreateNewUser implements CreatesNewUsers
     {
 
         $this->input=$input;
-
+           
         Validator::make($input, [
             'name' => ['required', 'string', 'max:35'],
             'email' => ['required', 'string', 'email:rfc,dns', 'max:50', 'unique:users'],
@@ -65,14 +65,14 @@ class CreateNewUser implements CreatesNewUsers
 
 
         return DB::transaction(function () use ($input) {
-
+                $mobileNumber=$this->formatMobileNumber($input['CountryMobileCode'],$input['mobile_number']);
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => Hash::make($input['password']),
                 'timezone'=>$input['timezone'],
                 'unsubscribe_token'=>Str::random(100),
-                'mobile_number'=>$input['mobile_number'],
+                'mobile_number'=>$mobileNumber,
             ]), function (User $user) {
 
                 $this->createAccount($user);
@@ -81,6 +81,20 @@ class CreateNewUser implements CreatesNewUsers
         });
 
     }
+
+    // format mobile number
+    protected function formatMobileNumber($code, $mobilenumber)
+{
+    if (!is_null($mobilenumber)) {
+        if (substr($mobilenumber, 0, 1) === '0') {
+            $mobilenumber = substr($mobilenumber, 1);
+        }
+
+        return $code . $mobilenumber;
+    }
+
+    return null;
+}
 
     /**
      * Create a personal account for the user.
