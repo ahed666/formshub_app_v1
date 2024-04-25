@@ -27,7 +27,7 @@ class CreateNewUser implements CreatesNewUsers
     {
 
         $this->input=$input;
-           
+
         Validator::make($input, [
             'name' => ['required', 'string', 'max:35'],
             'email' => ['required', 'string', 'email:rfc,dns', 'max:50', 'unique:users'],
@@ -65,7 +65,7 @@ class CreateNewUser implements CreatesNewUsers
 
 
         return DB::transaction(function () use ($input) {
-                $mobileNumber=$this->formatMobileNumber($input['CountryMobileCode'],$input['mobile_number']);
+                $mobileNumber=$this->formatMobileNumber($input['mobile_number']);
             return tap(User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
@@ -90,7 +90,7 @@ class CreateNewUser implements CreatesNewUsers
             $mobilenumber = substr($mobilenumber, 1);
         }
 
-        return $code . $mobilenumber;
+        return  $mobilenumber;
     }
 
     return null;
