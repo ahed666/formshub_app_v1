@@ -659,7 +659,7 @@ function updateValue(text)
                     answerschecked.pop();
                     SetNextInnerText(true);
                     dail=validation.countryCallingCode;
-                    number="+"+dail+text_question_value;
+                    number="+"+dail+formatNumber(text_question_value);
                     answerschecked.push(number);
 
                 }
@@ -696,6 +696,17 @@ function updateValue(text)
     // answerschecked.length==0&&current_question.optional==1?btn_next.innerHTML="skip":btn_next.innerHTML="next";
 
 
+}
+function formatNumber(number) {
+    if (typeof number === 'number') {
+        number = number.toString(); // Convert number to string
+    }
+
+    if (number.charAt(0) === '0') {
+        return number.slice(1); // Remove first character ('0')
+    }
+
+    return number;
 }
 // set answer by it id for custom question
 function setanswer_custom_mcq(question_id,answer_id,score){
