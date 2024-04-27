@@ -331,13 +331,15 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
 
 <script >
+      var translations = @json(__('main'));
+
   function ShowWarning(){
     Swal.fire({
             icon: 'error',
 
-            text: 'Custom form logo is not available on this account, to upload your logo upgrade your account now',
+            text: translations.warningEditFormlogo,
             confirmButtonColor:'#1277D1',
-            footer:`<a target="_blank" href="{{ route('subscribe','upgrade') }}" class="animate-pulse text-secondary_blue hover:text-blue-500">Upgrade now</a>`
+            footer:`<a target="_blank" href="{{ route('subscribe','upgrade') }}" class="animate-pulse text-secondary_blue hover:text-blue-500">${translations.upgradenow}</a>`
     })
   }
 

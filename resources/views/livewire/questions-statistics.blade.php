@@ -492,11 +492,12 @@
     //  show  warning of allow export or no
     function ShowWarning() {
         Swal.fire({
-            icon: 'error'
-            , title: 'Oops...'
-            , text: 'Something went wrong!'
-            , footer: '<a href="">Why do I have this issue?</a>'
-        })
+            icon: 'error',
+
+            text: translations.warningExportQuestion,
+            confirmButtonColor:'#1277D1',
+            footer:`<a target="_blank" href="{{ route('subscribe','upgrade') }}" class="animate-pulse text-secondary_blue hover:text-blue-500">${translations.upgradenow}</a>`
+    })
     }
 
     //    export form action

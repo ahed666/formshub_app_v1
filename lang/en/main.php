@@ -513,6 +513,7 @@ return [
     'pleasewait'=>'Please Wait',
     'answernotempty'=>'The answer can\'t be  empty',
 
+
     //kiosks
     'kioskhaveform'=>'This kiosk have form. to delete Kiosk you should make it without form(unlink)',
     'devicedeletealarm'=>'You will no longer have control of this kiosk(device),this kiosk will be factory reset',
@@ -596,6 +597,9 @@ return [
     'num_questions_Premium'=>'You have reached the maximum limit allowed.',
     'num_media_Premium'=>'You have reached the maximum limit allowed.',
 
+    //warning
+    'warningEditFormlogo'=>'Custom form logo is not available on this account, to upload your logo upgrade your account now',
+    'warningExportQuestion'=>'Export question is not available on this account, to export the question upgrade your account now',
 
     //hints
     'activeformhint'=>'This option allows you to switch form (Active) meaning people can submit responses to this form, whether from a shared link or from a connected kiosk, or (Inactive), meaning this form will not be visible to people and responses can not be submitted whether from a shared link or from a connected kiosk.',
