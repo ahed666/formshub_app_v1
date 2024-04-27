@@ -339,6 +339,8 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 
             text: translations.warningEditFormlogo,
             confirmButtonColor:'#1277D1',
+            confirmButtonText: `<h5 style='color:ffffff;border:0;box-shadow: none;'>${translations.ok}</h5>`,
+
             footer:`<a target="_blank" href="{{ route('subscribe','upgrade') }}" class="animate-pulse text-secondary_blue hover:text-blue-500">${translations.upgradenow}</a>`
     })
   }

@@ -255,14 +255,19 @@ class Kiosks extends Component
     //  delete device
     public function deletedevice()
     {
-        $kiosk=Kiosk::whereid($this->device_delete_id)->first();
-        $standbyMedia=StandbykiosksMedia::whereid($kiosk->standbymedia_id)->first();
-        if(str_contains($standbyMedia->path_file,'storage/images/upload/standby'||$standbyMedia->path_file,'storage/videos/standby'))
-        File::delete(public_path($standbyMedia->path_file));
-        $standbyMedia->delete();
-        $kiosk->delete();
+        try {
+            $kiosk=Kiosk::whereid($this->device_delete_id)->first();
+            $standbyMedia=StandbykiosksMedia::whereid($kiosk->standbymedia_id)->first();
+            if (str_contains($standbyMedia->path_file, 'storage/images/upload/standby') || str_contains($standbyMedia->path_file, 'storage/videos/standby'))
+            File::delete(public_path($standbyMedia->path_file));
+            $standbyMedia->delete();
+            $kiosk->delete();
 
 
+
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         $this->mount();
     }
     // unlink device
