@@ -110,6 +110,7 @@ document
 // Fetches a payment intent and captures the client secret
 async function initialize() {
     setLoadingForm(true);
+
   const { clientSecret } = await fetch("{{route('payment.paymentIntent.create', $order_id)}}", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -121,7 +122,7 @@ async function initialize() {
   const paymentElementOptions = {
     layout: "tabs",
   };
-   console.log(clientSecret);
+
   const paymentElement = elements.create("payment", paymentElementOptions);
   paymentElement.mount("#payment-element");
   setLoadingForm(false);

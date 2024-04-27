@@ -66,7 +66,7 @@
                             <li class="flex  mt-[2px]   ">
 
                                 <x-subscriptionfeature_svg :colorid="0" />
-                                <span class="text-md whitespace-normal" >{{ __('main.getflexableresponses') }}</span>
+                                <span class="text-md whitespace-normal" >{{ __('main.getflexableresponses',['num'=>env('NUM_OF_RESPONSES_FREE',10000),'max'=>$type->num_responses]) }}</span>
                             </li>
                         @endif
                         {{--  num of questions --}}
