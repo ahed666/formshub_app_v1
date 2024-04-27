@@ -181,11 +181,11 @@
                         <span>{{ __('main.maxnum_respponses')}}</span>
                     </div>
                     <div class="col-span-1 text-center rounded-[0.5rem] ">
-                        <span class="font-bold"> {{ $current_subscribe->num_responses}}</span>
+                        <span class="font-bold"> {{ env('NUM_OF_RESPONSES_FREE',500)}}</span>
                     </div>
                     @else
                     <div class="col-span-3 min-w-[310px] max-w-[310px]">
-                        <span>{{ __('main.responsesmount')}}</span>
+                        <span>{{ __('main.maxnum_respponses')}}</span>
                     </div>
                     <div class="col-span-1 text-center rounded-[0.5rem] ">
                         <span class="font-bold"> {{$current_subscribe->num_responses }}</span>

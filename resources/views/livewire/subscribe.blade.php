@@ -60,7 +60,7 @@
                             <li class="flex  mt-[2px]   ">
 
                                 <x-subscriptionfeature_svg :colorid="0" />
-                                <span class="text-md whitespace-normal" >{{ __('main.getupresponses',['num'=>env('NUM_OF_RESPONSES_FREE',10000)]) }}</span>
+                                <span class="text-md whitespace-normal" >{{ __('main.getupresponses',['num'=>env('NUM_OF_RESPONSES_FREE',500)]) }}</span>
                             </li>
                         @else
                             <li class="flex  mt-[2px]   ">
