@@ -51,6 +51,7 @@ class EditFormQuestions extends Component
     public $current_questions;
     public $modalopen = false;
 
+    public $forms;
     public $local = "en";
     //    form options
     public $formexpiry = false;
@@ -442,7 +443,8 @@ public $answers_json_text_rating='
     {
 
         foreach ($this->formlanguages as $key => $lang) {
-            if ($lang['id'] == $this->language_delete_id) {unset($this->formlanguages[$key]);
+            if ($lang['id'] == $this->language_delete_id)
+            {    unset($this->formlanguages[$key]);
                 FormTrnslations::whereform_id($this->current_form_id)->whereform_local($lang['code'])->delete();
                 foreach ($this->getquestions($this->current_form_id) as $question) {
 
@@ -513,6 +515,7 @@ public $answers_json_text_rating='
             $this->dispatchBrowserEvent('languagesChanged');
             return;
          }
+
         foreach ($this->main_languages as $lang)
         {
             if ($lang['code'] == $code) {
