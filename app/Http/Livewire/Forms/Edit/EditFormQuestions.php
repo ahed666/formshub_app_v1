@@ -447,18 +447,38 @@ public $answers_json_text_rating='
                 foreach ($this->getquestions($this->current_form_id) as $question) {
 
                         $answers = Answers::wherequestion_id($question['id'])->get();
-                        foreach ($answers as $answer) {
-                            // if the languages count =1 delete images of answers else then no delete images
-                            if(count($this->formlanguages)==0){
-                            if ($answer->picture_id != null) {
-                            $imagepath = Pictures::whereid($answer->picture_id)->first()->pic_url;
-                            if (str_contains($imagepath, 'storage/images/temp/') || str_contains($imagepath, 'storage/images/drawing/')|| str_contains($imagepath, 'storage/images/upload/')) {File::delete(public_path($imagepath));}
-                            Pictures::whereid($answer['picture_id'])->delete();
+
+                         // if the languages count =0(no langauges) delete images of answers else then no delete images
+                        if(count($this->formlanguages)==0)
+                        {
+
+                            foreach ($answers as $answer)
+                            {
+                                if ($answer->picture_id != null)
+                                {
+                                    $imagepath = Pictures::whereid($answer->picture_id)->first()->pic_url;
+                                    if (str_contains($imagepath, 'storage/images/temp/') || str_contains($imagepath, 'storage/images/drawing/')|| str_contains($imagepath, 'storage/images/upload/')) {File::delete(public_path($imagepath));}
+                                    Pictures::whereid($answer['picture_id'])->delete();
+                                }
+                            }
+                            if($question['type_of_question_id']==19||$question['type_of_question_id']==20)
+                            {
+                                $imagepath = Pictures::whereid($question['picture_id'])->first()->pic_url;
+                                if (str_contains($imagepath, 'storage/images/temp/') || str_contains($imagepath, 'storage/images/upload/'))
+                                {File::delete(public_path($imagepath));}
+                                Pictures::whereid($question['picture_id'])->delete();
+                            }
+
                         }
-                    }
+                        foreach ($answers as $answer)
+                        {
                             AnswersTranslation::whereanswer_id($answer->id)->whereanswer_local($lang['code'])->delete();
                         }
+
                         QuestionTranslation::wherequestion_id($question['id'])->wherequestion_local($lang['code'])->delete();
+
+
+
                     // }
                 }
 
