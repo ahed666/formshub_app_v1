@@ -111,7 +111,15 @@ class AllResponses extends Component
 
     }
     public function refreshdataallresponses(){
-        $this->mount();
+        $this->allresponses = Responses::where('form_id', $this->current_form_id)
+        ->orderBy('reviewed_at', 'desc')
+        ->get();
+
+        $this->current_form=Form::whereid($this->current_form_id)->first();
+        $this->main_languages=json_decode($this->main_lang, true);
+        $this->subscribe=SubscribePlan::getCurrentSubscription(Auth::user()->currentAccount->id);
+        $this->allowexport=$this->subscribe->export;
+
         $this->dispatchBrowserEvent('refreshall');
 
     }
