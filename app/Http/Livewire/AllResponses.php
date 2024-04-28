@@ -53,6 +53,7 @@ class AllResponses extends Component
     public $averagescore;
     public $formquestions;
     public $formquestionsNum;
+    public $questions;
     public $formlanguages;
     public $filtersquestion=[];
     public $allresponses=[];
@@ -60,6 +61,7 @@ class AllResponses extends Component
     public $path;
     public $allowexport;
     public $subscribe;
+    public $main_languages;
     public $startDateOfResponse='2023-01-01';
     public $endDateOfResponse='2023-01-01';
 
@@ -109,7 +111,7 @@ class AllResponses extends Component
 
     }
     public function refreshdataallresponses(){
-        $this->responsesdata();
+        $this->mount();
         $this->dispatchBrowserEvent('refreshall');
 
     }

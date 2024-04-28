@@ -210,8 +210,8 @@ class StatisticsForm extends Component
         $this->numofresponsesfordevices=[];
 
         $this->devices=[];
-        $share_key;
-        $others_key;
+        // $share_key;
+        // $others_key;
         $this->devices[0]="Share";$this->numofresponsesfordevices[0]=0;
         $this->devices[1]="Others";$this->numofresponsesfordevices[1]=0;
         $i=2;
