@@ -449,7 +449,7 @@ public $answers_json_text_rating='
                         $answers = Answers::wherequestion_id($question['id'])->get();
                         foreach ($answers as $answer) {
                             // if the languages count =1 delete images of answers else then no delete images
-                            if(count($this->formlanguages)==1){
+                            if(count($this->formlanguages)==0){
                             if ($answer->picture_id != null) {
                             $imagepath = Pictures::whereid($answer->picture_id)->first()->pic_url;
                             if (str_contains($imagepath, 'storage/images/temp/') || str_contains($imagepath, 'storage/images/drawing/')|| str_contains($imagepath, 'storage/images/upload/')) {File::delete(public_path($imagepath));}
