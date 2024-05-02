@@ -613,7 +613,7 @@
                     {{-- code text --}}
                     <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full">
                         <x-input-label for="promocodetext" class="col-span-2" :value="__('Code')" />
-                        <input minlength="10"   maxlength="10"   type="text"     id="promocodetext" name="promocodetext"
+                        <input    maxlength="10"   type="text"     id="promocodetext" name="promocodetext"
                             class="  w-full    h-10 bg-gray-50   text-gray-900 text-sm rounded-lg col-span-7
                             block  px-2 border-gray-300  focus:border-secondary
                              focus:ring-secondary  "     required>
