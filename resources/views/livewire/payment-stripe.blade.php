@@ -10,37 +10,101 @@
         <article class="bg-white rounded-lg shadow-lg">
             <div class="p-5 ">
 
-            <div class="grid grid-cols-12  border-2 rounded-lg   p-2 bg-gray-100 border-gray-200 min-h-[150px] mb-4">
+            <div class="grid grid-cols-12 gap-2  border-2 rounded-lg   p-2 bg-gray-100 border-gray-200 min-h-[150px] mb-12">
 
-                <div class="col-span-9 xs:col-span-12 sm:col-span-12 md:col-span-12">
-                    {!! $desc!!}
+                <div class="col-span-8 xs:col-span-12 sm:col-span-12 md:col-span-12">
+                    <div class="grid space-y-6">
+                        <div>
+                            {!! $desc!!}
+                        </div>
+
+
+                            @if($validCode)
+                            <div class="flex justify-start items-center">
+                                <span class="text-valid ">{{ __('main.codeappliedsuccessmessage',['ratio'=>$validCode->discount_value]) }}</span>
+
+                            </div>
+                            @else
+                            <div class="w-[80%] xs:w-[80%] grid  items-center  ">
+                                <div class="flex justify-start items-center">
+                                    <x-input-label for="promocode" :value="__('main.promocode')" />
+
+                                </div>
+                                <div class="flex  items-center space-x-2">
+
+                                    <x-text-input wire:model="codeText"  minlength="10"   maxlength="10"  id="promocode" name="promocode"   type="text" class="mt-1 block w-32 opacity-50 px-2 py-1"  required  />
+
+                                    <button wire:loading.attr="disabled" wire:click="applyCode" id="button" class="justify-center min-w-[80px] w-auto h-8 p-1 text-center
+                                     inline-flex items-center px-2 py-1 bg-secondary
+                                     border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-secondary_1
+                                     active:bg-gray-900  disabled:opacity-25 transition
+                                     " type="submit">
+                                         <span>{{ __('main.apply') }}</span>
+
+
+                                     </button>
+
+                                </div>
+                                @if ($errorMessage) <span class="flex font-medium text-sm  mt-1 text-red-600 text-danger  error placeholder-gray-300">{{ $errorMessage }}</span> @endif
+
+
+
+                            </div>
+
+                            @endif
+
+
+
+                    </div>
+
                 </div>
 
-                <div class="col-span-3 xs:col-span-12 sm:col-span-12 md:col-span-12">
+                <div class="grid grid-rows-3 gap-2 col-span-4 xs:col-span-12 sm:col-span-12 md:col-span-12">
                     @php
-                    $formattedPrice = number_format($order->price, 2);
-                    $formattedVat = number_format($order->price*0.05, 2);
-                    $formattedTotalPrice = number_format($order->price+(($order->price)*0.05), 2);
+                    $formattedPrice = number_format($price, 2);
+                    $formattedDiscountValue=number_format($price*($discountRatio/100), 2);
+                    $formattedSubTotal=number_format($formattedPrice-$formattedDiscountValue, 2);
+                    $formattedVat = number_format($formattedSubTotal*0.05, 2);
+                    $formattedTotalPrice = number_format($formattedSubTotal+(($formattedSubTotal)*0.05), 2);
                     @endphp
-                    <div class="grid grid-cols-12 items-center justify-center">
-                        <span class="col-span-4">{{ __('main.price') }}</span>
-                        <span class="col-span-6 text-secondary_blue  mx-1 text-right">{{  $formattedPrice }}</span>
+                    <div class="row-span-1 items-center">
+                        <div class="grid grid-cols-12 items-center justify-center pl-1">
+                            <span class="col-span-4">{{ __('main.price') }}</span>
+                            <span class="col-span-6 text-secondary_blue  mx-1 text-right">{{  $formattedPrice }}</span>
+                            <span class="col-span-2 text-xs">AED</span>
+                        </div>
+                        <div class="grid grid-cols-12 items-center justify-center pl-1">
+                            <span class="col-span-4">{{ __('main.discount') }}</span>
+                            <span class="col-span-6 text-secondary_blue  mx-1 text-right">{{  $formattedDiscountValue }}</span>
+                            <span class="col-span-2 text-xs">AED</span>
+                        </div>
+                    </div>
+
+                    <div class="row-span-1 grid items-center">
+
+                    <div class="grid grid-cols-12 items-center justify-center pl-1">
+                        <span class="col-span-4">{{ __('main.total') }}</span>
+                        <span class="col-span-6 text-secondary_blue  mx-1 text-right">{{  $formattedSubTotal }}</span>
                         <span class="col-span-2 text-xs">AED</span>
                     </div>
-                    <div class="grid grid-cols-12 items-center justify-center">
-                        <span class="col-span-4">{{ __('main.vat') }}</span>
+                    <div class="grid grid-cols-12 items-center justify-center pl-1">
+                        <span class="col-span-4">{{ __('main.tax') }}</span>
                         <span class="col-span-6 text-secondary_blue  mx-1 text-right">{{  $formattedVat }}</span>
                         <span class="col-span-2 text-xs">AED</span>
                     </div>
-                    <div class="grid grid-cols-12 items-center justify-center">
-                        <span class="col-span-4 font-bold">{{ __('main.total') }}</span>
+
+                    </div>
+                    <div class="row-span-1 grid items-center  bg-white">
+                    <div class="grid grid-cols-12 items-center justify-center pl-1">
+                        <span class="col-span-4 font-bold">{{ __('main.dueamount') }}</span>
                         <span class="col-span-6 text-secondary_blue font-bold  mx-1 text-right">{{  $formattedTotalPrice }}</span>
                         <span class="col-span-2 text-xs">AED</span>
+                    </div>
                     </div>
 
                 </div>
             </div>
-            <div class="px-14">
+            <div wire:ignore target="codeText" class="px-14 xs:px-2">
                 <div id="loading" class="flex justify-center items-center">
                     <h1 >
                         {{ __('main.loading') }}
@@ -49,7 +113,7 @@
                 <div class="flex justify-center items-center text-primary_red" id="payment-message" style="display: none;">
                 </div>
                 <form action="" method="post" id="payment-form">
-                <div id="payment-element">
+                <div   id="payment-element">
 
                 </div>
                 <div class="flex justify-between items-center border-t-[1px] p-2 mt-2 border-gray-200">
@@ -110,12 +174,22 @@ document
 // Fetches a payment intent and captures the client secret
 async function initialize() {
     setLoadingForm(true);
+    try {
+    const response = await fetch("{{route('payment.paymentIntent.create', $order_id)}}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}" // Use X-CSRF-TOKEN header for CSRF protection
+        },
+        body: JSON.stringify({ /* your request body here */ }),
+    });
 
-  const { clientSecret } = await fetch("{{route('payment.paymentIntent.create', $order_id)}}", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ "_token":"{{csrf_token()}}" }),
-  }).then((r) => r.json());
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorMessage}`);
+    }
+
+    const { clientSecret } = await response.json();
 
   elements = stripe.elements({ clientSecret });
 
@@ -125,6 +199,11 @@ async function initialize() {
 
   const paymentElement = elements.create("payment", paymentElementOptions);
   paymentElement.mount("#payment-element");
+      // Use clientSecret as needed
+} catch (error) {
+    console.error('Fetch error:', error);
+    // Handle the error (e.g., display an error message to the user)
+}
   setLoadingForm(false);
 }
 

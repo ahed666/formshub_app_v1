@@ -86,6 +86,7 @@ public function createOrder(){
     $order->total=(float)(($this->totalprice+($this->totalprice*(5/100))));
     $order->action=$this->action;
     $order->cate_responses=$this->choosenCategory->id;
+
     $order->save();
 
     return $order->id;

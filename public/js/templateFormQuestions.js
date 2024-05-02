@@ -297,7 +297,7 @@ function initialquestion(){
                 </select>
                 <input readonly onmousedown="return false" onselectstart="return false"
                 style=" -moz-user-select: none;  -ms-user-select: none;  -khtml-user-select: none; -webkit-user-select:none" disabled
-                 inputmode='none' placeholder="" maxlength="12" name="text_question_num" class="${align} select-none rounded-[0.5rem]" data-virtual-element type="text" class="form-control"
+                 inputmode='none' placeholder="" maxlength="10" name="text_question_num" class="${align} select-none rounded-[0.5rem]" data-virtual-element type="text" class="form-control"
                   id="InputArea"></div>`;
                 countires_select=document.getElementById('countries_select');
 

@@ -31,11 +31,14 @@
                     <span class="text-secondary text-xl font-bold">{{ $type->subscription_type }}</span>
                     </div>
                     {{-- price --}}
-                    <div class="grid  text-center mt-2 items-center text-3xl xs:text-lg font-bold text-secondary_1">
+                    <div class="grid  text-center mt-2  text-3xl xs:text-lg font-bold text-secondary_1 min-h-[80px]">
                         @if($type->order_plan==1)
-                        <div><span class= "">{{ $type->price }}</span><span class="text-xs">{{ __('AED') }}</span></div>
+                        <div><span class= "">{{ number_format($type->price, 2) }}</span><span class="text-xs">{{ __('AED') }}</span></div>
+
                         @else
-                        <div><span class="">{{ round($type->price) }}</span><span class="text-xs">{{ __('AED') }}</span><span class="text-sm text-secondary_1">{{ __(' / Year') }}</span></div>
+                        <div><span >{{ number_format($type->price/12, 2) }}</span><span class="text-xs">{{ __(' AED') }}</span><span class="text-sm text-secondary_1">{{ __(' / Month') }}</span></div>
+                        <div class="text-md xs:text-sm text-gray-400"><span class="">{{ __('main.chargedannually',['price'=>number_format($type->price, 2)]) }}</span></div>
+
                         @endif
                     </div>
                     {{-- features --}}
@@ -151,30 +154,7 @@
                                 <span class="text-md whitespace-normal" >{{ __('main.exportstatistics') }}</span>
                             </li>
                         @endif
-                        {{-- select num of responses --}}
-                    {{-- @if($type->subscription_type!="Free")
-                    <div class="p-1 mt-4 mx-1">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="dropdown">
-                         {{ __('main.selectnumofresponses') }}
-                        </label>
-                        <div class="relative">
-                          <select wire:model="cateresponses" id="dropdown" name="dropdown" class="text-md width-1/2 rounded-lg block appearance-none  bg-white border border-gray-300 text-gray-700
-                           leading-tight focus:outline-none focus:border-gray-500 ">
 
-                           @foreach ($responsesCategories as $cat  )
-
-                           <option class="text-md" value="{{$cat->id}}">{{ number_format($cat->num, 0, '.', ',') }}</option>
-
-                           @endforeach
-
-                            <!-- Add more options as needed -->
-                          </select>
-
-                        </div>
-                        @error('cateresponses') <span class="text-sm text-red-400 error">{{ $message }}</span> @enderror
-
-                    </div>
-                    @endif --}}
                     </ul>
 
 

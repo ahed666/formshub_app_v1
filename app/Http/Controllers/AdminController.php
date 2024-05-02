@@ -37,6 +37,7 @@ use App\Models\SupportTicket;
 use App\Models\DeletedAccount;
 use App\Models\canceledPlan;
 use App\Models\OrderProduct;
+use App\Models\PromotionCode;
 use App\Models\Order;
 use App\Models\TypeDevice;
 use Jenssegers\Agent\Agent;
@@ -332,7 +333,8 @@ class AdminController extends Controller
               }
 
              $responsesCategories=ResponseCategory::all();
-            return view('admin.settings',compact('admins','allPlans','responsesCategories','accounts','sessions'));
+            $promotionCodes= PromotionCode::all();
+            return view('admin.settings',compact('admins','promotionCodes','allPlans','responsesCategories','accounts','sessions'));
         }
         else{
 
@@ -530,6 +532,77 @@ class AdminController extends Controller
         catch (\Throwable $th) {
             return redirect()->route('admin.settings')->with('message','error');
         }
+    }
+
+    public function checkCodeUnique(Request $request)
+    {
+        $code = $request->input('code');
+        $isUnique = !PromotionCode::where('code', $code)->exists();
+
+        return response()->json(['unique' => $isUnique]);
+    }
+
+    // add promo function
+    public function addPromocode(Request $request){
+        $validatedData = $request->validate([
+            'promocodetext' => 'required|unique:promotion_codes,code',
+            // Add other validation rules as needed
+        ],[
+           'promocodetext.unique'=>'The promo code must be unique',
+        ]);
+        try {
+            //code...
+
+            PromotionCode::create([
+                'code' => $request->promocodetext,
+                'use_type'=>$request->typeuse_select,
+                'valid' => $request->filled('valid_checkbox') ? $request->valid_checkbox : false,
+                'public' => $request->filled('public_checkbox') ? $request->public_checkbox : false,
+                'discount_value' => $request->discount_value,
+                'note'=>$request->note,
+            ]);
+            return redirect()->route('admin.settings')->with('message','success');
+        }
+        catch (\Throwable $th) {
+            dd($th);
+            return redirect()->route('admin.settings')->with('message','error');
+        }
+
+    }
+    public function editPromocode(Request $request){
+        try {
+            //code...
+
+        $promotionCode = PromotionCode::find($request->promocodeid); // Assuming $id is the ID of the promotion code to update
+
+        $promotionCode->update([
+            'code' => $request->promocodetext,
+            'use_type' => $request->typeuse_select,
+            'valid' => $request->filled('valid_checkbox') ? $request->valid_checkbox : false,
+            'public' => $request->filled('public_checkbox') ? $request->public_checkbox : false,
+            'discount_value' => $request->discount_value,
+            'note' => $request->note,
+        ]);
+        return redirect()->route('admin.settings')->with('message','success');
+
+    } catch (\Throwable $th) {
+
+        return redirect()->route('admin.settings')->with('message','error');
+
+    }
+    }
+
+    public function deletepromocode($id){
+        try {
+            PromotionCode::find($id)->delete();
+            return redirect()->route('admin.settings')->with('message','success');
+
+        } catch (\Throwable $th) {
+
+            return redirect()->route('admin.settings')->with('message','error');
+
+        }
+
     }
 }
 

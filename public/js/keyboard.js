@@ -210,6 +210,7 @@ function createkeyboard(num=false,surveyLanguage) {
                         //    val=_lastElementFocused.value.split("");
                         //     val.splice(idx, 0, this.innerText);
                         // _lastElementFocused.value=val.join("");
+
                         if(_lastElementFocused.value.length<inputfeild.maxLength)
                        {_lastElementFocused.value=_lastElementFocused.value+this.innerText;
                         updateValue( _lastElementFocused.value);}
@@ -305,71 +306,30 @@ function createkeyboard(num=false,surveyLanguage) {
                 button.classList.add('pointer-event-none');
                 switch(matrix[i][j]) {
                     case '+backspace':
-                    button.innerHTML = '<span class="pointer-events-none"><--</span>';
-                    button.setAttribute('data-trigger', 'backspace');
-                    button.setAttribute('title', 'Backspace');
-                    /* the slicing using timer */
-                    var mouseTimerHandler = null;
-                    button.addEventListener("mousedown", function(event) {
+                        button.innerHTML = '<span class="pointer-events-none">⌫</span>';
+                        button.setAttribute('data-trigger', 'backspace');
+                        button.setAttribute('title', 'Backspace');
+                        /* the slicing using timer */
+                        var mouseTimerHandler = null;
+                        button.addEventListener("mousedown", function(event) {
 
-                        mouseTimerHandler = setInterval(function(){
-                        if (event.which == 1) {
-                            _lastElementFocused.value = _lastElementFocused.value.slice(0, -1);
-                        }
-                        }, 200);
-                    }, false);
-                    button.addEventListener("mouseup", function() {
-                        clearTimeout(mouseTimerHandler);
-                    });
-                    button.style.width = '108px';
+                            mouseTimerHandler = setInterval(function(){
+                            if (event.which == 1) {
+                                _lastElementFocused.value = _lastElementFocused.value.slice(0, -1);
+                            }
+                            }, 200);
+                        }, false);
+                        button.addEventListener("mouseup", function() {
+                            clearTimeout(mouseTimerHandler);
+                        });
+                        button.style.width = '108px';
                     break;
-                    // case '+ar':
-                    //   button.innerHTML =`<span id="lang" >العربية</span>`;
-                    //   button.setAttribute('data-trigger', 'ar');
-                    //   button.setAttribute('title', 'Ar');
-                    //   button.style.width = '15%';
-                    //   break;
-                    //   case '+en':
-                    //   button.innerHTML =`<span id="lang" >English</span>`;
-                    //   button.setAttribute('data-trigger', 'en');
-                    //   button.setAttribute('title', 'En');
-                    //   button.style.width = '15%';
-                    //   break;
-                    //   case '+tl':
-                    //   button.innerHTML =`<span id="lang" >Tagalog</span>`;
-                    //   button.setAttribute('data-trigger', 'tl');
-                    //   button.setAttribute('title', 'Tl');
-                    //   button.style.width = '15%';
-                    //   break;
-                    //   case '+ur':
-                    //   button.innerHTML =`<span id="lang" >Urdu</span>`;
-                    //   button.setAttribute('data-trigger', 'ur');
-                    //   button.setAttribute('title', 'Ur');
-                    //   button.style.width = '15%';
-                    //   break;
-                    // case '+shift':
-                    //   button.innerHTML = 'shift';
-                    //   button.setAttribute('data-trigger', 'shift');
-                    //   button.setAttribute('title', 'Shift');
-                    //   button.style.width = '20%';
-                    //   break;
-                    //   case '+123?':
-                    //   button.innerHTML = '123?';
-                    //   button.setAttribute('data-trigger', '123?');
-                    //   button.setAttribute('title', '123?');
-                    //   button.style.width = '15%';
-                    //   break;
-                    //   case '+abc':
-                    //   button.innerHTML = 'abc';
-                    //   button.setAttribute('data-trigger', 'en');
-                    //   button.setAttribute('title', 'abc');
-                    //   button.style.width = '15%';
-                    //   break;
-                    // case '+space':
-                    button.innerHTML = '&nbsp;';
-                    button.setAttribute('data-trigger', 'space');
-                    button.setAttribute('title', 'Space');
-                    button.style.width = '50%';
+
+                     case '+clearall':
+                    button.innerHTML = '↺';
+                    button.setAttribute('data-trigger', 'clearall');
+                    button.setAttribute('title', 'clearall');
+                    button.style.width = '108px';
                     break;
 
                     default:
@@ -385,71 +345,29 @@ function createkeyboard(num=false,surveyLanguage) {
                     _lastElementFocused.focus();
                     var x = this.getAttribute('data-trigger');
                     if (x != null) {
-                    switch(x) {
-                        case 'backspace':
-                        _lastElementFocused.value = _lastElementFocused.value.slice(0, -1);
-                        console.log(_lastElementFocused.value.length);
-                        updateValue( _lastElementFocused.value);
-                        resetidletime();
-                        break;
-                        // case 'ar':
-                        //   var reversed='ar';
-
-                        //   target.innerHTML = '';
-                        //   owner.generate(target,owner.getMatrix(reversed), reversed);
-
-                        //     inputfeild.classList.remove('text-left')
-                        //     inputfeild.classList.add('text-right');
-                        //     resetidletime();
-                        //   break;
-                        //   case 'en':
-                        //   var reversed='en';
-                        //   target.innerHTML = '';
-                        //   owner.generate(target,owner.getMatrix(reversed), reversed);
-                        //     inputfeild.classList.remove('text-right')
-                        //     inputfeild.classList.add('text-left');
-                        //     resetidletime();
-                        //   break;
-                        //   case 'tl':
-                        //   var reversed='tl';
-                        //   target.innerHTML = '';
-                        //   owner.generate(target,owner.getMatrix(reversed), reversed);
-                        //     inputfeild.classList.remove('text-right')
-                        //     inputfeild.classList.add('text-left');
-                        //     resetidletime();
-                        //   break;
-                        //   case 'ur':
-                        //   var reversed='ur';
-                        //   target.innerHTML = '';
-                        //   owner.generate(target,owner.getMatrix(reversed), reversed);
-                        //     inputfeild.classList.remove('text-left')
-                        //     inputfeild.classList.add('text-right');
-                        //     resetidletime();
-
-                        //   break;
-
-                        // case 'space':
-                        //   _lastElementFocused.value = _lastElementFocused.value + ' ';
-                        //   updateValue( _lastElementFocused.value);
-                        //   resetidletime();
-                        //   break;
-                        // case 'shift':
-                        //   var u = uppercase === true ? false : true;
-                        //   target.innerHTML = '';
-                        //   owner.generate(target,owner.getMatrix(language), language, u);
-                        //   resetidletime();
-                        //   break;
-                        //   case '123?':
-                            target.innerHTML = '';
-                            owner.generate(target,owner.getMatrix('ch'), 'ch');
+                    switch(x)
+                        {
+                            case 'backspace':
+                            _lastElementFocused.value = _lastElementFocused.value.slice(0, -1);
+                            updateValue( _lastElementFocused.value);
                             resetidletime();
                             break;
-                            }
+
+                            case 'clearall':
+                                _lastElementFocused.value ='';
+                            updateValue( _lastElementFocused.value);
+                            resetidletime();
+                            break;
+                        }
                     }
                     else {
-                    _lastElementFocused.value = _lastElementFocused.value + this.innerText;
-                    updateValue( _lastElementFocused.value);
-                    resetidletime();
+
+                        if(_lastElementFocused.value.length<inputfeild.maxLength)
+                        {
+                            _lastElementFocused.value = _lastElementFocused.value + this.innerText;
+                            updateValue( _lastElementFocused.value);
+                            resetidletime();
+                        }
 
                     }
                 });
@@ -462,35 +380,12 @@ function createkeyboard(num=false,surveyLanguage) {
             },
             getMatrix: function(language) {
             var matrix = {
-            //     en: [
-            //     ['+ar','q','w','e','r','t','y','u','i','o','p'],
-            //     ['+en','a','s','d','f','g','h','j','k','l'],
-            //     ['+tl','z','x','c','v','b','n','m','+backspace'],
-            //     ['+ur','+shift','+space','+123?']
-            //   ],
-            //   tl: [
-            //     ['+ar','q','w','e','r','t','y','u','i','o','p'],
-            //     ['+en','a','s','d','f','g','h','j','k','l'],
-            //     ['+tl','z','x','c','v','b','n','m','+backspace'],
-            //     ['+ur','+shift','+space','+123?']
-            //   ],
-            //  ur: [
-            //      ['+ar','ط','ظ','ص','ض','ہ','ذ','د','ڈ','ث','ٹ','پ','ب','س'],
-            //      ['+en','ت','ج','چ','ح','خ','م','ژ','و','ز','ن','ل','ہ','ش'],
-            //      ['+tl','آ','ا','ک','گ','ی','ے','ق','ف','غ','ع','+backspace'],
-            //      ['+ur','+shift','+space','+123?']
-            //     ],
-            //     ar: [
-            //         ['+ar','ذ','ض','ص','ث','ق','ف','غ','ع','ه','خ','ح','ج'],
-            //         ['+en','ش','س','ي','ب','ل','ا','ت','ن','م','ك','ط'],
-            //         ['+tl','ئ','ء','ؤ','ر','أ','ى','ة','و','ز','ظ','+backspace'],
-            //         ['+ur','+shift','+space','+123?']
-            //        ],
+
 
                 ch:[['1','2','3'],
                     ['4','5','6'],
                     ['7','8','9'],
-                    ['+','0','+backspace']
+                    ['+clearall','0','+backspace']
                     ]
                         };
             return matrix[language];

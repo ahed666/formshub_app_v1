@@ -16,6 +16,7 @@ use App\Models\Invoice;
 use App\Models\Account;
 use App\Models\ResponseCategory;
 use App\Models\User;
+use App\Models\PromotionCode;
 use App\Notifications\InvoiceNotification;
 class PaymentController extends Controller
 {
@@ -60,7 +61,14 @@ class PaymentController extends Controller
     {
 
       $this->updateSubscription($order);
+
+      if($order->promotioncodeid!=null)
+        {
+        $this->updatePromotionCode($order);
+        }
       $message=$this->createInvoice($order);
+      SubscribeOrder::whereid($order_id)->delete();
+
       return redirect('/subscriptions')->with('message', $message);
     }
     //else or if not successed
@@ -69,6 +77,23 @@ class PaymentController extends Controller
         $request->session()->flash('danger', $token['error']);
     }
   }
+
+   // update used count of PromotionCode
+  private function updatePromotionCode($order){
+
+        try {
+            $promotionCode = PromotionCode::find($order->promotioncodeid);
+            $promotionCode->used+=1;
+            $promotionCode->save();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+
+    }
+
+
+
 
   private function updateSubscription($order){
     if($order->action=="buyresponses")

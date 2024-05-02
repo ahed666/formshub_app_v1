@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link  rel="stylesheet" href="{{ asset('styles/bootstrap.min.css')}}">
 
@@ -39,7 +40,7 @@
                     </thead>
                     <tbody class="bg-white " >
                         @foreach ($admins as $i   => $admin )
-                        <tr class="h-10 min-h-10 max-h-10 w-full bg-gray-50 p-1 border-b-[1px] border-gray-200">
+                        <tr class="h-10 min-h-10 max-h-10 w-full bg-gray-50 p-1 border-b-[1px] border-gray-300">
                         <td class="text-center">
                             <span  class="xs:text-xs text-sm ">{{ $admin->id }}</span>
                         </td>
@@ -125,10 +126,11 @@
                     </div>
                 @endif
                 {{-- end of sessions --}}
-                {{-- subscriptions info --}}
+                {{-- App Setting --}}
                 <div class="flex justify-center items-center bg-white text-md rounded-[0.5rem] p-4 mt-2">
-                    <h1>{{ __('Subscription Settings') }}</h1>
+                    <h1>{{ __('App Settings') }}</h1>
                 </div>
+                {{-- subscriptions info --}}
                 <div class="grid grid-cols-3 gap-2 mt-4">
                     {{-- free --}}
                     @foreach ($allPlans as $key => $plan )
@@ -136,7 +138,7 @@
 
                     <div class="col-span-1 xs:col-span-3 ">
                         <div class="flex justify-start items-center">{{ $key }}</div>
-                        <div class="border border-black rounded-[0.5rem] p-4">
+                        <div class="border-[1px] border-black rounded-[0.5rem] p-4">
                             <form method="POST" action="{{ route('admin.saveplan') }}">
                                 @csrf
                                 <input value="{{ $plan->id }}" type="hidden" name="planid">
@@ -350,7 +352,7 @@
                         {{-- responses Category --}}
                         <div class="max-h-[200px]">
                             <div  class="flex justify-start items-center">{{ __('Additional responses price') }}</div>
-                            <div class="border border-black rounded-[0.5rem] p-4">
+                            <div class="border-[1px] border-black rounded-[0.5rem] p-4">
                                 <h1>{{ __('Edit:') }}</h1>
                                 <div class="flex justify-between items-center">
                                     <select  id="responsesCategories_select" name="responsesCategories_select" class=" w-full  h-10   text-sm rounded-lg
@@ -385,7 +387,7 @@
                         {{-- account status edit --}}
                         <div class="mt-10">
                             <div  class="flex justify-start items-center">{{ __('Accounts') }} <span class="text-xs">{{ __('(change status of account)') }}</span> </div>
-                            <div class="border border-black rounded-[0.5rem] p-4">
+                            <div class="border-[1px] border-black rounded-[0.5rem] p-4">
                                 <div class="flex justify-between items-center">
                                     <input   type="number"  min="0"  pattern="\d*"   id="idaccount_check" name="idaccount_check"
                                         class="  w-1/4  mr-2  h-10 bg-gray-50   text-gray-900 text-sm rounded-lg
@@ -401,14 +403,106 @@
                             </div>
                         </div>
                         {{-- export accounts --}}
-                        <div class="flex justify-between items-center mt-10">
+                        <div class="flex justify-between items-center mt-10 border-[1px] border-black rounded-[0.5rem] p-4">
                            <span>{{ __('Export Accounts') }}</span>
                            <x-jet-button type="button" onclick="getAccounts()"  class="">export</x-jet-button>
 
                         </div>
+
                     </div>
                 </div>
             {{--end subscriptions info --}}
+                {{-- promo codes --}}
+                <div class="flex justify-between items-center bg-white text-md rounded-[0.5rem] p-2 mt-2">
+                    <h1>{{ __('Promotion Codes') }}</h1>
+                    <x-jet-button class="ml-3" data-toggle="modal" data-target="#show_promocode"  type="button"   >
+                        {{ __('Add new') }}
+                    </x-jet-button>
+            </div>
+                <div class="max-h-[400px] overflow-y-auto">
+                    <table class="admins_table table-fixed w-full  rounded-lg mt-4  " >
+                        {{-- head of table --}}
+                        <thead class="h-14">
+                        <tr class="border-b-[1px] border-t-[1px] p-1  bg-gray-600 text-white ">
+
+                            <th   class="sticky top-0 px-4 py-2 z-50 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Code</th>
+                            <th   class="sticky top-0 px-4  py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">For</th>
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Discount Value</th>
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Valid</th>
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Accessibility</th>
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">How many used</th>
+
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Note</th>
+
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Options</th>
+
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white " >
+                            @foreach($promotionCodes as $key => $promoCode)
+                                @php
+                                    $typeUse = '';
+                                                switch ($promoCode->use_type) {
+                                                    case 'upgrade':
+                                                        $typeUse = 'Upgrade';
+                                                        break;
+                                                    case 'renew':
+                                                        $typeUse = 'Renew';
+                                                        break;
+                                                    case 'buyresponses':
+                                                        $typeUse = 'Buy Responses';
+                                                        break;
+                                                    default:
+                                                        $typeUse = 'Unknown';
+                                                        break;
+                                                }
+                                                $validStatus = $promoCode->valid ? 'Valid' : 'Not Valid';
+                                             $publicStatus = $promoCode->public ? 'Public' : 'Private';
+                                @endphp
+                            <tr class="h-10 min-h-10 max-h-10 w-full bg-gray-50 p-1 border-b-[1px] border-gray-300">
+                            <td class="text-center">
+                                <span  class="xs:text-xs text-sm ">{{ $promoCode->code }}</span>
+                            </td>
+                            <td class="text-center overflow-hidden"><span  class="xs:text-xs text-sm   text-left">{{ $typeUse }}</span></td>
+                            <td class="text-center overflow-hidden"><span class=" xs:text-xs text-sm text-center">{{  $promoCode->discount_value }}</span></td>
+
+                            <td class="text-center overflow-hidden"><span  class="xs:text-xs text-sm text-center">{{  $validStatus }}</span></td>
+                            <td class="text-center overflow-hidden"><span  class="xs:text-xs text-sm text-center">{{  $publicStatus }}</span></td>
+                            <td class="text-center overflow-hidden"><span  class="xs:text-xs text-sm text-center">{{  $promoCode->used }}</span></td>
+                            <td class="text-center overflow-hidden"><span  class="xs:text-xs text-sm text-center">{{  $promoCode->note }}</span></td>
+
+
+                                <td class="text-center">
+                                    <div class="flex justify-center space-x-2 items-center">
+                                        <div class="text-center">
+
+                                            <svg data-toggle="modal" data-target="#show_promocode" onclick="EditPromoCode({{$key}})" class="text-svg_primary hover:text-secondary_blue hover:cursor-pointer h-6 w-6 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <path d="M12 3.99997H6C4.89543 3.99997 4 4.8954 4 5.99997V18C4 19.1045 4.89543 20 6 20H18C19.1046 20 20 19.1045 20 18V12M18.4142 8.41417L19.5 7.32842C20.281 6.54737 20.281 5.28104 19.5 4.5C18.7189 3.71895 17.4526 3.71895 16.6715 4.50001L15.5858 5.58575M18.4142 8.41417L12.3779 14.4505C12.0987 14.7297 11.7431 14.9201 11.356 14.9975L8.41422 15.5858L9.00257 12.6441C9.08001 12.2569 9.27032 11.9013 9.54951 11.6221L15.5858 5.58575M18.4142 8.41417L15.5858 5.58575"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" /> </g>
+                                            </svg>
+                                        </div>
+                                        <div class="text-center">
+
+
+                                            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                                            <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+                                            <svg onclick="DeletePromoCode({{ $promoCode->id }})"  class="h-6 w-6 text-svg_primary hover:text-primary_red focus:text-primary_red"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            </svg>
+
+
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -490,11 +584,126 @@
         </div>
         </div>
     </div>
+    <div  class="modal fade fixed top-0 left-0 z-[1055]  h-full w-full  " data-backdrop="static" data-keyboard="false" id="show_promocode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[800px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
+        <div class="modal-content  w-full flex-col rounded-md border-none  bg-clip-padding text-current shadow-lg
+        outline-none ">
+            {{-- header --}}
+            <div class="flex items-center justify-between p-4 border-b rounded-t ">
+                <div class="flex items-center">
+                <h3 id="dialog_title" class="text-xl font-semibold text-gray-900 ">
+                    {{ __('Add promotion code ') }}
+                </h3>
+
+                </div>
+                <button  onclick="ClearFormEditPromoCode()" type="button"  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex
+                items-center   close" data-dismiss="modal" aria-label="Close">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0
+                    011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div   class=" 2xl:max-h-[700px] xs:max-h-[400px] p-4">
+                <form id="promocodeform" method="POST" action="{{ route('admin.addpromocode') }}">
+                    <div id="error_container" class="alert alert-danger" style="display: none;">
+                        <ul id="error_list">
+                        </ul>
+                    </div>
+                    @csrf
+                    <input type="hidden" id="promocodeid" name="promocodeid">
+                    {{-- code text --}}
+                    <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full">
+                        <x-input-label for="promocodetext" class="col-span-2" :value="__('Code')" />
+                        <input minlength="10"   maxlength="10"   type="text"     id="promocodetext" name="promocodetext"
+                            class="  w-full    h-10 bg-gray-50   text-gray-900 text-sm rounded-lg col-span-7
+                            block  px-2 border-gray-300  focus:border-secondary
+                             focus:ring-secondary  "     required>
+                            <x-jet-button onclick="generateRandomCode()" class="flex justify-center col-span-3 " type="button"   >
+                                {{ __('generate') }}
+                            </x-jet-button>
+                    </div>
+                   {{-- type of use --}}
+                   <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                        <x-input-label class="col-span-2" for="typeuse_select" :value="__('For')" />
+
+                        <select  id="typeuse_select" name="typeuse_select" class="col-span-10   h-10   text-sm rounded-lg
+                            px-2  border-gray-300  focus:border-secondary  bg-gray-50
+                            focus:ring-secondary "  >
+                                    <option value="buyresponses">{{ __('Buy Responses') }}</option>
+                                    <option value="upgrade">{{ __('Upgrade') }}</option>
+                                    <option value="renew">{{ __('Renew ') }}</option>
+
+                        </select>
+                   </div>
+                   {{-- value of discount --}}
+                    <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                        <x-input-label class="col-span-2" for="discount_value" :value="__('Value of Discount')" />
+                        <input   type="number"  min="1" max="100"  pattern="\d*"   id="discount_value" name="discount_value"
+                            class="      h-10 bg-gray-50   text-gray-900 text-sm rounded-lg col-span-10
+                            block  px-2 border-gray-300  focus:border-secondary
+                             focus:ring-secondary  "     required>
+                   </div>
+                   {{-- permissions --}}
+                   <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                        <x-input-label class="col-span-2" for="" :value="__('Permissions')" />
+                        {{-- public --}}
+                        <div class="col-span-5 flex justify-center items-center space-x-2">
+                            <x-input-label class="col-span-2" for="public_checkbox" :value="__('Public')" />
+                            <label class=" relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox"  value="1"  checked class="sr-only peer" name="public_checkbox" id="public_checkbox">
+                                <div class="w-11 col-span-3 h-6 bg-gray-200 peer-focus:outline-none
+                                rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute
+                                after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
+                                    peer-checked:bg-secondary_blue"></div>
+
+                            </label>
+                        </div>
+                        {{-- valid --}}
+                        <div class="col-span-5 flex justify-center items-center space-x-2">
+                            <x-input-label class="col-span-2" for="valid_checkbox" :value="__('Valid')" />
+                            <label class=" relative inline-flex items-center cursor-pointer">
+
+                                <input type="checkbox" value="1"  checked  class="sr-only peer" name="valid_checkbox" id="valid_checkbox">
+                                <div class="w-11 col-span-3 h-6 bg-gray-200 peer-focus:outline-none
+                                rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute
+                                after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
+                                    peer-checked:bg-secondary_blue"></div>
+
+                                </label>
+                        </div>
+                   </div>
+                   {{-- note --}}
+                   <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4  my-2  w-full">
+                    <x-input-label for="note" class="col-span-2" :value="__('Note')" />
+                    <textarea    type="text"  rows="10"    id="note" name="note"
+                        class="   h-10 bg-gray-50   text-gray-900 text-sm rounded-lg col-span-10
+                        block  px-2 border-gray-300  focus:border-secondary
+                         focus:ring-secondary  "     required></textarea>
+
+                </div>
+
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+
+                        <x-jet-secondary-button onclick="ClearFormEditPromoCode()"  data-dismiss="modal" aria-label="Close"  type="button"  wire:loading.attr="disabled">
+                            {{ __('Cancel') }}
+                        </x-jet-secondary-button>
+                        <x-jet-button class="ml-3" type="submit"   wire:loading.attr="disabled">
+                            {{ __('Save') }}
+                        </x-jet-button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+        </div>
+    </div>
     @livewireScripts()
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('https://unpkg.com/xlsx-populate/browser/xlsx-populate.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
+
         pathExcelFile="/resources/admin/Accounts.xlsx";
         function getAccounts(){
             axios.get('/api/data/export/accounts')
@@ -774,6 +983,121 @@
         </g>`;
     }
   }
+//   promo code
+var PromotionCodes = {!! json_encode($promotionCodes->toArray(), JSON_HEX_TAG) !!};
+// edit promo code
+
+//   generate random promo code
+var length=10;
+function generateRandomCode() {
+    var characters = '123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var charactersLength = characters.length;
+    var randomString = '';
+    for (var i = 0; i < length; i++) {
+        randomString += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    document.getElementById('promocodetext').value=randomString;
+
+}
+var edit=false;
+function ClearFormEditPromoCode(){
+    edit=false
+    document.getElementById('dialog_title').innerText="Add promo code";
+    document.getElementById('promocodetext').value ='';
+    document.getElementById('typeuse_select').value ='buyresponses';
+    document.getElementById('discount_value').value ='';
+    document.getElementById('public_checkbox').checked = true;
+    document.getElementById('valid_checkbox').checked = true;
+    document.getElementById('note').value='';
+        var form = document.getElementById('promocodeform');
+
+        form.setAttribute('action', `{{ route("admin.addpromocode") }}`);
+
+
+
+}
+// delete promo code
+function DeletePromoCode(id){
+    Swal.fire({
+                title:'Delte Promotion Code',
+                html: 'Do you want delete  this promotion code?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1277D1',
+            showCancelButton: true,
+            cancelButtonColor:'#f3f4f6',
+            cancelButtonText:`<h5 style='color:000000;border:0;box-shadow: none;'>Cancel</h5>`,
+            confirmButtonText:'Ok'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '{{ route('admin.deletepromocode', ['id' => ':id']) }}'.replace(':id', id);
+
+            }
+            })
+
+}
+
+// edit promo code
+ function EditPromoCode(PromoCodeKey){
+    edit=true;
+
+    document.getElementById('dialog_title').innerText="Edit promo code";
+     PromoCode = PromotionCodes[PromoCodeKey];
+    document.getElementById('promocodetext').value = PromoCode.code;
+    document.getElementById('typeuse_select').value = PromoCode.use_type;
+    document.getElementById('discount_value').value = PromoCode.discount_value;
+    document.getElementById('public_checkbox').checked = PromoCode.public;
+
+    document.getElementById('valid_checkbox').checked = PromoCode.valid;
+    document.getElementById('note').value=PromoCode.note;
+    var form = document.getElementById('promocodeform');
+
+
+    document.getElementById('promocodeid').value = PromoCode.id;
+    form.setAttribute('action', `{{ route("admin.editpromocode") }}`);
+
+
+ }
+//  check on unique of promocode
+    document.getElementById('promocodeform').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the form from submitting
+        var code = document.getElementById('promocodetext').value;
+
+        // Perform an AJAX request to check the uniqueness of the code
+        if(edit==false){
+        $.ajax({
+            url: '{{ route('admin.checkcodeunique') }}',
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: { code: code },
+            success: function(response) {
+                if (response.unique) {
+                    // If the code is unique, submit the form
+                    document.getElementById('promocodeform').submit();
+                } else {
+
+                    // If the code is not unique, display an error message
+                    var errorContainer = document.getElementById('error_container');
+                    var errorList = document.getElementById('error_list');
+                    errorList.innerHTML = '<li>The code must be unique.</li>';
+                    errorContainer.style.display = 'block';
+                }
+            },
+            error: function() {
+                // Handle errors
+                console.error('Error checking code uniqueness.');
+            }
+        });
+        }
+        else
+        {
+            document.getElementById('promocodeform').submit();
+
+        }
+    });
+
 </script>
     {{-- menubar for each form in owl carousel  --}}
 

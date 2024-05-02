@@ -35,7 +35,6 @@ class Subscribe extends Component
     public $desc;
 
     public $step;
-
     public $subscriptions_upgrade='
     {
       "Free":["Basic","Premium","Professional","Ultimate"],
@@ -80,7 +79,7 @@ class Subscribe extends Component
     public function mount()
     {
 
-        $this->action="new plan";
+
         $this->step=1;
 
 
@@ -116,13 +115,14 @@ class Subscribe extends Component
         $this->choosenPlanInfo=TypeSubscribe::whereid($plan)->first();
         $this->totalprice=$this->choosenPlanInfo->price;
 
-            $desc1="Forms hub premium one-year subscription with ".env('NUM_OF_RESPONSES_PREMIUM', 10000)." free responses.";
+            $desc1="Forms hub premium 12 months subscription with ".env('NUM_OF_RESPONSES_PREMIUM', 10000)." free responses.";
             if($this->choosenPlan==$this->current_subscribe->plan_id)
-            $desc2= " valid (from ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('Y-m-d')." to ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->addyear()->subDays(1)->format('Y-m-d').")";
-
+            { $desc2= " valid (from ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->format('Y-m-d')." to ".\Carbon\Carbon::parse($this->current_subscribe->expired_at)->addyear()->subDays(1)->format('Y-m-d').")";
+              $this->action="renew";
+            }
             else
-            $desc2= " valid (from ".\Carbon\Carbon::now()->format('Y-m-d')." to ".\Carbon\Carbon::now()->addyear()->subDays(1)->format('Y-m-d').")";
-
+           { $desc2= " valid (from ".\Carbon\Carbon::now()->format('Y-m-d')." to ".\Carbon\Carbon::now()->addyear()->subDays(1)->format('Y-m-d').")";
+            $this->action="upgrade";}
 
 
             $this->desc=$desc1.$desc2;
@@ -149,6 +149,7 @@ class Subscribe extends Component
             $order->total=(float)(($this->totalprice+($this->totalprice*(5/100))));
             $order->action=$this->action;
             $order->cate_responses=null;
+
             $order->save();
 
             return $order->id;

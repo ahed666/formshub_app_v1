@@ -336,7 +336,9 @@ return [
        'invoicedate'=>'Invoice Date',
 
        'download'=>'Download',
-       ''=>'',
+       'promocode'=>'Have a promo code?',
+       'apply'=>'Apply',
+       'cannotbyempty'=>'can not be empty',
 
        //subscriptions
        'yoursubscription'=>'Your Subscription :',
@@ -382,6 +384,9 @@ return [
        'peryear'=>' per year',
        'cancelsubscription'=>'Cancel Subscription',
        'checkout'=>'Checkout',
+
+       'chargedannually'=>'(Charged Annually :price AED)',
+
 
     //support
 
@@ -565,10 +570,12 @@ return [
     //paying
     'buy_responses'=>'Forms hub :num additional responses ',
     'valid'=>'valid (from: :start to: :end)',
-    'newplan'=>'Forms hub premium one-year subscription with :num free responses',
+    'newplan'=>'Forms hub premium 12 months subscription with :num free responses',
     'price'=>'Price: ',
-    'vat'=>'Vat: ',
-    'total'=>'Total :',
+    'tax'=>'TAX: ',
+    'total'=>'Total: ',
+    'discount'=>'Discount: ',
+    'dueamount'=>'Due Amount: ',
     'fullname'=>'Full Name',
     'cardnumber'=>'Card Number',
     'cardexpiry'=>'Card Expiry',
@@ -583,6 +590,9 @@ return [
     'pleasewait_message'=>'Do not close or refresh this window, it won\'t take long',
     'processing'=>'Proccessing',
     'loading'=>'Loading',
+    'codeappliedsuccessmessage'=>'Great! 🌟 you have a promo code applied (:ratio% discount)',
+    'codenotvalid'=>'Sorry!! The promo code is not valid',
+
 
     //error permisions
 

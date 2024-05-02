@@ -81,6 +81,9 @@ Route::group(['prefix'=>'admin-center','middleware'=>['auth:admin']],function(){
     Route::post('/changeorderstatus', [AdminController::class, 'changeorderstatus'])->name('admin.changeorderstatus');
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
 
+    Route::post('/adminlogoutsession/{id}',[AdminController::class, 'adminLogout'])->name('admin.adminLogout');
+
+
     Route::get('/deletedaccounts', [AdminController::class, 'deletedaccounts'])->name('admin.deletedaccounts');
     Route::get('/canceledplans', [AdminController::class, 'canceledplans'])->name('admin.canceledplans');
     Route::post('/updateinfo',[AdminController::class, 'updateAdminInfo'] )->name('admin.info.update');
@@ -89,8 +92,11 @@ Route::group(['prefix'=>'admin-center','middleware'=>['auth:admin']],function(){
     Route::post('/saveresponsescategories',[AdminController::class, 'saveresponsescategories'])->name('admin.saveresponsescategories');
     Route::post('/logout',[AdminController::class, 'destroy'])->name('admin.logout');
     Route::post('/adminlogoutsession/{id}',[AdminController::class, 'adminLogout'])->name('admin.adminLogout');
+    Route::post('/addpromocode',[AdminController::class, 'addPromocode'])->name('admin.addpromocode');
+    Route::post('/editpromocode',[AdminController::class, 'editPromocode'])->name('admin.editpromocode');
+    Route::get('/deletepromocode/{id}',[AdminController::class, 'deletepromocode'])->name('admin.deletepromocode');
 
-
+    Route::post('/check-code-unique', [AdminController::class, 'checkCodeUnique'])->name('admin.checkcodeunique');
 
 
 
