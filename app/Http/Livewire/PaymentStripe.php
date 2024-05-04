@@ -60,6 +60,7 @@ class PaymentStripe extends Component
 
                 $this->order->promotioncodeid=$this->validCode->id;
                 $this->order->save();
+                $this->dispatchBrowserEvent('promocode-applied');
             } else {
 
                 // Code is invalid, handle the error response

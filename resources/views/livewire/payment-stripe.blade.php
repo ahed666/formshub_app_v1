@@ -171,6 +171,9 @@ document
   .querySelector("#payment-form")
   .addEventListener("submit", handleSubmit);
 
+  document.addEventListener('promocode-applied', event =>  {
+    initialize();
+  });
 // Fetches a payment intent and captures the client secret
 async function initialize() {
     setLoadingForm(true);

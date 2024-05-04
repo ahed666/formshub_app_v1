@@ -49,14 +49,14 @@ class PaymentController extends Controller
 
     ];
   }
-
+//   confirm payment
   public function confirm(Request $request,$order_id){
     $order=SubscribeOrder::whereid($order_id)->first();
 
    $stripe = new \Stripe\StripeClient(config('services.stripe.secret_key'));
    $paymentIntent= $stripe->paymentIntents->retrieve($request->query('payment_intent'), []);
 //    if payment proccess successed
-//1 update subscription 2 create invoice
+//_1 update subscription _2 if there is promo then update it's used count  _3 create invoice
    if($paymentIntent->status=="succeeded")
     {
 
