@@ -43,7 +43,7 @@
             <div class="flex justify-center items-center w-full" id="formLogo">  </div>
             <div  class="flex justify-start items-center my-4 p-2">{{ __('main.formtitle_editform') }}<span  class="ml-1 font-bold" id="formTitle"></span></div>
             <div class="grid grid-cols-12 justify-center items-center bg-white rounded-[0.5rem] p-2">
-                <div class="col-span-12 grid grid-cols-12">
+                <div class="col-span-12 gap-3 grid grid-cols-12">
                     {{-- score --}}
                     <div  class="flex justify-start items-center  col-span-6 ">
                         <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.score') }}</span></div>
@@ -93,7 +93,7 @@
 
     <script>
          var translations = @json(__('main'));
-         var langauges= {
+         var languages= {
         "ar": {
             "lang": "العربية"
 
