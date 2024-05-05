@@ -23,23 +23,23 @@
                 {{-- score --}}
                 <div  class="flex justify-start items-center  col-span-6 xs:col-span-12">
                     <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.score') }}</span></div>
-                    <div id="progressBar_score" class="flex justify-center items-center" ></div>
+                    <div id="progressBar_score" class="flex justify-center items-center font-bold" ></div>
                 </div>
                 {{-- reviewed at  --}}
                 <div  class="flex justify-start items-center col-span-6 xs:col-span-12">
                     <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.submitiondateandtime') }}</span></div>
-                    <div id="response_date" class="flex justify-center items-center"></div>
+                    <div id="response_date" class="flex justify-center items-center font-bold"></div>
                 </div>
                 {{-- completion --}}
                 <div  class="flex justify-start items-center col-span-6 xs:col-span-12 ">
                     <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.completionpercent_todo') }}</span></div>
-                    <div id="progressBar_completion" class="flex justify-center items-center"></div>
+                    <div id="progressBar_completion" class="flex justify-center items-center font-bold"></div>
                 </div>
 
                 {{-- Language --}}
                 <div  class="flex justify-start items-center col-span-6  xs:col-span-12">
                     <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.submitionlanguage') }}</span></div>
-                    <div id="response_langauge" class="flex justify-center items-center"></div>
+                    <div id="response_langauge" class="flex justify-center items-center font-bold"></div>
                 </div>
             </div>
             <div class="col-span-4 xs:col-span-12 flex justify-between">

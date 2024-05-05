@@ -41,29 +41,29 @@
     <body>
         <div wire:loading.class="disabled opacity-50  " id="show-response-body" class=" grid justify-center items-center rounded-[0.5rem] ">
             <div class="flex justify-center items-center w-full" id="formLogo">  </div>
-            <div  class="flex justify-start items-center my-4 p-2">{{ __('main.formtitle') }}<span  class="ml-1" id="formTitle"></span></div>
+            <div  class="flex justify-start items-center my-4 p-2">{{ __('main.formtitle_editform') }}<span  class="ml-1 font-bold" id="formTitle"></span></div>
             <div class="grid grid-cols-12 justify-center items-center bg-white rounded-[0.5rem] p-2">
                 <div class="col-span-12 grid grid-cols-12">
                     {{-- score --}}
                     <div  class="flex justify-start items-center  col-span-6 ">
                         <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.score') }}</span></div>
-                        <div id="progressBar_score" class="flex justify-center items-center" ></div>
+                        <div id="progressBar_score" class="flex justify-center items-center font-bold" ></div>
                     </div>
                     {{-- reviewed at  --}}
                     <div  class="flex justify-start items-center col-span-6 ">
                         <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.submitiondateandtime') }}</span></div>
-                        <div id="response_date" class="flex justify-center items-center"></div>
+                        <div id="response_date" class="flex justify-center items-center font-bold"></div>
                     </div>
                     {{-- completion --}}
                     <div  class="flex justify-start items-center col-span-6 ">
                         <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.completionpercent_todo') }}</span></div>
-                        <div id="progressBar_completion" class="flex justify-center items-center"></div>
+                        <div id="progressBar_completion" class="flex justify-center items-center font-bold"></div>
                     </div>
 
                     {{-- Language --}}
                     <div  class="flex justify-start items-center col-span-6 ">
                         <div class="flex justify-center items-center mr-1"><span class="text-sm">{{ __('main.submitionlanguage') }}</span></div>
-                        <div id="response_langauge" class="flex justify-center items-center"></div>
+                        <div id="response_langauge" class="flex justify-center items-center font-bold"></div>
                     </div>
                 </div>
 
@@ -93,7 +93,27 @@
 
     <script>
          var translations = @json(__('main'));
+         var langauges= {
+        "ar": {
+            "lang": "العربية"
 
+        }
+        , "en": {
+            "lang": "English"
+
+        }
+        , "ur": {
+            "lang": "Urdu"
+
+        }
+        , "tl": {
+            "lang": "Tagalog"
+
+        }
+    }
+        function getLanguageName(code) {
+        return languages[code].lang;
+    }
         var response = {!! json_encode($response, JSON_HEX_TAG) !!};
         var form = {!! json_encode($form, JSON_HEX_TAG) !!};
 
@@ -114,7 +134,7 @@
                 progressBarScore.innerHTML=`<x-progress-bar  id="score-${response.id}" value="${response.score}" class="bg-yellow-300" />`;
                 progressBarCompletion.innerHTML=`<x-progress-bar  id="completpercent-${response.id}"  value="${response.complet_percent}" class="bg-valid" />`;
                 responseDate.innerHTML=`<span class="text-sm">${datePart + ' ' + timePart.slice(0, 5)}</span>`;
-                responselangauge.innerHTML=`<span class="text-sm">${lang}</span>`;
+                responselangauge.innerHTML=`<span class="text-sm">${getLanguageName(lang)}</span>`;
                 formTitle.innerText=form.form_title;
                 formLogo.innerHTML=`<img class="object-contain max-w-[120px] max-h-[90px] min-h-[90px] min-w-[120px] w-[120px] h-[90px]" src="{{ asset('${form.logo_url}') }}" alt="">`;
                 var body =document.getElementById('showresponse-tablebody');
