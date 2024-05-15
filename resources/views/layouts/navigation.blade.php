@@ -24,8 +24,8 @@
         </span>
         <a  class="md:hidden  lg:hidden xl:hidden 2xl:hidden " href="{{ route('dashboard') }}">
             <img class="block w-[140px] h-[60px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
-            <div class="flex justify-center items-center">
-                <span>{{ __('V') }}{{ env('APP_VERSION') }}</span>
+            <div class="flex justify-center items-center ">
+                <span class="font-bold">{{ __('V') }}{{ env('APP_VERSION') }}</span>
              </div>
         </a>
 
