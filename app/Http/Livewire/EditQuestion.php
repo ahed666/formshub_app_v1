@@ -29,7 +29,6 @@ class EditQuestion extends Component
     // old
     use WithFileUploads;
     public $step=1;
-    public $type_details;
     public $modal=false;
     public $stepanswer=0;
     public $stepimage;
@@ -65,6 +64,7 @@ class EditQuestion extends Component
     // satisafaction and rating with image (new 8-28)
     public $question_image;
     public $question_image_temp;
+    public $languageNamesByCode;
     public $Chars=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z",
     "AA","AB","AC","AD","AE","AF","AG","AH","AI","AJ","AK","AL","AM","AN","AO","AP","AQ","AR","AS","AT","AU","AV","AW","AX","AY","AZ"
   ];
@@ -172,8 +172,10 @@ public $answers_json_text_rating='
 
         $questionType=QuestionType::whereid($this->question['type_of_question_id'])->first();
         $this->type=$questionType->question_type ;
-        $this->type_detail=$questionType->question_type_details;
-        $this->type_details=QuestionType::whereid($this->question['type_of_question_id'])->first()->question_type_details;
+
+        $this->type_detail=app()->getLocale() == 'en'?$questionType->question_type_details : $questionType->question_type_details_ar;
+
+
         // if type of question is custom
         /*if($this->type=='custom_rating'||$this->type=='custom_satisfaction')
         {    $ques=Questions::join('custom_questions', 'questions.id', '=', 'custom_questions.question_id')->
@@ -318,7 +320,7 @@ public $answers_json_text_rating='
         $this->count=count($this->answers);
         $this->stepanswer=count($this->answers);
         $this->initvalue($this->count);
-        $this->dispatchBrowserEvent('loadquestion',['question'=>$this->question,'question_text'=>$this->question_text,'type'=>$this->type,'answers'=>$this->answers,'type_details'=>$this->type_details,'local'=>$this->local,'languages'=>$this->languages]);
+        $this->dispatchBrowserEvent('loadquestion',['question'=>$this->question,'question_text'=>$this->question_text,'type'=>$this->type,'answers'=>$this->answers,'local'=>$this->local,'languages'=>$this->languages]);
 
 
     }

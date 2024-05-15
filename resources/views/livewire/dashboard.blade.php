@@ -35,7 +35,7 @@
     <div class=" grid grid-cols-12  px-2 pb-2 mt-2   gap-4   max-h-fit   xs:max-h-full" >
 
          {{-- info --}}
-        <div class="min-h-[250px] max-h-[250px] h-[250px] xs:h-full xs:max-h-full rounded-[0.5rem] col-span-5 row-span-1 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12 max-h-1/3 ">
+        <div class="min-h-[250px] max-h-[250px] h-[250px] xs:h-full xs:max-h-full rounded-[0.5rem] col-span-5 row-span-1 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12 max-h-1/3 ">
              {{-- welcome message --}}
                 <div class="flex  items-center xs:grid">
                     {{ __('main.welcomeAccount',['name' => Auth::user()->name,'currentaccount'=>$currentAccount->account_name]) }}
@@ -98,7 +98,7 @@
 
         </div>
         {{-- actions --}}
-        <div class="min-h-[250px] max-h-[250px] h-[250px] rounded-[0.5rem] col-span-5 row-span-1 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12">
+        <div class="min-h-[250px] max-h-[250px] h-[250px] rounded-[0.5rem] col-span-5 row-span-1 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12">
             <div class="flex justify-between items-center">
 
                 <div class="flex justify-between items-center">
@@ -141,7 +141,7 @@
                     </ul>
         </div>
         {{-- chart2 --}}
-        <div class=" rounded-[0.5rem] col-span-2 p-4 row-span-1 xs:row-span-5 sm:row-span-5 md:row-span-5  lg:row-span-5 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12">
+        <div class=" rounded-[0.5rem] col-span-2 p-4 row-span-1 xs:row-span-5 sm:row-span-5 md:row-span-5  lg:row-span-5 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12">
             <div class="flex justify-start items-center">
                 <h1 class="text-sm">{{ __('main.mysubscription') }}</h1>
             </div>
@@ -195,7 +195,7 @@
             @endif
         </div>
         {{-- forms --}}
-        <div wire:ignore class="rounded-[0.5rem] col-span-5 row-span-2 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12 ">
+        <div wire:ignore class="rounded-[0.5rem] col-span-5 row-span-2 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12 ">
             <div class="flex justify-between" >
                 <h1 class=" text-sm" >{{ __('main.forms') }}</h1>
                 <div class="" >
@@ -325,7 +325,7 @@
             </div>
         </div>
         {{-- kiosk --}}
-        <div wire:ignore class=" rounded-[0.5rem] col-span-5 p-4 row-span-2 xs:row-span-5 sm:row-span-5 lg:row-span-5 md:row-span-5 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12">
+        <div wire:ignore class=" rounded-[0.5rem] col-span-5 p-4 row-span-2 xs:row-span-5 sm:row-span-5 lg:row-span-5 md:row-span-5 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12">
             <div class="flex justify-between" >
                 <h1 class="text-sm" >{{ __('main.kiosks') }}</h1>
                  <div class="" >
@@ -461,7 +461,7 @@
                 </div>
         </div>
         {{-- chart1 --}}
-        <div class="relative rounded-[0.5rem] col-span-2 row-span-2 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12">
+        <div class="relative rounded-[0.5rem] col-span-2 row-span-2 xs:row-span-5 sm:row-span-5 md:row-span-5 lg:row-span-5 p-4 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12">
             <div class="flex justify-start items-center">
                 <h1 class="text-sm">{{ __('main.support_help') }}</h1>
             </div>
@@ -494,7 +494,7 @@
 
         </div>
          {{-- chart responses --}}
-        <div wire:ignore class="rounded-[0.5rem] col-span-5 p-4 row-span-2 xs:row-span-5 sm:row-span-5 lg:row-span-5 md:row-span-5 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12">
+        <div wire:ignore class="rounded-[0.5rem] col-span-5 p-4 row-span-2 xs:row-span-5 sm:row-span-5 lg:row-span-5 md:row-span-5 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12">
             <div class="flex justify-between items-center " >
                 <span class="text-sm" >{{__('main.formsinteractiverate')  }}</span>
                 <a id="button-responses_forms" onclick="showLegend('responses_forms')" class="text-secondary_blue text-sm hover:cursor-pointer hover:no-underline">{{ __('main.hidelabels') }}</a>
@@ -506,7 +506,7 @@
             </div>
         </div>
         {{-- chart kiosks --}}
-        <div wire:ignore class="rounded-[0.5rem] col-span-5 p-4 row-span-2 xs:row-span-5 sm:row-span-5 lg:row-span-5 md:row-span-5 bg-white xs:col-span-12 md:col-span-12 lg:col-span-12">
+        <div wire:ignore class="rounded-[0.5rem] col-span-5 p-4 row-span-2 xs:row-span-5 sm:row-span-5 lg:row-span-5 md:row-span-5 bg-white xs:col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12">
             <div class="flex justify-between items-center " >
                 <span class="text-sm" >{{__('main.kiosksusagerate')  }}</span>
                 <a id="button-responses_kiosks" onclick="showLegend('responses_kiosks')" class="text-secondary_blue text-sm hover:cursor-pointer hover:no-underline">{{ __('main.hidelabels') }}</a>

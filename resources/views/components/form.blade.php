@@ -1,6 +1,6 @@
 
 @if($form->form_type_id==1)
-    <div class="max-h-max h-max col-span-4  lg:col-span-6 md:col-span-6 sm:col-span-12 xs:col-span-12 border-secondary_blue border-[1px] p-3 rounded-[0.5rem] bg-white ">
+    <div class="max-h-max h-max  col-span-4  xl:col-span-6  lg:col-span-6 md:col-span-6 sm:col-span-12 xs:col-span-12 border-secondary_blue border-[1px] p-3 rounded-[0.5rem] bg-white ">
 
         {{-- logo,name and menu --}}
         <div class="flex space-x-10 justify-between items-center">

@@ -22,14 +22,17 @@
             </svg>
 
         </span>
-        <a  class=" md:hidden lg:hidden 2xl:hidden " href="{{ route('dashboard') }}">
+        <a  class="md:hidden  lg:hidden xl:hidden 2xl:hidden " href="{{ route('dashboard') }}">
             <img class="block w-[140px] h-[60px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
+            <div class="flex justify-center items-center">
+                <span>{{ __('V') }}{{ env('APP_VERSION') }}</span>
+             </div>
+        </a>
 
-              </a>
 
     </div>
 
-    <div id="" class="sidebar xs:hidden fixed z-[100] top-0 bottom-0 left-0 p-2   w-[12%] lg:w-[20%] md:w-[25%] sm:w-[50%] xs:w-[50%] xs:overflow-y-auto xs:no-scrollbar
+    <div id="" class="sidebar xs:hidden fixed z-[100] top-0 bottom-0 left-0 p-2  w-[12%] xl:w-[20%] lg:w-[20%] md:w-[25%] sm:w-[25%] xs:w-[50%] xs:overflow-y-auto xs:no-scrollbar
     text-center bg-gray-900">
         <div class="text-gray-100 text-xl">
             <div class="">
@@ -105,11 +108,11 @@
 
               </a>
         </div>
-        <div class="min-h-[75%] max-h-[75%] overflow-y-scroll
-        no-scrollbar">
+        <div class=" max-h-[50%] 2xl:min-h-[75%] 2xl:max-h-[75%] xl:max-h-[60%] lg:max-h-[60%]  md:max-h-[50%] sm:max-h-[50%] overflow-y-scroll
+             no-scrollbar">
             {{-- dashboard --}}
             <div style="{{ (request()->is('dashboard')) ? 'background-color:#1277D1' : '' }}"
-                class=" max-h-[44px] min-h-[44px] p-1 mt-20 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
+                class=" max-h-[44px] min-h-[44px] p-1 mt-20  lg:mt-16 md:mt-14 sm:mt-12 xs:mt-10 flex items-center rounded-md px-4 duration-300 cursor-pointer   hover:bg-secondary_blue text-white">
 
 
                 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -120,7 +123,7 @@
                 </svg>
                 <x-dropdown-link  class="no-underline hover:no-underline focus:no-underline" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
 
-                <span class="text-[15px] ml-4 text-gray-200 text-center text-red  {{ (request()->is('dashboard')) ? "font-bold" : "" }} ">  {{ __('main.dashboard') }}</span></x-dropdown-link>
+                <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 text-gray-200 text-center text-red  {{ (request()->is('dashboard')) ? "font-bold" : "" }} ">  {{ __('main.dashboard') }}</span></x-dropdown-link>
             </div>
 
             {{-- forms --}}
@@ -137,7 +140,7 @@
                     </svg>
                 <x-dropdown-link class="flex no-underline hover:no-underline focus:no-underline"  :href="route('forms')" :active="request()->routeIs('forms')">
 
-                <span class="text-[15px] ml-4 text-gray-200 text-center {{ (request()->is('forms')) ? "font-bold" : "" }} ">  {{ __('main.myforms') }}</span></x-dropdown-link>
+                <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 text-gray-200 text-center {{ (request()->is('forms')) ? "font-bold" : "" }} ">  {{ __('main.myforms') }}</span></x-dropdown-link>
             </div>
             {{-- kiosks --}}
             <div  style="{{ (request()->is('kiosks')) ? 'background-color:#1277D1' : '' }}"
@@ -151,7 +154,7 @@
                     </svg>
                 <x-dropdown-link class="flex no-underline hover:no-underline focus:no-underline" :href="route('kiosks')" :active="request()->routeIs('kiosks')">
 
-                <span class="text-[15px] ml-4 text-gray-200 text-center {{ (request()->is('kiosks')) ? "font-bold" : "" }} ">  {{ __('main.mykiosks') }}</span></x-dropdown-link>
+                <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 text-gray-200 text-center {{ (request()->is('kiosks')) ? "font-bold" : "" }} ">  {{ __('main.mykiosks') }}</span></x-dropdown-link>
             </div>
 
             {{-- todo --}}
@@ -169,7 +172,7 @@
                     </svg>
                     <x-dropdown-link class="flex no-underline hover:no-underline focus:no-underline"  :href="route('todolist')" :active="request()->routeIs('todolist')">
 
-                    <span class="text-[15px] ml-4 text-gray-200 text-center {{ (request()->is('todo')) ? "font-bold" : "" }} ">  {{ __('main.todo_nav') }}</span></x-dropdown-link>
+                    <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 text-gray-200 text-center {{ (request()->is('todo')) ? "font-bold" : "" }} ">  {{ __('main.todo_nav') }}</span></x-dropdown-link>
             </div>
 
              {{-- signpdf --}}
@@ -184,7 +187,7 @@
                     </svg>
                     <x-dropdown-link class="flex no-underline hover:no-underline focus:no-underline"  :href="route('signpdf.index')" :active="request()->routeIs('signpdf.index')">
 
-                    <span class="text-[15px] ml-4 text-gray-200 text-center {{ (request()->is('signpdf.index')) ? "font-bold" : "" }} ">  {{ __('main.signpdf_nav') }}</span></x-dropdown-link>
+                    <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 text-gray-200 text-center {{ (request()->is('signpdf.index')) ? "font-bold" : "" }} ">  {{ __('main.signpdf_nav') }}</span></x-dropdown-link>
             </div>
             {{-- support &account --}}
             <div class="min-h-[250px]">
@@ -201,7 +204,7 @@
                         </svg>
                         <x-dropdown-link onclick="ShowSubMenu()" class="flex items-center no-underline hover:no-underline focus:no-underline"  >
 
-                        <span class="text-[15px] ml-4 text-gray-200 text-center whitespace-nowrap">  {{ __('main.account') }}</span>
+                        <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 text-gray-200 text-center whitespace-nowrap">  {{ __('main.account') }}</span>
                         <span class="ml-8 w-4 h-4" >
                             <svg id="svgdown" class="hidden" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"></path>
@@ -226,7 +229,7 @@
                             <div
                                 class=" mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:text-secondary text-white">
 
-                                <x-dropdown-link class=" flex no-underline hover:no-underline text-[15px] ml-4 {{ $current_url }}  text-center   hover:text-secondary focus:no-underline"  :href="route('accounts.show', $id)">
+                                <x-dropdown-link class=" flex no-underline hover:no-underline text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 {{ $current_url }}  text-center   hover:text-secondary focus:no-underline"  :href="route('accounts.show', $id)">
 
                                 {{ __('main.settings') }}</x-dropdown-link>
                             </div>
@@ -234,7 +237,7 @@
                             <div
                                 class=" mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:text-secondary text-white">
 
-                                <x-dropdown-link class="flex no-underline hover:no-underline text-[15px] ml-4 {{ (request()->is('billings')) ? 'text-secondary' : 'text-gray-200' }}  text-center   hover:text-secondary focus:no-underline"  :href="route('billings')">
+                                <x-dropdown-link class="flex no-underline hover:no-underline text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 {{ (request()->is('billings')) ? 'text-secondary' : 'text-gray-200' }}  text-center   hover:text-secondary focus:no-underline"  :href="route('billings')">
 
                                 {{ __('main.payamentbilling') }}</x-dropdown-link>
                             </div>
@@ -242,7 +245,7 @@
                             <div
                                 class=" mt-3 flex items-center rounded-md px-4 duration-300 cursor-pointer hover:text-secondary text-white">
 
-                                <x-dropdown-link class="flex no-underline hover:no-underline text-[15px] ml-4 {{  (request()->is('subscriptions')) ? 'text-secondary' : 'text-gray-200'  }}  text-center   hover:text-secondary focus:no-underline"  :href="route('subscriptions')">
+                                <x-dropdown-link class="flex no-underline hover:no-underline text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 {{  (request()->is('subscriptions')) ? 'text-secondary' : 'text-gray-200'  }}  text-center   hover:text-secondary focus:no-underline"  :href="route('subscriptions')">
 
                                 {{ __('main.subscriptions') }}</x-dropdown-link>
                             </div>
@@ -262,14 +265,14 @@
                     </svg>
                         <x-dropdown-link class="flex no-underline hover:no-underline focus:no-underline"  :href="route('support')" :active="request()->routeIs('support')">
 
-                        <span class="text-[15px] ml-4 text-gray-200 text-center ">  {{ __('main.support') }}</span></x-dropdown-link>
+                        <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs ml-4 text-gray-200 text-center ">  {{ __('main.support') }}</span></x-dropdown-link>
                 </div>
             </div>
         </div>
         <div class="border-gray-600 h-[1px]  border-t grid grid-cols-3 ">
               {{-- profile --}}
-            <x-dropdown-link class="flex px-0 no-underline hover:no-underline focus:no-underline"  :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
-                <div class="p-2 mt-0 grid col-span-1 justify-center items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-secondary_blue text-white">
+            <x-dropdown-link class="grid justify-center px-0 no-underline hover:no-underline focus:no-underline"  :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                <div class="py-2 px-4 lg:p-1 md:p-1  sm:p-1 xs:p-1 mt-0 grid col-span-1 justify-center items-center rounded-md  duration-300 cursor-pointer hover:bg-secondary_blue text-white">
 
                     <div class="flex justify-center items-center">
                         <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -281,7 +284,7 @@
                     </div>
                     <div class="flex justify-center items-center">
 
-                    <span class="text-md    text-gray-200 text-center ">  {{ __('main.profile') }}</span>
+                    <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs    text-gray-200 text-center ">  {{ __('main.profile') }}</span>
 
                     </div>
                 </div>
@@ -289,10 +292,10 @@
             {{-- logout --}}
             <form method="POST" action="{{ route('logout') }}" class="flex justify-center items-center">
                 @csrf
-                <x-dropdown-link class="flex px-0 no-underline hover:no-underline focus:no-underline" :href="route('logout')"
+                <x-dropdown-link class="grid justify-center px-0 no-underline hover:no-underline focus:no-underline" :href="route('logout')"
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">
-                    <div  class="p-2 mt-0 grid col-span-1 justify-center items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-secondary_blue text-white">
+                    <div  class="py-2 px-4 lg:p-1 md:p-1  sm:p-1 xs:p-1 mt-0 grid col-span-1 justify-center items-center rounded-md  duration-300 cursor-pointer hover:bg-secondary_blue text-white">
 
                         <div class="flex justify-center items-center">
                             <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
@@ -309,15 +312,16 @@
 
 
 
-                            <span class="text-md  text-gray-200 text-center ">  {{ __('main.logout') }}</span>
+                            <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs text-gray-200 text-center ">  {{ __('main.logout') }}</span>
 
                     </div>
                 </x-dropdown-link>
             </form>
             {{-- language --}}
-            <a class="flex px-0 no-underline hover:no-underline focus:no-underline p-2 mt-0 grid col-span-1 justify-center items-center rounded-md px-4 duration-300 cursor-pointer  text-white"
+            <a class="grid justify-center w-full  py-2 text-left text-sm leading-5   focus:outline-none
+            transition duration-150 ease-in-out  px-0 no-underline hover:no-underline focus:no-underline"
             @if(App::getLocale()=="ar")  href="{{ route('setLocale','en') }}" @else href="{{ route('setLocale','ar') }}" @endif >
-                <div class=" p-2 mt-0 grid col-span-1 justify-center items-center rounded-md px-4 duration-300 cursor-pointer hover:bg-secondary_blue  text-white">
+                <div class=" py-2 px-4 lg:p-1 md:p-1  sm:p-1 xs:p-1 mt-0 grid col-span-1 justify-center items-center rounded-md  duration-300 cursor-pointer hover:bg-secondary_blue text-white">
                         <div class="flex justify-center items-center">
                             <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
                             <svg class="w-[20px]" fill="#000000"  viewBox="0 0 24 24" id="translate" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
@@ -333,9 +337,9 @@
                         </div>
                         <div class="flex justify-center items-center" >
                             @if(App::getLocale()=="ar")
-                            <span class="text-md  text-gray-200 text-center "> {{ __('EN') }}</span>
+                            <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs  text-gray-200 text-center "> {{ __('English') }}</span>
                             @else
-                            <span class="text-md  text-gray-200 text-center "> {{ __('AR') }}</span>
+                            <span class="text-md lg:text-xs md:text-xs sm:text-xs xs:text-xs text-gray-200 text-center "> {{ __('العربية') }}</span>
                             @endif
                         </div>
 

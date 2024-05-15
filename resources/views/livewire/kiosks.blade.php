@@ -89,7 +89,7 @@
             @else
                 @foreach ($kiosks as $i=> $kiosk)
 
-                    <div class="col-span-3 lg:col-span-6  md:col-span-6 sm:col-span-12 xs:col-span-12 border-secondary_blue border-[1px] bg-white p-3 rounded-[0.5rem]">
+                    <div class="2xl:col-span-3  xl:col-span-4 lg:col-span-6  md:col-span-6 sm:col-span-12 xs:col-span-12 border-secondary_blue border-[1px] bg-white p-3 rounded-[0.5rem]">
                         <div class="grid grid-cols-6">
                             {{-- kiosk icon --}}
                             <div class="col-span-2 relative ">

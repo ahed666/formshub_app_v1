@@ -92,9 +92,18 @@ Route::group(['prefix'=>'admin-center','middleware'=>['auth:admin']],function(){
     Route::post('/saveresponsescategories',[AdminController::class, 'saveresponsescategories'])->name('admin.saveresponsescategories');
     Route::post('/logout',[AdminController::class, 'destroy'])->name('admin.logout');
     Route::post('/adminlogoutsession/{id}',[AdminController::class, 'adminLogout'])->name('admin.adminLogout');
+
     Route::post('/addpromocode',[AdminController::class, 'addPromocode'])->name('admin.addpromocode');
     Route::post('/editpromocode',[AdminController::class, 'editPromocode'])->name('admin.editpromocode');
     Route::get('/deletepromocode/{id}',[AdminController::class, 'deletepromocode'])->name('admin.deletepromocode');
+
+    Route::post('/adddevice',[AdminController::class, 'addDevice'])->name('admin.adddevice');
+    Route::post('/editdevice',[AdminController::class, 'editDevice'])->name('admin.editdevice');
+    Route::get('/deletedevice/{id}',[AdminController::class, 'deleteDevice'])->name('admin.deletedevice');
+
+    Route::post('/addclient',[AdminController::class, 'addClient'])->name('admin.addclient');
+    Route::post('/editclient',[AdminController::class, 'editClient'])->name('admin.editclient');
+    Route::get('/deleteclient/{id}',[AdminController::class, 'deleteClient'])->name('admin.deleteclient');
 
     Route::post('/check-code-unique', [AdminController::class, 'checkCodeUnique'])->name('admin.checkcodeunique');
 

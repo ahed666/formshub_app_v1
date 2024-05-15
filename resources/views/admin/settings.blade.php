@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link  rel="stylesheet" href="{{ asset('styles/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
 
     @include('admin.includes.head')
 
@@ -408,6 +409,32 @@
                            <x-jet-button type="button" onclick="getAccounts()"  class="">export</x-jet-button>
 
                         </div>
+                        {{-- clients --}}
+                        <div class="mt-10">
+                            <div  class="flex justify-between items-center mb-2">{{ __('Clients') }}
+                                <x-jet-button class="ml-3" data-toggle="modal" data-target="#show_client"  type="button"   >
+                                    {{ __('Add new') }}
+                                </x-jet-button>
+                            </div>
+                            <div class="border-[1px] border-black rounded-[0.5rem] p-4 overflow-hidden">
+                                <div class="owl-carousel owl-theme client-logo " id="client-logo">
+                                    @foreach ($clients as $client)
+                                    <div class="item mx-1  ">
+                                      <img src="{{ asset($client->client_logo) }}" class="w-[100px] h-[100px] object-contain" alt="client-logo">
+
+                                        <div class="flex justify-center items-center">
+                                            <svg onclick="DeleteClient({{ $client->id }})"  class="h-6 w-6 text-svg_primary hover:text-primary_red focus:text-primary_red"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                            </svg>
+                                        </div>
+                                  </div>
+                                    @endforeach
+                                </div>
+
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -418,7 +445,7 @@
                     <x-jet-button class="ml-3" data-toggle="modal" data-target="#show_promocode"  type="button"   >
                         {{ __('Add new') }}
                     </x-jet-button>
-            </div>
+                </div>
                 <div class="max-h-[400px] overflow-y-auto">
                     <table class="admins_table table-fixed w-full  rounded-lg mt-4  " >
                         {{-- head of table --}}
@@ -503,6 +530,74 @@
                         </tbody>
                     </table>
                 </div>
+
+               {{-- end of promo code --}}
+
+               {{-- devices --}}
+               <div class="flex justify-between items-center bg-white text-md rounded-[0.5rem] p-2 mt-2">
+                <h1>{{ __('Devices') }}</h1>
+                <x-jet-button class="ml-3" data-toggle="modal" data-target="#show_deivce"  type="button"   >
+                    {{ __('Add new') }}
+                </x-jet-button>
+                </div>
+                <div class="max-h-[400px] overflow-y-auto">
+                    <table class="admins_table table-fixed w-full  rounded-lg mt-4  " >
+                        {{-- head of table --}}
+                        <thead class="h-14">
+                        <tr class="border-b-[1px] border-t-[1px] p-1  bg-gray-600 text-white ">
+
+                            <th   class="sticky top-0 px-4 py-2 z-50 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Name</th>
+                            <th   class="sticky top-0 px-4  py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Device Model</th>
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Price Before</th>
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Price Now</th>
+                            <th  class="sticky top-0 px-4 py-2 bg-gray-600 ml-1 mr-1 w-1/5 xs:text-xs text-sm text-center">Options</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody class="bg-white " >
+                            @foreach($typeDevices as $key => $type)
+
+                            <tr class="h-10 min-h-10 max-h-10 w-full bg-gray-50 p-1 border-b-[1px] border-gray-300">
+                            <td class="text-center">
+                                <span  class="xs:text-xs text-sm ">{{ $type->name }}</span>
+                            </td>
+                            <td class="text-center overflow-hidden"><span  class="xs:text-xs text-sm   text-left">{{ $type->model->device_model }}</span></td>
+                            <td class="text-center overflow-hidden"><span class=" xs:text-xs text-sm text-center">{{  $type->price_prev }}</span></td>
+
+                            <td class="text-center overflow-hidden"><span  class="xs:text-xs text-sm text-center">{{  $type->price }}</span></td>
+                            <td class="text-center">
+                                <div class="flex justify-center space-x-2 items-center">
+                                    <div class="text-center">
+
+                                        <svg data-toggle="modal" data-target="#show_deivce" onclick="EditDevice({{$key}})" class="text-svg_primary hover:text-secondary_blue hover:cursor-pointer h-6 w-6 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path d="M12 3.99997H6C4.89543 3.99997 4 4.8954 4 5.99997V18C4 19.1045 4.89543 20 6 20H18C19.1046 20 20 19.1045 20 18V12M18.4142 8.41417L19.5 7.32842C20.281 6.54737 20.281 5.28104 19.5 4.5C18.7189 3.71895 17.4526 3.71895 16.6715 4.50001L15.5858 5.58575M18.4142 8.41417L12.3779 14.4505C12.0987 14.7297 11.7431 14.9201 11.356 14.9975L8.41422 15.5858L9.00257 12.6441C9.08001 12.2569 9.27032 11.9013 9.54951 11.6221L15.5858 5.58575M18.4142 8.41417L15.5858 5.58575"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" /> </g>
+                                        </svg>
+                                    </div>
+                                    <div class="text-center">
+
+
+                                        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                                        <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+                                        <svg onclick="DeleteDevice({{ $type->id }})"  class="h-6 w-6 text-svg_primary hover:text-primary_red focus:text-primary_red"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <g id="SVGRepo_iconCarrier"> <path d="M10 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M4 7H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                                        </svg>
+
+
+                                    </div>
+                                </div>
+                            </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+               {{-- end of devices --}}
             </div>
         </div>
     </div>
@@ -584,6 +679,7 @@
         </div>
         </div>
     </div>
+    {{-- promo codes modal --}}
     <div  class="modal fade fixed top-0 left-0 z-[1055]  h-full w-full  " data-backdrop="static" data-keyboard="false" id="show_promocode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[800px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
         <div class="modal-content  w-full flex-col rounded-md border-none  bg-clip-padding text-current shadow-lg
@@ -697,6 +793,163 @@
         </div>
         </div>
     </div>
+    {{-- device modal --}}
+    <div  class="modal fade fixed top-0 left-0 z-[1055]  h-full w-full  " data-backdrop="static" data-keyboard="false" id="show_deivce" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[800px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
+        <div class="modal-content  w-full flex-col rounded-md border-none  bg-clip-padding text-current shadow-lg
+        outline-none ">
+            {{-- header --}}
+            <div class="flex items-center justify-between p-4 border-b rounded-t ">
+                <div class="flex items-center">
+                <h3 id="dialog_device_form_title" class="text-xl font-semibold text-gray-900 ">
+                    {{ __('Add New Device ') }}
+                </h3>
+
+                </div>
+                <button  onclick="ClearFormEditDevice()" type="button"  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex
+                items-center   close" data-dismiss="modal" aria-label="Close">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0
+                    011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div   class=" 2xl:max-h-[700px] xs:max-h-[400px] p-4">
+                <form id="deviceform" method="POST" enctype="multipart/form-data" action="{{ route('admin.adddevice') }}">
+                    <div id="error_container" class="alert alert-danger" style="display: none;">
+                        <ul id="error_list">
+                        </ul>
+                    </div>
+                    @csrf
+                    <input type="hidden" id="deviceid" name="deviceid">
+                    {{-- Name of device --}}
+                    <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                        <x-input-label class="col-span-2" for="device_name" :value="__('Deivce Name')" />
+                        <input   type="text"    id="device_name" name="device_name"
+                            class="      h-10 bg-gray-50   text-gray-900 text-sm rounded-lg col-span-10
+                            block  px-2 border-gray-300  focus:border-secondary
+                            focus:ring-secondary  "     required>
+                    </div>
+
+                   {{-- device model --}}
+                   <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                        <x-input-label class="col-span-2" for="devicemodel_select" :value="__('Device Model')" />
+
+                        <select  id="devicemodel_select" name="devicemodel_select" class="col-span-10   h-10   text-sm rounded-lg
+                            px-2  border-gray-300  focus:border-secondary  bg-gray-50
+                            focus:ring-secondary "  >
+                            @foreach ($devicesModels as $model)
+                            <option value="{{ $model->id }}">{{ $model->device_model }}</option>
+                            @endforeach
+
+
+
+                        </select>
+                   </div>
+                   <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                    <x-input-label class="col-span-2" for="image" :value="__('Device Image')" />
+
+                    <input  type="file"  accept="image/*"  id="image" name="image" class="col-span-10   h-10   text-sm rounded-lg
+                        px-2  border-gray-300  focus:border-secondary  bg-gray-50
+                        focus:ring-secondary "  required>
+
+               </div>
+
+
+                   {{-- price before --}}
+                    <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                        <x-input-label class="col-span-2" for="price_before" :value="__('Price Before')" />
+                        <input   type="text" pattern="[0-9]*" inputmode="numeric"  id="price_before" name="price_before"
+                            class="      h-10 bg-gray-50   text-gray-900 text-sm rounded-lg col-span-10
+                            block  px-2 border-gray-300  focus:border-secondary
+                             focus:ring-secondary  "     >
+                   </div>
+                   {{-- price now --}}
+                   <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                    <x-input-label class="col-span-2" for="price_now" :value="__('Price Now')" />
+                    <input   type="text" pattern="[0-9]*" inputmode="numeric"  id="price_now" name="price_now"
+                        class="      h-10 bg-gray-50   text-gray-900 text-sm rounded-lg col-span-10
+                        block  px-2 border-gray-300  focus:border-secondary
+                         focus:ring-secondary  "     required>
+               </div>
+
+
+
+
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+
+                        <x-jet-secondary-button onclick="ClearFormEditDevice()"  data-dismiss="modal" aria-label="Close"  type="button"  wire:loading.attr="disabled">
+                            {{ __('Cancel') }}
+                        </x-jet-secondary-button>
+                        <x-jet-button class="ml-3" type="submit"   wire:loading.attr="disabled">
+                            {{ __('Save') }}
+                        </x-jet-button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+        </div>
+    </div>
+    {{-- client modal --}}
+
+    <div  class="modal fade fixed top-0 left-0 z-[1055]  h-full w-full  " data-backdrop="static" data-keyboard="false" id="show_client" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered  min-h-[calc(100%-1rem)] w-full max-w-[800px] translate-y-[-50px] items-center  transition-all duration-10 ease-out-in min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)]" role="document">
+        <div class="modal-content  w-full flex-col rounded-md border-none  bg-clip-padding text-current shadow-lg
+        outline-none ">
+            {{-- header --}}
+            <div class="flex items-center justify-between p-4 border-b rounded-t ">
+                <div class="flex items-center">
+                <h3 id="dialog_client_form_title" class="text-xl font-semibold text-gray-900 ">
+                    {{ __('Add New Client ') }}
+                </h3>
+
+                </div>
+                <button  onclick="ClearFormEditClient()" type="button"  class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex
+                items-center   close" data-dismiss="modal" aria-label="Close">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0
+                    011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+            </div>
+            <div   class=" 2xl:max-h-[700px] xs:max-h-[400px] p-4">
+                <form id="deviceform" method="POST" enctype="multipart/form-data" action="{{ route('admin.addclient') }}">
+                    <div id="error_container" class="alert alert-danger" style="display: none;">
+                        <ul id="error_list">
+                        </ul>
+                    </div>
+                    @csrf
+
+                    <div class="grid grid-cols-12 gap-1 justify-between items-center space-x-4 w-full mt-4">
+                        <x-input-label class="col-span-2" for="image" :value="__('Logo')" />
+
+                        <input  type="file"  accept="image/*"  id="image" name="image" class="col-span-10   h-10   text-sm rounded-lg
+                            px-2  border-gray-300  focus:border-secondary  bg-gray-50
+                            focus:ring-secondary "  required>
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+
+                        <x-jet-secondary-button onclick="ClearFormEditClient()"  data-dismiss="modal" aria-label="Close"  type="button"  wire:loading.attr="disabled">
+                            {{ __('Cancel') }}
+                        </x-jet-secondary-button>
+                        <x-jet-button class="ml-3" type="submit"   wire:loading.attr="disabled">
+                            {{ __('Save') }}
+                        </x-jet-button>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+        </div>
+    </div>
+
     @livewireScripts()
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('https://unpkg.com/xlsx-populate/browser/xlsx-populate.min.js') }}"></script>
@@ -810,6 +1063,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jquery.fancytable/dist/fancyTable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
 
 
@@ -985,6 +1240,8 @@
   }
 //   promo code
 var PromotionCodes = {!! json_encode($promotionCodes->toArray(), JSON_HEX_TAG) !!};
+var typeDevices = {!! json_encode($typeDevices->toArray(), JSON_HEX_TAG) !!};
+
 // edit promo code
 
 //   generate random promo code
@@ -1058,47 +1315,163 @@ function DeletePromoCode(id){
 
 
  }
+
+
 //  check on unique of promocode
-    document.getElementById('promocodeform').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent the form from submitting
-        var code = document.getElementById('promocodetext').value;
+document.getElementById('promocodeform').addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent the form from submitting
+    var code = document.getElementById('promocodetext').value;
 
-        // Perform an AJAX request to check the uniqueness of the code
-        if(edit==false){
-        $.ajax({
-            url: '{{ route('admin.checkcodeunique') }}',
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: { code: code },
-            success: function(response) {
-                if (response.unique) {
-                    // If the code is unique, submit the form
-                    document.getElementById('promocodeform').submit();
-                } else {
+    // Perform an AJAX request to check the uniqueness of the code
+    if(edit==false){
+    $.ajax({
+        url: '{{ route('admin.checkcodeunique') }}',
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: { code: code },
+        success: function(response) {
+            if (response.unique) {
+                // If the code is unique, submit the form
+                document.getElementById('promocodeform').submit();
+            } else {
 
-                    // If the code is not unique, display an error message
-                    var errorContainer = document.getElementById('error_container');
-                    var errorList = document.getElementById('error_list');
-                    errorList.innerHTML = '<li>The code must be unique.</li>';
-                    errorContainer.style.display = 'block';
-                }
-            },
-            error: function() {
-                // Handle errors
-                console.error('Error checking code uniqueness.');
+                // If the code is not unique, display an error message
+                var errorContainer = document.getElementById('error_container');
+                var errorList = document.getElementById('error_list');
+                errorList.innerHTML = '<li>The code must be unique.</li>';
+                errorContainer.style.display = 'block';
             }
-        });
-        }
-        else
-        {
-            document.getElementById('promocodeform').submit();
-
+        },
+        error: function() {
+            // Handle errors
+            console.error('Error checking code uniqueness.');
         }
     });
+    }
+    else
+    {
+        document.getElementById('promocodeform').submit();
+
+    }
+});
+
+
+// devices
+// edit device
+function EditDevice(DeviceKey)
+{
+    edit=true;
+
+    document.getElementById('dialog_device_form_title').innerText="Edit Device";
+     Device = typeDevices[DeviceKey];
+     console.log(Device);
+    document.getElementById('device_name').value = Device.name;
+    document.getElementById('devicemodel_select').value = Device.model.id;
+    document.getElementById('price_before').value = Device.price_prev;
+    document.getElementById('price_now').value = Device.price;
+
+
+    var form = document.getElementById('deviceform');
+
+
+    document.getElementById('deviceid').value = Device.id;
+    form.setAttribute('action', `{{ route("admin.editdevice") }}`);
+
+
+ }
+ function ClearFormEditDevice(){
+    edit=false
+    document.getElementById('dialog_device_form_title').innerText="Add New Device";
+    document.getElementById('device_name').value ='';
+    document.getElementById('discount_value').value ='';
+    document.getElementById('price_before').value ='';
+    document.getElementById('price_now').value ='';
+    document.getElementById('image').value=null;
+        var form = document.getElementById('deviceform');
+
+        form.setAttribute('action', `{{ route("admin.adddevice") }}`);
+
+ }
+// delete device
+function DeleteDevice(id){
+    Swal.fire({
+                title:'Delte Device',
+                html: 'Do you want delete  this Device?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#1277D1',
+            showCancelButton: true,
+            cancelButtonColor:'#f3f4f6',
+            cancelButtonText:`<h5 style='color:000000;border:0;box-shadow: none;'>Cancel</h5>`,
+            confirmButtonText:'Ok'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '{{ route('admin.deletedevice', ['id' => ':id']) }}'.replace(':id', id);
+
+            }
+            })
+
+}
+
 
 </script>
+
+<script>
+    // clients
+    // delete device
+    function DeleteClient(id){
+        Swal.fire({
+                    title:'Delete Client',
+                    html: 'Do you want delete  this Client?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#1277D1',
+                showCancelButton: true,
+                cancelButtonColor:'#f3f4f6',
+                cancelButtonText:`<h5 style='color:000000;border:0;box-shadow: none;'>Cancel</h5>`,
+                confirmButtonText:'Ok'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '{{ route('admin.deleteclient', ['id' => ':id']) }}'.replace(':id', id);
+
+                }
+                })
+
+    }
+    $('.client-logo').owlCarousel({
+            loop: true,
+            margin: 0,
+            dots: false,
+            nav: false,
+            autoplay: true,
+            responsiveClass:true,
+            responsive: {
+                0: {
+                    items: 3
+                },
+                300: {
+                    items: 3
+                },
+                600: {
+                    items: 4
+                },
+                1000: {
+                    items: 5
+                }
+            },
+            onInitialized: function(event) {
+                var items = event.item.count;
+                var visibleItems = event.page.size;
+                if (items <= visibleItems) {
+                    this.settings.loop = false;
+                    this.settings.merge = true;
+                    this.settings.mergeFit = true;
+                }
+            }
+        })
+  </script>
     {{-- menubar for each form in owl carousel  --}}
 
     <script>

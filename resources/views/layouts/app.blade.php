@@ -118,7 +118,7 @@
         dropdown();
 
         function openSidebar() {
-            document.querySelector(".sidebar").classList.toggle("xs:hidden");
+            document.querySelector(".sidebar").classList.toggle("hidden");
         }
 
     </script>

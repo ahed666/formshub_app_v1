@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\StatefulGuard;
+use Illuminate\Support\Facades\File;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Pipeline;
 // use Laravel\Fortify\Actions\AttemptToAuthenticate;
@@ -30,6 +31,7 @@ use App\Models\Form;
 use App\Models\Responses;
 use App\Models\Invoice;
 use App\Models\DeviceCode;
+use App\Models\DeviceModel;
 use App\Models\ResponseCategory;
 use \PDF;
 use Dompdf\Dompdf;
@@ -37,6 +39,7 @@ use App\Models\SupportTicket;
 use App\Models\DeletedAccount;
 use App\Models\canceledPlan;
 use App\Models\OrderProduct;
+use App\Models\Client;
 use App\Models\PromotionCode;
 use App\Models\Order;
 use App\Models\TypeDevice;
@@ -334,7 +337,10 @@ class AdminController extends Controller
 
              $responsesCategories=ResponseCategory::all();
             $promotionCodes= PromotionCode::all();
-            return view('admin.settings',compact('admins','promotionCodes','allPlans','responsesCategories','accounts','sessions'));
+            $typeDevices=TypeDevice::with('model')->get();
+            $devicesModels=DeviceModel::all();
+            $clients=Client::all();
+            return view('admin.settings',compact('admins','typeDevices','clients','devicesModels','promotionCodes','allPlans','responsesCategories','accounts','sessions'));
         }
         else{
 
@@ -599,6 +605,115 @@ class AdminController extends Controller
 
         } catch (\Throwable $th) {
 
+            return redirect()->route('admin.settings')->with('message','error');
+
+        }
+
+    }
+
+
+
+    // devices
+    // edit device
+    public function editDevice(Request $request){
+
+        try {
+            //code...
+
+        $device = TypeDevice::find($request->deviceid); // Assuming $id is the ID of the promotion code to update
+         if($request->hasFile('image'))
+      {  File::delete(public_path($device->image));
+        $imagePath = $request->image->store('images/devices');}
+         else
+         $imagePath=$device->image;
+
+        $device->update([
+            'name' => $request->device_name,
+            'model_id' => $request->devicemodel_select,
+            'price_prev' => $request->price_before,
+            'price' => $request->price_now,
+            'image'=>$imagePath,
+
+        ]);
+        return redirect()->route('admin.settings')->with('message','success');
+
+    } catch (\Throwable $th) {
+            dd($th);
+        return redirect()->route('admin.settings')->with('message','error');
+
+    }
+    }
+
+    // delete device
+    public function deleteDevice($id){
+        try {
+           $device= TypeDevice::find($id)->first();
+            // Storage::delete('images/devices/' . $device->image);
+            File::delete(public_path($device->image));
+
+            $device->delete();
+            return redirect()->route('admin.settings')->with('message','success');
+
+        } catch (\Throwable $th) {
+           dd($th);
+            return redirect()->route('admin.settings')->with('message','error');
+
+        }
+
+    }
+
+    //  add device
+    public function addDevice(Request $request){
+
+        try {
+            if($request->hasFile('image'))
+            $imagePath = $request->image->store('images/devices');
+
+            TypeDevice::create([
+                'name' => $request->device_name,
+                'model_id' => $request->devicemodel_select,
+                'price_prev' => $request->price_before,
+                'price' => $request->price_now,
+                'image'=>$imagePath,
+            ]);
+            return redirect()->route('admin.settings')->with('message','success');
+        }
+        catch (\Throwable $th) {
+            dd($th);
+            return redirect()->route('admin.settings')->with('message','error');
+        }
+    }
+
+
+    // add client
+    public function addClient(Request $request){
+        try {
+            if($request->hasFile('image'))
+            $imagePath = $request->image->store('images/clients');
+
+            Client::create([
+
+                'client_logo'=>$imagePath,
+            ]);
+            return redirect()->route('admin.settings')->with('message','success');
+        }
+        catch (\Throwable $th) {
+            dd($th);
+            return redirect()->route('admin.settings')->with('message','error');
+        }
+    }
+    // delete client
+    public function deleteClient($id){
+        try {
+           $client= Client::find($id)->first();
+            // Storage::delete('images/devices/' . $device->image);
+            File::delete(public_path($client->client_logo));
+
+            $client->delete();
+            return redirect()->route('admin.settings')->with('message','success');
+
+        } catch (\Throwable $th) {
+           dd($th);
             return redirect()->route('admin.settings')->with('message','error');
 
         }

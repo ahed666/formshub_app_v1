@@ -648,11 +648,12 @@ class AddQuestion extends Component
         $this->resetErrorBag();
 
     }
-    public function selecttype($type,$type_detail){
+    public function selecttype($id){
+        $questionType=QuestionType::whereid($id)->first();
         $this->answers=[];
         $this->count=0;
-        $this->type=$type;
-        $this->type_detail=$type_detail;
+        $this->type=$questionType->question_type;
+        $this->type_detail=app()->getLocale() == 'en'?$questionType->question_type_details : $questionType->question_type_details_ar;;
         $this->checkdisable();
         $this->initvalue();
         // add initial one answer

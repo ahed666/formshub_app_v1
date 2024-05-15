@@ -54,32 +54,53 @@
                         <!-- Modal body -->
                         <div class="px-2 overflow-y-auto 2xl:max-h-[600px] xs:max-h-[400px]">
                              @foreach ( $category_types as $i=>$category )
-                                <div class="mb-1 mt-2 px-2 font-bold text-black  " ><span>{{ $category->category_name }}</span></div>
+                                <div class="mb-1 mt-2 px-2 font-bold text-black  " >
+                                    <span>
+                                        @if (App::getLocale() == 'en')
+                                    {{ $category->category_name }}
+                                    @else
+                                    {{ $category->category_name_ar }}
+                                    @endif
+
+                                    </span>
+                                </div>
                                 <ul class="  grid w-full  grid-cols-10  gap-4 p-1  " >
                                     @foreach ($TypesOfQuestion as $t )
 
-                                    @if($t->category_id==$category->id)
-                                        <li   class="2xl:col-span-2 xl:col-span-2 lg:col-span-2 md:col-span-4  sm:col-span-4 xs:col-span-12 "  >
-                                            <input wire:loading.class="disabled" wire:click="selecttype('{{ $t->question_type }}','{{ $t->question_type_details }}')" value="{{ $t->question_type }}" {{ $type==$t->question_type?"checked":"" }} class="hidden peer" name="question" id="item{{ $t->id }}" type="radio" required>
-                                                <label for="item{{ $t->id }}" class="inline-flex items-center justify-between w-full p-1  text-gray-500 bg-white border-[2px] rounded-lg cursor-pointer
-                                                   peer-checked:border-blue-400
-                                                hover:text-gray-600 hover:bg-gray-100 ">
-                                                <img src="{{asset($t->image)}}" alt="">
+                                        @if($t->category_id==$category->id)
+                                            @php
+                                                if (App::getLocale() == 'en')
+                                                    $type_details=$t->question_type_details ;
+                                                else
+                                                    $type_details= $t->question_type_details_ar;
 
-                                            </label>
+                                            @endphp
+                                                <li   class="2xl:col-span-2 xl:col-span-2 lg:col-span-2 md:col-span-4  sm:col-span-4 xs:col-span-12 "  >
+                                                    <input wire:loading.class="disabled"
 
-                                            <div class="flex items-baseline">
-                                                <a data-bs-toggle="tooltip"  data-bs-html="true" title="{{ $t->question_type_details }}">
-                                                    <svg   class="inline-block text-blue-400 ml-[1px] mr-[1px] w-[20px] h[20px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
-                                                    </svg>
-                                                </a>
-                                                <span class="text-sm text-left whitespace-normal inline-block"> {{ $t->question_type_details }}</span>
+                                                     wire:click="selecttype('{{ $t->id }}')"
+                                                      value="{{ $t->question_type }}" {{ $type==$t->question_type?"checked":"" }} class="hidden peer" name="question" id="item{{ $t->id }}" type="radio" required>
+                                                        <label for="item{{ $t->id }}" class="inline-flex items-center justify-between w-full p-1  text-gray-500 bg-white border-[2px] rounded-lg cursor-pointer
+                                                        peer-checked:border-blue-400
+                                                        hover:text-gray-600 hover:bg-gray-100 ">
+                                                        <img src="{{asset($t->image)}}" alt="">
 
-                                            </div>
+                                                    </label>
 
-                                        </li>
-                                    @endif
+                                                    <div class="flex items-baseline">
+                                                        <a data-bs-toggle="tooltip"  data-bs-html="true" title="{{ $type_details }}">
+                                                            <svg   class="inline-block text-blue-400 ml-[1px] mr-[1px] w-[20px] h[20px]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
+                                                            </svg>
+                                                        </a>
+                                                        <span class="text-sm text-left whitespace-normal inline-block">
+                                                            {{ $type_details }}
+                                                            </span>
+
+                                                    </div>
+
+                                                </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             @endforeach

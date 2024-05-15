@@ -7,7 +7,7 @@
 
 @endpush
 
-<div   class="h-screen overflow-hidden xs:overflow-auto xs:h-full">
+<div   class="2xl:h-screen 2xl:overflow-hidden xs:overflow-auto xs:h-full">
     <x-successfulaction   :kiosks="$current_form_kiosks"/>
 
     <div  wire:loading.class="flex z-[100]" wire:loading.remove.class="hidden" class="hidden  justify-center items-center absolute top-1/2 right-[44%] ">
@@ -35,9 +35,9 @@
 
 
                  {{-- form settings --}}
-                <div class="grid xs:block 2xl:grid-cols-12 xl:grid-cols-12 lg:grid-cols-12 md:grid-cols-12 gap-2   ">
+                <div class="grid xs:block 2xl:grid-cols-12 xl:grid-cols-12 lg:block md:block gap-2   ">
                     {{-- form settings --}}
-                    <div class="col-span-3   " >
+                    <div class="col-span-3   lg:col-span-12 md:col-span-12 " >
 
 
                         <div class="w-full flex justify-between space-x-4 items-center p-4  rounded-[0.5rem] bg-white  xs:my-2 xs:p-2 drop-shadow mb-2">
@@ -339,7 +339,7 @@
                     </div>
 
                     {{-- form questions --}}
-                    <div  class="col-span-9   px-2 pb-2 border-[1px] border-gray-400  rounded-[0.5rem] bg-white    drop-shadow"  >
+                    <div  class="col-span-9   lg:col-span-12 md:col-span-12  px-2 pb-2 border-[1px] border-gray-400  rounded-[0.5rem] bg-white    drop-shadow"  >
                             <div>
                                 <div class="grid grid-cols-3 min-h-[80px] ">
                                     <div class="block col-span-1  p-1">
