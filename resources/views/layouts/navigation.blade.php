@@ -25,7 +25,7 @@
         <a  class="md:hidden  lg:hidden xl:hidden 2xl:hidden " href="{{ route('dashboard') }}">
             <img class="block w-[140px] h-[60px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
             <div class="flex justify-center items-center ">
-                <span class="font-bold">{{ __('V') }}{{ env('APP_VERSION') }}</span>
+                <span >{{ __('V') }}{{ env('APP_VERSION') }}</span>
              </div>
         </a>
 
@@ -105,7 +105,9 @@
 
              <a  href="{{ route('dashboard') }}">
             <img class="block w-[130px] h-[50px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
-
+                <div class="flex justify-center items-center ">
+                    <span >{{ __('V') }}{{ env('APP_VERSION') }}</span>
+                </div>
               </a>
         </div>
         <div class=" max-h-[50%] 2xl:min-h-[75%] 2xl:max-h-[75%] xl:max-h-[60%] lg:max-h-[60%]  md:max-h-[50%] sm:max-h-[50%] overflow-y-scroll
