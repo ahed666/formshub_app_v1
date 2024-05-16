@@ -849,7 +849,7 @@
 
                     <input  type="file"  accept="image/*"  id="image" name="image" class="col-span-10   h-10   text-sm rounded-lg
                         px-2  border-gray-300  focus:border-secondary  bg-gray-50
-                        focus:ring-secondary "  required>
+                        focus:ring-secondary "  >
 
                </div>
 
