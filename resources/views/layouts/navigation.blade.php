@@ -27,8 +27,8 @@
                 <img class="block w-[140px] h-[60px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
 
             </a>
-            <div class="flex justify-center items-center ">
-                <span >{{ __('V') }}{{ env('APP_VERSION') }}</span>
+            <div class="flex justify-center items-center  ">
+                <span class="text-sm" >{{ __('V') }}{{ env('APP_VERSION') }}</span>
              </div>
         </div>
 
@@ -105,13 +105,15 @@
             <div class="my-2 bg-gray-600 h-[1px]"></div>
         </div>
         <div class="p-2.5 flex items-center justify-center rounded-md px-4 duration-300 cursor-pointer  text-white">
-
+            <div>
              <a  href="{{ route('dashboard') }}">
             <img class="block w-[130px] h-[50px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
-                <div class="flex justify-center items-center ">
-                    <span >{{ __('V') }}{{ env('APP_VERSION') }}</span>
-                </div>
+
               </a>
+              <div class="flex justify-center items-center  ">
+                <span class="text-sm" >{{ __('V') }}{{ env('APP_VERSION') }}</span>
+             </div>
+            </div>
         </div>
         <div class=" max-h-[50%] 2xl:min-h-[75%] 2xl:max-h-[75%] xl:max-h-[60%] lg:max-h-[60%]  md:max-h-[50%] sm:max-h-[50%] overflow-y-scroll
              no-scrollbar">
