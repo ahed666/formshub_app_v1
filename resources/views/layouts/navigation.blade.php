@@ -22,8 +22,8 @@
             </svg>
 
         </span>
-        <div class="md:hidden  lg:hidden xl:hidden 2xl:hidden ">
-            <a href="{{ route('dashboard') }}">
+        <div class="md:hidden  lg:hidden xl:hidden 2xl:hidden hover:cursor-default ">
+            <a class="hover:cursor-pointer" href="{{ route('dashboard') }}">
                 <img class="block w-[140px] h-[60px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
 
             </a>
@@ -105,8 +105,8 @@
             <div class="my-2 bg-gray-600 h-[1px]"></div>
         </div>
         <div class="p-2.5 flex items-center justify-center rounded-md px-4 duration-300 cursor-pointer  text-white">
-            <div>
-             <a  href="{{ route('dashboard') }}">
+            <div class="hover:cursor-default">
+             <a class="hover:cursor-pointer"  href="{{ route('dashboard') }}">
             <img class="block w-[130px] h-[50px] object-contain text-gray-800 " viewbox="0 0 58 58" fill="none" src="{{asset('images/logos/app_logo_nav.png')}}" alt="">
 
               </a>
