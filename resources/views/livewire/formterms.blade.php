@@ -53,7 +53,7 @@
 </div>
 @push('scripts')
 
-<script src="https://cdn.tiny.cloud/1/YOUR_API_KEY/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 
 <script>
 
@@ -67,11 +67,7 @@
         var maxLength = messageEle.getAttribute('maxlength');
         var currentLength = messageEle.value.length;
         counterEle.innerText = `${currentLength}`;
-    //     tinymce.init({
-    //   selector: 'textarea',
-    //   plugins: 'advlist autolink lists link image charmap print preview anchor',
-    //   toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | link image',
-    // });
+
     }
 
 
