@@ -7,7 +7,7 @@
         </div>
         <!-- Modal content -->
         <div class="p-4 overflow-y-auto max-h-[70%]">
-            <div class="result-upload-{{ $type }} flex justify-center max-h-[500px]"></div>
+            <div class="result-upload-{{ $type }} flex justify-center max-h-[400px]"></div>
         </div>
         <!-- Footer -->
         <div class="flex items-center p-4 border-t border-gray-200">

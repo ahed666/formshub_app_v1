@@ -21,7 +21,8 @@ use Livewire\WithFileUploads;
 use Storage;
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
-use Image;
+use Intervention\Image\ImageManagerStatic as Image;
+
 // google translate api
 use Stichoza\GoogleTranslate\GoogleTranslate;
 class EditQuestion extends Component

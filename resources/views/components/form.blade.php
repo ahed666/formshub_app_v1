@@ -67,7 +67,7 @@
 
 
         {{-- buttons --}}
-        <div class="mt-2 xs:mt-1 flex justify-between xs:justify-normal xs:space-x-2 items-center ">
+        <div class="mt-2 xs:mt-1 flex justify-between  xs:space-x-2 items-center ">
 
                 <div>
 
@@ -97,7 +97,7 @@
                     {{-- preview button --}}
                     <a target="_blank" href="{{ route('preview',$form->id) }}" class="bg-gray-400 hover:no-underline inline-flex items-center px-4 py-2 xs:m-0 xs:p-1
                         border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest
-                        active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-1 ">
+                        active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-1 xs:hidden ">
                         {{ __('main.preview') }}
                         <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
                             <defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title>

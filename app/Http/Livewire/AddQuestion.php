@@ -28,7 +28,8 @@ use App\Models\SubscribePlan;
 use App\Models\TypeSubscribe;
 use App\Models\FormTrnslations;
 use Carbon\Carbon;
-use Image;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 
 class AddQuestion extends Component
