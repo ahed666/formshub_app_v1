@@ -75,7 +75,7 @@
                                                     $type_details= $t->question_type_details_ar;
 
                                             @endphp
-                                                <li   class="2xl:col-span-2 xl:col-span-2 lg:col-span-2 md:col-span-4  sm:col-span-4 xs:col-span-12 "  >
+                                                <li   class="2xl:col-span-2 xl:col-span-2 lg:col-span-2 md:col-span-4  sm:col-span-4 xs:col-span-5 "  >
                                                     <input wire:loading.class="disabled"
 
                                                      wire:click="selecttype('{{ $t->id }}')"
@@ -647,36 +647,7 @@
                     @endif
                 {{-- crop image modal --}}
 
-                <div  id="cropimage-add"
-                    class="modal      absolute z-[500px] top-4 bottom-4 left-0 xs:left-0 border-[1px] rounded-t-xl border-transparent
-                    max-h-[900px]  w-full bg-white
-                    {{ $modal?"block":"hidden" }}">
-
-                        <div class=" h-10 border-[1px] rounded-t-xl border-transparent p-2 flex justify-end modal-header">
-                        <a wire:click="closemodal" class=" w-10 h-6 text-secondary_red hover:text-primary_red cursor-pointer flex justify-center" >
-                            <span  class=" close   ">&times;</span>
-                        </a>
-                        </div>
-                        <!-- Modal content -->
-                        <div class=" h-[80%]   overflow-y-scroll ">
-                            <div class=" result-upload-add flex justify-center"></div>
-                        </div>
-                        <!--rightbox-->
-
-                        <!-- input file -->
-                        <div id="optionsCropModal" class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
-                            <!-- save btn -->
-                            <x-jet-secondary-button  wire:click="closemodal"   type="button" >
-                                {{ __('Cancel') }}
-                            </x-jet-secondary-button>
-                            <x-jet-button  wire:click="cropimage"  class="ml-3" type="button"   >
-                                {{ __('Crop') }}
-                            </x-jet-button>
-                            {{-- <button wire:click="closemodal" class="cursor-pointer ml-2 mr-2 p-2 border-[2px] border-transparent hover:bg-blue-400  rounded-xl bg-blue-500 w-auto">close</button>
-                            <a wire:click="cropingimage"   class="btn save hide cursor-pointer ml-2 mr-2 p-2 border-[2px] border-transparent hover:bg-blue-400 rounded-xl bg-blue-500 w-auto">Save</a> --}}
-                        </div>
-
-                </div>
+                <x-crop-image-modal :modal="$modal" :type="'add'" />
                 {{-- end crop image modal --}}
 
 

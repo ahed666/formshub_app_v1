@@ -524,37 +524,9 @@
    </form>
     {{-- crop modal --}}
 
-    <div  id="cropimage-edit"
-         class="modal    absolute z-[500px] top-4 bottom-4 left-0 xs:left-0 border-[1px] rounded-t-xl border-transparent
-         max-h-[900px]  w-full bg-white
-          {{ $modal?"block":"hidden" }}">
-
-            <div class=" h-10 border-[1px] rounded-t-xl border-transparent p-2 flex justify-end modal-header">
-            <a wire:click="closemodal" class=" w-10 h-6 text-secondary_red hover:text-primary_red cursor-pointer flex justify-center" >
-                <span  class=" close   ">&times;</span>
-            </a>
-            </div>
-            <!-- Modal content -->
-            <div class=" h-[80%]   overflow-y-scroll">
-                <div class=" result-upload  flex justify-center"></div>
-            </div>
-            <!--rightbox-->
-
-            <!-- input file -->
-            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
-                <!-- save btn -->
-                <x-jet-secondary-button  wire:click="closemodal"   type="button" >
-                    {{ __('main.cancel') }}
-                </x-jet-secondary-button>
-                <x-jet-button  wire:click="cropimage"  class="ml-3" type="button"   >
-                    {{ __('main.crop') }}
-                </x-jet-button>
-                {{-- <button wire:click="closemodal" class="cursor-pointer ml-2 mr-2 p-2 border-[2px] border-transparent hover:bg-blue-400  rounded-xl bg-blue-500 w-auto">close</button>
-                <a wire:click="cropingimage"   class="btn save hide cursor-pointer ml-2 mr-2 p-2 border-[2px] border-transparent hover:bg-blue-400 rounded-xl bg-blue-500 w-auto">Save</a> --}}
-            </div>
+    <x-crop-image-modal :modal="$modal" :type="'edit'" />
 
 
-    </div>
     {{-- end  crop modal --}}
 </div>
 @push('scripts')
@@ -612,7 +584,7 @@ if (accept) {
 
     document.addEventListener('image-updated-edit', event =>  {
 
-        result = document.querySelector('.result-upload');
+        result = document.querySelector('.result-upload-edit');
         // img_w = document.querySelector('.img-w'),
         // img_h = document.querySelector('.img-h'),
         // options = document.querySelector('.options'),
@@ -636,7 +608,7 @@ if (accept) {
             result.innerHTML = '';
                         // append new image
             result.appendChild(img);
-
+               console.log(result);
                         // show save btn and options
             // save.classList.remove('hide');
             // options.classList.remove('hide');
