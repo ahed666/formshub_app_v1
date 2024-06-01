@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Storage;
 
 class Questions extends Model
 {
@@ -55,8 +56,8 @@ class Questions extends Model
             $path='storage/accounts/account-'.Auth::user()->current_account_id.'/forms/form-'.$formId.'/question-'.$questionId.'/';
             $name="question_image-".$questionId.'.jpg';
 
-            if (!file_exists($path)) {
-                mkdir($path, 0755, true);
+            if (!Storage::exists($path)) {
+                Storage::makeDirectory($path, 0755, true);
             }
 
             $newUrl = $path .$name;
