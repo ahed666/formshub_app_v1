@@ -51,6 +51,9 @@ class Multistepsform extends Component
     public $CountryMobileCode;
       public $idCountry;
       public $isChecked=false;
+
+
+      public $messages;
       //status of show password
     public $show=false;
     //current step (inital 2 beacuse there is one country defult)
@@ -155,33 +158,7 @@ class Multistepsform extends Component
         else
         $this->show=false;
       }
-      //to initial status of confirmed password
-//     public function onchangeconfirmpassword(){
-//         if($this->password_confirmation!=$this->password){
-//        $this->isconfirm=0;}
-//        else{
-//        $this->validate(['password_confirmation' => 'required_with:password|same:password', ]);
-//        $this->isconfirm=1;}
 
-//     }
-//  public function onchangepassword(){
-
-//      $this->passwordStrength=0;
-//     $this->validate(['password' => $this->passwordRules(), ]);
-//     $zxcvbn = new Zxcvbn();
-// 	$strength = $zxcvbn->passwordStrength($this->password);
-
-// 	$this->passwordStrength = $strength['score'];
-
-
-//  }
-//  public function updatedmobile_number($mobile_number){
-//     $this->numberphonelevel=0;
-//     if($this->mobile_number!=null){
-//         $this->validate(['mobile_number'=>['required','regex:/((5)[0-9]{8}$)|((05)[0-9]{8}$)/']]);
-//         $this->numberphonelevel=1;
-//     }
-//  }
 //on update password to valid it on real time
  public function updatedpassword($password)
 
@@ -199,25 +176,7 @@ class Multistepsform extends Component
  }
 
 
-    // public function increasestep(){
 
-
-    //     $this->validatedata();
-
-    //     $this->currentstep++;
-
-
-
-
-    // }
-    // public function decreasestep(){
-    //     $this->resetErrorBag();
-
-    //     $this->currentstep--;
-    //     if($this->currentstep<1){
-    //         $this->currentstep=1;
-    //     }
-    // }
 
     public function updated($propertyName)
     {
@@ -234,41 +193,7 @@ class Multistepsform extends Component
         $this->validate();
     }
 
-    // public function register(){
 
-    //    $this->validatedata();
-    //     $this->resetErrorBag();
-    //     $this->currentstep==1;
-    //     //remove zero if first char in mobile number is 0
-    //     if($this->mobile_number[0]=='0'){
-    //     $this->mobile_number=substr($this->mobile_number,1);}
-    //     $user= User::create([
-    //         'country'=>$this->country,
-    //         'name' => $this->name,
-    //         'email' => $this->email,
-
-    //         'phone_number' => $this->phone_number,
-    //         'mobile_number' => $this->mobile_number,
-    //         'city' => $this->city,
-    //         'know_about_us'=>$this->know_about_us,
-    //         'company_name' => $this->company_name,
-
-    //         'billing_address' => $this->billing_address,
-    //         'tax_number' =>$this->tax_number,
-    //         'password' => Hash::make($this->password),
-    //         'subscribe'=>(bool)$this->receive_emails,
-    //     ]);
-    //     event(new Registered($user));
-
-    //        $email=$this->email;
-
-
-
-
-    //      //redirect to next page after registertion
-    //         return redirect()->route('responseregister',$user);
-
-    // }
     public function submitForm(){
         $this->validatedata();
 

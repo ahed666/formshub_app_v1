@@ -1,0 +1,19 @@
+{
+   "type":"Agree_Disagree",
+    "en": {
+        "0": "Agree",
+        "1": "Disagree"
+    },
+    "ar": {
+        "0": "أوافق",
+        "1": "لا أوافق"
+    },
+    "tl": {
+        "0": "Sumang-ayon",
+        "1": "Hindi Sumasang-ayon"
+    },
+    "ur": {
+        "0": "متفق",
+        "1": "متفق نہیں"
+    }
+}

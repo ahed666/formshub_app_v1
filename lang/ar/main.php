@@ -493,8 +493,9 @@ return [
      'deleteform_media' => 'سيؤدي حذف نموذج الوسائط إلى محو جميع الوسائط المضافة التي تنتمي إليه، لا يمكن التراجع عن هذا الإجراء!!',
      'suredelete' => 'أنا متأكد , أريد حذف النموذج',
     'suredeletemedia'=> 'أنا متأكد , أريد حذف العنصر',
-    'addformfailed' => 'فشلت إضافة النموذج!',
-    'addquestionfailed' => 'فشلت إضافة السؤال!',
+    'addformfailed' => 'فشل إضافة النموذج!',
+    'editformfailed'=>'فشل تعديل  النموذج!',
+    'addquestionfailed' => 'فشل إضافة السؤال!',
     'featurenotavilable' => 'هذه الميزة غير متاحة في هذه الخطة. للوصول إلى هذه الميزة',
     'successfullyaction_withkiosks' => 'تم حفظ التغييرات الخاصة بك وسيتم تطبيقها في المرة القادمة التي يتم فيها تحميل هذا النموذج. لديك كيوسك أو أكثر مرتبطة بهذا النموذج. هل ترغب في إرسال طلب إلى جميع الكيوسكات المرتبطة لتطبيق التغييرات الآن؟',
     'successfullyaction_withoutkiosks' => 'تم حفظ التغييرات الخاصة بك وسيتم تطبيقها في المرة القادمة التي يتم فيها تحميل هذا النموذج',
@@ -649,4 +650,16 @@ return [
     // others
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
+
+    // validation
+    'answernotempty' => 'الإجابة لا يمكن أن تكون فارغة',
+    'scorenotempty' => 'الدرجة لا يمكن أن تكون فارغة',
+    'questiontextmin' => 'يجب أن يحتوي :attribute على 10 أحرف على الأقل',
+    'scoremax' => 'يجب أن تكون الدرجة بين 0 و 10',
+    'scoremin' => 'يجب أن تكون الدرجة بين 0 و 10',
+    'questionrequired' => 'حقل :attribute فارغ',
+    'answersrequired' => 'يجب إضافة إجابة واحدة على الأقل',
+    'questiontyperequired' => 'يجب اختيار نوع السؤال',
+
 ];

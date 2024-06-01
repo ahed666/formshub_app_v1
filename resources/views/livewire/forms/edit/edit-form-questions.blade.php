@@ -19,6 +19,7 @@
     </div>
     <input type="hidden" id="flashedMessage" value="{{ session('success_message') }}">
     <input type="hidden" id="flashedMessage_error" value="{{ session('error_message') }}">
+    <input type="hidden" id="flashedMessage_error_edit" value="{{ session('error_message_editform') }}">
 
     <div wire:loading.class="disabled opacity-50 animate-pulse" class="grid grid-rows-12 min-h-screen">
 
@@ -40,10 +41,10 @@
                     <div class="col-span-3   lg:col-span-12 md:col-span-12 " >
 
 
-                        <div class="w-full flex justify-between space-x-4 items-center p-4  rounded-[0.5rem] bg-white  xs:my-2 xs:p-2 drop-shadow mb-2">
+                        <div class="w-full flex justify-between xs:justify-center space-x-4 items-center p-4  rounded-[0.5rem] bg-white  xs:my-2 xs:p-2 drop-shadow mb-2">
                             {{-- preview  hover:cursor-pointer ease-in delay-100  hover:-translate-z-1 hover:scale-[1.1]  duration-200--}}
 
-                            <a target="_blank" href="{{ route('preview',$current_form->id) }}" class="bg-gray-400 rounded hover:no-underline  p-2  h-16 w-[35%]  xs:my-2   xs:flex xs:justify-center xs:items-center ">
+                            <a target="_blank" href="{{ route('preview',$current_form->id) }}" class="xs:hidden bg-gray-400 rounded hover:no-underline  p-2  h-16 w-[35%]  xs:my-2   xs:flex xs:justify-center xs:items-center ">
                                 <div  class="flex justify-center items-center">
 
                                     <svg class=" w-4 h-4 mx-1 text-white  cursor-pointer " fill="currentColor"  viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg"><defs><style>.cls-1{fill:none;}</style></defs><title>task--view</title><circle cx="22" cy="24" r="2"/><path id="_inner_path_" data-name="&lt;inner path&gt;" class="cls-1" d="M22,28a4,4,0,1,1,4-4A4.0039,4.0039,0,0,1,22,28Zm0-6a2,2,0,1,0,2,2A2.0027,2.0027,0,0,0,22,22Z"/><path d="M29.7769,23.4785A8.64,8.64,0,0,0,22,18a8.64,8.64,0,0,0-7.7769,5.4785L14,24l.2231.5215A8.64,8.64,0,0,0,22,30a8.64,8.64,0,0,0,7.7769-5.4785L30,24ZM22,28a4,4,0,1,1,4-4A4.0045,4.0045,0,0,1,22,28Z"/><path d="M12,28H7V7h3v3H22V7h3v9h2V7a2,2,0,0,0-2-2H22V4a2,2,0,0,0-2-2H12a2,2,0,0,0-2,2V5H7A2,2,0,0,0,5,7V28a2,2,0,0,0,2,2h5ZM12,4h8V8H12Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
@@ -1057,6 +1058,7 @@ function ShoweditTermsHint(){
 
     var flashedMessage = document.getElementById('flashedMessage').value;
     var flashedMessage_error = document.getElementById('flashedMessage_error').value;
+
     $kiosks=@json($current_form_kiosks);
     if (flashedMessage) {
         console.log(flashedMessage);
@@ -1072,9 +1074,18 @@ function ShoweditTermsHint(){
 
     })
     }
+    var flashedMessageErrorEdit = document.getElementById('flashedMessage_error_edit').value;
+        if (flashedMessageErrorEdit) {
+            Swal.fire({
+            icon: 'error',
+            title:translations.editformfailed,
+            text:flashedMessage,
+            confirmButtonColor:'#1277D1',
+    })}
 
 
 
 </script>
+
 
 @endpush

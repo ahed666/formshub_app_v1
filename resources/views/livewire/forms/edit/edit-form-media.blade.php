@@ -522,12 +522,11 @@
 <script src="{{ asset('https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js')}}"></script>
 <script defer src="{{ asset('https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js')}}" defer></script>
 <script src="{{ asset('https://cdn.jsdelivr.net/npm/sweetalert2@11')}}"></script>
-
+<script   src="{{ asset('js/config.js') }}"></script>
 {{-- sweet alert delete confirm --}}
 <script>
     var translations = @json(__('main'));
-    var app_url="https://app.formshub.net/";
-//   var app_url="http://192.168.1.101:8000/";
+
     //  to confirm delete media
     window.addEventListener('show-media-delete-confirmation', event => {
 
@@ -698,6 +697,7 @@ document.addEventListener('livewire:load', function () {
    window.addEventListener('mediaFetched', event => {
 
     var media =event.detail.media;
+    console.log(media);
     media.forEach(mediaElement => {
 
         var thumbDiv=document.getElementById(`thumb_${mediaElement.id}`);
@@ -709,7 +709,8 @@ document.addEventListener('livewire:load', function () {
             video.height = 360;
             video.controls = true;
             const source = document.createElement('source');
-            const  src=app_url+mediaElement.path;
+            const  src=app_url+'/'+mediaElement.path;
+            console.log(src);
 
             source.src = src;
             source.type = 'video/mp4';
@@ -720,11 +721,12 @@ document.addEventListener('livewire:load', function () {
             canvas.height = 150;
 
             video.addEventListener('loadedmetadata', function() {
-                const middleTime = video.duration / 2; // Calculate middle time
+                var middleTime = video.duration / 2; // Calculate middle time
                 video.currentTime = middleTime; // Seek to middle time
-                console.log( video.duration);
+                console.log( video.currentTime);
 
                 video.addEventListener('seeked', function() {
+
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -744,7 +746,7 @@ document.addEventListener('livewire:load', function () {
         }
         else
         {
-            const  src=app_url+mediaElement.path;
+            const  src=app_url+'/'+mediaElement.path;
             const thumbnailImage  = new Image();
             thumbnailImage .src = src;
             thumbnailImage .width=150;

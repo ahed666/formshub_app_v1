@@ -16,7 +16,7 @@ use App\Models\SignFile;
 use App\Models\Form;
 use App\Models\Kiosk;
 use Jenssegers\Agent\Agent;
-
+use Illuminate\Support\Facades\File;
 use App\Notifications\DeleteAccount;
 class ProfileController extends Controller
 {
@@ -70,14 +70,13 @@ class ProfileController extends Controller
         $subscription=SubscribePlan::join('type_of_subscriptions','type_of_subscriptions.id','=','subscriptions_plans.type_of_subscription_id')->where('subscriptions_plans.account_id',Auth::user()->current_account_id)
         ->select('type_of_subscriptions.subscription_type','subscriptions_plans.created_at')->first();
 
-        // delete forms and its responses
-        Form::deleteFormsFiles($account->id);
 
-        //  delete files
-        SignFile::deleteFiles($account->id);
+        // delete all data of account in storage folder
+        $directoryPath='storage/accounts/account-'.$account->id;
+        if (File::exists($directoryPath)) {
+            File::deleteDirectory($directoryPath);
+        }
 
-        // delete Kiosks files
-        Kiosk::deleteFiles($account->id);
 
 
         $deletedAccount=new DeletedAccount();

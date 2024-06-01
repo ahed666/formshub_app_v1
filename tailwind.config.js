@@ -23,22 +23,14 @@ module.exports = {
             '5xl': '3.052rem',
 
           },
-        screens:{
-            'xs':{'min': '200px', 'max': '600px'},
-            'sm': {'min': '600px', 'max': '767px'},
-            // => @media (min-width: 640px and max-width: 767px) { ... }
-
-            'md': {'min': '767px', 'max': '1023px'},
-            // => @media (min-width: 768px and max-width: 1023px) { ... }
-
-            'lg': {'min': '1023px', 'max': '1279px'},
-            // => @media (min-width: 1024px and max-width: 1279px) { ... }
-
-            'xl': {'min': '1279px', 'max': '1535px'},
-            // => @media (min-width: 1280px and max-width: 1535px) { ... }
-
-            '2xl': {'min': '1536px'},
-        },
+          screens: {
+            'xs': {'raw': '(min-width: 200px) and (max-width: 600px)'},
+            'sm': {'raw': '(min-width: 600px) and (max-width: 767px)'},
+            'md': {'raw': '(min-width: 767px) and (max-width: 1023px)'},
+            'lg': {'raw': '(min-width: 1023px) and (max-width: 1279px)'},
+            'xl': {'raw': '(min-width: 1279px) and (max-width: 1535px)'},
+            '2xl': {'raw': '(min-width: 1536px)'},
+          },
 
         extend: {
             fontFamily: {

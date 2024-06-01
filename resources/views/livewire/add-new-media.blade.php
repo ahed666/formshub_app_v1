@@ -23,24 +23,41 @@
     <form wire:submit.prevent="saveFile">
 
         @csrf
-        @if($currentFile)
+        @if($currentFilePath)
+          {{-- video or image view div --}}
         <div id="uploadBody" class="grid justify-center items-center  m-8">
+
             @if($currentMediaType=="video"&&$validVideo)
-                <video class="w-[200px] h-[200px]" autoplay muted  controls >
-                    <source src="{{ asset($currentFilePath) }}" type="video/mp4">
+
+                <video id="mediavideo-video0" class="w-[200px] h-[200px]" autoplay muted  controls >
+                    <source
+                    @if(str_contains($currentFilePath, 'blob:'))
+                    src="{{ $currentFilePath}}"
+                    @else
+                    src="{{ asset($currentFilePath)}}"
+                    @endif
+                     type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <h1 class="mt-2 font-bold">{{ __('main.duration') }}<span class="text-secondary_blue font-normal">{{ $this->duration }}</span>{{ __('main.secondsymobl') }}</h1>
             @else
-                <img class="w-[640px] h-[390px] xs:w-[320px] xs:h-[195px] object-contain" id="imageModal" src="{{ asset($currentFilePath) }}" alt="">
+                <img class="w-[640px] h-[390px] xs:w-[320px] xs:h-[195px] object-contain" id="mediaimage-image0"
+
+                 @if(str_contains($currentFilePath, 'data:image'))
+                 src="{{ $currentFilePath}}"
+                 @else
+                 src="{{ asset($currentFilePath)}}"
+                 @endif
+                  alt="">
                 <div class="flex justify-center items-center">
-                     <h1>{{ __('main.duration') }} <input type="number" min="1" max="180" wire:model="duration" class="rounded-[0.5rem] w-28 mt-1"> {{ __('main.secondsymobl') }}</h1>
+                     <h1 class="text-center">{{ __('main.duration') }} <input type="number" min="1" max="180" wire:model="duration" class="rounded-[0.5rem] w-28 mt-1"> {{ __('main.secondsymobl') }}</h1>
                 </div>
             @endif
 
 
         </div>
         @else
+        {{-- upload div --}}
         <div
         x-data="{ isUploading: false, progress: 0 }"
         x-on:livewire-upload-start="isUploading = true"
@@ -49,7 +66,7 @@
         x-on:livewire-upload-progress="progress = $event.detail.progress"
          id="uploadBody" class="flex justify-center items-center  m-8">
             <label class="h-48  flex  justify-center items-center relative hover:cursor-pointer cursor-pointer   rounded-[0.5rem] w-1/2 border-[1px] border-gray-200 border-dashed  mb-0" for="image">
-                <input onchange="validateVideo()" wire:loading.attr="disabled" wire:target="currentFile"  wire:model="currentFile" class="   h-48 opacity-0 absolute  hover:cursor-pointer cursor-pointer w-full" type="file" name="file" id="file" accept="image/*, video/*"  />
+                <input  onchange="uploadImagenewmedia(event,'0','newmedia')" wire:model="currentFile" class="   h-48 opacity-0 absolute  hover:cursor-pointer cursor-pointer w-full" type="file" name="file" id="file" accept="image/*, video/*"  />
                 <div class="grid justify-center items-center">
                     <div  class="pl-2 pr-2 pt-2 hover:cursor-pointer cursor-pointer flex justify-center items-center">
 
@@ -73,7 +90,9 @@
                        <h1   wire:loading.class.remove="hidden" wire:target="currentFile" class="hidden mt-1  text-sm "><span class="animate-pulse ">{{ __('main.uploading') }}</span> {{ __('main.pleasewait') }}</h1>
 
                     </div>
-                    <div class="w-full " x-show="isUploading">
+
+                    <div class="w-full justify-center items-center " x-show="isUploading">
+
                         <progress class="" max="100" x-bind:value="progress"></progress>
 
                     </div>
@@ -97,43 +116,12 @@
                 <x-jet-secondary-button   wire:click="resetvalues   ()" data-dismiss="modal" aria-label="Close"   type="button" >
                     {{ __('main.cancel') }}
                 </x-jet-secondary-button>
-                <x-jet-button    class="ml-3" type="submit" wire:loading.attr="disabled"   >
+                <x-jet-button    class="ml-3" type="submit" wire:loading.attr="disabled"    >
                     {{ __('main.save') }}
                 </x-jet-button>
 
             </div>
-            {{-- upload new --}}
-            {{-- @if($currentFile)
-            <div  class="flex justify-center items-center  m-1">
-                <label class="h-12  flex  justify-center items-center relative hover:cursor-pointer cursor-pointer   rounded-[0.5rem]  border-[1px] border-gray-200 border-dashed  mb-0" for="image">
-                    <input   wire:model="currentFile" class="   h-12 opacity-0 absolute  hover:cursor-pointer cursor-pointer w-full" type="file" name="file" id="file" accept="image/*, video/*"  />
-                    <div class="grid justify-center items-center">
-                        <div  class="pl-2 pr-2 pt-2 hover:cursor-pointer cursor-pointer flex justify-center items-center">
 
-                            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-                            <svg   wire:loading.class="animate-bounce " wire:target="currentFile"
-                            class=" w-4 h-4 hover:cursor-pointer cursor-pointer" fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="upload-double-arrow-3" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-                            <g id="SVGRepo_iconCarrier">
-                            <polyline id="secondary" points="9 6 12 3 15 6" style="fill: none; stroke: #1277d1; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
-                            <polyline id="secondary-2" data-name="secondary" points="9 11 12 8 15 11" style="fill: none; stroke: #1277d1; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
-                            <line id="secondary-3" data-name="secondary" x1="12" y1="8" x2="12" y2="17" style="fill: none; stroke: #1277d1; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
-                            <path id="primary" d="M4,17v3a1,1,0,0,0,1,1H19a1,1,0,0,0,1-1V17" style="fill: none; stroke: #878787; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
-                            </g>
-                            </svg>
-                        </div>
-                        <div class="pl-2 pr-2 pb-2 hover:cursor-pointer cursor-pointer   flex justify-center">
-                        <h1  class="mt-1  text-sm ">{{ __('Upload New') }}</h1>
-
-                        </div>
-
-                    </div>
-                </label>
-
-
-            </div>
-            @endif --}}
 
         </div>
         {{-- error of validation --}}
@@ -154,32 +142,8 @@
 
     {{-- crop modal --}}
 
-    <div   id="cropimage-edit" class="modal    absolute z-[1055] top-4 bottom-4  xs:left-0 border-[1px] rounded-t-xl border-transparent
-            max-h-[900px] h-full max-w-[900px] w-full bg-white {{ $modal?"block":"hidden" }}">
-            <div class=" h-10 border-[1px] rounded-t-xl border-transparent p-2 flex justify-end modal-header">
-                <a wire:click="closemodal" class=" w-10 h-6 text-secondary_red hover:text-primary_red cursor-pointer flex justify-center" >
-                    <span  class=" close   ">&times;</span>
-                </a>
-            </div>
-            <!-- Modal content -->
-            <div class=" h-[80%]   overflow-y-scroll ">
-                <div class=" result-upload flex justify-center"></div>
-            </div>
-            <!--rightbox-->
-            <!-- input file -->
-            <div class=" flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b h-20">
-                <!-- save btn -->
-                <x-jet-secondary-button  wire:click="closemodal"   type="button" >
-                    {{ __('Cancel') }}
-                </x-jet-secondary-button>
-                <x-jet-button  onclick="cropimage()"  class="ml-3" type="button"   >
-                    {{ __('Crop') }}
-                </x-jet-button>
+    <x-crop-image-modal :modal="$modal" :type="'newmedia'" />
 
-            </div>
-
-
-    </div>
 </div>
 @push('scripts')
 <script>
@@ -189,38 +153,47 @@
 
     <script>
  var base64Video;
-    document.addEventListener('image-updated-edit', event =>  {
-            console.log('edit');
-            result = document.querySelector('.result-upload');
-            // img_w = document.querySelector('.img-w'),
-            // img_h = document.querySelector('.img-h'),
-            // options = document.querySelector('.options'),
-            save = document.querySelector('.save');
+ let indexImage;
+ var translations = @json(__('main'));
+ function closemodal(){
+        modal.classList.add('hidden');
+    }
+//  on uploading file
+ function uploadImagenewmedia(event,index,type){
+    imageInput=event.target;
+//    extract file
+    file = imageInput.files[0];
+    // deteect type of file
+      const fileType = file.type;
+    const isImage = fileType.startsWith('image/');
+    const isVideo = fileType.startsWith('video/');
+    indexImage=index;
 
-            // dwn = document.querySelector('.download'),
-            upload = document.querySelector('.image');
-            cropper = '';
-            var finalCropWidth = 640;
-            var finalCropHeight = 390;
-            var finalAspectRatio = finalCropWidth / finalCropHeight;
-            // on change show image with crop options
 
-                    // start file reader
-                const reader = new FileReader();
-                let img = document.createElement('img');
-                img.id = 'image';
-                img.src = @this.imagesrc;
+    //   if image open modal of cropping
+    if (isImage) {
+        modal=document.getElementById(`cropimage-${type}`);
+        const  result = document.querySelector(`.result-upload-${type}`);
 
-                            // clean result before
+
+        const reader = new FileReader();
+        modal.classList.remove('hidden');
+        reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+
                 result.innerHTML = '';
-                            // append new image
-                result.appendChild(img);
-
-                            // show save btn and options
-                // save.classList.remove('hide');
-                // options.classList.remove('hide');
-                            // init cropper
-                cropper = new Cropper(img, {
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 700;
+                canvas.height = 400;
+                context.drawImage(img, 0, 0, 700, 400);
+                result.appendChild(canvas);
+                var finalCropWidth = 640;
+                var finalCropHeight = 390;
+                var finalAspectRatio = finalCropWidth / finalCropHeight;
+                cropper = new Cropper(canvas, {
                     dragMode: 'move',
                     aspectRatio: finalAspectRatio,
                     autoCropArea: 0.9,
@@ -234,28 +207,82 @@
                     toggleDragModeOnDblclick: false,
                 });
 
+        };
+        };
 
+        reader.readAsDataURL(file);
+   }
+    //   if video set it to livewire
+   else
+   {
+        const videoUrl = URL.createObjectURL(file);
+        const videoSize = file.size; // size in bytes
+            const videoSizeMB = (videoSize / (1024 * 1024)).toFixed(2);
+        const tempVideoElement = document.createElement('video');
+            tempVideoElement.src = videoUrl;
+            tempVideoElement.addEventListener('loadedmetadata', () => {
+                const duration =Math.round(tempVideoElement.duration) ;
 
+                if(duration > @this.maxVideoDuration)
+                {
+                    errorUpload(translations.maxvideodurationwarning.replace(':duration', @this.maxVideoDuration));
+                }
+                else if(videoSizeMB > @this.maxFileSize)
+                {
+                    errorUpload(translations.maxfilesizewarning.replace(':size', @this.maxFileSize));
+                }
+                else
+                // Do something with the duration if needed
+                // For example, you can save it to your Livewire component
+               {
+                    // console.log(file);
+                    // const reader = new FileReader();
+                    // reader.onload = function(e) {
+                    // const base64String = e.target.result.split(',')[1]; // Get the base64 part
 
-            // save on click
+                    // @this.saveVideo(videoUrl,base64String, duration);
+                    // };
+                    // reader.readAsDataURL(file);
+                    fetch(videoUrl)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        let newFile = new File([blob], file.name, { type: blob.type });
+                        // Use Livewire to upload the file
+                        // @this.upload('video', newFile);
+                        @this.saveVideo(videoUrl, duration);
+                    });
+                }
+            });
+   }
 
-    });
-   function cropimage(){
-            // get result to data uri
-            let imgSrc = cropper.getCroppedCanvas({
+}
+function cropimagenewmedia(){
+
+// image=document.getElementById(`mediaimage-image${indexImage}`);
+
+const canvas = cropper.getCroppedCanvas({
                 width:1280,
                 height:780
-                }).toDataURL();
+                });
+const croppedImage = canvas.toDataURL('image/jpeg');
+
+console.log(croppedImage);
+@this.saveImage(croppedImage,indexImage);
+
+modal.classList.add('hidden');
+
+}
 
 
 
-                @this.saveImageTemp(imgSrc);
-                @this.closemodalwithsave();
-            // dwn.classList.remove('hide');
-            // dwn.download = 'imagename.png';
-            // dwn.setAttribute('href',imgSrc);
-    }
-
+function errorUpload(message){
+    Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: message,
+            confirmButtonColor:'#1277D1',
+            })
+}
     document.addEventListener('error', event =>  {
         const errorMessage=event.detail.message;
         const title=event.detail.title;

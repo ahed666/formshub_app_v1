@@ -69,6 +69,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ->get();
 
   }
+//   info about counts of emails subscriptions
   public static function userEmailsSubscriptions(){
     return [
         'E.S Notification' =>count(self::whereemail_sub_notification(true)->get()),
@@ -81,6 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 }
+// return all info about users
   public static function userInfo(){
     $userVerifiy=self::userVerifiy();
     $userEmailsSubscriptions=self::userEmailsSubscriptions();

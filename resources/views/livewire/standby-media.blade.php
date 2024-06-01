@@ -1,4 +1,6 @@
-<div>
+<div  x-data="{ isUploading: false, progress: 0 }"
+x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false"
+x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
     {{-- header --}}
     <div class="flex items-center justify-between p-4 border-b rounded-t ">
         <div class="flex items-center">
@@ -19,8 +21,28 @@
     <div class=" 2xl:max-h-[700px] xs:max-h-[400px] flex justify-center items-center p-2">
         {{-- <img class="w-[640px] h-[390px] xs:w-[320px] xs:h-[195px] object-contain" src="" class="" id="imageModal" alt=""> --}}
 
-        <div id="uploadBody" class="grid justify-center items-center  m-8" >
+        <div  id="uploadBody" class="grid justify-center items-center  m-8" >
 
+            {{-- @if( $this->type=="image")
+             <img  @if(str_contains($path, 'data:image'))
+             src="{{ $path}}"
+             @else
+             src="{{ asset($path)}}"
+             @endif
+              class="w-[640px] h-[390px] xs:w-[320px] xs:h-[195px] object-contain" alt="">
+            @elseif ($this->type=="video")
+            <video id="mediavideo-video0" class="w-[640px] h-[390px] xs:w-[320px] xs:h-[195px] object-contain" autoplay muted  controls >
+                <source
+                @if(str_contains($path, 'blob:'))
+                src="{{ $path}}"
+                @else
+                src="{{ asset($path)}}"
+                @endif
+                 type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            @endif --}}
 
 
 
@@ -32,19 +54,18 @@
 
     {{-- end body --}}
     {{-- footer --}}
-    <div class="flex justify-between items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
+    <div
+
+    class="flex justify-between items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
         <div class="flex justify-center space-x-2 items-center">
             <x-jet-secondary-button wire:click="resetValue" data-dismiss="modal" aria-label="Close" type="button" wire:loading.attr="disabled">
                 {{ __('main.cancel') }}
             </x-jet-secondary-button>
-            <x-jet-button wire:click="saveStandbyMediaKiosk" class="ml-3" type="button" wire:loading.attr="disabled" wire:target="currentFile">
+            <x-jet-button x-bind:disabled="isUploading" wire:click="saveStandbyMediaKiosk" class="ml-3" type="button" wire:loading.attr="disabled" wire:target="currentFile">
                 {{ __('main.save') }}
             </x-jet-button>
         </div>
-        <div class="flex justify-between space-x-4 items-center"
-        x-data="{ isUploading: false, progress: 0 }"
-        x-on:livewire-upload-start="isUploading = true" x-on:livewire-upload-finish="isUploading = false"
-        x-on:livewire-upload-error="isUploading = false" x-on:livewire-upload-progress="progress = $event.detail.progress">
+        <div class="flex justify-between space-x-4 items-center"    >
 
             <label class="grid justify-center items-center mb-0" for="currentFile">
                 <div class="flex justify-center items-center">
@@ -65,7 +86,7 @@
                 </div>
                 <h1 x-show="!isUploading" class="text-xs">{{ __('main.upload') }}</h1>
                 <h1 x-show="isUploading" class="text-xs">{{ __('uploading') }}</h1>
-                <input wire:model="currentFile" class="image opacity-0 absolute -z-10" type="file" name="currentFile" id="currentFile" accept="image/*, video/*" />
+                <input onchange="uploadImagestandby(event,'0','standby')" wire:model="currentFile" class="image opacity-0 absolute -z-10" type="file" name="currentFile" id="currentFile" accept="image/*, video/*" />
             </label>
 
             <div class="grid justify-center items-center">
@@ -90,7 +111,7 @@
 
       {{-- crop modal --}}
 
-      <x-crop-image-modal :modal="$modal" :type="'edit-standby'" />
+      <x-crop-image-modal :modal="$modal" :type="'standby'" />
 </div>
 
 @push('scripts')
@@ -100,7 +121,7 @@
     var body=document.getElementById('uploadBody');
     document.addEventListener('media-edited', event => {
     const media = event.detail;
-
+       console.log
     if (media.type == "video") {
         const path = media.path;
         const videoElement = document.createElement('video');
@@ -125,58 +146,15 @@
 });
 
 
-    document.addEventListener('image-updated-edit', event => {
-        console.log('edit');
-        result = document.querySelector('.result-upload-edit-standby');
-        // img_w = document.querySelector('.img-w'),
-        // img_h = document.querySelector('.img-h'),
-        // options = document.querySelector('.options'),
-        save = document.querySelector('.save');
-
-        // dwn = document.querySelector('.download'),
-        upload = document.querySelector('.image');
-        cropper = '';
-        var finalCropWidth = 640;
-        var finalCropHeight = 390;
-        var finalAspectRatio = finalCropWidth / finalCropHeight;
-        // on change show image with crop options
-
-        // start file reader
-        const reader = new FileReader();
-        let img = document.createElement('img');
-        img.id = 'image';
-        img.src = @this.imagesrc;
-
-        // clean result before
-        result.innerHTML = '';
-        // append new image
-        result.appendChild(img);
-
-        // show save btn and options
-        // save.classList.remove('hide');
-        // options.classList.remove('hide');
-        // init cropper
-        cropper = new Cropper(img, {
-            dragMode: 'move'
-            , aspectRatio: finalAspectRatio
-            , autoCropArea: 0.9
-            , restore: false
-            , guides: false
-            , center: false
-            , highlight: false
-            , cropBoxMovable: true
-            , cropBoxResizable: true,
-
-            toggleDragModeOnDblclick: false
-        , });
-
-
-
-
-        // save on click
-
-    });
-
+// on error upload
+function errorUpload(message){
+    Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: message,
+            confirmButtonColor:'#1277D1',
+            })
+}
     function cropimage() {
         // get result to data uri
         let imgSrc = cropper.getCroppedCanvas({
@@ -191,6 +169,129 @@
         // dwn.classList.remove('hide');
         // dwn.download = 'imagename.png';
         // dwn.setAttribute('href',imgSrc);
+    }
+
+    var base64Video;
+ let indexImage;
+ var translations = @json(__('main'));
+ function closemodal(){
+        modal.classList.add('hidden');
+    }
+//  on uploading file
+ function uploadImagestandby(event,index,type){
+    Alpine.store('uploading', true);
+    imageInput=event.target;
+    //    extract file
+    file = imageInput.files[0];
+    // deteect type of file
+      const fileType = file.type;
+    const isImage = fileType.startsWith('image/');
+    const isVideo = fileType.startsWith('video/');
+    indexImage=index;
+
+
+    //   if image open modal of cropping
+    if (isImage) {
+        modal=document.getElementById(`cropimage-${type}`);
+        const  result = document.querySelector(`.result-upload-${type}`);
+
+
+        const reader = new FileReader();
+        modal.classList.remove('hidden');
+        reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+
+                result.innerHTML = '';
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 700;
+                canvas.height = 400;
+                context.drawImage(img, 0, 0, 700, 400);
+                result.appendChild(canvas);
+                var finalCropWidth = 640;
+                var finalCropHeight = 390;
+                var finalAspectRatio = finalCropWidth / finalCropHeight;
+                cropper = new Cropper(canvas, {
+                    dragMode: 'move',
+                    aspectRatio: finalAspectRatio,
+                    autoCropArea: 0.9,
+                    restore: false,
+                    guides: false,
+                    center: false,
+                    highlight: false,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+
+                    toggleDragModeOnDblclick: false,
+                });
+
+        };
+        };
+
+        reader.readAsDataURL(file);
+   }
+    //   if video set it to livewire
+//    else
+//    {
+//         const videoUrl = URL.createObjectURL(file);
+//         const videoSize = file.size; // size in bytes
+//             const videoSizeMB = (videoSize / (1024 * 1024)).toFixed(2);
+//         const tempVideoElement = document.createElement('video');
+//             tempVideoElement.src = videoUrl;
+//             tempVideoElement.addEventListener('loadedmetadata', () => {
+//                 const duration =Math.round(tempVideoElement.duration) ;
+
+//                 if(duration > @this.maxVideoDuration)
+//                 {
+//                     errorUpload(translations.maxvideodurationwarning.replace(':duration', @this.maxVideoDuration));
+//                 }
+//                 else if(videoSizeMB > @this.maxFileSize)
+//                 {
+//                     errorUpload(translations.maxfilesizewarning.replace(':size', @this.maxFileSize));
+//                 }
+//                 else
+//                 // Do something with the duration if needed
+//                 // For example, you can save it to your Livewire component
+//                {
+//                     // console.log(file);
+//                     // const reader = new FileReader();
+//                     // reader.onload = function(e) {
+//                     // const base64String = e.target.result.split(',')[1]; // Get the base64 part
+
+//                     // @this.saveVideo(videoUrl,base64String, duration);
+//                     // };
+//                     // reader.readAsDataURL(file);
+//                     fetch(videoUrl)
+//                     .then(res => res.blob())
+//                     .then(blob => {
+//                         let newFile = new File([blob], file.name, { type: blob.type });
+//                         // Use Livewire to upload the file
+//                         // @this.upload('video', newFile);
+//                         @this.saveVideo(videoUrl, duration);
+//                     });
+//                 }
+//             });
+//    }
+   Alpine.store('uploading', false);
+
+}
+    function cropimagestandby(){
+
+    // image=document.getElementById(`mediaimage-image${indexImage}`);
+
+    const canvas = cropper.getCroppedCanvas({
+                    width:1280,
+                    height:780
+                    });
+    const croppedImage = canvas.toDataURL('image/jpeg');
+
+    console.log(croppedImage);
+    @this.saveImage(croppedImage,indexImage);
+
+    modal.classList.add('hidden');
+
     }
 
     document.addEventListener('save', (e) => {

@@ -106,11 +106,12 @@ class Responses extends Model
         $forms= self::RightJoin('forms', 'forms.id', '=', 'responses.form_id')
         ->where('forms.account_id', '=', $accountId)
         ->where('forms.form_type_id','=',1)
-        ->groupBy('forms.id')->select('forms.form_title',DB::raw('COUNT(*) as count'))->get();
+        ->groupBy('forms.id')->select('forms.form_title',DB::raw('COUNT(responses.id) as count'))->get();
 
         $numAllResponses=self::allResponses($accountId);
+      
         foreach ($forms as $key => $form) {
-            $numAllResponses==0?$form->ratio=0:$form->ratio=round(($form->count)*100/$numAllResponses,1);
+            $form->ratio=$numAllResponses==0?0:($form->count==0?0:round(($form->count)*100/$numAllResponses,1));
         }
 
         $chartData = [

@@ -88,32 +88,7 @@ class Allforms extends Component
    public $plansPermissionsErrors;
 
 
-   public $messages_defult =
-   '[
-   {"local":"en","start_header":"Hi there, your opinion matters!",
-       "start_text":"Please select the language to begin",
-       "end_header":"Thank you for your time","end_text":"We are glad to hear from you, Have a great day!",
-       "terms":"Insert your terms and conditions here."
 
-    },
-
-  {"local":"ar",
-   "start_header":"!مرحبا بك، رأيك يهمنا",
-   "start_text":"الرجاء إختيار اللغة للبدء",
-   "end_header":"شكراً على وقتك","end_text":"!يسعدنا دائما السماع منك, يوما سعيداً",
-   "terms":"َضع الشروط والأحكام الخاصة بك هنا."},
-
-  {"local":"tl","start_header":"Kumusta, ang iyong opinyon ay mahalaga!",
-   "start_text":"Mangyaring piliin ang wika upang magsimula",
-   "end_header":"Salamat sa iyong oras","end_text":"Natutuwa kaming makarinig mula sa iyo, Magkaroon ng magandang araw!",
-   "terms":"Ipasok ang iyong mga tuntunin at kundisyon dito."},
-
-  {"local":"ur","start_header":"!ہیلو، آپ کی رائے اہم ہے",
-   "start_text":"براہ کرم شروع کرنے کے لیے زبان منتخب کریں۔",
-   "end_header":"اپ کے وقت کا شکریہ","end_text":"!ہمیں آپ سے سن کر خوشی ہوئی، آپ کا دن اچھا گزرے",
-   "terms":"اپنی شرائط و ضوابط یہاں داخل کریں۔"}
-
-  ]';
     public $messages;
     public $lang =
     '[
@@ -128,7 +103,16 @@ class Allforms extends Component
     { "id": 4, "code":"tl","name": "Tagalog","trans":"fil"}
     ]';
 
-
+    public function loadJsonData($file)
+    {
+        $path = resource_path('data/'.$file.'.json');
+        if (File::exists($path)) {
+            $json = File::get($path);
+            return json_decode($json, true);
+        } else {
+            return ['error' => 'File not found'];
+        }
+    }
     public function delete($id)
     {
         $this->form_delete_id = $id;
@@ -177,13 +161,7 @@ class Allforms extends Component
 
         // // if form have image
 
-        if ($form->logo_id != null) {
-            $imagepath = Logos::whereid($form->logo_id)->first()->logo_url;
-            if (str_contains($imagepath, 'images/temp/') || str_contains($imagepath, 'images/upload/')) {
-                File::delete(public_path($imagepath));
-            }
-            Logos::whereid($form->logo_id)->delete();
-        }
+
         FormTrnslations::whereform_id($this->form_delete_id)->delete();
 
 
@@ -259,7 +237,7 @@ class Allforms extends Component
 
 
         $this->main_languages = json_decode($this->main_lang, true);
-        $this->messages = json_decode($this->messages_defult, true);
+        $this->messages =  $this->loadJsonData('defaultFormMessages');
 
 
     }

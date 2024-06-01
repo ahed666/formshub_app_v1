@@ -117,10 +117,7 @@
         }
         dropdown();
 
-        function openSidebar() {
-            console.log(document.querySelector(".sidebar").classList);
-            document.querySelector(".sidebar").classList.toggle("xs:hidden");
-        }
+
 
     </script>
 

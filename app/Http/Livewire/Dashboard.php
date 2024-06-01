@@ -116,7 +116,7 @@ class Dashboard extends Component
 
         // charts
         $this->responsesDataChart=Responses::responsesPerDates($this->current_account_id) ;
-
+       
     }
     public function hideAction($id){
 

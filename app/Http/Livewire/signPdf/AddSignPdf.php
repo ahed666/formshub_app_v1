@@ -32,8 +32,9 @@ use Livewire\WithFileUploads;
 use setasign\Fpdi\Fpdi;
 use Illuminate\Support\Facades\Validator;
 use Spatie\PdfToText\Pdf;
-use Storage;
+
 use Smalot\PdfParser\Parser;
+use Illuminate\Support\Facades\Storage;
 
 use Spatie\Pdf\Pdf as SpatiePdf;
 use Spatie\Pdf\Text;
@@ -87,7 +88,7 @@ class AddSignPdf extends Component
     //end of subscribe
     //    messages of form
     public $current_message;
-
+    public $tempFile;
     // end messages of form
     public $lang =
         '[
@@ -240,32 +241,20 @@ public $answers_json_text_rating='
 
          if($testSizeResult['result']==true){
         // $temporaryPath = $this->currentFile->storeAs('files/temp', $this->currentFile->getClientOriginalName(), 'public');
-        $pdfBinaryContent = file_get_contents($this->currentFile->path());
+        $temporaryPath = $this->currentFile->storeAs('storage/files/temp', $this->currentFile->getClientOriginalName(), 'public');
 
-        // Encode the binary content to base64
-        $pdfBase64 = base64_encode($pdfBinaryContent);
-        // Decode the base64 string
-        $pdfBinary = base64_decode($pdfBase64);
+            // Get the URL to the stored file
+        // $url = Storage::url($temporaryPath);
 
-        // Specify the storage path
-        $subPath='storage/files/temp/';
-        $storagePath = public_path($subPath);
-
-        // Ensure the directory exists; create it if not
-        if (!File::isDirectory($storagePath)) {
-            File::makeDirectory($storagePath, 0777, true, true);
-        }
-
-        // Generate a unique filename (e.g., using a timestamp)
-        $filename = 'pdf_' . time() . '.pdf';
 
         // Save the PDF file to the specified path
-        File::put($storagePath . $filename, $pdfBinary);
+        // File::put($storagePath . $filename, $pdfBinary);
         $this->uploadedFileInfo = [
             'name' => $this->currentFile->getClientOriginalName(),
-            'path' =>$subPath . $filename,
+            'path' =>$temporaryPath,
             'size'=>$testSizeResult['message'],
         ];
+
         $this->dispatchBrowserEvent('file-uploaded',['uploadedFileInfo' => $this->uploadedFileInfo]);
         }
         else
@@ -424,7 +413,14 @@ public $answers_json_text_rating='
 
                 // delete previous file
                 if($this->uploadedFileInfo['path']!=$this->PdfFile->path_file)
-                    File::delete(public_path($this->PdfFile->path_file));
+                    {
+                        $path = 'storage/accounts/account-' . Auth::user()->current_account_id . '/files/';
+                        $newPath = $path .'tosignpdf.pdf';
+                        file::move( $this->uploadedFileInfo['path'], $newPath);
+                        $this->uploadedFileInfo['path']= $newPath;
+
+                    }
+
                 // delete previous signed pdf
                 SignFile::deleteLastSignature(Auth::user()->current_account_id);
 

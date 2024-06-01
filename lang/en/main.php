@@ -490,6 +490,7 @@ return [
     'suredelete'=>'I\'m sure I want  to delete the form',
     'suredeletemedia'=>'I\'m sure I want  to delete the item',
     'addformfailed'=>'Add form failed!',
+    'editformfailed'=>'Edit form failed!',
     'addquestionfailed'=>'Add question failed!',
     'featurenotavilable'=>'This feature is not available on this plan To access this feature',
     'successfullyaction_withkiosks'=>'Your changes have been saved and will be applied the next time this form is loaded, therefore you have a kiosk or more linked to this form, would you like to send a request to all linked kiosks to apply changes now?',
@@ -516,7 +517,7 @@ return [
     'recommandedvideosize'=>'*Max file size (10MP), Max Duration (180s)',
     'uploading'=>'Uploading... ',
     'pleasewait'=>'Please Wait',
-    'answernotempty'=>'The answer can\'t be  empty',
+
 
 
     //kiosks
@@ -635,4 +636,15 @@ return [
      // others
      'password' => 'The provided password is incorrect.',
      'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+
+    //  validation
+    'answernotempty'=>'The answer can\'t be  empty',
+    'scorenotempty'=>'The score can\'t be  empty',
+    'questiontextmin'=>'The :attribute must contain at least 10 characters ',
+    'scoremax'=>'the score should be between 0 and 10',
+    'scoremin'=>'the score should be between 0 and 10',
+    'questionrequired'=>'The :attribute is empty ',
+    'answersrequired'=>'You should add at least one answer',
+    'questiontyperequired'=>'You Should Select Question Type',
+
 ];

@@ -98,9 +98,13 @@ class SignPdfTemplate extends Component
     public function saveAsPDF($dataUrl){
         // try
         // {
-
+            $path = 'storage/accounts/account-' . Auth::user()->current_account_id . '/files/signatures/';
+            $name="SignedFile_".$this->currentkiosk->id."_"."_".Carbon::now()->format('Ymd_His').".pdf";
+            if (!file_exists($path)) {
+                mkdir($path, 666, true);
+            }
             $file = public_path($this->formPdfFile->path_file);
-            $outputFile="storage/files/upload/SignedFile_".$this->currentkiosk->id."_"."_".Carbon::now()->format('Ymd_His').".pdf";
+            $outputFile=$path.$name;
             $outputFilePath = public_path($outputFile);
 
             $fpdi = new FPDI;
@@ -160,9 +164,9 @@ class SignPdfTemplate extends Component
 
 
         // }
-        // catch (\Throwable $th) {
+        // // catch (\Throwable $th) {
 
-        // }
+        // // }
     }
  // function to set status kiosk to previous status
     public function setPreviousStatusKiosk(){

@@ -1,4 +1,35 @@
+<div  class="grid">
 
+    <div class="">
+        <label class="mb-[1px] flex justify-start items-center cursor-pointer" for="selectedAction-{{ $i }}">
+
+            <input    wire:model.defer="answers.{{ $i }}.action" value="None" data-bs-toggle="tooltip"
+                data-bs-html="true" title="No action if the answer chosen"
+                class="rounded-full focus:ring-transparent text-green-300 bg-gray-100 w-3 h-3    " name="selectedAction-{{ $i }}" type="radio" />
+            <span class="text-xs mr-1 ml-1">{{ __('main.none') }}</span>
+        </label>
+    </div>
+    <div class="">
+        <label class="mb-[1px] flex justify-start items-center cursor-pointer" for="selectedAction-{{ $i }}">
+
+            <input  wire:model.defer="answers.{{ $i }}.action" value="Skip" data-bs-toggle="tooltip"
+                data-bs-html="true" title="Skip Next Question if the answer chosen"
+                class="rounded-full focus:ring-transparent text-green-300 bg-gray-100 w-3 h-3 " name="selectedAction-{{ $i }}" type="radio" />
+            <span class="text-xs mr-1 ml-1">{{ __('main.skipnextquestion') }}</span>
+        </label>
+    </div>
+    <div class="">
+        <label class="mb-[1px] flex justify-start items-center cursor-pointer" for="selectedAction-{{ $i }}">
+
+            <input  wire:model.defer="answers.{{ $i }}.action" value="End" data-bs-toggle="tooltip"
+                data-bs-html="true" title="End Form if the answer chosen"
+                class="rounded-full focus:ring-transparent text-green-300 bg-gray-100 w-3 h-3 " name="selectedAction-{{ $i }}" type="radio" />
+            <span class="text-xs mr-1 ml-1">{{ __('main.endform') }}</span>
+        </label>
+    </div>
+</div>
+
+{{--
 <div class="  "  x-data="{ isOpen: false, selectedAction: '{{ $answers[$i]['action'] }}' }">
     <div class="max-h-[20px]">
         <span class="text-xs">{{ __('main.action') }}</span>
@@ -66,6 +97,6 @@
     {{-- <div x-show="selectedAction || selectedAction === ''" class="mt-2 text-gray-800 flex justify-center items-center">
        <span class="text-xs" x-text="selectedAction || 'None'"></span>
     </div> --}}
-</div>
+{{-- </div>
 
-
+ --}}

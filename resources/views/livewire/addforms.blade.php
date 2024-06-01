@@ -45,7 +45,8 @@
 
                                     @foreach ( $form_types as $type )
                                         <li   class="2xl:col-span-3 xl:col-span-3 lg:col-span-3  "  >
-                                            <input {{ $type->id==2?"disabled":"" }}   wire:model="form_type_id" value="{{ $type->id }}" class="peer visually-hidden " name="form-type" id="form-type-{{ $type->id }}" type="radio" required>
+                                            {{-- {{ $type->id==2?"disabled":"" }}  --}}
+                                            <input {{ $type->id==2?"disabled":"" }}  wire:model="form_type_id" value="{{ $type->id }}" class="peer visually-hidden " name="form-type" id="form-type-{{ $type->id }}" type="radio" required>
                                                 <label for="form-type-{{ $type->id }}" class="{{ $type->enable?"":"opacity-50" }}
                                                     grid items-center justify-center w-full p-1  text-gray-500 bg-white border-[2px] rounded-lg cursor-pointer
                                                     peer-checked:border-secondary_blue
@@ -124,7 +125,13 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
                                             </svg></a></label>
                                         <div class="border-2 rounded-lg border-gray-400  max-w-[120px] max-h-[90px] min-h-[90px] min-w-[120px] w-[120px] h-[90px] p-1  relative " >
-                                            <img  class="object-contain w-full h-full" src="{{asset($form_logo_temp) }}" alt="">
+                                            <img id="form-image0" class="object-contain w-full h-full"
+                                            @if(str_contains($form_logo_temp, 'data:image'))
+                                            src="{{ $form_logo_temp}}"
+                                            @else
+                                            src="{{ asset($form_logo_temp)}}"
+                                            @endif
+                                            alt="">
                                             @if(!$custom)
                                             <label onclick="ShowWarning()" class="items-center  absolute  flex  left-[-0.5rem] bottom-[-1rem]   rounded bg-white " for="logo">
                                                 <svg class="w-6 h-6  hover:cursor-pointer text-svg_primary hover:text-secondary_blue" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,7 +149,7 @@
                                                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                                                     <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10V11H17C18.933 11 20.5 12.567 20.5 14.5C20.5 16.433 18.933 18 17 18H16C15.4477 18 15 18.4477 15 19C15 19.5523 15.4477 20 16 20H17C20.0376 20 22.5 17.5376 22.5 14.5C22.5 11.7793 20.5245 9.51997 17.9296 9.07824C17.4862 6.20213 15.0003 4 12 4C8.99974 4 6.51381 6.20213 6.07036 9.07824C3.47551 9.51997 1.5 11.7793 1.5 14.5C1.5 17.5376 3.96243 20 7 20H8C8.55228 20 9 19.5523 9 19C9 18.4477 8.55228 18 8 18H7C5.067 18 3.5 16.433 3.5 14.5C3.5 12.567 5.067 11 7 11H8V10ZM15.7071 13.2929L12.7071 10.2929C12.3166 9.90237 11.6834 9.90237 11.2929 10.2929L8.29289 13.2929C7.90237 13.6834 7.90237 14.3166 8.29289 14.7071C8.68342 15.0976 9.31658 15.0976 9.70711 14.7071L11 13.4142V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V13.4142L14.2929 14.7071C14.6834 15.0976 15.3166 15.0976 15.7071 14.7071C16.0976 14.3166 16.0976 13.6834 15.7071 13.2929Z" fill="CurrentColor"/> </g>
                                                     </svg>
-                                                <input   wire:model="logo" class="image opacity-0 absolute -z-10" type="file" name="logo" id="logo" accept="image/png,image/webp, image/svg, image/jpeg" />
+                                                <input  onchange="uploadImageForm(event,'0','form')" class="image opacity-0 absolute -z-10" type="file" name="logo" id="logo" accept="image/png,image/webp, image/svg, image/jpeg" />
                                             </label>
                                             @endif
                                         </div>
@@ -198,7 +205,14 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"></path>
                                     </svg></a></label>
                                 <div class="border-2 rounded-lg border-gray-400  max-w-[160px] max-h-[120px] min-h-[120px] min-w-[160px] w-[160px] h-[120px] p-1  relative " >
-                                    <img  class="object-contain w-full h-full" src="{{asset($form_logo_temp) }}" alt="">
+                                    <img id="form-image0" class="object-contain w-full h-full"
+                                    @if(str_contains($form_logo_temp, 'data:image'))
+                                    src="{{ $form_logo_temp}}"
+                                    @else
+                                    src="{{ asset($form_logo_temp)}}"
+                                    @endif
+                                    alt="">
+
                                     @if(!$custom)
                                     <label onclick="ShowWarning()" class="items-center  absolute  flex  left-[-0.5rem] bottom-[-1rem]   rounded bg-white " for="logo">
                                         <svg class="w-6 h-6  hover:cursor-pointer text-svg_primary hover:text-secondary_blue" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -216,7 +230,7 @@
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                                             <g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8 10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10V11H17C18.933 11 20.5 12.567 20.5 14.5C20.5 16.433 18.933 18 17 18H16C15.4477 18 15 18.4477 15 19C15 19.5523 15.4477 20 16 20H17C20.0376 20 22.5 17.5376 22.5 14.5C22.5 11.7793 20.5245 9.51997 17.9296 9.07824C17.4862 6.20213 15.0003 4 12 4C8.99974 4 6.51381 6.20213 6.07036 9.07824C3.47551 9.51997 1.5 11.7793 1.5 14.5C1.5 17.5376 3.96243 20 7 20H8C8.55228 20 9 19.5523 9 19C9 18.4477 8.55228 18 8 18H7C5.067 18 3.5 16.433 3.5 14.5C3.5 12.567 5.067 11 7 11H8V10ZM15.7071 13.2929L12.7071 10.2929C12.3166 9.90237 11.6834 9.90237 11.2929 10.2929L8.29289 13.2929C7.90237 13.6834 7.90237 14.3166 8.29289 14.7071C8.68342 15.0976 9.31658 15.0976 9.70711 14.7071L11 13.4142V19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19V13.4142L14.2929 14.7071C14.6834 15.0976 15.3166 15.0976 15.7071 14.7071C16.0976 14.3166 16.0976 13.6834 15.7071 13.2929Z" fill="CurrentColor"/> </g>
                                             </svg>
-                                        <input   wire:model="logo" class="image opacity-0 absolute -z-10" type="file" name="logo" id="logo" accept="image/png,image/webp, image/svg, image/jpeg" />
+                                        <input   onchange="uploadImageForm(event,'0','form')" class="image opacity-0 absolute -z-10" type="file" name="logo" id="logo" accept="image/png,image/webp, image/svg, image/jpeg" />
                                     </label>
                                     @endif
                                 </div>
@@ -247,37 +261,7 @@
             </form>
          @endif
         {{-- crop modal --}}
-        <div  id="cropimage-form" data-bs-backdrop="static"
-         class="modal   absolute z-[500px] top-4 bottom-4 left-0 xs:left-0 border-[1px] rounded-t-xl border-transparent
-         max-h-[900px]  w-full bg-white
-          {{ $modal?"block":"hidden" }}">
-
-            <div class=" h-10 border-[1px] rounded-t-xl border-transparent p-2 flex justify-end modal-header">
-            <a wire:click="closemodal" class=" w-10 h-6 text-secondary_red hover:text-primary_red cursor-pointer flex justify-center" >
-                <span  class=" close   ">&times;</span>
-            </a>
-            </div>
-            <!-- Modal content -->
-            <div class="h-[80%]  overflow-y-scroll ">
-                <div class=" resultupload  flex justify-center"></div>
-            </div>
-            <!--rightbox-->
-
-            <!-- input file -->
-            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b ">
-                <!-- save btn -->
-                <x-jet-secondary-button  wire:click="closemodal"   type="button" >
-                    {{ __('main.cancel') }}
-                </x-jet-secondary-button>
-                <x-jet-button  wire:click="cropingimage"  class="ml-3" type="button"   >
-                    {{ __('main.crop') }}
-                </x-jet-button>
-                {{-- <button wire:click="closemodal" class="cursor-pointer ml-2 mr-2 p-2 border-[2px] border-transparent hover:bg-blue-400  rounded-xl bg-blue-500 w-auto">close</button>
-                <a wire:click="cropingimage"   class="btn save hide cursor-pointer ml-2 mr-2 p-2 border-[2px] border-transparent hover:bg-blue-400 rounded-xl bg-blue-500 w-auto">Save</a> --}}
-            </div>
-
-
-        </div>
+        <x-crop-image-modal :modal="$modal" :type="'form'" />
         {{-- end  crop modal --}}
 </div>
 @push('scripts')
@@ -345,69 +329,87 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     })
   }
 
-
-   document.addEventListener('form-image-updated', event =>  {
-
-  result = document.querySelector('.resultupload');
- save = document.querySelector('.save');
- upload = document.querySelector('.image');
- cropper = '';
- var finalCropWidth = 152;
+  var finalCropWidth = 152;
  var finalCropHeight = 112;
  var finalAspectRatio = finalCropWidth / finalCropHeight;
- // on change show image with crop options
-
-         // start file reader
-     const reader = new FileReader();
-     let img = document.createElement('img');
-     img.id = 'image';
-     console.log(result);
-     img.src = @this.logosrc;
-    console.log(img);
-                 // clean result before
-     result.innerHTML = '';
-
-                 // append new image
-     result.appendChild(img);
-     console.log(result);
-                 // show save btn and options
-
-                 // init cropper
-     cropper = new Cropper(img, {
-         dragMode: 'move',
-         aspectRatio: finalAspectRatio,
-         autoCropArea: 0.9,
-         restore: true,
-         guides: true,
-         center: true,
-         highlight: true,
-         cropBoxMovable: true,
-         cropBoxResizable: true,
-
-         toggleDragModeOnDblclick: false,
-     });
 
 
+    function uploadImageForm(event,index,type){
 
+        modal=document.getElementById(`cropimage-${type}`);
+        const  result = document.querySelector(`.result-upload-${type}`);
 
- // save on click
+        indexImage=index;
 
- });
- document.addEventListener('saving',(e)=>{
-     e.preventDefault();
-     // get result to data uri
-     let imgSrc = cropper.getCroppedCanvas({
+        imageInput=event.target;
+        console.log(indexImage,event,imageInput.id);
+        file = imageInput.files[0];
+        const reader = new FileReader();
+        modal.classList.remove('hidden');
+        reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+
+                result.innerHTML = '';
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                const canvasWidth = 400;
+                const canvasHeight = 300;
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                const finalAspectRatio = canvasWidth / canvasHeight;
+
+                // Calculate the scaling to maintain aspect ratio
+                const imgAspectRatio = img.width / img.height;
+                let drawWidth, drawHeight, offsetX, offsetY;
+
+                if (imgAspectRatio > finalAspectRatio) {
+                    drawWidth = canvasWidth;
+                    drawHeight = canvasWidth / imgAspectRatio;
+                    offsetX = 0;
+                    offsetY = (canvasHeight - drawHeight) / 2;
+                } else {
+                    drawWidth = canvasHeight * imgAspectRatio;
+                    drawHeight = canvasHeight;
+                    offsetX = (canvasWidth - drawWidth) / 2;
+                    offsetY = 0;
+                }
+             context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+                result.appendChild(canvas);
+                cropper = new Cropper(canvas, {
+                    dragMode: 'move',
+                    aspectRatio: finalAspectRatio,
+                    autoCropArea: 0.9,
+                    restore: true,
+                    guides: true,
+                    center: true,
+                    highlight: true,
+                    cropBoxMovable: true,
+                    cropBoxResizable: true,
+
+                    toggleDragModeOnDblclick: false,
+                });
+
+        };
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+    function cropimageform(){
+        image=document.getElementById(`form-image${indexImage}`);
+        const canvas = cropper.getCroppedCanvas({
          width:400,
-         height:200
-         }).toDataURL();
+         height:300
+         });
+        const croppedImage = canvas.toDataURL('image/jpeg');
 
+        image.src=croppedImage;
+        @this.saveimage(croppedImage);
 
+        modal.classList.add('hidden');
 
-         @this.SavImage(imgSrc);
-         @this.closemodalwithsave();
-     // dwn.classList.remove('hide');
-     // dwn.download = 'imagename.png';
-     // dwn.setAttribute('href',imgSrc);
-     });
+    }
 </script>
 @endpush

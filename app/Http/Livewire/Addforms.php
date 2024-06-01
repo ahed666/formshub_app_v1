@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Auth;
 use Storage;
 use Illuminate\Support\Str;
 
+
 use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 class Addforms extends Component
@@ -102,13 +103,7 @@ class Addforms extends Component
     public function resetvalue()
     {
 
-        if(str_contains($this->form_logo_temp,'images/temp/'))
-        {
-                //  dd(public_path(str_replace('/', '\\', $this->form_logo) ));
 
-            File::delete(public_path($this->form_logo_temp));
-
-        }
         $this->form_logo="images/logo_1_transparent_dark.png";
         $this->form_logo_temp="images/logo_1_transparent_dark.png";
         $this->logo="images/logo_1_transparent_dark.png";
@@ -228,186 +223,64 @@ class Addforms extends Component
         );
     }
     public function addform(){
+
         if ($this->isSubmitting) {
             return;
         }
         $this->isSubmitting = true;
-        $folderPath ='storage/images/upload/';
-        if (!file_exists($folderPath)) {
-            mkdir($folderPath, 0777, true);
-        }
+
+
+
         // if there is form =>Edit form
         if($this->form_id!=null)
 
         {
+
             $this->validatedataonedit();
             $this->resetErrorBag();
-            $form=Form::findOrFail($this->form_id);
 
-            $logo=Logos::findOrFail($form->logo_id);
-              if($logo==null)
-              {
-                $logo=new Logos();
-              }
-              elseif(str_contains($this->form_logo_temp,'storage/images/upload/')){
+            $form=Form::editForm($this->form_id,$this->form_title,$this->form_logo_temp,);
 
-                File::delete(public_path($logo->logo_url));
-              }
+            try {
 
-            if(str_contains($this->form_logo_temp,'storage/images/temp/'))
-            {
-                $numofform=count(Form::whereaccount_id(Auth::user()->current_account_id)->get());
-                $image_name="form-logo-".Auth::user()->id.Carbon::now()->format('YmdHis');
-                $name=$image_name . '.jpg';
-                $file = $folderPath .$name;
+                return redirect()->route('editform', ['id' => $form->id])->with('success_message','your form has been edit successfuly');
 
-                $old=public_path($this->form_logo_temp);
-                $new=$file;
-                File::move($old , $new);
+            } catch (\Throwable $th) {
+                return redirect()->route('editform', ['id' => $form->id])->with('error_message_editform','cannot edit form');
 
             }
-                else
-                $new=$this->form_logo;
 
-            $logo->logo_url=$new;
 
-            $logo->form_id=$this->form_id;
-            $logo->logo_name="logo-".$this->form_title;
-            $logo->save();
-            $form->form_title=$this->form_title;
-            // $form->business_name=$this->form_BusinessName;
-            $form->user_id=Auth::user()->id;
-            $form->account_id=Auth::user()->current_account_id;
-            $form->logo_id=$logo->id;
 
-            $form->save();
-
-            $this->resetvalue();
-            $this->isSubmitting = false;
-            return redirect()->route('editform', ['id' => $form->id])->with('success_message','your form has been edit successfuly');
 
         }
         // if there is not form =>add form
         else
         {
-            $forms=Form::whereaccount_id(Auth::user()->current_account_id)->get();
-            // if reached max num of forms
-            $this->current_subscribe=SubscribePlan::getCurrentSubscription(Auth::user()->current_account_id);
-
-            if(count($forms)>=$this->current_subscribe->num_forms){
-                $this->isSubmitting = false;
-               return redirect()->route('forms')->with('error_message','You have reached the maximum limit allowed.');
-            }
-
-            else
-            {
-                $numofform=count(Form::whereaccount_id(Auth::user()->current_account_id)->get());
-                if($this->form_title==null)
-                {$this->form_title="FormHub_form".$numofform;
-                    while (Form::where('form_title', $this->form_title)->exists()) {
-                        $uniqueCode = Str::random(10); // Generate a new code if it already exists
-                        $this->form_title="FormPoint_form".$numofform.$uniqueCode;
-                    }
-                }
-
+            try {
                 $this->validatedataonadd();
                 $this->resetErrorBag();
-                $logo=new Logos();
-
-                if(str_contains($this->form_logo_temp,'storage/images/temp/'))
-                {
-
-                    $image_name="form-logo-".Auth::user()->id.Carbon::now()->format('YmdHis');
-                    $name=$image_name . '.jpg';
-                    $file = $folderPath .$name;
-
-                    $old=public_path($this->form_logo_temp);
-                    $new=$file;
-                    File::move($old , $new);
-                }
-                else
-                    $new=$this->form_logo;
+                $form=  Form::addForm($this->form_title,$this->form_type_id,$this->form_logo_temp,$this->form_DefultLanguages,$this->messages);
 
 
-
-
-
-                $form=new Form();
-                $form->form_title=$this->form_title;
-                // $form->business_name=$this->form_BusinessName;
-                $form->user_id=Auth::user()->id;
-                $form->account_id=Auth::user()->current_account_id;
-
-                $form->form_type_id=$this->form_type_id;
-                $form->save();
-
-                $logo->logo_url=$new;
-                $logo->form_id=$form->id;
-                $logo->logo_name="logo-".$this->form_title;
-                $logo->save();
-
-                $form=Form::whereid($form->id)->first();
-                $form_title = preg_replace('/\s+/', '',$this->form_title);
-                $form->url=url("/forms/{$form->account_id}/{$form->id}");
-
-                $form->logo_id=$logo->id;
-                $form->save();
-                // add defult messages
-
-                //if type is question and answer
-                if($form->form_type_id==1){
-                    foreach ($this->form_DefultLanguages as $key => $form_DefultLanguage)
-                    {
-                        foreach($this->messages as $message)
-                        {
-                            if($message['local']==$form_DefultLanguage)
-                            {
-                                $form_trans=new FormTrnslations();
-                                $form_trans->form_start_header=$message['start_header'];
-                                $form_trans->form_start_text=$message['start_text'];
-                                $form_trans->form_end_header=$message['end_header'];
-                                $form_trans->form_end_text=$message['end_text'];
-                                $form_trans->terms=$message['terms'];
-                                $form_trans->form_id=$form->id;
-                                $form_trans->form_local=$form_DefultLanguage;
-                                $form_trans->save();
-
-                            }
-                        }
-                    }
-                }
-                // if another type
-                else
-                {
-                   $formConfig=new  FormMediaConfig();
-                   $formConfig->form_id=$form->id;
-                   $formConfig->allow_touch=true;
-                   $formConfig->allow_loop=true;
-
-                   $formConfig->save();
-                }
+                // to increase count of responses +1  in facts
+                Fact::increseFactCount('createdforms');
                 $this->resetvalue();
 
                 $this->isSubmitting = false;
-                // to increase count of responses +1  in facts
-                Fact::increseFactCount('createdforms');
-                return redirect()->route('editform', ['id' => $form->id])->with('success_message','your Form has been add successfuly');
-
+                return redirect()->route('editform', ['id' => $form->id])->with('success_message','your form has been add successfuly');
+            } catch (\Throwable $th) {
+                return redirect()->route('forms')->with('error_message','your job has been falid');
             }
+
 
         }
 
 
 
-    }
-    public function updatedlogo()
-    {
-        $this->modal=true;
-        $this->logosrc=$this->logo->temporaryUrl();
-
-        $this->dispatchBrowserEvent('form-image-updated', ['image' => $this->logo]);
 
     }
+
     // save image after crop it
     public function cropingimage(){
         $this->dispatchBrowserEvent('saving');
@@ -415,38 +288,12 @@ class Addforms extends Component
 
 
     }
-    // to close the crop modal if user click close button or icon
-    public function closemodal(){
-        $this->form_logo="images/logo_1_transparent_dark.png";
-        $this->form_logo_temp="images/logo_1_transparent_dark.png";
-        $this->modal=false;
-    }
 
-    // t oclose crop modal if user click save
-    public function closemodalwithsave(){
-
-        $this->modal=false;
-    }
     // save image after crop it
-    public function SavImage($image){
-        $folderPath = public_path('storage/images/temp/');
-        if (!file_exists($folderPath)) {
-            mkdir($folderPath, 0777, true);
-        }
-        $image_parts = explode(";base64,", $image);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
+    public function saveimage($image){
 
-        $name=uniqid() . '.jpg';
-        $file = $folderPath .$name;
-        $this->modal=false;
-        // dd($this->answers[$this->stepimage]['image']);
-        // if(str_contains($this->form_logo, '/storage/images/temp/')||str_contains($this->form_logo, '/storage/images/upload/'))
-        //   {
-        //     File::delete(public_path($this->form_logo));}
-        $this->form_logo_temp="/storage/images/temp/".$name;
-        file_put_contents($file, $image_base64);
+        $this->form_logo_temp=$image;
+
 
     }
     public function render()

@@ -56,16 +56,14 @@ use App\Http\Livewire\FormTemplate;
 |
 */
 // admin
-Route::group(['prefix'=>'admin-center','middleware'=>['admin:admin']],function(){
+Route::group(['prefix' => 'admin-center', 'middleware' => ['admin:admin']], function () {
     Route::get('/login', [AdminController::class, 'loginForm']);
     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
-
-
-   });
+});
 
 
 
-Route::group(['prefix'=>'admin-center','middleware'=>['auth:admin']],function(){
+Route::group(['prefix' => 'admin-center', 'middleware' => ['auth:admin']], function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/accounts', [AdminController::class, 'accounts'])->name('admin.accounts');
@@ -81,36 +79,33 @@ Route::group(['prefix'=>'admin-center','middleware'=>['auth:admin']],function(){
     Route::post('/changeorderstatus', [AdminController::class, 'changeorderstatus'])->name('admin.changeorderstatus');
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
 
-    Route::post('/adminlogoutsession/{id}',[AdminController::class, 'adminLogout'])->name('admin.adminLogout');
+    Route::post('/adminlogoutsession/{id}', [AdminController::class, 'adminLogout'])->name('admin.adminLogout');
 
 
     Route::get('/deletedaccounts', [AdminController::class, 'deletedaccounts'])->name('admin.deletedaccounts');
     Route::get('/canceledplans', [AdminController::class, 'canceledplans'])->name('admin.canceledplans');
-    Route::post('/updateinfo',[AdminController::class, 'updateAdminInfo'] )->name('admin.info.update');
-    Route::post('/saveplan',[AdminController::class, 'saveplan'] )->name('admin.saveplan');
-    Route::post('/changeaccountstatus',[AdminController::class, 'changeaccountstatus'] )->name('admin.changeaccountstatus');
-    Route::post('/saveresponsescategories',[AdminController::class, 'saveresponsescategories'])->name('admin.saveresponsescategories');
-    Route::post('/logout',[AdminController::class, 'destroy'])->name('admin.logout');
-    Route::post('/adminlogoutsession/{id}',[AdminController::class, 'adminLogout'])->name('admin.adminLogout');
+    Route::post('/updateinfo', [AdminController::class, 'updateAdminInfo'])->name('admin.info.update');
+    Route::post('/saveplan', [AdminController::class, 'saveplan'])->name('admin.saveplan');
+    Route::post('/changeaccountstatus', [AdminController::class, 'changeaccountstatus'])->name('admin.changeaccountstatus');
+    Route::post('/saveresponsescategories', [AdminController::class, 'saveresponsescategories'])->name('admin.saveresponsescategories');
+    Route::post('/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+    Route::post('/adminlogoutsession/{id}', [AdminController::class, 'adminLogout'])->name('admin.adminLogout');
 
-    Route::post('/addpromocode',[AdminController::class, 'addPromocode'])->name('admin.addpromocode');
-    Route::post('/editpromocode',[AdminController::class, 'editPromocode'])->name('admin.editpromocode');
-    Route::get('/deletepromocode/{id}',[AdminController::class, 'deletepromocode'])->name('admin.deletepromocode');
+    Route::post('/addpromocode', [AdminController::class, 'addPromocode'])->name('admin.addpromocode');
+    Route::post('/editpromocode', [AdminController::class, 'editPromocode'])->name('admin.editpromocode');
+    Route::get('/deletepromocode/{id}', [AdminController::class, 'deletepromocode'])->name('admin.deletepromocode');
 
-    Route::post('/adddevice',[AdminController::class, 'addDevice'])->name('admin.adddevice');
-    Route::post('/editdevice',[AdminController::class, 'editDevice'])->name('admin.editdevice');
-    Route::get('/deletedevice/{id}',[AdminController::class, 'deleteDevice'])->name('admin.deletedevice');
+    Route::post('/adddevice', [AdminController::class, 'addDevice'])->name('admin.adddevice');
+    Route::post('/editdevice', [AdminController::class, 'editDevice'])->name('admin.editdevice');
+    Route::get('/deletedevice/{id}', [AdminController::class, 'deleteDevice'])->name('admin.deletedevice');
 
-    Route::post('/addclient',[AdminController::class, 'addClient'])->name('admin.addclient');
-    Route::post('/editclient',[AdminController::class, 'editClient'])->name('admin.editclient');
-    Route::get('/deleteclient/{id}',[AdminController::class, 'deleteClient'])->name('admin.deleteclient');
+    Route::post('/addclient', [AdminController::class, 'addClient'])->name('admin.addclient');
+    Route::post('/editclient', [AdminController::class, 'editClient'])->name('admin.editclient');
+    Route::get('/deleteclient/{id}', [AdminController::class, 'deleteClient'])->name('admin.deleteclient');
 
     Route::post('/check-code-unique', [AdminController::class, 'checkCodeUnique'])->name('admin.checkcodeunique');
-
-
-
 });
-Route::get('/api/data/export/accounts',[AdminController::class, 'getAccounts'])->name('admin.getAccounts');
+Route::get('/api/data/export/accounts', [AdminController::class, 'getAccounts'])->name('admin.getAccounts');
 
 //    Route::middleware(['auth:admin'])->get('/admin-center/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
@@ -123,42 +118,45 @@ Route::get('/', function () {
 
 
 //   form of kiosk
-Route::get('/devices/{device_name}/{device_id}',[FormController::class, 'index']);
+Route::get('/devices/{device_name}/{device_id}', [FormController::class, 'index']);
 
-Route::get('/loader',function()
-{
+Route::get(
+    '/loader',
+    function () {
 
-    return view('loader');
-}
+        return view('loader');
+    }
 );
 
 // end unsubscribe
 
 //external urls
 
-//knowledgebase
-Route::get('/knowledgebase',function()
-{
 
-    $externalUrl = env('WEBSITE_URL','https://formshub.net').'/knowledgebase'; // Replace this with your external URL
+
+//knowledgebase
+Route::get('/knowledgebase', function () {
+
+    $externalUrl = env('WEBSITE_URL', 'https://formshub.net') . '/knowledgebase'; // Replace this with your external URL
     return redirect()->away($externalUrl);
 })->name('knowledgebase');
 //terms and conditions
-Route::get('/terms_conditions',function()
-{
+Route::get(
+    '/terms_conditions',
+    function () {
 
-    $externalUrl = env('WEBSITE_URL','https://formshub.net').'/termsandconditions'; // Replace this with your external URL
-    return redirect()->away($externalUrl);
-
-}
+        $externalUrl = env('WEBSITE_URL', 'https://formshub.net') . '/termsandconditions'; // Replace this with your external URL
+        return redirect()->away($externalUrl);
+    }
 )->name('terms_conditions');
 // privacy policy
-Route::get('/privacypolicy',function()
-{
+Route::get(
+    '/privacypolicy',
+    function () {
 
-    $externalUrl = env('WEBSITE_URL','https://formshub.net').'/privacypolicy'; // Replace this with your external URL
-    return redirect()->away($externalUrl);
-}
+        $externalUrl = env('WEBSITE_URL', 'https://formshub.net') . '/privacypolicy'; // Replace this with your external URL
+        return redirect()->away($externalUrl);
+    }
 )->name('privacypolicy');
 
 
@@ -176,56 +174,58 @@ Route::middleware([
     Route::get('/payment/{id}/stripe/callback', [PaymentController::class, 'confirm'])->name('stripe.return');
 
     Route::get('/buyresponses', function () {
-        $allowBuyResponses=SubscribePlan::checkAllowBuyResponses(Auth::user()->current_account_id);
+        $allowBuyResponses = SubscribePlan::checkAllowBuyResponses(Auth::user()->current_account_id);
 
-        if($allowBuyResponses)
-        {
+        if ($allowBuyResponses) {
 
-            return view('buyresponses' );
-        }
-      else
-      abort(403, 'Unauthorized action.');
-
-
+            return view('buyresponses');
+        } else
+            abort(403, 'Unauthorized action.');
     })->name('buyresponses');
 
+    // question
+
+    Route::post('addquestion', [QuestionController::class, 'save'])->name('question.add');
+    Route::get('/get-answer-block/{index}', [QuestionController::class, 'getAnswerBlock']);
+
+
     // change language
-    Route::get('setlocale/{locale}',[LocaleController::class, 'setLocale'])->name('setLocale');
+    Route::get('setlocale/{locale}', [LocaleController::class, 'setLocale'])->name('setLocale');
     // statistics
-    Route::get('/statistics/overview/{id}',[StatisticsController::class, 'overview'])->name('statisticform');
-Route::get('/statistics/questions-statistics/{id}',[StatisticsController::class, 'questionsStatistics'] )->name('questions-statistics');
-Route::get('/statistics/all-responses/{id}',[StatisticsController::class, 'allResponses'])->name('all-responses');
+    Route::get('/statistics/overview/{id}', [StatisticsController::class, 'overview'])->name('statisticform');
+    Route::get('/statistics/questions-statistics/{id}', [StatisticsController::class, 'questionsStatistics'])->name('questions-statistics');
+    Route::get('/statistics/all-responses/{id}', [StatisticsController::class, 'allResponses'])->name('all-responses');
 
 
-Route::get('/signpdf',[SignPdfController::class, 'signPdfIndex'])->name('signpdf.index');
-Route::get('/addsignpdf',[SignPdfController::class, 'addSignPdf'])->name('signpdf.add');
+    Route::get('/signpdf', [SignPdfController::class, 'signPdfIndex'])->name('signpdf.index');
+    Route::get('/addsignpdf', [SignPdfController::class, 'addSignPdf'])->name('signpdf.add');
 
 
-// view pdf
-Route::get('/view-pdf/{id}', [PdfController::class, 'viewPdf'])->name('view.pdf');
-Route::get('/download-pdf/{id}', [PdfController::class, 'downloadPdf'])->name('download.pdf');
+    // view pdf
+    Route::get('/view-pdf/{id}', [PdfController::class, 'viewPdf'])->name('view.pdf');
+    Route::get('/download-pdf/{id}', [PdfController::class, 'downloadPdf'])->name('download.pdf');
 
 
 
- // statistics of form
-//  Route::get('/statistics/{id}', function ($id) {
+    // statistics of form
+    //  Route::get('/statistics/{id}', function ($id) {
 
-//     return view('statistics');
-// })->name('statisticform');
+    //     return view('statistics');
+    // })->name('statisticform');
     // unsubscribe create view
-Route::get('/unsubscribe/{type}/{token}/{userid}',[UnsubscribeController::class, 'create'])->name('unsubscribe');
+    Route::get('/unsubscribe/{type}/{token}/{userid}', [UnsubscribeController::class, 'create'])->name('unsubscribe');
 
-Route::post('/confirm_unsubscribe/{type}/{token}/{userid}',[UnsubscribeController::class, 'store'])->name('confirm_unsubscribe');
-Route::post('/save_question',[QuestionController::class, 'save'])->name('save_question');
+    Route::post('/confirm_unsubscribe/{type}/{token}/{userid}', [UnsubscribeController::class, 'store'])->name('confirm_unsubscribe');
+    Route::post('/save_question', [QuestionController::class, 'save'])->name('save_question');
 
     // pdf controller
-//  Route::get('preview', 'App\Http\Controllers\PDFController@preview')->name('preview');
-//  Route::post('/convert-excel-to-pdf', 'App\Http\Controllers\ReportController@convert');
-// Route::post('/subscriptions', [SubscriptionController::class, 'create'])->name('subscriptions.create');
-// Route::get('/',         [SubscriptionController::class, 'index']);
+    //  Route::get('preview', 'App\Http\Controllers\PDFController@preview')->name('preview');
+    //  Route::post('/convert-excel-to-pdf', 'App\Http\Controllers\ReportController@convert');
+    // Route::post('/subscriptions', [SubscriptionController::class, 'create'])->name('subscriptions.create');
+    // Route::get('/',         [SubscriptionController::class, 'index']);
 
-// langauges of forms
-Route::get('/langugages/add/{form_id}/{code}', [LanguagesController::class, 'addLang'])->name('addlang');
+    // langauges of forms
+    Route::get('/langugages/add/{form_id}/{code}', [LanguagesController::class, 'addLang'])->name('addlang');
 
     // dashboard route
     Route::get('/dashboard', function () {
@@ -233,7 +233,7 @@ Route::get('/langugages/add/{form_id}/{code}', [LanguagesController::class, 'add
     })->name('dashboard');
 
 
-Route::post('/payment', [SubscriptionController::class, 'payment']);
+    Route::post('/payment', [SubscriptionController::class, 'payment']);
     // dashboard route
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -242,24 +242,25 @@ Route::post('/payment', [SubscriptionController::class, 'payment']);
     Route::get('/invoices/{id}', function ($id) {
         $invoices = Invoice::whereid($id)->get();
 
-        return view('pdf.invoice',compact('invoices'));
+        return view('pdf.invoice', compact('invoices'));
     })->name('invoicepdf');
 
     // edit form route
-    Route::get('/forms/{id}/{lastLocal?}', function ($id,$lastLocal = null) {
-        $form=Form::find($id);
-        if($form){
-        if(Auth::user()->current_account_id==$form->account_id)
-          {  $type_id=FormType::whereid(Form::whereid($id)->first()->form_type_id)->first()->id;
-            return view('edit_form',compact('id','type_id','lastLocal'));}
-        else
-        abort(403, 'Unauthorized action.');}
-        else  return redirect('/forms');
+    Route::get('/forms/{id}/{lastLocal?}', function ($id, $lastLocal = null) {
+        $form = Form::find($id);
+        if ($form) {
+            if (Auth::user()->current_account_id == $form->account_id) {
+                $type_id = FormType::whereid(Form::whereid($id)->first()->form_type_id)->first()->id;
+                return view('edit_form', compact('id', 'type_id', 'lastLocal'));
+            } else
+                abort(403, 'Unauthorized action.');
+        } else  return redirect('/forms');
     })->name('editform');
 
 
 
-    Route::post('/upload',function(){})->name('crop');
+    Route::post('/upload', function () {
+    })->name('crop');
     // dashboard route
     Route::get('/statistics', function () {
         return view('statistics');
@@ -271,90 +272,66 @@ Route::post('/payment', [SubscriptionController::class, 'payment']);
 
 
         return view('kiosks');
-
     })->name('kiosks');
     // form route
     Route::get('/forms', function () {
 
-        return view('forms' );
-
+        return view('forms');
     })->name('forms');
     // billing route
     Route::get('/payment_billing', function () {
 
-        return view('accounts.billings' );
-
+        return view('accounts.billings');
     })->name('billings');
     // subscriptions route
     Route::get('/subscriptions', function () {
 
-        return view('accounts.subscriptions' );
-
+        return view('accounts.subscriptions');
     })->name('subscriptions');
     // subscription to plan  route
-      // subscriptions route
+    // subscriptions route
 
 
-      Route::get('/subscribe/{type?}/{id?}', function ($type=null,$id=null) {
+    Route::get('/subscribe/{type?}/{id?}', function ($type = null, $id = null) {
 
         $account = Jetstream::newAccountModel()->findOrFail(Auth::user()->currentAccount->id);
-        $accountStatus=SubscribePlan::getCurrentAccountStatus(Auth::user()->currentAccount->id);
+        $accountStatus = SubscribePlan::getCurrentAccountStatus(Auth::user()->currentAccount->id);
 
-        if($account->user_id==Auth::user()->id)
-        {
-            if(($accountStatus['status']=='Locked'||$accountStatus['status']=='Grace')&&$type=="buyresponses")
-            return redirect('/subscriptions')->with('error','check on your subscription status');
+        if ($account->user_id == Auth::user()->id) {
+            if (($accountStatus['status'] == 'Locked' || $accountStatus['status'] == 'Grace') && $type == "buyresponses")
+                return redirect('/subscriptions')->with('error', 'check on your subscription status');
             else
-            return view('subscribe',compact('type','id') );
-
-
-        }
-        elseif($accountuser=AccountUser::whereaccount_id($account->id)->whereuser_id(Auth::user()->id)->first())
-        {
-            if($accountuser->role=="admin")
-            {
-                if(($accountStatus['status']=='Locked'||$accountStatus['status']=='Grace')&&$type=="buyresponses")
-                    return redirect('/subscriptions')->with('error','check on your subscription status');
+                return view('subscribe', compact('type', 'id'));
+        } elseif ($accountuser = AccountUser::whereaccount_id($account->id)->whereuser_id(Auth::user()->id)->first()) {
+            if ($accountuser->role == "admin") {
+                if (($accountStatus['status'] == 'Locked' || $accountStatus['status'] == 'Grace') && $type == "buyresponses")
+                    return redirect('/subscriptions')->with('error', 'check on your subscription status');
                 else
-                    return view('subscribe',compact('type','id') );
-
-
+                    return view('subscribe', compact('type', 'id'));
+            } else {
+                return redirect('/subscriptions')->with('error', 'check on your role in this account');
             }
-            else
-            {
-                return redirect('/subscriptions')->with('error','check on your role in this account');
-
-
-
-
-            }
-
         }
-
-
     })->name('subscribe');
     Route::get('/todo', function () {
 
-        return view('todolist' );
-
+        return view('todolist');
     })->name('todolist');
 
     // preview form
     Route::get('/preview/{id}', function ($id) {
 
-        return view('preview',compact('id'));
-
+        return view('preview', compact('id'));
     })->name('preview');
 
 
-    Route::get('/previewform/{id}',[FormController::class,'preview'] )->name('previewform');
+    Route::get('/previewform/{id}', [FormController::class, 'preview'])->name('previewform');
 
 
 
     Route::get('/support', function () {
 
         return view('support');
-
     })->name('support');
 
 
@@ -367,12 +344,12 @@ Route::post('/payment', [SubscriptionController::class, 'payment']);
 });
 
 Route::get('/login/{user}', function ($user) {
-    $user=User::whereid($user)->first();
+    $user = User::whereid($user)->first();
     // Auth::logout($user);
-     return redirect()->route('login');
+    return redirect()->route('login');
 })->name('loginfromregister');
 
-Route::get('setlocale/{locale}',[LocaleController::class, 'setLocale'])->name('setLocale');
+Route::get('setlocale/{locale}', [LocaleController::class, 'setLocale'])->name('setLocale');
 
 // require_once __DIR__ .'/jetstream.php';
 Route::middleware('auth')->group(function () {
@@ -381,5 +358,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require_once __DIR__ .'/jetstream.php';
-require_once __DIR__.'/auth.php';
+require_once __DIR__ . '/jetstream.php';
+require_once __DIR__ . '/auth.php';

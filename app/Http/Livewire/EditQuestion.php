@@ -44,7 +44,6 @@ class EditQuestion extends Component
     public $image;
     public $answersdeleted=[];
     public $imagedefultsrc;
-     public $answerdeleteid;
     // to detect where user click add score
     public $stepscore=null;
     public $setscore=array();
@@ -60,7 +59,6 @@ class EditQuestion extends Component
     public $local;
     public $languages;
     public $maxAnswersNum=50;
-    public $deleteaction="deleteAnswerConfirmation";
     public $is_mandetory_question=null;
     // satisafaction and rating with image (new 8-28)
     public $question_image;
@@ -87,25 +85,9 @@ class EditQuestion extends Component
         "number":"images/questionstextimages/number_question.png"
     }';
 
-    public $answers_json_text_satisfaction='
-    {"type":"satisfaction","custom_type":"custom_satisfaction",
-    "ar":{"0":"راضي تماماٌ",
-        "1":"راضي",
-        "2":"محايد",
-        "3":"غير راضي",
-        "4":"غير راضي تماماٌ"},
-        "en":{"0":"Very Satisfied","1":"Satisfied","2":"Natural","3":"Unsatisfied","4":"Very Unsatisfied"},
-        "ur":{"0":"مکمل طور پر مطمئن",
-            "1":"مطمئن",
-            "2":"غیر جانبدار",
-            "3":"غیر مطمئن",
-            "4":"مکمل طور پر غیر مطمئن"},
-        "tl":{"0":"Ganap na Nasiyahan","1":"Nasiyahan","2":"Natural","3":"Hindi Nasisiyahan","4":"Ganap na Hindi Nasisiyahan"}
-    }
-';
-public $answers_json_text_rating='
- {"type":"rating","custom_type":"custom_rating","0":"5","1":"4","2":"3","3":"2","4":"1"}
-';
+    public $answers_json_text;
+
+
     protected $listeners = ['edit'=>'edit',
         // to delete form
         'deleteanswerConfirmed'=>'deleteanswer',
@@ -154,6 +136,16 @@ public $answers_json_text_rating='
         }
 
     }
+    public function loadJsonData($file)
+    {
+        $path = resource_path('data/'.$file.'.json');
+        if (File::exists($path)) {
+            $json = File::get($path);
+            return json_decode($json, true);
+        } else {
+            return ['error' => 'File not found'];
+        }
+    }
     // initial function
     public function edit($id,$local,$languages){
 
@@ -173,6 +165,8 @@ public $answers_json_text_rating='
 
         $questionType=QuestionType::whereid($this->question['type_of_question_id'])->first();
         $this->type=$questionType->question_type ;
+        $this->answers_json_text=$this->loadJsonData($this->type);
+
 
         $this->type_detail=app()->getLocale() == 'en'?$questionType->question_type_details : $questionType->question_type_details_ar;
 
@@ -377,44 +371,19 @@ public $answers_json_text_rating='
 
 
     }
-    public function saveimage($image){
-        $folderPath = public_path('storage/images/temp/');
-        if (!file_exists($folderPath)) {
-            mkdir($folderPath, 0777, true);
-        }
-        $image_parts = explode(";base64,", $image);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
+    public function saveimage($image,$step){
 
-        $image = Image::make($image_base64);
-
-
-        $this->modal=false;
-
-        // if image for questiion (satisfaction_image or rating_image)
         if($this->type=="satisfaction_image"||$this->type=="rating_image")
         {
-            $name=Auth::user()->id.uniqid().Carbon::now()->format('YmdHis').'.jpg';
-            $file = $folderPath .$name;
-            if(str_contains($this->question_image, 'storage/images/temp/'))
-            {
-                File::delete(public_path($this->question_image));
-            }
-            $this->question_image_temp="/storage/images/temp/".$name;
-             $image->save($file, 100);
+          $this->question_image=$image;
         }
-        else{
-            $name=Auth::user()->id.$this->stepimage.uniqid().Carbon::now()->format('YmdHis').'.jpg';
-            $file = $folderPath .$name;
-            if(str_contains($this->answers[$this->stepimage]['image'], 'storage/images/temp/'))
-            {
-                File::delete(public_path($this->answers[$this->stepimage]['image']));
+        else
+        {
+          $this->answers[$step]['image']=$image;
 
-            }
-            $this->answers[$this->stepimage]['temp_image']="/storage/images/temp/".$name;
-            $image->save($file, 100);
         }
+
+
 
     }
 
@@ -454,50 +423,35 @@ public $answers_json_text_rating='
     }
 
     //   on delete answer
-    public function deleteanswer()
+    public function deleteanswer($index)
     {
-        array_push($this->answersdeleted,$this->answers[$this->answerdeleteid]['id']);
 
-        //    $this->answers[$i]['code']=null;
-        // if the item deleted IS the last item
-            if($this->answerdeleteid==$this->count-1)
+        $answer=Answers::find($this->answers[$index]['id']);
+
+        if($answer){
+            $answersTransDeleting=AnswersTranslation::whereanswer_id($answer->id);
+            $answersTransDeleting->delete();
+
+            // if answer have image
+            if($image=Pictures::find($answer->picture_id))
             {
-                $this->count-=1;
+
+            if(!str_contains($image->pic_url, 'default_answer_image'))
+            {
+                File::delete(public_path($image->pic_url));
+            }
+                $imagesDeleting=Pictures::findOrFail($answer['picture_id']);
+                $imagesDeleting->delete();
+            }
+            $answer->delete();
+
+
+
+                }
+                array_splice($this->answers, $index, 1);
 
                 $this->stepanswer-=1;
-                array_pop($this->answers);
-            }
-        else
-        {
-          for($j=$this->answerdeleteid;$j<$this->count-1;$j++)
-           {
-                    $this->answers[$j]['id']= $this->answers[$j+1]['id'];
-                    $this->answers[$j]['value']= $this->answers[$j+1]['value'];
-                    $this->answers[$j]['image']= $this->answers[$j+1]['image'];
-                    $this->answers[$j]['temp_image']= $this->answers[$j+1]['temp_image'];
 
-                    $this->answers[$j]['score']= $this->answers[$j+1]['score'];
-                    $this->answers[$j]['hide']= $this->answers[$j+1]['hide'];
-                    // $this->answers[$j]['skip']= $this->answers[$j+1]['skip'];
-                    // $this->answers[$j]['terminate']= $this->answers[$j+1]['terminate'];
-                    $this->answers[$j]['action']= $this->answers[$j+1]['action'];
-                    $this->setscore[$j]=$this->setscore[$j+1];
-                    $this->setskip[$j]=$this->setskip[$j+1];
-                    $this->setterminate[$j]=$this->setterminate[$j+1];
-                    $this->sethide[$j]=$this->sethide[$j+1];
-            }
-
-            $this->count-=1;
-
-            $this->stepanswer-=1;
-
-            array_pop($this->answers);
-
-        }
-        // if there is one answer
-        if(count($this->answers)==1)
-        { $this->answers[0]['hide']=false;
-         $this->sethide[0]=false;}
 
     }
 
@@ -525,7 +479,7 @@ public $answers_json_text_rating='
           {$image=null;}
 
             // if the question is the first question
-        if($this->count==0)
+        if(count($this->answers)==0)
             {
 
 
@@ -548,16 +502,16 @@ public $answers_json_text_rating='
                 $this->stepanswer+=1;
             }
 
-        elseif($this->count>0)
+        elseif(count($this->answers)>0)
         {
 
-            $this->currentanswer=$this->answers[$this->count-1]['value'];
+            $this->currentanswer=$this->answers[count($this->answers)-1]['value'];
             if( $this->currentanswer!=" " &&  $this->currentanswer!=null)
-            {  $name='answer'.$this->count-1;
+            {  $name='answer'.count($this->answers)-1;
 
                 $collect=collect(
                     ["id"=>-1,
-                    "code"=>$this->Chars[$this->count],
+                    "code"=>$this->Chars[count($this->answers)],
                     "value"=>null,
                     "image"=>$image,
                     "temp_image"=>$image,
@@ -630,13 +584,7 @@ public $answers_json_text_rating='
     );
     }
 
-    //   delete Answer confirmation
-    public function deleteAnswerConfirmation($id){
-        $this->answerdeleteid=$id;
-        $this->dispatchBrowserEvent('show-delete-answer-confirmation');
-        //    to re select the current form
 
-    }
       // validate on submit
     public function validatedata(){
 
@@ -657,13 +605,13 @@ public $answers_json_text_rating='
         $this->validate([
 
             'answers.*.value' =>['required'],
-            'question' =>['required','min:6'],
+            'question_text' =>['required','min:6'],
             'answers'=>['required','min:1'],
             ],[
-            'answers.*.value.required'=>'The answer can\'t be  empty ',
-            'question.min'=>'The :attribute must contain at least 10 characters ',
-            'question.required'=>'The :attribute is empty ',
-            'answers.required'=>'You should add at least one answer',
+            'answers.*.value.required'=>trans('main.answernotempty'),
+            'question_text.min'=>trans('main.questiontextmin'),
+            'question_text.required'=>trans('main.questionrequired'),
+            'answers.required'=>trans('main.answersrequired'),
 
         ]
           );
@@ -675,108 +623,40 @@ public $answers_json_text_rating='
         $this->validate([
 
 
-            'question' =>['required','min:6'],
+            'question_text' =>['required','min:6'],
 
 
         ],[
 
-            'question.min'=>'The :attribute must contain at least 10 characters ',
-
-            'question.required'=>'The :attribute is empty ',
-
+            'question_text.min'=>trans('main.questiontextmin'),
+            'question_text.required'=>trans('main.questionrequired'),
 
         ]
           );
     }
     // to  save question
     public function save(){
+        if($this->type=="drawing"||$this->type=="yes_no"||$this->type=="like_dislike"||$this->type=="Agree_Disagree"||$this->type=="rating"||$this->type=="satisfaction"||$this->type=="short_text_question"||$this->type=="email"||$this->type=="number"||$this->type=="date_question"||$this->type=="long_text_question")
+        {$this->validatequestion();}
+        else
+        {$this->validatedata();}
         try
         {
-            if($this->type=="drawing"||$this->type=="yes_no"||$this->type=="like_dislike"||$this->type=="Agree_Disagree"||$this->type=="rating"||$this->type=="satisfaction"||$this->type=="short_text_question"||$this->type=="email"||$this->type=="number"||$this->type=="date_question"||$this->type=="long_text_question")
-            {$this->validatequestion();}
-            else
-            {$this->validatedata();}
+
 
             $folderPath ='storage/images/upload/';
             if (!file_exists($folderPath)) {
                 mkdir($folderPath, 0777, true);
             }
             $form_id=$this->question['form_id'];
-            // if custom question
-
-                // mandetory or no questions
-                $Question=Questions::find($this->question['id']);
-
-                $Question->optional=!$this->is_mandetory_question;
-
-                if($this->type=="satisfaction_image"||$this->type=="rating_image")
-                {
-                    if(str_contains($this->question_image_temp, 'storage/images/temp/'))
-                    {
-                    $image_name="question_image-".Auth::user()->id.Carbon::now()->format('YmdHis');
-                    $name=$image_name . '.jpg';
-                    $file = $folderPath .$name;
-                    $old=public_path($this->question_image_temp);
-                    $new=$file;
-                    if(str_contains($this->question_image,'storage/images/upload/'))
-                    File::delete(public_path($this->question_image));
-
-                    File::move($old , $new);
-                    }
-                    else
-                    {
-                        $new=$this->question_image;
-                    }
-                    $imageQuestionInfo=Pictures::whereid($Question->picture_id)->first();
-                    $imageQuestionInfo->pic_url=$new;
-                    $imageQuestionInfo->save();
-
-                }
-
-                $Question->save();
-
-                // delete the answers that its deleted
-                for ($i=0; $i <count($this->answersdeleted) ; $i++)
-                {
-
-                    // $answer=Answers::wherequestion_id($this->question['id'])
-                    // ->join('answer_translations','answer_translations.answer_id','=','answers.id')->Where('answer_translations.id','=',$this->answersdeleted[$i])
-                    // ->select('answers.*','answer_translations.*')->get();
-                    $answer=Answers::wherequestion_id($this->question['id'])->whereid($this->answersdeleted[$i])->first();
-                     if($answer){
-                    $answersTransDeleting=AnswersTranslation::whereanswer_id($answer['id']);
-                    $answersTransDeleting->delete();
-                   $answersDeleting=Answers::findOrFail($answer['id']);
-                   $answersDeleting->delete();
-                    // if answer have image
-                    if($answer['picture_id']!=null)
-                    {
-                    $imagepath=Pictures::whereid($answer['picture_id'])->first()->pic_url;
-                        if(str_contains($imagepath, 'storage/images/temp/')||str_contains($imagepath, 'storage/images/upload/'))
-                    {
-                        File::delete(public_path($imagepath));}
-                        $imagesDeleting=Pictures::findOrFail($answer['picture_id']);
-                        $imagesDeleting->delete();
-                    }}
 
 
-                }
+            $Question=Questions::editQuestion($this->question['id'],$this->is_mandetory_question,$this->question['form_id'],$this->type,$this->question_image,$this->local,$this->question_text);
 
 
-                $question_trans=QuestionTranslation::wherequestion_id($this->question['id'])->wherequestion_local($this->local)->first();
-                $question_trans->question_details=$this->question_text;
-                $question_trans->save();
 
-                //  detect the source of trnslation
-                $source="";
-                foreach($this->languages as $lang)
-                {
-                    if($lang['code']==$this->local)
-                    {
-                    $source=$lang['trans'];
-                    }
 
-                }
+
                 /*
                 here we will save answers
                 1 detect type
@@ -788,192 +668,15 @@ public $answers_json_text_rating='
                 //if question yes or no .......
                 if($this->type=="yes_no"||$this->type=="like_dislike"||$this->type=="Agree_Disagree"||$this->type=="rating"||$this->type=="satisfaction")
                 {
-                    foreach($this->answers as $ans)
+                    $answers_text=$this->loadJsonData($this->type);
+                    $Question->editAnswers($Question->id,$this->question['form_id'],$this->answers,$this->languages,$this->local,  $answers_text);
 
-                    {
-                        $answer=Answers::find($ans['id']);
-
-                        $answer->score=$ans['score'];
-                        $ans['action']=="Skip"?$answer->conditional=true:$answer->conditional=false;
-                        $ans['action']=="End"?$answer->terminate=true:$answer->terminate=false;
-                        $answer->hide=$ans['hide'];
-                        $answer->Save();
-
-                    }
                 }
                 //else another question
                 else{
 
-                    foreach($this->answers as $i=>$ans)
-                    {
+                    $Question->editAnswers($Question->id,$this->question['form_id'],$this->answers,$this->languages,$this->local, null);
 
-                        // if answer is exsist =>edit it
-
-                        if(Answers::find($ans['id']))
-                        {
-                            $answer=Answers::wherequestion_id($this->question['id'])
-                            ->join('answer_translations','answer_translations.answer_id','=','answers.id')->Where('answers.id','=',$ans['id'])
-                            ->where('answer_translations.answer_local',$this->local)->first();
-
-                            // if answer  have image
-                            if($answer->picture_id!=null)
-                                {    $image=Pictures::join('answers','pictures.id','=','answers.picture_id')->where('answers.id','=',$answer->answer_id)->select('pictures.*')->first();
-
-                                    if(str_contains($ans['temp_image'],'storage/images/temp/'))
-                                    {
-                                        $image_name="answer-image-".$this->question['id'].uniqid().$i.Auth::user()->id.Carbon::now()->format('YmdHis');
-                                        $name=$image_name . '.jpg';
-                                        $file = $folderPath .$name;
-
-                                        $old=public_path($ans['temp_image']);
-                                        $new=$file;
-
-                                        if(str_contains($ans['image'],'storage/images/upload/'))
-                                        File::delete(public_path($ans['image']));
-
-                                        File::move($old , $new);
-                                    }
-                                        else
-                                        $new=$ans['image'];
-
-                                    $image->pic_url=$new;
-
-                                    $image->save();
-
-                                    $answer_trans=AnswersTranslation::find($answer->id);
-                                    $answer_trans->answer_details=$ans['value'];
-
-                                    $answer_trans->save();
-
-
-                                }
-                                // if answer not have image => answer without image
-                            else{
-                                    $answer_trans=AnswersTranslation::find($answer->id);
-                                    $answer_trans->answer_details=$ans['value'];
-                                    $answer_trans->save();
-
-
-                                }
-                            // edit answer details score,skip,hide
-
-                            $answer=Answers::find($answer->answer_id);
-
-                            $answer->score=$ans['score'];
-                            // $Answer->conditional=$ans['skip'];
-                            // $Answer->terminate=$ans['terminate'];
-                            $ans['action']=="Skip"?$answer->conditional=true:$answer->conditional=false;
-                            $ans['action']=="End"?$answer->terminate=true:$answer->terminate=false;
-                            $answer->hide=$ans['hide'];
-                            $answer->Save();
-                        }
-                        // if answer is not exsist =>add it
-                        else
-                        {
-                            // if answer  have image
-                            if($ans['temp_image']!=null)
-                            {
-                                if(str_contains($ans['temp_image'], 'storage/images/temp/'))
-                                {
-                                    $image_name="answer-image-".$this->question['id'].uniqid().$i.Auth::user()->id.Carbon::now()->format('YmdHis');
-                                    $name=$image_name . '.jpg';
-                                    $file = $folderPath .$name;
-                                    $old=public_path($ans['temp_image']);
-                                    $new=$file;
-                                    File::delete(public_path($ans['image']));
-                                    File::move($old , $new);
-                                }
-                                else
-                                {
-                                    $new=$ans['temp_image'];
-
-                                }
-
-                                $image_ans=new Pictures();
-                                $image_ans->pic_url=$new;
-                                $image_ans->pic_name=$ans['value'];
-                                $image_ans->user_id=Auth::user()->id;
-                                $image_ans->account_id=Auth::user()->current_account_id;
-                                $image_ans->save();
-                                $answer=new Answers();
-                                $answer->question_id=$this->question['id'];
-                                $answer->picture_id=$image_ans->id;
-                                $answer->score=$ans['score'];
-                                // $answer->conditional=$ans['skip'];
-                                // $answer->terminate=$ans['terminate'];
-                                $ans['action']=="Skip"?$answer->conditional=true:$answer->conditional=false;
-                                $ans['action']=="End"?$answer->terminate=true:$answer->terminate=false;
-                                $answer->hide=$ans['hide'];
-                                $answer->save();
-
-                                foreach($this->languages as $lang)
-                                {
-                                    $answer_trans=new AnswersTranslation();
-                                    $answer_trans->answer_local=$lang['code'];
-                                    $answer_trans->answer_id=$answer->id;
-                                    // if($lang['code']==$this->local)
-                                    // $answer_trans->answer_details=$ans['value'];
-                                    // else
-                                    // $answer_trans->answer_details=" ";
-                                    // {
-                                    //     // try {
-                                    //     //     $tr = new GoogleTranslate();
-                                    //     //     $answer_trans->answer_details=$tr->setSource($source)->setTarget($lang['trans'])->translate($ans['value']);
-                                    //     // } catch (\Throwable $th) {
-                                    //     //     $answer_trans->answer_details=$ans['value'];
-
-                                    //     // }
-                                    //   $answer_trans->answer_details=$ans['value'];
-
-                                    // }
-                                    $answer_trans->answer_details=$ans['value'];
-                                    $answer_trans->save();
-                                }
-
-                            }
-                            // if answer not have image => answer without image
-                            else
-                            {
-                                $answer=new Answers();
-                                $answer->question_id=$this->question['id'];
-                                $answer->picture_id=null;
-                                $answer->score=$ans['score'];
-                                // $answer->conditional=$ans['skip'];
-                                // $answer->terminate=$ans['terminate'];
-                                $ans['action']=="Skip"?$answer->conditional=true:$answer->conditional=false;
-                                $ans['action']=="End"?$answer->terminate=true:$answer->terminate=false;
-                                $answer->hide=$ans['hide'];
-                                $answer->save();
-
-                                foreach($this->languages as $lang)
-                                {
-                                    $answer_trans=new AnswersTranslation();
-                                    $answer_trans->answer_local=$lang['code'];
-                                    $answer_trans->answer_id=$answer->id;
-                                    // if($lang['code']==$this->local)
-                                    // $answer_trans->answer_details=$ans['value'];
-                                    // else
-                                    // {
-                                    //     // try {
-                                    //     //     $tr = new GoogleTranslate();
-                                    //     //     $answer_trans->answer_details=$tr->setSource($source)->setTarget($lang['trans'])->translate($ans['value']);
-                                    //     // } catch (\Throwable $th) {
-                                    //     //     $answer_trans->answer_details=$ans['value'];
-
-                                    //     // }
-
-                                    //    $answer_trans->answer_details=$ans['value'];
-
-                                    // }
-                                    $answer_trans->answer_details=$ans['value'];
-                                    $answer_trans->save();
-                                }
-                            }
-                        }
-
-
-
-                    }
                 }
 
 

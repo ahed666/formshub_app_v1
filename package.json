@@ -21,6 +21,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "flowbite": "^2.3.0",
         "froala-editor": "^4.1.4",
         "intl-tel-input": "^17.0.19",
         "virtual-keyboard": "^1.30.4"

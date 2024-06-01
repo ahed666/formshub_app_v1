@@ -11,7 +11,7 @@ use App\Models\TypeSubscribe;
 use App\Models\AccountUser;
 use App\Models\AccountInvitation;
 use Illuminate\Auth\Access\HandlesAuthorization;
-
+use App\Models\Form;
 class AccountPolicy
 {
     use HandlesAuthorization;
@@ -126,5 +126,20 @@ class AccountPolicy
     public function delete(User $user, Account $account): bool
     {
         return $user->ownsAccount($account);
+    }
+
+
+     /**
+     * Determine if the user can add a form.
+     *
+     * @param  \App\Models\User  $user
+     * @return bool
+     */
+    public function createForm(User $user)
+    {
+        $forms = Form::where('account_id', $user->current_account_id)->get();
+        $currentSubscription = SubscribePlan::getCurrentSubscription($user->current_account_id);
+
+        return $forms->count() < $currentSubscription->num_forms;
     }
 }

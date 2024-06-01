@@ -68,26 +68,7 @@ class EditFormQuestions extends Component
     //end of subscribe
     //    messages of form
     public $current_message;
-    public $messages_defult =
-        '[
-        {"local":"en","start_header":"Hi there, your opinion matters!",
-            "start_text":"Please select the language to begin",
-            "end_header":"Thank you for your time","end_text":"We are glad to hear from you, Have a great day!",
-            "terms":"Insert your terms and conditions here."},
-       {"local":"ar",
-        "start_header":"مرحبا بك، رأيك يهمنا!",
-        "start_text":"الرجاء إختيار اللغة للبدء",
-        "end_header":"شكراً على وقتك","end_text":"!يسعدنا دائما السماع منك, يوما سعيداً",
-        "terms":"َضع الشروط والأحكام الخاصة بك هنا."},
-       {"local":"tl","start_header":"Kumusta, ang iyong opinyon ay mahalaga!",
-        "start_text":"Mangyaring piliin ang wika upang magsimula",
-        "end_header":"Salamat sa iyong oras","end_text":"Natutuwa kaming makarinig mula sa iyo, Magkaroon ng magandang araw!",
-        "terms":"Ipasok ang iyong mga tuntunin at kundisyon dito."},
-       {"local":"ur","start_header":"!ہیلو، آپ کی رائے اہم ہے",
-        "start_text":"براہ کرم شروع کرنے کے لیے زبان منتخب کریں۔",
-        "end_header":"اپ کے وقت کا شکریہ","end_text":"!ہمیں آپ سے سن کر خوشی ہوئی، آپ کا دن اچھا گزرے",
-        "terms":"اپنی شرائط و ضوابط یہاں داخل کریں۔"}
-       ]';
+
     public $messages;
     // end messages of form
     public $lang =
@@ -177,6 +158,17 @@ public $answers_json_text_rating='
 
 
     ];
+
+    public function loadJsonData($file)
+    {
+        $path = resource_path('data/'.$file.'.json');
+        if (File::exists($path)) {
+            $json = File::get($path);
+            return json_decode($json, true);
+        } else {
+            return ['error' => 'File not found'];
+        }
+    }
     // set alert translation notifiaction to false
     public function hideTranslationAlert(){
 
@@ -315,7 +307,7 @@ public $answers_json_text_rating='
         }
         $this->forms = Form::whereaccount_id(Auth::user()->current_account_id)->get();
         $this->main_languages = json_decode($this->main_lang, true);
-        $this->messages = json_decode($this->messages_defult, true);
+        $this->messages = $this->loadJsonData('defaultFormMessages');
 
         $this->current_form_kiosks=Kiosk::leftjoin('device_codes','device_codes.id','=','devices.device_code_id')
         ->where('devices.form_id',$this->current_form_id)
@@ -520,17 +512,17 @@ public $answers_json_text_rating='
         {
             if ($lang['code'] == $code) {
                 $lan = $lang;
+                $this->local = $lan['code'];
                 break;
             }
         }
 
-        $this->local = $lan['code'];
+
 
         // add defult messages
         $form_trans = new FormTrnslations();
-        foreach ($this->messages as $message)
-        {
-            if ($message['local'] == $this->local) {
+        $message=$this->messages[$this->local];
+
                 $form_trans->form_start_header = $message['start_header'];
                 $form_trans->form_start_text = $message['start_text'];
                 $form_trans->form_end_header = $message['end_header'];
@@ -539,11 +531,7 @@ public $answers_json_text_rating='
                 $form_trans->form_id = $this->current_form_id;
                 $form_trans->form_local = $this->local;
                 $form_trans->save();
-                break;
 
-            }
-
-        }
         //  end of add defult messages
 
         //  add question and answers
@@ -777,7 +765,7 @@ public $answers_json_text_rating='
         ->where('devices.form_id',$this->current_form_id)
         ->select('devices.*','device_codes.device_code as device_code')->get();
 
-        $this->messages = json_decode($this->messages_defult, true);
+        $this->messages =  $this->loadJsonData('defaultFormMessages');
 
         $this->formlanguages = $this->getLocalesOfForm($this->current_form_id);
         if($lastLocal!=null)
@@ -938,26 +926,32 @@ public $answers_json_text_rating='
     // use App\Models\AnswersTranslation;
     public function deletequestion()
     {
+
         $question = Questions::whereid($this->question_delete_id)->first();
 
             // delete question
             //delete question translation
+            //  delete question folder
             //delete answers
             //delte answers translation
             $answers = Answers::wherequestion_id($this->question_delete_id)->get();
+
             foreach ($answers as $answer) {
-                if ($answer->picture_id != null) {
-                    $imagepath = Pictures::whereid($answer->picture_id)->first()->pic_url;
-                    if (str_contains($imagepath, 'storage/images/temp/') || str_contains($imagepath, 'storage/images/upload/')||str_contains($imagepath, 'storage/images/drawing/'))
-                    {File::delete(public_path($imagepath));}
-                    Pictures::whereid($answer['picture_id'])->delete();
-                }
+
                 AnswersTranslation::whereanswer_id($answer->id)->delete();
                 Answers::whereid($answer->id)->delete();
 
             }
+            //  delete question folder
+            $directoryPath='storage/accounts/account-'.Auth::user()->current_account_id.'/forms/form-'.$this->current_form_id.'/question-'.$question->id;
+            if (File::exists($directoryPath)) {
+                File::deleteDirectory($directoryPath);
+            }
+
             QuestionTranslation::wherequestion_id($this->question_delete_id)->delete();
             Questions::whereid($this->question_delete_id)->delete();
+
+
         // }
 
         $this->current_questions = $this->getquestions($this->current_form_id);
@@ -970,6 +964,7 @@ public $answers_json_text_rating='
 
             $q->save();
         }
+
         $this->current_form = Form::join('logos', 'logos.id', '=', 'forms.logo_id')
             ->where('forms.account_id', Auth::user()->current_account_id)->where('forms.id', $this->current_form_id)->select('forms.id as form_id', 'forms.*', 'logos.logo_url')->first();
         if ($this->current_form != null)
