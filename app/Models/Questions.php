@@ -56,7 +56,7 @@ class Questions extends Model
             $name="question_image-".$questionId.'.jpg';
 
             if (!file_exists($path)) {
-                mkdir($path, 666, true);
+                mkdir($path, 0755, true);
             }
 
             $newUrl = $path .$name;
