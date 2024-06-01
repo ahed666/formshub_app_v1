@@ -19,7 +19,7 @@ class FormMedia extends Model
     public static function saveFormMediaData($itemData,$formId,$itemId,$type){
         $path='storage/accounts/account-'.Auth::user()->current_account_id.'/forms/form-'.$formId.'/media';
         if (!file_exists($path)) {
-            mkdir($path, 666, true);
+            mkdir($path, 0755, true);
         }
          if($type=='video')
          {

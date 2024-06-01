@@ -415,6 +415,9 @@ public $answers_json_text_rating='
                 if($this->uploadedFileInfo['path']!=$this->PdfFile->path_file)
                     {
                         $path = 'storage/accounts/account-' . Auth::user()->current_account_id . '/files/';
+                        if (!file_exists($path)) {
+                            mkdir($path, 0755, true);
+                        }
                         $newPath = $path .'tosignpdf.pdf';
                         file::move( $this->uploadedFileInfo['path'], $newPath);
                         $this->uploadedFileInfo['path']= $newPath;

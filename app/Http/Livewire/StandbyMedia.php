@@ -198,7 +198,9 @@ class StandbyMedia extends Component
             $fileNameToStore = "standby_" . $kiosk->id . ".mp4";
             $pathStore='storage/accounts/account-'.Auth::user()->current_account_id.'/kiosks/standby';
             if (!file_exists($pathStore)) {
-                mkdir($pathStore, 666, true);
+                mkdir($pathStore, if (!file_exists($path)) {
+                    mkdir($path, 0755, true);
+                }, true);
             }
 
             $newUrl = $this->video->storeAs($pathStore, $fileNameToStore);

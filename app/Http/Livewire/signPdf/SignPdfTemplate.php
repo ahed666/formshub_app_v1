@@ -101,7 +101,7 @@ class SignPdfTemplate extends Component
             $path = 'storage/accounts/account-' . Auth::user()->current_account_id . '/files/signatures/';
             $name="SignedFile_".$this->currentkiosk->id."_"."_".Carbon::now()->format('Ymd_His').".pdf";
             if (!file_exists($path)) {
-                mkdir($path, 666, true);
+                mkdir($path, 0755, true);
             }
             $file = public_path($this->formPdfFile->path_file);
             $outputFile=$path.$name;

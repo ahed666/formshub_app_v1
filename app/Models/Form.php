@@ -200,7 +200,7 @@ class Form extends Model
             $name="form_image-".$formId.'.jpg';
 
             if (!file_exists($path)) {
-                mkdir($path, 666, true);
+                mkdir($path, 0755, true);
             }
 
             $newUrl = $path .$name;
@@ -246,7 +246,7 @@ class Form extends Model
         $user = Auth::user();
         $account = Account::find($user->current_account_id);
         if (Gate::forUser($user)->denies('createForm', $account)) {
-                   dd('no');
+
                return redirect()->route('forms')->with('error_message','You have reached the maximum limit allowed.');
         }
         else{

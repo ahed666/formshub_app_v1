@@ -33,7 +33,7 @@ class Questions extends Model
             $name="answer_image-".$answerId.'.jpg';
 
             if (!file_exists($path)) {
-                mkdir($path, 666, true);
+                mkdir($path, 0755, true);
             }
 
             $newUrl = $path .$name;
