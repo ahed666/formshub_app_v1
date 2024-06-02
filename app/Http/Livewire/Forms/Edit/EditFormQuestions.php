@@ -434,6 +434,7 @@ public $answers_json_text_rating='
     public function deletelang()
     {
 
+
         foreach ($this->formlanguages as $key => $lang) {
             if ($lang['id'] == $this->language_delete_id)
             {    unset($this->formlanguages[$key]);
@@ -479,15 +480,21 @@ public $answers_json_text_rating='
             }
 
         }
+        $this->formlanguages=$this->getLocalesOfForm($this->current_form_id);
+        if(count($this->formlanguages)>0)
+        return redirect()->route('editform', ['id' => $this->current_form_id,'lastLocal'=>$this->formlanguages[0]['code']])->with('success_message','language deleted');
+        else
+        return redirect()->route('editform', ['id' => $this->current_form_id])->with('success_message','language deleted');
 
-        $local = reset($this->formlanguages);
-        $this->changelocal($local['id']);
-        //  to enable updating of form on each change or action
-        $form=Form::whereid($this->current_form_id)->first();
-        $form->updating=true;$form->save();
 
-        $this->dispatchBrowserEvent('languagesChanged');
-        $this->dispatchBrowserEvent('contentChanged');
+        // $local = reset($this->formlanguages);
+        // $this->changelocal($local['id']);
+        // //  to enable updating of form on each change or action
+        // $form=Form::whereid($this->current_form_id)->first();
+        // $form->updating=true;$form->save();
+
+        // $this->dispatchBrowserEvent('languagesChanged');
+        // $this->dispatchBrowserEvent('contentChanged');
 
     }
 

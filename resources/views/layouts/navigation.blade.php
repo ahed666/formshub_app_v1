@@ -35,7 +35,7 @@
 
     </div>
 
-    <div id="sidebar" class="sidebar  fixed z-[100] top-0 bottom-0 left-0 p-2  w-[12%] xl:w-[13%] lg:w-[13%] md:w-[25%] sm:w-[25%] xs:w-[50%] xs:overflow-y-auto xs:no-scrollbar
+    <div id="sidebar" class="sidebar xs:hidden fixed z-[100] top-0 bottom-0 left-0 p-2  w-[12%] xl:w-[13%] lg:w-[13%] md:w-[25%] sm:w-[25%] xs:w-[50%] xs:overflow-y-auto xs:no-scrollbar
     text-center bg-gray-900">
         <div class="text-gray-100 text-xl">
             <div class="">
@@ -372,10 +372,12 @@
        function openSidebar() {
 
             document.getElementById("sidebar").classList.remove("hidden");
+            document.getElementById("sidebar").classList.remove("xs:hidden");
         }
         function closeSidebar() {
 
           document.getElementById("sidebar").classList.add("hidden");
+          document.getElementById("sidebar").classList.add("xs:hidden");
       }
     </script>
 @endpush
