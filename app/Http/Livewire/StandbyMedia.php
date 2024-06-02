@@ -239,8 +239,7 @@ class StandbyMedia extends Component
 
         }
         catch (\Throwable $th) {
-            //throw $th;
-            dd($th);
+            
         }
 
 

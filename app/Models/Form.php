@@ -190,7 +190,7 @@ class Form extends Model
         }
         catch (\Throwable $th)
         {
-                   dd($th);
+                 
         }
     }
     // save form image
@@ -213,7 +213,7 @@ class Form extends Model
             return $newUrl;
 
         } catch (\Throwable $th) {
-           dd($th);
+
         }
     }
 

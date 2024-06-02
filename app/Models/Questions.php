@@ -46,7 +46,7 @@ class Questions extends Model
             return $newUrl;
 
         } catch (\Throwable $th) {
-           dd($th);
+
         }
     }
     // save question image
@@ -69,7 +69,7 @@ class Questions extends Model
             return $newUrl;
 
         } catch (\Throwable $th) {
-           dd($th);
+           
         }
     }
 

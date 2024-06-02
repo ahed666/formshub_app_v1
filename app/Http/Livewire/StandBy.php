@@ -51,6 +51,7 @@ class StandBy extends Component
     public $current_formid;
     public $formPdfFile;
     public $current_message;
+    public $url;
     public function getListeners()
     {
             return [
