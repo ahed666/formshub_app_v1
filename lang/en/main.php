@@ -611,6 +611,7 @@ return [
     //warning
     'warningEditFormlogo'=>'Custom form logo is not available on this account, to upload your logo upgrade your account now',
     'warningExportQuestion'=>'Export question is not available on this account, to export the question upgrade your account now',
+    'warningExportResponses'=>'Export responses is not available on this account, to export the responses upgrade your account now',
 
     //hints
     'activeformhint'=>'This option allows you to switch form (Active) meaning people can submit responses to this form, whether from a shared link or from a connected kiosk, or (Inactive), meaning this form will not be visible to people and responses can not be submitted whether from a shared link or from a connected kiosk.',
