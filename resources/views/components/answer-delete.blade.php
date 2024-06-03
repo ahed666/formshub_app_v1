@@ -1,5 +1,12 @@
 <div class="flex justify-center items-center w-[10%]">
-<a onclick="showConfirmDelete({{ $i }})" class="">
+<a
+@if($deleteAction=='edit')
+onclick="showConfirmDelete({{ $i }})"
+@elseif ($deleteAction=='add')
+wire:click="deleteAnswer({{ $i }})"
+@endif
+
+class="">
     <svg class="h-4 w-4 text-svg_primary hover:text-primary_red focus:text-primary_red hover:cursor-pointer "  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g  stroke-width="0"/>
     <g  stroke-linecap="round" stroke-linejoin="round"/>

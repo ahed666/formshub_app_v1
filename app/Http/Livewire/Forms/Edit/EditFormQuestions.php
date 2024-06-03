@@ -437,7 +437,8 @@ public $answers_json_text_rating='
 
         foreach ($this->formlanguages as $key => $lang) {
             if ($lang['id'] == $this->language_delete_id)
-            {    unset($this->formlanguages[$key]);
+            {
+                // unset($this->formlanguages[$key]);
                 FormTrnslations::whereform_id($this->current_form_id)->whereform_local($lang['code'])->delete();
                 foreach ($this->getquestions($this->current_form_id) as $question) {
 
@@ -447,21 +448,9 @@ public $answers_json_text_rating='
                         if(count($this->formlanguages)==0)
                         {
 
-                            foreach ($answers as $answer)
-                            {
-                                if ($answer->picture_id != null)
-                                {
-                                    $imagepath = Pictures::whereid($answer->picture_id)->first()->pic_url;
-                                    if (str_contains($imagepath, 'storage/images/temp/') || str_contains($imagepath, 'storage/images/drawing/')|| str_contains($imagepath, 'storage/images/upload/')) {File::delete(public_path($imagepath));}
-                                    Pictures::whereid($answer['picture_id'])->delete();
-                                }
-                            }
-                            if($question['type_of_question_id']==19||$question['type_of_question_id']==20)
-                            {
-                                $imagepath = Pictures::whereid($question['picture_id'])->first()->pic_url;
-                                if (str_contains($imagepath, 'storage/images/temp/') || str_contains($imagepath, 'storage/images/upload/'))
-                                {File::delete(public_path($imagepath));}
-                                Pictures::whereid($question['picture_id'])->delete();
+                            $directoryPath='storage/accounts/account-'.Auth::user()->current_account_id.'/forms/form-'.$this->current_form_id.'/question-'.$question['id'];
+                            if (File::exists($directoryPath)) {
+                                File::deleteDirectory($directoryPath);
                             }
 
                         }
@@ -477,6 +466,7 @@ public $answers_json_text_rating='
                     // }
                 }
 
+                  break;
             }
 
         }
@@ -634,16 +624,19 @@ public $answers_json_text_rating='
     {
 
         foreach ($this->formlanguages as $lang) {
-            if ($lang['id'] == $local_id) {
-                $local = $lang['code'];
+            if ($lang['id'] == $local_id)
+            {
+                $this->local  = $lang['code'];
+                break;
             }
         }
 
-        $this->local = $local;
+
 
         $this->update_currentform();
         $this->dispatchBrowserEvent('languagesChanged');
 
+        // return redirect()->route('editform', ['id' => $this->current_form_id,'lastLocal'=> $this->local]);
 
     }
     // get locales of form

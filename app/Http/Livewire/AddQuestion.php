@@ -341,15 +341,13 @@ class AddQuestion extends Component
     }
 
     //   on delete answer
-    public function deleteanswer($i)
+    public function deleteAnswer($i)
     {
 
         //    $this->answers[$i]['code']=null;
         // if the item deleted IS the last item
         if (isset($this->answers[$i])) {
-            if(str_contains($this->answers[$i]['image'],'storage/images/temp/'))
-            {
-              File::delete(public_path($this->answers[$i]['image']));}
+
             unset($this->answers[$i]);
 
             // Re-index the array to remove gaps in the indices
@@ -367,6 +365,7 @@ class AddQuestion extends Component
 
             // Call the checkdisable method
             $this->checkdisable();
+
         }
 
 
@@ -608,7 +607,7 @@ class AddQuestion extends Component
             }
             catch (\Throwable $th)
             {
-                dd($th);
+
                 return redirect()->route('editform', ['id' => $this->form_id,'lastLocal'=>$this->local])->with('error_message','cannnot be add');
 
             }

@@ -288,7 +288,7 @@ return [
     'print'=>'طباعة',
     'question'=>'السؤال',
     'answer'=>'الإجابة',
-    'score'=>'النتيجة :',
+    'score'=>'العلامة :',
     'displaylanguage'=>'لغة العرض : ',
     'completionpercent_todo'=>'نسبة الإنجاز :',
     'update'=>'تحديث',

@@ -287,14 +287,14 @@
                                                     <div  id="list{{ $i }}" class="col-span-4  border-[1px] border-gray-300 rounded-lg p-1 ">
                                                         <div  class="flex row-span-6   h-20 mb-1" >
                                                             <div class="w-[10%] flex justify-center items-center" >
-                                                            <span class="whitespace-nowrap text-sm font-bold text-center ">{{ $answer['code'] }}</span>
+                                                            <span class="whitespace-nowrap text-sm font-bold text-center ">{{ $Chars[$i] }}</span>
                                                             </div>
                                                             {{-- answer input --}}
                                                             <textarea maxlength="130"  rows="2"   class="resize-none focus:shadow-none focus:border-b-2 focus:border-t-0 focus:border-l-0 focus:border-r-0 shadow-none border-t-0 border-r-0 border-l-0 border-b-2 outline-none text-black {{  $answer['hide']==true?"opacity-25":"" }} {{ $local=='en'||$local=='tl'?"text-left":"text-right " }} w-[80%] border-b-2 outline-none {{ $errors->first("answers.$i.value")?"border-primary_red":"border-valid" }}"   wire:model.defer="answers.{{$i}}.value"  name="answers.{{ $i }}.value"
                                                             id="answers.{{ $i }}.value"  required autofocus ></textarea>
                                                             {{-- end answer --}}
                                                             {{-- delete answer  --}}
-                                                            <x-answer-delete :i="$i" :deleteAction="$deleteaction" />
+                                                            <x-answer-delete :i="$i" :deleteAction="'add'" />
                                                         </div>
                                                         <x-options-multianswers :i="$i" :answers="$answers" />
                                                     </div>
@@ -326,16 +326,22 @@
                                             <div id="list{{ $i }}" class="   p-1  col-span-3 border-[1px] border-gray-300 rounded-lg" >
                                                 {{-- header of answer  --}}
                                                 <div class="flex justify-between items-center" >
-                                                    <div class=""><span class="whitespace-nowrap text-sm font-bold " >{{ $answer['code'] }}</span></div>
+                                                    <div class=""><span class="whitespace-nowrap text-sm font-bold " >{{ $Chars[$i] }}</span></div>
 
                                                 {{-- delete answer  --}}
-                                                <x-answer-delete :i="$i" :deleteAction="$deleteaction" />
+                                                <x-answer-delete :i="$i" :deleteAction="'add'" />
                                                 </div>
                                                 {{-- add image section --}}
                                                 <div class="{{  $answer['hide']==true?"opacity-25":"" }} mt-2 flex justify-center  " >
                                                 <div class="border-[1px] border-gray-300 p-[2px] rounded-lg w-[100px] h-[100px] ">
-                                                    <img  wire:ignore id="answerimage-image{{ $i }}" wire:model.defer="answers.{{$i}}.image" class="w-full h-full object-contain block ml-auto mr-auto"
-                                                        src="{{ asset($answer['image'])}}" alt="">
+                                                    <img   id="answerimage-image{{ $i }}" wire:model.defer="answers.{{$i}}.image" class="w-full h-full object-contain block ml-auto mr-auto"
+
+                                                        @if(str_contains($answer['image'], 'data:image'))
+                                                        src="{{ $answer['image']}}"
+                                                        @else
+                                                        src="{{ asset($answer['image'])}}"
+                                                        @endif
+                                                         alt="">
 
                                                         <label class="items-center w-4 relative  flex bottom-[10px] right-[8px]  bg-green-300 border-[1px] rounded-2xl" for="image{{ $i }}">
                                                             <svg  class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -379,14 +385,14 @@
                                                 @if( $stepanswer>=$i)
                                                 <div class="{{  $answer['hide']==true?"opacity-25":"" }} col-span-8 h-16 flex  items-center border-[1px] border-gray-200 p-1 rounded-lg">
                                                     {{-- tag of each answer --}}
-                                                    <div class="w-[20px] col-span-1 flex justify-center items-center" >  <span class="whitespace-nowrap text-sm font-bold   ">{{ $answer['code'] }}</span></div>
+                                                    <div class="w-[20px] col-span-1 flex justify-center items-center" >  <span class="whitespace-nowrap text-sm font-bold   ">{{ $Chars[$i] }}</span></div>
                                                     {{-- answer input --}}
                                                     <textarea maxlength="130" rows="3"    class="max-h-[60px] w-[90%] resize-none focus:shadow-none focus:border-b-2 focus:border-t-0 focus:border-l-0 focus:border-r-0 shadow-none border-t-0 border-r-0 border-l-0 border-b-2 outline-none  {{ $local=='en'||$local=='tl'?"text-left":"text-right " }} {{ $errors->first("answers.$i.value")?"border-primary_red":"border-valid" }}
                                                     "   wire:model.defer="answers.{{$i}}.value"  name="answers.{{ $i }}.value"
                                                     id="answers.{{ $i }}.value"  required autofocus ></textarea>
                                                     {{-- end answer --}}
                                                     {{-- delete answer  --}}
-                                                    <x-answer-delete :i="$i" :deleteAction="$deleteaction" />
+                                                    <x-answer-delete :i="$i" :deleteAction="'add'" />
                                                 </div>
                                                 <div class="col-span-4 flex justify-center items-center h-16">
                                                         {{-- answer option --}}
@@ -414,8 +420,14 @@
                                     {{-- add image section --}}
                                     <div class=" mt-2 flex justify-center  " >
                                         <div class="border-[1px] border-gray-300 p-[2px] rounded-lg w-[150px] h-[150px] ">
-                                            <img wire:ignore id="answerimage-image0" wire:model.defer="{{ asset($question_image)}}" class="w-full h-full object-contain block ml-auto mr-auto"
-                                                src="{{ asset($question_image)}}" alt="">
+                                            <img  id="answerimage-image0" wire:model.defer="{{ asset($question_image)}}" class="w-full h-full object-contain block ml-auto mr-auto"
+
+                                                @if(str_contains($question_image, 'data:image'))
+                                                src="{{ $question_image}}"
+                                                @else
+                                                src="{{ asset($question_image)}}"
+                                                @endif
+                                                 alt="">
 
                                                 <label class="items-center w-4 relative  flex bottom-[10px] right-[8px]  bg-green-300 border-[1px] rounded-2xl" for="image">
                                                     <svg  class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

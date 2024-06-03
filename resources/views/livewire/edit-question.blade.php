@@ -162,7 +162,7 @@
                                 <div class=""><span class="whitespace-nowrap text-sm font-bold " >{{ $Chars[$i] }}</span></div>
 
                             {{-- delete answer  --}}
-                            <x-answer-delete :i="$i"  />
+                            <x-answer-delete :i="$i" :deleteAction="'edit'"  />
                             </div>
                             {{-- add image section --}}
                             <div class="{{  $answer['hide']==true?"opacity-25":"" }} mt-2 flex justify-center  " >
@@ -227,7 +227,7 @@
                                         id="answers.{{ $i }}.value"  required autofocus ></textarea>
                                         {{-- end answer --}}
                                         {{-- delete answer  --}}
-                                        <x-answer-delete :i="$i"  />
+                                        <x-answer-delete :i="$i" :deleteAction="'edit'" />
                                     </div>
                                     <x-options-multianswers :i="$i" :answers="$answers" />
                                 </div>
@@ -267,7 +267,7 @@
                                {{-- end answer --}}
 
                                {{-- delete answer  --}}
-                               <x-answer-delete :i="$i"  />
+                               <x-answer-delete :i="$i" :deleteAction="'edit'"  />
 
                            </div>
                            <div class="col-span-4 flex justify-center items-center h-16">
@@ -421,32 +421,7 @@
 {{-- sweet alert delete confirm --}}
 <script>
     // to confirm delete form
-     window.addEventListener('show-delete-answer-confirmation', event => {
-        (async () => {
 
-const { value: accept } = await Swal.fire({
-    text: translations.deleteanswer_message,
-  input: 'checkbox',
-  inputValue: 0,
-  icon:'question',
-  confirmButtonColor: '#dc2626',
-    showCancelButton: true,
-    cancelButtonColor:'#f3f4f6',
-    cancelButtonText:"<h5 style='color:000000;border:0;box-shadow: none;'>Cancel</h5>",
-  inputPlaceholder:translations.suredelete_answer,
-  confirmButtonText:translations.delete,
-  inputValidator: (result) => {
-    return !result && translations.checkboxrequired
-  }
-})
-
-if (accept) {
-    Livewire.emit('deleteanswerConfirmed');
-
-}
-
-})()
-     });
    let answerDeleteId;
     function showConfirmDelete(id){
         answerDeleteId=id;
@@ -469,7 +444,7 @@ if (accept) {
             })
 
             if (accept) {
-                Livewire.emit('deleteanswerConfirmed',answerDeleteId);
+                Livewire.emit('deleteanswerEditFormConfirmed',answerDeleteId);
 
             }
 

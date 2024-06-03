@@ -90,7 +90,7 @@ class EditQuestion extends Component
 
     protected $listeners = ['edit'=>'edit',
         // to delete form
-        'deleteanswerConfirmed'=>'deleteanswer',
+        'deleteanswerEditFormConfirmed'=>'deleteAnswerEditForm',
         'save'=>'save',
 ];
     // to initializtion array of skip,hide,score,terminate and num of answers based on type of question
@@ -423,7 +423,7 @@ class EditQuestion extends Component
     }
 
     //   on delete answer
-    public function deleteanswer($index)
+    public function deleteAnswerEditForm($index)
     {
 
         $answer=Answers::find($this->answers[$index]['id']);
