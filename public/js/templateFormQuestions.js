@@ -11,7 +11,6 @@ var answers;
 var progressbar=document.getElementById('progressbar');
 var progressbar_value=document.getElementById('progressbar_value');
 var ConnectionError=false;
-import { getCountries } from './countries.js';
 
 
 // sounds
