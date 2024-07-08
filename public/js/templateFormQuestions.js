@@ -79,16 +79,17 @@ var buttonsLanguages=JSON.parse(JSON.stringify(buttonsLang));
 //
 //
 //  if click on back button
-  function fetchAndLogCountries() {
+ async function fetchAndLogCountries() {
 
-    fetch(app_url+'/js/countries.json')
-    .then(response => response.json())
-    .then(data => {
-        // Process the data
-        console.log(data); // Log the data to the console
-        return data; // Call a function to display the countries
-    })
-    .catch(error => console.error('Error fetching the JSON file:', error));
+    try {
+        const response = await fetch(app_url+'/js/countries.json');
+        const countries = await response.json();
+        console.log('Fetched countries:', countries);
+        return countries; // Return the fetched data
+    } catch (error) {
+        console.error('Error fetching the JSON file:', error);
+    }
+
 
 }
 
