@@ -11,6 +11,7 @@ var answers;
 var progressbar=document.getElementById('progressbar');
 var progressbar_value=document.getElementById('progressbar_value');
 var ConnectionError=false;
+import { getCountries } from './countries.js';
 
 
 // sounds
@@ -79,6 +80,17 @@ var buttonsLanguages=JSON.parse(JSON.stringify(buttonsLang));
 //
 //
 //  if click on back button
+async function fetchAndLogCountries() {
+    try {
+        const response = await fetch('./countries.json');
+        const data = await response.json();
+        return data;
+        console.log(data);
+    } catch (error) {
+        console.error('Error fetching countries:', error);
+    }
+}
+
 function DisagreeArguments(){
     document.getElementById('next').disabled = true;
     reload();
@@ -1265,7 +1277,7 @@ document.addEventListener('startform',(e)=>{
     displayScore=Boolean(e.detail.score);
     current_message=e.detail.current_message;
     comments=e.detail.comments;
-    countires=module.getCountries();
+    countires=fetchAndLogCountries();
     initCountriesDiv();
     calculatetotalscore();
 

@@ -51,11 +51,7 @@
 <script type="text/javascript" src="{{ asset('js/jquery.signature.js') }}"  ></script>
 
 <script>module={};</script>
-<script type="module" >
- import {getCountries} from "/../js/countries.js";
- module.getCountries=getCountries;
- console.log(module);
-</script>
+
 @stack('scripts')
     </body>
 </html>

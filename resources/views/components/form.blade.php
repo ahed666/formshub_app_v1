@@ -4,7 +4,7 @@
 
         {{-- logo,name and menu --}}
         <div class="flex space-x-10 justify-between items-center">
-            {{-- logo  --}}
+            {{-- logo --}}
             <div class=" relative">
                 <svg class="w-16 h-16 xs:w-10 xs:h-10" viewBox="0 0 512 512" enable-background="new 0 0 512 512" id="Layer_1" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"/>
