@@ -798,24 +798,29 @@ function containsObject(id, list) {
     return false;
 }
 // to initialization the countries code select div
-function initCountriesDiv()
+ function initCountriesDiv()
 {
 
-            try {
-                 response =  fetch(app_url+'/js/countries.json');
-                 countries =  response.json();
-                console.log('Fetched countries:', countries);
 
-            } catch (error) {
-                console.error('Error fetching the JSON file:', error);
+            if(countries==null)
+                {getCountries().then(response =>{
+                                    countries_div="";
+                                    console.log(countries);
+                                    countries.forEach(element => {
+
+                                        element.code=="AE"? countries_div+=` <option selected  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`:countries_div+=` <option  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`;
+                                    });
+                });}
+            else
+            {
+                countries_div="";
+                                    console.log(countries);
+                                    countries.forEach(element => {
+
+                                        element.code=="AE"? countries_div+=` <option selected  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`:countries_div+=` <option  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`;
+                                    });
             }
 
-            countries_div="";
-            console.log(countries);
-            countries.forEach(element => {
-
-                element.code=="AE"? countries_div+=` <option selected  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`:countries_div+=` <option  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`;
-            });
 }
 // reset input value of number phone when user change country
 function resetnumber()
@@ -1265,8 +1270,18 @@ function  calculatetotalscore()
         }
     });
 }
+async function getCountries(){
+    try {
+        response =  await fetch(app_url+'/js/countries.json');
+        countries = await response.json();
+       console.log('Fetched countries:', countries);
+
+   } catch (error) {
+       console.error('Error fetching the JSON file:', error);
+   }
+}
 // start form
-document.addEventListener('startform',(e)=>{
+ document.addEventListener('startform',(e)=>{
     StartAudio.play();
     //  set the step,language and questions
     step=e.detail.step;
@@ -1278,6 +1293,7 @@ document.addEventListener('startform',(e)=>{
     displayScore=Boolean(e.detail.score);
     current_message=e.detail.current_message;
     comments=e.detail.comments;
+    getCountries();
 
     initCountriesDiv();
     calculatetotalscore();
