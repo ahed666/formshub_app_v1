@@ -33,7 +33,7 @@ var ratingScore;
 var answerschecked=[];
 var questions=[];
 var submitedquestions=[];
-var countires=[];
+var countires;
 var comments;
 var ControlButtons;
 var drawingPad;
@@ -812,6 +812,7 @@ function containsObject(id, list) {
 function initCountriesDiv()
 {
             countires_div="";
+            console.log(countires);
             countires.forEach(element => {
 
                 element.code=="AE"? countires_div+=` <option selected  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`:countires_div+=` <option  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`;
@@ -1279,6 +1280,7 @@ document.addEventListener('startform',(e)=>{
     current_message=e.detail.current_message;
     comments=e.detail.comments;
     countires=fetchAndLogCountries();
+    console.log('countries',countires);
     initCountriesDiv();
     calculatetotalscore();
 
