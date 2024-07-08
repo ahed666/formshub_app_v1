@@ -81,7 +81,7 @@ var buttonsLanguages=JSON.parse(JSON.stringify(buttonsLang));
 //  if click on back button
  function fetchAndLogCountries() {
 
-    fetch('./countries.json')
+    fetch(app_url+'/js/countries.json')
     .then(response => response.json())
     .then(data => {
         // Process the data
