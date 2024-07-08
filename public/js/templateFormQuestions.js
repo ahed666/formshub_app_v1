@@ -17,7 +17,7 @@ var ConnectionError=false;
 var successAudio = document.getElementById('SuccessAudio');
 var StartAudio = document.getElementById('StartAudio');
 
-var countires_div;
+var countries_div;
 // end elements
 var finished=false;
 var displayScore=false;
@@ -33,7 +33,7 @@ var ratingScore;
 var answerschecked=[];
 var questions=[];
 var submitedquestions=[];
-var countires;
+var countries;
 var comments;
 var ControlButtons;
 var drawingPad;
@@ -79,19 +79,7 @@ var buttonsLanguages=JSON.parse(JSON.stringify(buttonsLang));
 //
 //
 //  if click on back button
- async function fetchAndLogCountries() {
 
-    try {
-        const response = await fetch(app_url+'/js/countries.json');
-        const countries = await response.json();
-        console.log('Fetched countries:', countries);
-        return countries; // Return the fetched data
-    } catch (error) {
-        console.error('Error fetching the JSON file:', error);
-    }
-
-
-}
 
 function DisagreeArguments(){
     document.getElementById('next').disabled = true;
@@ -313,9 +301,9 @@ function initialquestion(){
                 style=" -moz-user-select: none;  -ms-user-select: none;  -khtml-user-select: none; -webkit-user-select:none" disabled
                  inputmode='none' placeholder="" maxlength="10" name="text_question_num" class="${align} select-none rounded-[0.5rem]" data-virtual-element type="text" class="form-control"
                   id="InputArea"></div>`;
-                countires_select=document.getElementById('countries_select');
+                  countries_select=document.getElementById('countries_select');
 
-                    countires_select.innerHTML=countires_div;
+                  countries_select.innerHTML=countries_div;
 
 
 
@@ -812,11 +800,21 @@ function containsObject(id, list) {
 // to initialization the countries code select div
 function initCountriesDiv()
 {
-            countires_div="";
-            console.log(countires);
-            countires.forEach(element => {
 
-                element.code=="AE"? countires_div+=` <option selected  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`:countires_div+=` <option  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`;
+            try {
+                 response =  fetch(app_url+'/js/countries.json');
+                 countries =  response.json();
+                console.log('Fetched countries:', countries);
+
+            } catch (error) {
+                console.error('Error fetching the JSON file:', error);
+            }
+
+            countries_div="";
+            console.log(countries);
+            countries.forEach(element => {
+
+                element.code=="AE"? countries_div+=` <option selected  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`:countries_div+=` <option  value="${element.code}">${element.name}&#160(${element.dial_code})</option>`;
             });
 }
 // reset input value of number phone when user change country
@@ -1280,8 +1278,7 @@ document.addEventListener('startform',(e)=>{
     displayScore=Boolean(e.detail.score);
     current_message=e.detail.current_message;
     comments=e.detail.comments;
-    countires= fetchAndLogCountries();
-    console.log('countries',countires,fetchAndLogCountries());
+
     initCountriesDiv();
     calculatetotalscore();
 
