@@ -79,7 +79,7 @@ var buttonsLanguages=JSON.parse(JSON.stringify(buttonsLang));
 //
 //
 //  if click on back button
- function fetchAndLogCountries() {
+  function fetchAndLogCountries() {
 
     fetch(app_url+'/js/countries.json')
     .then(response => response.json())
@@ -1279,8 +1279,8 @@ document.addEventListener('startform',(e)=>{
     displayScore=Boolean(e.detail.score);
     current_message=e.detail.current_message;
     comments=e.detail.comments;
-    countires=fetchAndLogCountries();
-    console.log('countries',countires);
+    countires= fetchAndLogCountries();
+    console.log('countries',countires,fetchAndLogCountries());
     initCountriesDiv();
     calculatetotalscore();
 
